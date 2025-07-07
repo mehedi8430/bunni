@@ -7,7 +7,16 @@ export default function Header() {
             <img src="/react.svg" alt="logo" className="object-cover" />
           </div>
         </div>
-        <div className="px-10">header right content</div>
+
+        <div className="pl-24 pr-14 flex items-center justify-between w-full">
+          <div>
+            <p>Support</p>
+          </div>
+
+          <div>
+            <p>Support</p>
+          </div>
+        </div>
       </div>
     </header>
   );

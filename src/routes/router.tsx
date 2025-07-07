@@ -1,4 +1,5 @@
 import DashboardLayout from "@/layout/DashboardLayout";
+import DashboardPage from "@/pages/Dashboard";
 import HomePage from "@/pages/Home";
 import { createBrowserRouter } from "react-router";
 
@@ -15,7 +16,7 @@ export const Router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div className="text-3xl">Dashboard</div>,
+        element: <DashboardPage />,
       },
     ],
   },
