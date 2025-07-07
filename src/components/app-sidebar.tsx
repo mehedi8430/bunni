@@ -69,7 +69,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props} className="mt-16 border-none">
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>

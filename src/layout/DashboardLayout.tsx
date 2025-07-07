@@ -17,8 +17,9 @@ import {
 
 export default function DashboardLayout() {
   return (
-    <main>
-      {/* <Header /> */}
+    <section>
+      <Header />
+
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
@@ -54,6 +55,6 @@ export default function DashboardLayout() {
           </div>
         </SidebarInset>
       </SidebarProvider>
-    </main>
+    </section>
   );
 }

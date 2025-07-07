@@ -17,6 +17,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 export function NavMain({
   items,
@@ -33,7 +34,7 @@ export function NavMain({
   }[];
 }) {
   return (
-    <SidebarGroup className="py-6">
+    <SidebarGroup className="py-4">
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
@@ -44,7 +45,12 @@ export function NavMain({
           >
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
+                <SidebarMenuButton
+                  tooltip={item.title}
+                  className={cn("p-4 hover:bg-primary hover:text-white", {
+                    "bg-primary text-white": item?.isActive,
+                  })}
+                >
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
                   {item?.items?.length && (
@@ -57,7 +63,10 @@ export function NavMain({
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
+                        <SidebarMenuSubButton
+                          asChild
+                          className="p-4 hover:bg-primary hover:text-white"
+                        >
                           <a href={subItem.url}>
                             <span>{subItem.title}</span>
                           </a>
