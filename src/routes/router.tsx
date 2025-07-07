@@ -12,5 +12,11 @@ export const Router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     errorElement: <div>Error occurred</div>,
+    children: [
+      {
+        index: true,
+        element: <div className="text-3xl">Dashboard</div>,
+      },
+    ],
   },
 ]);

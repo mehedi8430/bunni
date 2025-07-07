@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/collapsible";
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -34,8 +33,8 @@ export function NavMain({
   }[];
 }) {
   return (
-    <SidebarGroup className="py-4">
-      <SidebarMenu>
+    <SidebarGroup className="py-8">
+      <SidebarMenu className="space-y-2">
         {items.map((item) => (
           <Collapsible
             key={item.title}
@@ -47,11 +46,14 @@ export function NavMain({
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton
                   tooltip={item.title}
-                  className={cn("p-4 hover:bg-primary hover:text-white", {
-                    "bg-primary text-white": item?.isActive,
-                  })}
+                  className={cn(
+                    "p-5 hover:bg-primary hover:text-white text-lg font-normal hover:data-[state=open]:bg-primary hover:data-[state=open]:text-white",
+                    {
+                      "bg-primary text-white": item?.isActive,
+                    }
+                  )}
                 >
-                  {item.icon && <item.icon />}
+                  {item.icon && <item.icon className="w-6 h-6 mr-1" />}
                   <span>{item.title}</span>
                   {item?.items?.length && (
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -60,12 +62,12 @@ export function NavMain({
               </CollapsibleTrigger>
               {item?.items?.length && (
                 <CollapsibleContent>
-                  <SidebarMenuSub>
+                  <SidebarMenuSub className="space-y-2">
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
                           asChild
-                          className="p-4 hover:bg-primary hover:text-white"
+                          className="p-5 hover:bg-primary hover:text-white text-lg font-normal mt-1"
                         >
                           <a href={subItem.url}>
                             <span>{subItem.title}</span>

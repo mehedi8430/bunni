@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import { BookOpen, Bot, Gauge, Settings } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
@@ -9,8 +9,8 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
-      icon: SquareTerminal,
+      url: "/dashboard",
+      icon: Gauge,
       isActive: true,
     },
     {
@@ -36,7 +36,7 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: Settings2,
+      icon: Settings,
       items: [
         {
           title: "Profile Settings",
@@ -69,7 +69,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props} className="mt-16 border-none">
+    <Sidebar collapsible="icon" {...props} className="mt-20 border-none">
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>

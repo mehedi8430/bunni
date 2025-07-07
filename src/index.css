@@ -1,7 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sora: "Sora", sans-serif;
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
