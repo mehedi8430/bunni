@@ -1,13 +1,13 @@
 import SelectInput, { type SelectOption } from "@/components/SelectInput";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
+import { calculateTicks } from "../utils/calculateTicks";
 
 const monthOptions: SelectOption[] = [
   { value: "monthly", label: "Monthly" },
@@ -15,9 +15,9 @@ const monthOptions: SelectOption[] = [
 ];
 
 const chartData = [
-  { month: "January", desktop: 20 },
+  { month: "January", desktop: 120 },
   { month: "February", desktop: 205 },
-  { month: "March", desktop: 70 },
+  { month: "March", desktop: 170 },
   { month: "April", desktop: 173 },
   { month: "May", desktop: 209 },
   { month: "June", desktop: 250 },
@@ -42,6 +42,26 @@ export default function BalanceAnalytics() {
     setSelected(value);
   };
 
+  // Calculate dynamic values from data
+  const { dynamicTicks, minValue, maxValue } = useMemo(() => {
+    const values = chartData.map((item) => item.desktop);
+    const dataMin = Math.min(...values);
+    const dataMax = Math.max(...values);
+
+    // Add some padding (10% on each side)
+    const padding = (dataMax - dataMin) * 0.1;
+    const paddedMin = Math.max(0, dataMin - padding);
+    const paddedMax = dataMax + padding;
+
+    const { ticks, niceMin, niceMax } = calculateTicks(paddedMin, paddedMax, 6);
+
+    return {
+      dynamicTicks: ticks,
+      minValue: niceMin,
+      maxValue: niceMax,
+    };
+  }, []);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -65,7 +85,11 @@ export default function BalanceAnalytics() {
             right: 12,
           }}
         >
-          <CartesianGrid vertical={false} />
+          <CartesianGrid
+            vertical={true}
+            strokeDasharray="12 5"
+            strokeWidth={0.6}
+          />
           <XAxis
             dataKey="month"
             tickLine={false}
@@ -74,8 +98,8 @@ export default function BalanceAnalytics() {
             tickFormatter={(value) => value.slice(0, 3)}
           />
           <YAxis
-            // ticks={dynamicTicks}
-            // domain={[minValue, maxValue]}
+            ticks={dynamicTicks}
+            domain={[minValue, maxValue]}
             axisLine={false}
             tickLine={false}
             tick={{ fill: "var(--color-chart-1-foreground)" }}
@@ -84,7 +108,21 @@ export default function BalanceAnalytics() {
           />
           <ChartTooltip
             cursor={false}
-            content={<ChartTooltipContent indicator="dot" hideLabel />}
+            content={({ active, payload }) => {
+              if (active && payload && payload.length) {
+                return (
+                  <div className="bg-slate-800 text-white px-3 py-2 rounded-md shadow-lg border-0">
+                    <div className="text-xs text-slate-300 mb-1">
+                      Total Balance
+                    </div>
+                    <div className="text-sm font-semibold">
+                      ${payload[0].value?.toLocaleString() || 0}
+                    </div>
+                  </div>
+                );
+              }
+              return null;
+            }}
           />
           <Area
             dataKey="desktop"
@@ -93,6 +131,10 @@ export default function BalanceAnalytics() {
             fillOpacity={0.4}
             stroke="var(--color-desktop)"
             strokeWidth={3}
+            activeDot={{
+              r: 6,
+              strokeWidth: 3,
+            }}
           />
         </AreaChart>
       </ChartContainer>
