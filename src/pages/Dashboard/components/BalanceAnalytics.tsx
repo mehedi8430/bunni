@@ -11,7 +11,7 @@ import { calculateTicks } from "../utils/calculateTicks";
 
 const monthOptions: SelectOption[] = [
   { value: "monthly", label: "Monthly" },
-  { value: "yearly", label: "yearly" },
+  // { value: "yearly", label: "yearly" },
 ];
 
 const chartData = [

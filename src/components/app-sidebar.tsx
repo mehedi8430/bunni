@@ -4,7 +4,6 @@ import { BookOpen, Bot, Gauge, Settings } from "lucide-react";
 import { NavMain } from "@/components/nav-main";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
 
-// This is sample data.
 const data = {
   navMain: [
     {
@@ -15,52 +14,52 @@ const data = {
     },
     {
       title: "Invoices",
-      url: "#",
+      url: "/dashboard/invoices",
       icon: Bot,
     },
     {
       title: "Customer",
-      url: "#",
+      url: "/dashboard/customer",
       icon: BookOpen,
     },
     {
       title: "Payment",
-      url: "#",
+      url: "/dashboard/payment",
       icon: BookOpen,
     },
     {
       title: "Products",
-      url: "#",
+      url: "/dashboard/products",
       icon: BookOpen,
     },
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/settings",
       icon: Settings,
       items: [
         {
           title: "Profile Settings",
-          url: "#",
+          url: "/dashboard/settings/profile",
         },
         {
           title: "Invoice Settings",
-          url: "#",
+          url: "/dashboard/settings/invoice",
         },
         {
           title: "User Management",
-          url: "#",
+          url: "/dashboard/settings/user",
         },
         {
           title: "Subscription",
-          url: "#",
+          url: "/dashboard/settings/subscription",
         },
         {
           title: "Notification",
-          url: "#",
+          url: "/dashboard/settings/notification",
         },
         {
           title: "Payment Integration",
-          url: "#",
+          url: "/dashboard/settings/payment",
         },
       ],
     },
