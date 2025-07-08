@@ -17,7 +17,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export function NavMain({
   items,
@@ -34,6 +34,11 @@ export function NavMain({
   }[];
 }) {
   const navigate = useNavigate();
+  const activePath = useLocation().pathname;
+
+  const isActive = (url: string) => {
+    return url === activePath;
+  };
 
   return (
     <SidebarGroup className="py-8">
@@ -52,7 +57,7 @@ export function NavMain({
                   className={cn(
                     "p-5 hover:bg-primary hover:text-white text-lg font-normal hover:data-[state=open]:bg-primary hover:data-[state=open]:text-white",
                     {
-                      "bg-primary text-white": item?.isActive,
+                      "bg-primary text-white": isActive(item.url),
                     }
                   )}
                   onClick={() => navigate(item.url)}
@@ -71,7 +76,12 @@ export function NavMain({
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
                           asChild
-                          className="p-5 hover:bg-primary hover:text-white text-lg font-normal mt-1"
+                          className={cn(
+                            "p-5 hover:bg-primary hover:text-white text-lg font-normal mt-1",
+                            {
+                              "bg-primary text-white": isActive(subItem.url),
+                            }
+                          )}
                           onClick={() => navigate(subItem?.url)}
                         >
                           <span>{subItem.title}</span>
