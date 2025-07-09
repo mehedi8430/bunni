@@ -31,7 +31,7 @@ export function LoginForm({
       >
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">Login</h1>
-          <p className="text-muted-foreground text-sm text-balance">
+          <p className="text-foreground text-sm text-balance">
             Don't have an account?{" "}
             <Link to="/auth/register" className="text-primary">
               Sign up
