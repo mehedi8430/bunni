@@ -9,7 +9,7 @@ import threeStar from "../assets/icons/three_star.svg";
 import banner from "../assets/images/Banner.svg";
 import navLogo from "../assets/icons/Logo.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
-import dashboard from "../assets/images/dashboard.png";
+import dashboard from "../assets/images/Dashboard.png";
 
 // Type definitions for better type safety
 export interface IconAssets {
