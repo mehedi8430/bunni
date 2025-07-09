@@ -1,7 +1,10 @@
 // Image and Icon Assets Provider
 import apple from "../assets/icons/apple.svg"; // Assuming you have an apple icon
+import arrowLeft from "../assets/icons/arrow_left.svg"; // Example of another icon
+import arrowRight from "../assets/icons/arrow_right.svg"; // Example of another icon
 import google from "../assets/icons/google.svg";
 import authBackground from "../assets/images/Background_Rectangles.svg";
+import chartCard from "../assets/images/chart_card.svg"; // Assuming you have a chard card icon
 import placeholderImage from "../assets/images/placeholder.svg";
 import reactIcon from "../assets/react.svg";
 
@@ -10,12 +13,15 @@ export interface IconAssets {
   react: string;
   google: string;
   apple: string;
+  arrowLeft: string;
+  arrowRight: string;
   // Add more icon types here as needed
 }
 
 export interface ImageAssets {
   placeholder: string;
   authBackground: string;
+  chartCard: string; // Assuming you have a chard card image
   // Add more image types here as needed
 }
 
@@ -29,6 +35,8 @@ export const icons: IconAssets = {
   react: reactIcon,
   google: google,
   apple: apple,
+  arrowLeft: arrowLeft,
+  arrowRight: arrowRight,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -37,6 +45,7 @@ export const icons: IconAssets = {
 export const images: ImageAssets = {
   placeholder: placeholderImage,
   authBackground: authBackground,
+  chartCard: chartCard, // Assuming you have a chart card image
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };
@@ -53,7 +62,7 @@ export { placeholderImage, reactIcon };
 // Utility function to get asset by category and name
 export const getAsset = (
   category: keyof AssetCollection,
-  name: string
+  name: string,
 ): string | undefined => {
   return assets[category][name as keyof (typeof assets)[typeof category]];
 };
@@ -66,7 +75,7 @@ export const getAssetsByCategory = (category: keyof AssetCollection) => {
 // Utility function to check if an asset exists
 export const hasAsset = (
   category: keyof AssetCollection,
-  name: string
+  name: string,
 ): boolean => {
   return name in assets[category];
 };
