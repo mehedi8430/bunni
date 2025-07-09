@@ -6,17 +6,25 @@ import taskIcon1 from "../assets/icons/task_icon1.svg";
 import taskIcon2 from "../assets/icons/task_icon2.svg";
 import taskIcon3 from "../assets/icons/task_icon3.svg";
 import threeStar from "../assets/icons/three_star.svg";
+import banner from "../assets/images/Banner.svg";
+import navLogo from "../assets/icons/Logo.svg";
+import rightArrow from "../assets/icons/rightArrow.svg";
+import dashboard from "../assets/images/dashboard.png";
 
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
   [key: string]: string;
+  navLogo: string;
+  rightArrow: string;
   // Add more icon types here as needed
 }
 
 export interface ImageAssets {
   placeholder: string;
   authBackground: string;
+  banner: string;
+  dashboard: string;
   // Add more image types here as needed
 }
 
@@ -32,6 +40,8 @@ export const icons: IconAssets = {
   taskIcon2,
   taskIcon3,
   threeStar,
+  navLogo: navLogo,
+  rightArrow: rightArrow,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -40,6 +50,8 @@ export const icons: IconAssets = {
 export const images: ImageAssets = {
   placeholder: placeholderImage,
   authBackground: authBackground,
+  banner: banner,
+  dashboard: dashboard,
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };

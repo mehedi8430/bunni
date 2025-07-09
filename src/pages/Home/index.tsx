@@ -1,7 +1,9 @@
-import Navbar from "./components/Navbar";
+import Banner from "./components/Banner";
+import HowDoesItWork from "./components/HowDoesItWork";
 
 export default function HomePage() {
   return <main>
-    <Navbar />
+    <Banner />
+    <HowDoesItWork />
   </main>;
 }
