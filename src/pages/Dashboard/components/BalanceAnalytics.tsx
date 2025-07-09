@@ -124,16 +124,19 @@ export default function BalanceAnalytics() {
               return null;
             }}
           />
+
           <Area
             dataKey="desktop"
             type="linear"
             fill="none"
-            fillOpacity={0.4}
             stroke="var(--color-desktop)"
-            strokeWidth={3}
+            strokeWidth={5}
             activeDot={{
-              r: 6,
+              r: 8,
               strokeWidth: 3,
+            }}
+            style={{
+              filter: "drop-shadow(0 0 10px var(--color-desktop))",
             }}
           />
         </AreaChart>
