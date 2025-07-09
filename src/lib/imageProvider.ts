@@ -15,6 +15,7 @@ import document from '../assets/icons/document.svg';
 import getPaid from '../assets/icons/getPaid.svg';
 import myCard from '../assets/images/myCard.svg';
 import check from '../assets/icons/check.svg';
+import sendMoney from '../assets/images/sendMoney.svg';
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -31,6 +32,7 @@ export interface ImageAssets {
   banner: string;
   dashboard: string;
   myCard: string;
+  sendMoney: string;
   // Add more image types here as needed
 }
 
@@ -63,6 +65,7 @@ export const images: ImageAssets = {
   banner: banner,
   dashboard: dashboard,
   myCard: myCard,
+  sendMoney: sendMoney,
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };

@@ -4,8 +4,8 @@ import { icons, images } from "@/lib/imageProvider";
 export default function BusinessFeatures() {
     return (
         <section className="container mx-auto my-16 md:my-20 lg:my-28 px-5">
-            <div className="flex flex-col md:flex-row items-center md:gap-8 lg:gap-20 space-y-7">
-                <div className="md:w-1/2 ">
+            <div className="flex flex-col-reverse md:flex-row items-center md:gap-8 lg:gap-20">
+                <div className="md:w-1/2 mt-7 md:mt-0">
                     <Image src={images.myCard} alt="Business Feature" className="w-full h-full" />
                 </div>
                 <div className="md:w-1/2 ">
