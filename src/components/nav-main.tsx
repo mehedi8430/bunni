@@ -31,6 +31,7 @@ export function NavMain({
     items?: {
       title: string;
       url: string;
+      icon?: string | LucideIcon;
     }[];
   }[];
 }) {
@@ -63,10 +64,7 @@ export function NavMain({
                   )}
                   onClick={() => navigate(item.url)}
                 >
-                  <ReactSVG
-                    src={item.icon}
-                    className="w-5 h-5 mr-1 text-white"
-                  />
+                  {item.icon && <ReactSVG src={item.icon} />}
                   {/* {item.icon && <item.icon className="w-6 h-6 mr-1" />} */}
                   <span>{item.title}</span>
                   {item?.items?.length && (
@@ -80,7 +78,6 @@ export function NavMain({
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
-                          asChild
                           className={cn(
                             "p-5 hover:bg-primary hover:text-white text-lg font-normal mt-1",
                             {
@@ -89,6 +86,7 @@ export function NavMain({
                           )}
                           onClick={() => navigate(subItem?.url)}
                         >
+                          {subItem.icon && <ReactSVG src={subItem.icon} />}
                           <span>{subItem.title}</span>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

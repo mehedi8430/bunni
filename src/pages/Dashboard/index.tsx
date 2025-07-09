@@ -8,7 +8,7 @@ import ProPlanCard from "./components/ProPlanCard";
 
 export default function DashboardPage() {
   return (
-    <main className="px-10 space-y-6 pb-6">
+    <main className="px-4 lg:px-10 space-y-6 pb-6">
       <section className="space-y-2">
         <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
         <p className="text-[20px] font-normal text-foreground/50">
@@ -45,19 +45,19 @@ export default function DashboardPage() {
 
       <section>
         <div className="grid grid-cols-3 gap-6">
-          <div className="bg-sidebar col-span-3 lg:col-span-2 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 xl:col-span-2 p-4 rounded-2xl">
             <BalanceAnalytics />
           </div>
-          <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
             <ThingsToDo />
           </div>
-          <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
             <BarChartSection />
           </div>
-          <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
             <AreaChartSection />
           </div>
-          <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
             <ProPlanCard />
           </div>
         </div>
