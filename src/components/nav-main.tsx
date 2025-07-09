@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
+import { ReactSVG } from "react-svg";
 
 import {
   Collapsible,
@@ -25,7 +26,7 @@ export function NavMain({
   items: {
     title: string;
     url: string;
-    icon?: LucideIcon;
+    icon?: string | LucideIcon;
     isActive?: boolean;
     items?: {
       title: string;
@@ -62,7 +63,11 @@ export function NavMain({
                   )}
                   onClick={() => navigate(item.url)}
                 >
-                  {item.icon && <item.icon className="w-6 h-6 mr-1" />}
+                  <ReactSVG
+                    src={item.icon}
+                    className="w-5 h-5 mr-1 text-white"
+                  />
+                  {/* {item.icon && <item.icon className="w-6 h-6 mr-1" />} */}
                   <span>{item.title}</span>
                   {item?.items?.length && (
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />

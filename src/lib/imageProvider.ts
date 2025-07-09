@@ -11,6 +11,19 @@ import navLogo from "../assets/icons/Logo.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
 import dashboard from "../assets/images/Dashboard.png";
 
+import invoices from "../assets/icons/invoices.svg";
+import customer from "../assets/icons/customer.svg";
+import payment from "../assets/icons/payment.svg";
+import products from "../assets/icons/products.svg";
+import dashboard_icon from "../assets/icons/dashboard_icon.svg";
+import invoice_settings from "../assets/icons/invoice_settings.svg";
+import payment_integration from "../assets/icons/payment_integration.svg";
+import notification from "../assets/icons/notification.svg";
+import profile_settings from "../assets/icons/profile_settings.svg";
+import subscription from "../assets/icons/subscription.svg";
+import user_management from "../assets/icons/user_management.svg";
+import settings from "../assets/icons/settings.svg";
+
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
@@ -42,6 +55,18 @@ export const icons: IconAssets = {
   threeStar,
   navLogo: navLogo,
   rightArrow: rightArrow,
+  invoices,
+  customer,
+  payment,
+  products,
+  dashboard_icon,
+  invoice_settings,
+  payment_integration,
+  notification,
+  profile_settings,
+  subscription,
+  user_management,
+  settings,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };

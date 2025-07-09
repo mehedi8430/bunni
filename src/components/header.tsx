@@ -1,6 +1,8 @@
 import { Bell, Headset } from "lucide-react";
 import SelectInput from "./SelectInput";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { icons } from "@/lib/imageProvider";
+import { ReactSVG } from "react-svg";
 
 export default function Header() {
   return (
@@ -8,11 +10,7 @@ export default function Header() {
       <div className="flex items-center">
         <div className="w-[328px] flex items-center justify-center">
           <div className="w-[109px] h-[78px] flex items-center justify-center">
-            <img
-              src="/src/assets/logo.png"
-              alt="logo"
-              className="object-cover"
-            />
+            <ReactSVG src={icons.navLogo} />
           </div>
         </div>
 

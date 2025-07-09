@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BookOpen, Bot, Gauge, Settings } from "lucide-react";
+import { icons } from "@/lib/imageProvider";
 
 import { NavMain } from "@/components/nav-main";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
@@ -9,57 +9,63 @@ const data = {
     {
       title: "Dashboard",
       url: "/dashboard",
-      icon: Gauge,
+      icon: icons.dashboard_icon,
       isActive: true,
     },
     {
       title: "Invoices",
       url: "/dashboard/invoices",
-      icon: Bot,
+      icon: icons.invoices,
     },
     {
       title: "Customer",
       url: "/dashboard/customer",
-      icon: BookOpen,
+      icon: icons.customer,
     },
     {
       title: "Payment",
       url: "/dashboard/payment",
-      icon: BookOpen,
+      icon: icons.payment,
     },
     {
       title: "Products",
       url: "/dashboard/products",
-      icon: BookOpen,
+      icon: icons.products,
     },
     {
       title: "Settings",
       url: "/dashboard/settings",
-      icon: Settings,
+      icon: icons.settings,
       items: [
         {
           title: "Profile Settings",
           url: "/dashboard/settings/profile",
+          icon: icons.profile_settings,
         },
         {
           title: "Invoice Settings",
           url: "/dashboard/settings/invoice",
+          icon: icons.invoice_settings,
         },
         {
           title: "User Management",
           url: "/dashboard/settings/user",
+          icon: icons.user_management,
         },
         {
           title: "Subscription",
           url: "/dashboard/settings/subscription",
+          icon: icons.subscription,
         },
         {
           title: "Notification",
           url: "/dashboard/settings/notification",
+          icon: icons.notification,
         },
         {
           title: "Payment Integration",
           url: "/dashboard/settings/payment",
+          icon: icons.payment_integration,
         },
       ],
     },
