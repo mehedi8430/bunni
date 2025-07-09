@@ -5,8 +5,8 @@ import Image from "@/components/shared/Image";
 
 export default function Banner() {
     return (
-            <section className="w-full relative">
-                <div className="h-[550px] md:h-[720px] lg:h-[calc(100vh+0px)] xl:h-[calc(100vh+250px)] absolute top-0 inset-x-0 -z-1 bg-cover bg-center" style={{ backgroundImage: `url(${images.banner})`}}></div>
+        <section className="w-full relative">
+                <div className="h-[550px] md:h-[720px] lg:h-[75%] xl:h-[75%] absolute top-0 inset-x-0 -z-1 bg-cover bg-center" style={{ backgroundImage: `url(${images.banner})`}}></div>
                 <Navbar />
                 <div className="container mx-auto mt-3 md:mt-20">
                     <div className="text-center max-sm:px-5">

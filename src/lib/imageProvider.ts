@@ -10,6 +10,10 @@ import banner from "../assets/images/Banner.svg";
 import navLogo from "../assets/icons/Logo.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
 import dashboard from "../assets/images/Dashboard.png";
+import user from '../assets/icons/user.svg';
+import document from '../assets/icons/document.svg';
+import getPaid from '../assets/icons/getPaid.svg';
+import myCard from '../assets/images/myCard.svg';
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -25,6 +29,7 @@ export interface ImageAssets {
   authBackground: string;
   banner: string;
   dashboard: string;
+  myCard: string;
   // Add more image types here as needed
 }
 
@@ -42,6 +47,9 @@ export const icons: IconAssets = {
   threeStar,
   navLogo: navLogo,
   rightArrow: rightArrow,
+  user,
+  document,
+  getPaid,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -52,6 +60,7 @@ export const images: ImageAssets = {
   authBackground: authBackground,
   banner: banner,
   dashboard: dashboard,
+  myCard: myCard,
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };
