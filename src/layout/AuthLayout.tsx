@@ -14,9 +14,9 @@ export default function AuthLayout() {
               </div>
             </div>
           </div>
-          <div className="bg-muted relative hidden lg:block">
+          <div className="relative hidden lg:block">
             <Image
-              src={images.placeholder}
+              src={images.authBackground}
               alt="Authentication background"
               fill
               priority

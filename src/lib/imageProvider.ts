@@ -1,4 +1,5 @@
 // Image and Icon Assets Provider
+import authBackground from "../assets/images/Background_Rectangles.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
 import reactIcon from "../assets/react.svg";
 
@@ -10,6 +11,7 @@ export interface IconAssets {
 
 export interface ImageAssets {
   placeholder: string;
+  authBackground: string;
   // Add more image types here as needed
 }
 
@@ -28,6 +30,7 @@ export const icons: IconAssets = {
 // Images collection - typically larger assets used for content
 export const images: ImageAssets = {
   placeholder: placeholderImage,
+  authBackground: authBackground,
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };
