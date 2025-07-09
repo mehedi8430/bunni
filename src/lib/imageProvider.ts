@@ -14,6 +14,7 @@ import user from '../assets/icons/user.svg';
 import document from '../assets/icons/document.svg';
 import getPaid from '../assets/icons/getPaid.svg';
 import myCard from '../assets/images/myCard.svg';
+import check from '../assets/icons/check.svg';
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -50,6 +51,7 @@ export const icons: IconAssets = {
   user,
   document,
   getPaid,
+  check,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
