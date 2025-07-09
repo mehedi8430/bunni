@@ -3,6 +3,8 @@ import { Plus } from "lucide-react";
 import BalanceAnalytics from "./components/BalanceAnalytics";
 import BarChartSection from "./components/BarChartSection";
 import AreaChartSection from "./components/AreaChartSection";
+import ThingsToDo from "./components/ThingsToDo";
+import ProPlanCard from "./components/ProPlanCard";
 
 export default function DashboardPage() {
   return (
@@ -35,7 +37,7 @@ export default function DashboardPage() {
             <BalanceAnalytics />
           </div>
           <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
-            things to do
+            <ThingsToDo />
           </div>
           <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
             <BarChartSection />
@@ -44,7 +46,7 @@ export default function DashboardPage() {
             <AreaChartSection />
           </div>
           <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
-            grid 5
+            <ProPlanCard />
           </div>
         </div>
       </section>
