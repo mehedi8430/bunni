@@ -1,4 +1,6 @@
 // Image and Icon Assets Provider
+import apple from "../assets/icons/apple.svg"; // Assuming you have an apple icon
+import google from "../assets/icons/google.svg";
 import authBackground from "../assets/images/Background_Rectangles.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
 import reactIcon from "../assets/react.svg";
@@ -6,6 +8,8 @@ import reactIcon from "../assets/react.svg";
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
+  google: string;
+  apple: string;
   // Add more icon types here as needed
 }
 
@@ -23,6 +27,8 @@ export interface AssetCollection {
 // Icons collection - typically smaller assets used for UI elements
 export const icons: IconAssets = {
   react: reactIcon,
+  google: google,
+  apple: apple,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };

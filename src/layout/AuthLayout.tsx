@@ -20,7 +20,7 @@ export default function AuthLayout() {
               alt="Authentication background"
               fill
               priority
-              className="dark:brightness-[0.2] dark:grayscale h-full w-full"
+              className="dark:brightness-[0.2] dark:grayscale h-full w-full bg-[#228E67]"
             />
           </div>
         </div>
