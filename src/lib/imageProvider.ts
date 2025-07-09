@@ -1,38 +1,27 @@
 // Image and Icon Assets Provider
-import check from "../assets/icons/check.svg";
-import document from "../assets/icons/document.svg";
-import getPaid from "../assets/icons/getPaid.svg";
-import navLogo from "../assets/icons/Logo.svg";
-import rightArrow from "../assets/icons/rightArrow.svg";
-import taskIcon1 from "../assets/icons/task_icon1.svg";
-import taskIcon2 from "../assets/icons/task_icon2.svg";
-import taskIcon3 from "../assets/icons/task_icon3.svg";
-import threeStar from "../assets/icons/three_star.svg";
-import user from "../assets/icons/user.svg";
+import apple from "../assets/icons/apple.svg"; // Assuming you have an apple icon
+import arrowLeft from "../assets/icons/arrow_left.svg"; // Example of another icon
+import arrowRight from "../assets/icons/arrow_right.svg"; // Example of another icon
+import google from "../assets/icons/google.svg";
 import authBackground from "../assets/images/Background_Rectangles.svg";
-import banner from "../assets/images/Banner.svg";
-import dashboard from "../assets/images/Dashboard.png";
-import myCard from "../assets/images/myCard.svg";
+import chartCard from "../assets/images/chart_card.svg"; // Assuming you have a chard card icon
 import placeholderImage from "../assets/images/placeholder.svg";
-import sendMoney from "../assets/images/sendMoney.svg";
 import reactIcon from "../assets/react.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
-  [key: string]: string;
-  navLogo: string;
-  rightArrow: string;
+  google: string;
+  apple: string;
+  arrowLeft: string;
+  arrowRight: string;
   // Add more icon types here as needed
 }
 
 export interface ImageAssets {
   placeholder: string;
   authBackground: string;
-  banner: string;
-  dashboard: string;
-  myCard: string;
-  sendMoney: string;
+  chartCard: string; // Assuming you have a chard card image
   // Add more image types here as needed
 }
 
@@ -44,16 +33,10 @@ export interface AssetCollection {
 // Icons collection - typically smaller assets used for UI elements
 export const icons: IconAssets = {
   react: reactIcon,
-  taskIcon1,
-  taskIcon2,
-  taskIcon3,
-  threeStar,
-  navLogo: navLogo,
-  rightArrow: rightArrow,
-  user,
-  document,
-  getPaid,
-  check,
+  google: google,
+  apple: apple,
+  arrowLeft: arrowLeft,
+  arrowRight: arrowRight,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -62,10 +45,7 @@ export const icons: IconAssets = {
 export const images: ImageAssets = {
   placeholder: placeholderImage,
   authBackground: authBackground,
-  banner: banner,
-  dashboard: dashboard,
-  myCard: myCard,
-  sendMoney: sendMoney,
+  chartCard: chartCard, // Assuming you have a chart card image
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };
