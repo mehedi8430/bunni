@@ -1,3 +1,5 @@
+import { LoginForm } from "@/components/authentication/LoginForm";
+import AuthLayout from "@/layout/AuthLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CustomerPage from "@/pages/Dashboard/Customer";
@@ -72,6 +74,21 @@ export const Router = createBrowserRouter([
       {
         path: "settings/payment",
         element: <PaymentIntegrationPage />,
+      },
+    ],
+  },
+  {
+    path: "auth",
+    element: <AuthLayout />,
+    errorElement: <div>Error occurred</div>,
+    children: [
+      {
+        index: true,
+        element: <LoginForm />,
+      },
+      {
+        path: "login",
+        element: <LoginForm />,
       },
     ],
   },
