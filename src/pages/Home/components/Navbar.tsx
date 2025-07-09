@@ -55,7 +55,7 @@ export default function Navbar() {
                         </SheetTrigger>
 
                         <SheetContent side="right" className="flex flex-col p-0 w-[90%]">
-                            {/* Custom Header with Logo and Close Button */}
+                            {/* Custom Header with Logo */}
                             <div className="flex items-center justify-between p-4 border-b">
                                 <div className="flex items-center">
                                     <img
