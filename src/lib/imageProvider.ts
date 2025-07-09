@@ -2,10 +2,15 @@
 import authBackground from "../assets/images/Background_Rectangles.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
 import reactIcon from "../assets/react.svg";
+import taskIcon1 from "../assets/icons/task_icon1.svg";
+import taskIcon2 from "../assets/icons/task_icon2.svg";
+import taskIcon3 from "../assets/icons/task_icon3.svg";
+import threeStar from "../assets/icons/three_star.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
+  [key: string]: string;
   // Add more icon types here as needed
 }
 
@@ -23,6 +28,10 @@ export interface AssetCollection {
 // Icons collection - typically smaller assets used for UI elements
 export const icons: IconAssets = {
   react: reactIcon,
+  taskIcon1,
+  taskIcon2,
+  taskIcon3,
+  threeStar,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };

@@ -1,38 +1,44 @@
 import { Check } from "lucide-react";
+import { icons } from "@/lib/imageProvider";
+import { ReactSVG } from "react-svg";
+import { Button } from "@/components/ui/button";
 
 export default function ProPlanCard() {
   return (
-    <div className="bg-white rounded-xl shadow p-5 space-y-4">
-      <div className="flex items-start justify-between">
-        <div>
-          <span className="text-3xl font-bold">$4.99</span>
-          <span className="text-muted-foreground text-sm">/month</span>
-        </div>
-        <div className="text-green-600 font-semibold text-sm flex items-center gap-1">
-          Pro Plan <span className="text-green-500">✨</span>
-        </div>
+    <div className="space-y-4">
+      <div className="flex justify-end gap-3 text-primary text-lg font-normal">
+        Pro Plan <ReactSVG src={icons.threeStar} className="size-6" />
       </div>
 
-      <p className="text-sm text-muted-foreground">
+      <div>
+        <span className="text-5xl font-semibold text-black">$4.99</span>
+        <span className="text-lg font-normal text-foreground/80">/month</span>
+      </div>
+
+      <p className="text-[16px] font-normal text-foreground/70">
         Invoice Smarter. Grow Faster.
       </p>
 
       <ul className="space-y-1 text-sm text-muted-foreground">
-        <li className="flex items-center gap-2">
-          <Check className="text-green-500 w-4 h-4" /> Unlimited Invoice
+        <li className="flex items-center gap-3 text-sm font-normal text-foreground/70">
+          <Check className="w-4 h-4 text-foreground" /> Unlimited Invoice
         </li>
-        <li className="flex items-center gap-2">
-          <Check className="text-green-500 w-4 h-4" /> Management Setting
+        <li className="flex items-center gap-3 text-sm font-normal text-foreground/70">
+          <Check className=" w-4 h-4 text-foreground" /> Management Setting
         </li>
-        <li className="flex items-center gap-2">
-          <Check className="text-green-500 w-4 h-4" /> Add Admin In Company
+        <li className="flex items-center gap-3 text-sm font-normal text-foreground/70">
+          <Check className="w-4 h-4 text-foreground" /> Add Admin In Company
           Profile
         </li>
       </ul>
 
-      <button className="bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-lg font-medium">
+      <Button
+        variant={"primary"}
+        className="w-full cursor-pointer mt-1 text-lg font-normal"
+        size={"lg"}
+      >
         Upgrade plan
-      </button>
+      </Button>
     </div>
   );
 }

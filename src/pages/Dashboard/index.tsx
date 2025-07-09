@@ -16,15 +16,27 @@ export default function DashboardPage() {
         </p>
 
         <div className="flex flex-col md:flex-row gap-2 items-center mt-6">
-          <Button className="bg-gradient-to-t from-primary to-primary-2 ">
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-lg font-normal"
+          >
             <Plus />
             Create Invoices
           </Button>
-          <Button className="bg-gradient-to-t from-primary to-primary-2 ">
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-lg font-normal"
+          >
             <Plus />
             New Customer
           </Button>
-          <Button className="bg-gradient-to-t from-primary to-primary-2 ">
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-lg font-normal"
+          >
             <Plus />
             New Products
           </Button>
