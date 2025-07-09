@@ -1,4 +1,6 @@
+import Image from "@/components/shared/Image";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { icons } from "@/lib/imageProvider";
 import {  useState } from "react";
 import { NavLink, useLocation } from "react-router";
 
@@ -17,20 +19,15 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="bg-white p-4 shadow-md">
-            <div className="container mx-auto flex items-center justify-between">
+        <nav className="py-6">
+            <div className="container mx-auto flex items-center justify-between max-md:px-5">
                 {/* Logo Section */}
-                <div className="flex items-center">
-                    {/* Replace with your actual logo image */}
-                    <img
-                        src="https://placehold.co/100x40/E0F2F7/000000?text=BUNNI"
-                        alt="Bunni Logo"
-                        className="h-10 mr-4 rounded-md"
-                    />
+                <div className="flex items-center h-10">
+                    <Image src={icons.navLogo} alt="Bunni Logo" className="h-20 w-20 rounded-md" />
                 </div>
 
                 {/* Hamburger Menu Icon for Mobile using Shadcn DrawerTrigger */}
-                <div className="md:hidden flex items-center">
+                <div className="lg:hidden flex items-center">
                     <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                         <SheetTrigger asChild>
                             <button
@@ -54,15 +51,11 @@ export default function Navbar() {
                             </button>
                         </SheetTrigger>
 
-                        <SheetContent side="right" className="flex flex-col p-0 w-[90%]">
+                        <SheetContent side="right" className="flex flex-col w-[90%]">
                             {/* Custom Header with Logo */}
-                            <div className="flex items-center justify-between p-4 border-b">
+                            <div className="flex items-center justify-between border-b border-foreground/8">
                                 <div className="flex items-center">
-                                    <img
-                                        src="https://placehold.co/100x40/E0F2F7/000000?text=BUNNI"
-                                        alt="Bunni Logo"
-                                        className="h-10 rounded-md"
-                                    />
+                                    <Image src={icons.navLogo} alt="Bunni Logo" className="h-12 w-full rounded-md ml-2" />
                                 </div>
                             </div>
 
@@ -100,7 +93,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Navigation Links - Mapped and using NavLink (Desktop) */}
-                <div className="hidden md:flex space-x-8">
+                <div className="hidden lg:flex space-x-8">
                     {navLinks.map((link) => (
                         <NavLink
                             key={link.name} // Unique key for each mapped item
@@ -117,7 +110,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Auth Buttons (Desktop) */}
-                <div className="hidden md:flex items-center space-x-5">
+                <div className="hidden lg:flex items-center space-x-5">
                     <button className="px-8 py-3.5 border border-primary text-foreground rounded-md text-xl">
                         Log In
                     </button>

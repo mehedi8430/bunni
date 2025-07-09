@@ -2,16 +2,24 @@
 import authBackground from "../assets/images/Background_Rectangles.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
 import reactIcon from "../assets/react.svg";
+import banner from  '../assets/images/Banner.svg';
+import navLogo from '../assets/icons/Logo.svg';
+import rightArrow from '../assets/icons/rightArrow.svg';
+import dashboard from '../assets/images/dashboard.png';
 
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
+  navLogo: string;
+  rightArrow: string;
   // Add more icon types here as needed
 }
 
 export interface ImageAssets {
   placeholder: string;
   authBackground: string;
+  banner: string;
+  dashboard: string;
   // Add more image types here as needed
 }
 
@@ -23,6 +31,8 @@ export interface AssetCollection {
 // Icons collection - typically smaller assets used for UI elements
 export const icons: IconAssets = {
   react: reactIcon,
+  navLogo: navLogo,
+  rightArrow: rightArrow,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -31,6 +41,8 @@ export const icons: IconAssets = {
 export const images: ImageAssets = {
   placeholder: placeholderImage,
   authBackground: authBackground,
+  banner: banner,
+  dashboard: dashboard,
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };
