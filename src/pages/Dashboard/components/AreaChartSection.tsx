@@ -2,9 +2,8 @@ import SelectInput, { type SelectOption } from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
 
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 const monthOptions: SelectOption[] = [
   { value: "monthly", label: "Monthly" },
@@ -19,7 +18,6 @@ const chartData = [
   { month: "May", desktop: 209 },
   { month: "June", desktop: 214 },
 ];
-
 const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -27,14 +25,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function BarChartSection() {
-  const [selected, setSelected] = useState<string>("monthly");
-
-  const handleMonthChange = (value: string) => {
-    console.log("Selected month:", value);
-    setSelected(value);
-  };
-
+export default function AreaChartSection() {
   return (
     <div className="space-y-2">
       <h4 className="text-lg font-semibold">Title</h4>
@@ -42,7 +33,7 @@ export default function BarChartSection() {
       <div className="flex items-center gap-4">
         <Button
           disabled
-          className="bg-[#D6FBE6] text-[#31B099] text-sm font-semibold gap-[1px]"
+          className="bg-red-200 text-red-600 text-sm font-semibold gap-[1px]"
         >
           <ArrowUpRight /> +3.12%
         </Button>
@@ -53,36 +44,46 @@ export default function BarChartSection() {
         <SelectInput
           options={monthOptions}
           placeholder="Select a month"
-          value={selected}
-          onValueChange={handleMonthChange}
           triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
         />
 
         <ChartContainer config={chartConfig}>
-          <BarChart
+          <AreaChart
             accessibilityLayer
             data={chartData}
-            margin={{
-              left: 0,
-              right: 0,
-            }}
+            margin={{ top: 0, right: 0, left: 0, bottom: 4 }}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+            <defs>
+              <linearGradient id="fillColor" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor="var(--color-chart-3)"
+                  stopOpacity={0.9}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="var(--color-chart-3)"
+                  stopOpacity={0.2}
+                />
+              </linearGradient>
+            </defs>
+            <CartesianGrid vertical={false} horizontal={false} />
+            <XAxis dataKey="month" hide />
+            <Area
+              dataKey="desktop"
+              type="linear"
+              fill="url(#fillColor)"
+              fillOpacity={1}
+              stroke="var(--color-desktop)"
+              strokeWidth={3}
+              activeDot={{
+                r: 6,
+                strokeWidth: 2,
+                stroke: "var(--color-desktop) ",
+                fill: "#fff",
+              }}
             />
-            <YAxis
-              tickLine={false}
-              tickMargin={5}
-              axisLine={false}
-              tickFormatter={(value) => `$${value}`}
-            />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={0} />
-          </BarChart>
+          </AreaChart>
         </ChartContainer>
       </div>
     </div>

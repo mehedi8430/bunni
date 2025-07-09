@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import BalanceAnalytics from "./components/BalanceAnalytics";
 import BarChartSection from "./components/BarChartSection";
+import AreaChartSection from "./components/AreaChartSection";
 
 export default function DashboardPage() {
   return (
@@ -40,7 +41,7 @@ export default function DashboardPage() {
             <BarChartSection />
           </div>
           <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
-            grid 4
+            <AreaChartSection />
           </div>
           <div className="bg-sidebar col-span-3 lg:col-span-1 p-4 rounded-2xl">
             grid 5
