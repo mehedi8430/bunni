@@ -48,8 +48,8 @@ export default function Notification() {
           <ReactSVG src={icons.notification} />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="border-border max-h-[80vh] w-80 overflow-y-auto border px-6 py-8 shadow-2xl md:w-120">
-        <div className="z-50 space-y-6">
+      <PopoverContent className="border-border z-50 max-h-[80vh] w-80 overflow-y-auto border px-6 py-8 shadow-2xl md:w-120">
+        <div className="space-y-6">
           <div className="space-y-3">
             <h2 className="text-2xl font-semibold">Notifications & Alerts</h2>
             <p className="text-foreground/50 text-[20px] font-normal">

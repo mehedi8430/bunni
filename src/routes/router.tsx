@@ -11,6 +11,7 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CustomerPage from "@/pages/Dashboard/Customer";
 import InvoicesPage from "@/pages/Dashboard/Invoices";
+import NotificationPageForMobile from "@/pages/Dashboard/NotificationPageForMobile";
 import PaymentPage from "@/pages/Dashboard/Payment";
 import ProductsPage from "@/pages/Dashboard/Products";
 import HomePage from "@/pages/Home";
@@ -81,6 +82,10 @@ export const Router = createBrowserRouter([
       {
         path: "settings/payment",
         element: <PaymentIntegrationPage />,
+      },
+      {
+        path: "notifications",
+        element: <NotificationPageForMobile />,
       },
     ],
   },
