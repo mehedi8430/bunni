@@ -106,15 +106,12 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-description: var(--description);
-<<<<<<< HEAD
   --color-footer-input-background: var(--footer-input-background);
   --color-footer-form-background: var(--footer-form-background);
-=======
 
   /* Custom Colors for project */
   --color-disabled: var(--disabled);
   --color-paragraph: var(--paragraph);
->>>>>>> rashad
 }
 
 .dark {
