@@ -81,28 +81,31 @@ export default function BalanceAnalytics() {
           accessibilityLayer
           data={chartData}
           margin={{
-            left: 12,
-            right: 12,
+            left: 0,
+            right: 0,
           }}
         >
           <CartesianGrid
             vertical={true}
-            strokeDasharray="12 5"
-            strokeWidth={0.6}
+            strokeDasharray="12 4"
+            strokeWidth={0.5}
+            stroke="var(--color-border)"
           />
           <XAxis
             dataKey="month"
             tickLine={false}
             axisLine={false}
-            tickMargin={8}
+            tickMargin={10}
             tickFormatter={(value) => value.slice(0, 3)}
           />
           <YAxis
             ticks={dynamicTicks}
             domain={[minValue, maxValue]}
             axisLine={false}
-            tickLine={false}
-            tick={{ fill: "var(--color-chart-1-foreground)" }}
+            tickLine={{
+              strokeWidth: 0.5,
+              stroke: "var(--color-border)",
+            }}
             tickMargin={5}
             tickFormatter={(value) => `$${value.toFixed(1)}`}
           />

@@ -22,10 +22,12 @@ import chartCard from "../assets/images/chart_card.svg"; // Assuming you have a 
 import dashboard from "../assets/images/Dashboard.png";
 import myCard from "../assets/images/myCard.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
+import sendMoney from "../assets/images/sendMoney.svg";
 import reactIcon from "../assets/react.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
+  [key: string]: string;
   [key: string]: string;
   react: string;
   google: string;
@@ -36,6 +38,7 @@ export interface IconAssets {
 }
 
 export interface ImageAssets {
+  [key: string]: string;
   [key: string]: string;
   placeholder: string;
   authBackground: string;
@@ -68,6 +71,19 @@ export const icons: IconAssets = {
   file,
   requring,
   reportingFilter,
+  taskIcon1,
+  taskIcon2,
+  taskIcon3,
+  threeStar,
+  navLogo: navLogo,
+  rightArrow: rightArrow,
+  user,
+  document,
+  getPaid,
+  check,
+  file,
+  requring,
+  reportingFilter,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -76,6 +92,11 @@ export const icons: IconAssets = {
 export const images: ImageAssets = {
   placeholder: placeholderImage,
   authBackground: authBackground,
+  chartCard: chartCard,
+  banner: banner,
+  dashboard: dashboard,
+  myCard: myCard,
+  sendMoney: sendMoney,
   chartCard: chartCard,
   banner: banner,
   dashboard: dashboard,
