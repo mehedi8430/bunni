@@ -27,10 +27,32 @@ import settings from "../assets/icons/settings.svg";
 // Type definitions for better type safety
 export interface IconAssets {
   react: string;
-  [key: string]: string;
+  taskIcon1: string;
+  taskIcon2: string;
+  taskIcon3: string;
+  threeStar: string;
   navLogo: string;
   rightArrow: string;
-  // Add more icon types here as needed
+  user: string;
+  document: string;
+  getPaid: string;
+  check: string;
+  file: string;
+  requring: string;
+  reportingFilter: string;
+  invoices: string;
+  customer: string;
+  payment: string;
+  products: string;
+  dashboard_icon: string;
+  invoice_settings: string;
+  payment_integration: string;
+  notification: string;
+  profile_settings: string;
+  subscription: string;
+  user_management: string;
+  settings: string;
+  [key: string]: string;
 }
 
 export interface ImageAssets {
@@ -55,6 +77,13 @@ export const icons: IconAssets = {
   threeStar,
   navLogo: navLogo,
   rightArrow: rightArrow,
+  user,
+  document,
+  getPaid,
+  check,
+  file,
+  requring,
+  reportingFilter,
   invoices,
   customer,
   payment,
@@ -77,6 +106,8 @@ export const images: ImageAssets = {
   authBackground: authBackground,
   banner: banner,
   dashboard: dashboard,
+  myCard: myCard,
+  sendMoney: sendMoney,
   // Add more images here as needed
   // Example: banners, avatars, backgrounds, etc.
 };
