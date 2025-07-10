@@ -1,8 +1,8 @@
 import Image from "@/components/shared/Image";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { icons } from "@/lib/imageProvider";
-import {  useState } from "react";
-import { useLocation } from "react-router";
+import { useState } from "react";
+import { Link, useLocation } from "react-router";
 
 
 
@@ -77,9 +77,11 @@ export default function Navbar() {
 
                                 <div className="flex flex-col w-full space-y-5 px-4">
                                     <SheetClose asChild>
-                                        <button className="w-full px-3 py-1.5 border border-primary text-foreground rounded-md">
-                                            Log In
-                                        </button>
+                                        <Link to={"/auth"}>
+                                            <button className="w-full px-3 py-1.5 border border-primary text-foreground rounded-md">
+                                                Log In
+                                            </button>
+                                        </Link>
                                     </SheetClose>
                                     <SheetClose asChild>
                                         <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
@@ -111,9 +113,11 @@ export default function Navbar() {
 
                 {/* Auth Buttons (Desktop) */}
                 <div className="hidden lg:flex items-center space-x-5">
-                    <button className="px-8 py-3.5 border border-primary text-foreground rounded-md text-xl">
-                        Log In
-                    </button>
+                    <Link to={"/auth"}>
+                        <button className="px-8 py-3.5 border border-primary text-foreground rounded-md text-xl cursor-pointer">
+                            Log In
+                        </button>
+                    </Link>
                     <button className="px-8 py-3.5 bg-primary text-white rounded-md text-xl">
                         Registration
                     </button>
