@@ -2,7 +2,7 @@ import Image from "@/components/shared/Image";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { icons } from "@/lib/imageProvider";
 import {  useState } from "react";
-import { NavLink, useLocation } from "react-router";
+import { useLocation } from "react-router";
 
 
 
@@ -13,9 +13,9 @@ export default function Navbar() {
 
     const navLinks = [
         { name: 'Home', path: '/' },
-        { name: 'Features', path: '/features' },
-        { name: 'How does it work', path: '/how-it-works' },
-        { name: 'Contact', path: '/contact' },
+        { name: 'Features', path: '#features' },
+        { name: 'How does it work', path: '#how-it-works' },
+        { name: 'Contact', path: '#contact' },
     ];
 
     return (
@@ -63,13 +63,13 @@ export default function Navbar() {
                             <div className="flex flex-col items-start">
                                 {navLinks.map((link) => (
                                     <SheetClose asChild key={link.name}>
-                                        <NavLink
-                                            to={link.path}
-                                            className={`block w-full px-4 py-2 text-sm ${location.pathname === link.path ? 'font-medium text-foreground' : 'text-description'
+                                        <a
+                                            href={link.path}
+                                            className={`block w-full px-4 py-2 text-sm ${location.hash === link.path || location.pathname === link.path ? 'font-medium text-foreground' : 'text-description'
                                                 }`}
                                         >
                                             {link.name}
-                                        </NavLink>
+                                        </a>
                                     </SheetClose>
                                 ))}
 
@@ -95,17 +95,17 @@ export default function Navbar() {
                 {/* Navigation Links - Mapped and using NavLink (Desktop) */}
                 <div className="hidden lg:flex space-x-8">
                     {navLinks.map((link) => (
-                        <NavLink
+                        <a
                             key={link.name} // Unique key for each mapped item
-                            to={link.path}  // The path the link navigates to
+                            href={link.path}  // The path the link navigates to
                             // isActive is a function that receives an object with isActive property
-                            className={({ isActive }) =>
-                                ` text-xl ${isActive ? 'text-foreground' : 'text-description'
+                            className={
+                                ` text-xl ${location.hash === link.path || location.pathname === link.path ? 'text-foreground' : 'text-description'
                                 }`
                             }
                         >
                             {link.name}
-                        </NavLink>
+                        </a>
                     ))}
                 </div>
 

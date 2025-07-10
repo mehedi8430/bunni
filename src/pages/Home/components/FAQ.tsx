@@ -14,7 +14,7 @@ interface FAQItem {
 export default function FAQ() {
     const [openItem, setOpenItem] = useState<string | null>("item-1");
     return (
-        <section className='container mx-auto px-4 py-16'>
+        <section id="faq" className='container mx-auto px-4 py-16'>
             <SectionTitle title="FAQ" subtitle="Everything You Need to Know Before Getting Started" className="mb-10" />
             <Accordion
                 type="single"

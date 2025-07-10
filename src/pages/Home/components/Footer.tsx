@@ -15,10 +15,10 @@ export default function Footer() {
 
     // Navigation links data
     const quickLinks: NavLink[] = [
-        { name: 'Home', url: '#' },
-        { name: 'Features', url: '#' },
-        { name: 'FAQs', url: '#' },
-        { name: 'How Does It Works', url: '#' },
+        { name: 'Home', url: '/' },
+        { name: 'Features', url: '#features' },
+        { name: 'FAQs', url: '#faq' },
+        { name: 'How Does It Works', url: '#how-it-works' },
     ];
 
     // Social media links data
@@ -94,7 +94,7 @@ export default function Footer() {
                         </div>
                     </div>
                     {/* Contact Us Form Section */}
-                    <div className="w-full md:w-2/5">
+                    <div id="contact" className="w-full md:w-2/5">
                         <h3 className="text-2xl md:text-2xl lg:text-3xl font-semibold text-white mb-6">Contact Us</h3>
                         <div className="bg-footer-form-background pt-10 pb-7 px-7 rounded-md">
                             <form className="space-y-4">
