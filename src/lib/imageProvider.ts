@@ -28,11 +28,20 @@ import reactIcon from "../assets/react.svg";
 // Type definitions for better type safety
 export interface IconAssets {
   [key: string]: string;
+  react: string;
+  google: string;
+  apple: string;
+  arrowLeft: string;
+  arrowRight: string;
   // Add more icon types here as needed
 }
 
 export interface ImageAssets {
   [key: string]: string;
+  placeholder: string;
+  authBackground: string;
+  chartCard: string; // Assuming you have a chard card image
+  // Add more image types here as needed
 }
 
 export interface AssetCollection {
@@ -60,6 +69,7 @@ export const icons: IconAssets = {
   file,
   requring,
   reportingFilter,
+
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
