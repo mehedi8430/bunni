@@ -15,12 +15,12 @@ export default function DashboardLayout() {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-            <div className="flex items-center gap-2 px-4">
-              <SidebarTrigger className="-ml-1" />
-            </div>
-          </header>
-          <Outlet />
+          <div className="fixed z-50 -mt-12 ml-4 md:mt-2 md:-ml-4">
+            <SidebarTrigger />
+          </div>
+          <main className="px-4 py-8 md:px-6">
+            <Outlet />
+          </main>
         </SidebarInset>
       </SidebarProvider>
     </section>

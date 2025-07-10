@@ -1,12 +1,21 @@
 import { icons, images } from "@/lib/imageProvider";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useSearchParams } from "react-router";
 import { ReactSVG } from "react-svg";
 import { Button } from "../ui/button";
 
-export default function SlideCard() {
-  const [active, setActive] = useState(0);
-  const [prevActive, setPrevActive] = useState(0);
+export default function SlideCard({
+  isBusiness = false,
+  steps = [],
+}: {
+  isBusiness?: boolean;
+  steps?: Array<{ title: string; describe: string }>;
+}) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const active = parseInt(searchParams.get("active") || "0", 10);
+  const prevActive = parseInt(searchParams.get("prevActive") || "0", 10);
+
   const totalCards = 4;
 
   // Calculate position for each card based on active index
@@ -27,11 +36,11 @@ export default function SlideCard() {
   return (
     <div className="space-y-10">
       <h2 className="text-primary-foreground text-center text-4xl leading-14 font-bold">
-        Take Control of Your Business Finances
+        {steps[active]?.title || "Take Control of Your Business Finances"}
       </h2>
-      <p className="text-muted-foreground mt-4 text-center text-xl leading-8">
-        Create invoices, request payments, and track every transaction—all in
-        one secure, powerful platform.
+      <p className="text-subtitle mt-4 text-center text-xl leading-8">
+        {steps[active]?.describe ||
+          "Create invoices, request payments, and track every transaction—all in one secure, powerful platform."}
       </p>
 
       <div className="relative flex h-[400px]">
@@ -68,8 +77,9 @@ export default function SlideCard() {
                 transition: `all 0.7s ease-in-out ${isActive ? "0.2s" : "0s"}`,
               }}
               onClick={() => {
-                setPrevActive(active);
-                setActive(index);
+                searchParams.set("active", index.toString());
+                searchParams.set("prevActive", active.toString());
+                setSearchParams(searchParams);
               }}
             >
               <ReactSVG
@@ -87,50 +97,57 @@ export default function SlideCard() {
       </div>
 
       {/* Optional: Add dots indicator */}
-      <div className="mx-auto mt-20 flex w-fit items-center justify-between">
-        <Button
-          variant="ghost"
-          className="hover:bg-primary cursor-pointer p-2"
-          onClick={() => {
-            setPrevActive(active);
-            setActive((prev) => (prev - 1 + totalCards) % totalCards);
-          }}
-          disabled={active === 0}
-        >
-          <ReactSVG src={icons.arrowLeft} className="text-muted" />
-        </Button>
-        <div className="mx-8 flex gap-2">
-          {Array.from({ length: totalCards }).map((_, index) => (
-            <Button
-              key={index}
-              variant="ghost"
-              className="hover:bg-primary cursor-pointer p-2"
-            >
-              <span
-                className={cn(
-                  "bg-background block h-2.5 w-7 rounded-2xl transition-all duration-300",
-                  {
-                    "bg-background": index === active,
-                    "bg-muted-foreground/30 hover:bg-muted-foreground/50":
-                      index !== active,
-                  },
-                )}
-              />
-            </Button>
-          ))}
+      {!isBusiness && (
+        <div className="mx-auto mt-20 flex w-fit items-center justify-between">
+          <Button
+            variant="ghost"
+            className="hover:bg-primary cursor-pointer p-2"
+            onClick={() => {
+              searchParams.set("prevActive", active.toString());
+              searchParams.set(
+                "active",
+                ((active - 1 + totalCards) % totalCards) + "",
+              );
+              setSearchParams(searchParams);
+            }}
+            disabled={active === 0}
+          >
+            <ReactSVG src={icons.arrowLeft} className="text-muted" />
+          </Button>
+          <div className="mx-8 flex gap-2">
+            {Array.from({ length: totalCards }).map((_, index) => (
+              <Button
+                key={index}
+                variant="ghost"
+                className="hover:bg-primary cursor-pointer p-2"
+              >
+                <span
+                  className={cn(
+                    "bg-background block h-2.5 w-7 rounded-2xl transition-all duration-300",
+                    {
+                      "bg-background": index === active,
+                      "bg-muted-foreground/30 hover:bg-muted-foreground/50":
+                        index !== active,
+                    },
+                  )}
+                />
+              </Button>
+            ))}
+          </div>
+          <Button
+            variant="ghost"
+            className="hover:bg-primary cursor-pointer p-2"
+            onClick={() => {
+              searchParams.set("prevActive", active.toString());
+              searchParams.set("active", ((active + 1) % totalCards) + "");
+              setSearchParams(searchParams);
+            }}
+            disabled={active === totalCards - 1}
+          >
+            <ReactSVG src={icons.arrowRight} className="text-muted" />
+          </Button>
         </div>
-        <Button
-          variant="ghost"
-          className="hover:bg-primary cursor-pointer p-2"
-          onClick={() => {
-            setPrevActive(active);
-            setActive((prev) => (prev + 1) % totalCards);
-          }}
-          disabled={active === totalCards - 1}
-        >
-          <ReactSVG src={icons.arrowRight} className="text-muted" />
-        </Button>
-      </div>
+      )}
 
       {/* Add custom CSS for swipe animation */}
       <style>{`

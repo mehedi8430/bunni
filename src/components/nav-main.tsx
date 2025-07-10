@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { CircleChevronRight } from "lucide-react";
+import { ReactSVG } from "react-svg";
 
 import {
   Collapsible,
@@ -25,11 +26,12 @@ export function NavMain({
   items: {
     title: string;
     url: string;
-    icon?: LucideIcon;
+    icon?: string;
     isActive?: boolean;
     items?: {
       title: string;
       url: string;
+      icon?: string;
     }[];
   }[];
 }) {
@@ -55,17 +57,18 @@ export function NavMain({
                 <SidebarMenuButton
                   tooltip={item.title}
                   className={cn(
-                    "p-5 hover:bg-primary hover:text-white text-lg font-normal hover:data-[state=open]:bg-primary hover:data-[state=open]:text-white",
+                    "hover:bg-primary hover:data-[state=open]:bg-primary p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white",
                     {
                       "bg-primary text-white": isActive(item.url),
-                    }
+                    },
                   )}
                   onClick={() => navigate(item.url)}
                 >
-                  {item.icon && <item.icon className="w-6 h-6 mr-1" />}
+                  {item.icon && <ReactSVG src={item.icon} />}
+                  {/* {item.icon && <item.icon className="w-6 h-6 mr-1" />} */}
                   <span>{item.title}</span>
                   {item?.items?.length && (
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    <CircleChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   )}
                 </SidebarMenuButton>
               </CollapsibleTrigger>
@@ -75,15 +78,15 @@ export function NavMain({
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
-                          asChild
                           className={cn(
-                            "p-5 hover:bg-primary hover:text-white text-lg font-normal mt-1",
+                            "hover:bg-primary mt-1 p-5 text-lg font-normal hover:text-white",
                             {
                               "bg-primary text-white": isActive(subItem.url),
-                            }
+                            },
                           )}
                           onClick={() => navigate(subItem?.url)}
                         >
+                          {subItem.icon && <ReactSVG src={subItem.icon} />}
                           <span>{subItem.title}</span>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

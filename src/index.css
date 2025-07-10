@@ -24,7 +24,7 @@
   --radius: 0.625rem;
   --background: oklch(97.37% 0.003 286.35);
   --foreground: oklch(35.88% 0.044 275.25);
-  --foreground01: oklch(28.91% 0.000 0);
+  --foreground01: oklch(28.91% 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -35,7 +35,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(92.862% 0.00446 135.79);
+  --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -56,8 +56,16 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --description: oklch(65% 0 0);
-  --footer-input-background: oklch(34.85% 0.000 0);
-  --footer-form-background: oklch(26.45% 0.000 0);
+  --footer-input-background: oklch(34.85% 0 0);
+  --footer-form-background: oklch(26.45% 0 0);
+
+  /* ============
+   Custom Colors for project
+   =============
+  */
+  --disabled: oklch(72.516% 0.00008 271.152);
+  --paragraph: oklch(35.879% 0.04397 275.255);
+  --subtitle: oklch(92.862% 0.00446 135.79);
 }
 
 @theme inline {
@@ -101,6 +109,11 @@
   --color-description: var(--description);
   --color-footer-input-background: var(--footer-input-background);
   --color-footer-form-background: var(--footer-form-background);
+
+  /* Custom Colors for project */
+  --color-disabled: var(--disabled);
+  --color-paragraph: var(--paragraph);
+  --color-subtitle: var(--subtitle);
 }
 
 .dark {
@@ -149,6 +162,6 @@
 .sheet-close {
   display: none !important;
 }
-html{
+html {
   scroll-behavior: smooth;
 }

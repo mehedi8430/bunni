@@ -11,12 +11,15 @@ const monthOptions: SelectOption[] = [
 ];
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
+  { month: "January", desktop: 96 },
+  { month: "February", desktop: 205 },
+  { month: "March", desktop: 200 },
+  { month: "April", desktop: 173 },
   { month: "May", desktop: 209 },
   { month: "June", desktop: 214 },
+  { month: "June", desktop: 254 },
+  { month: "June", desktop: 224 },
+  { month: "June", desktop: 114 },
 ];
 const chartConfig = {
   desktop: {
@@ -57,13 +60,13 @@ export default function AreaChartSection() {
               <linearGradient id="fillColor" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-chart-3)"
-                  stopOpacity={0.9}
+                  stopColor="var(--color-chart-1)"
+                  stopOpacity={0.4}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-chart-3)"
-                  stopOpacity={0.2}
+                  stopColor="var(--color-chart-1)"
+                  stopOpacity={0}
                 />
               </linearGradient>
             </defs>

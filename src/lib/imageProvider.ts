@@ -11,6 +11,7 @@ import navLogo from "../assets/icons/Logo.svg";
 import reportingFilter from "../assets/icons/reportingFilter.svg";
 import requring from "../assets/icons/requring.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
+import success from "../assets/icons/success.svg"; // Assuming you have a success icon
 import taskIcon1 from "../assets/icons/task_icon1.svg";
 import taskIcon2 from "../assets/icons/task_icon2.svg";
 import taskIcon3 from "../assets/icons/task_icon3.svg";
@@ -23,23 +24,58 @@ import dashboard from "../assets/images/Dashboard.png";
 import myCard from "../assets/images/myCard.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
 import sendMoney from "../assets/images/sendMoney.svg";
-import reactIcon from "../assets/react.svg";
+
+import customer from "../assets/icons/customer.svg";
+import dashboard_icon from "../assets/icons/dashboard_icon.svg";
+import invoice_settings from "../assets/icons/invoice_settings.svg";
+import invoices from "../assets/icons/invoices.svg";
+import notification from "../assets/icons/notification.svg";
+import payment from "../assets/icons/payment.svg";
+import payment_integration from "../assets/icons/payment_integration.svg";
+import products from "../assets/icons/products.svg";
+import profile_settings from "../assets/icons/profile_settings.svg";
+import settings from "../assets/icons/settings.svg";
+import subscription from "../assets/icons/subscription.svg";
+import user_management from "../assets/icons/user_management.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
+  taskIcon1: string;
+  taskIcon2: string;
+  taskIcon3: string;
+  threeStar: string;
+  navLogo: string;
+  rightArrow: string;
+  user: string;
+  document: string;
+  getPaid: string;
+  check: string;
+  file: string;
+  requring: string;
+  reportingFilter: string;
+  invoices: string;
+  customer: string;
+  payment: string;
+  products: string;
+  dashboard_icon: string;
+  invoice_settings: string;
+  payment_integration: string;
+  notification: string;
+  profile_settings: string;
+  subscription: string;
+  user_management: string;
+  settings: string;
   [key: string]: string;
-  react: string;
-  google: string;
-  apple: string;
-  arrowLeft: string;
-  arrowRight: string;
-  // Add more icon types here as needed
 }
 
 export interface ImageAssets {
   [key: string]: string;
   placeholder: string;
   authBackground: string;
+  banner: string;
+  dashboard: string;
+  myCard: string;
+  sendMoney: string;
   chartCard: string; // Assuming you have a chard card image
   // Add more image types here as needed
 }
@@ -51,7 +87,6 @@ export interface AssetCollection {
 
 // Icons collection - typically smaller assets used for UI elements
 export const icons: IconAssets = {
-  react: reactIcon,
   google: google,
   apple: apple,
   arrowLeft: arrowLeft,
@@ -69,6 +104,19 @@ export const icons: IconAssets = {
   file,
   requring,
   reportingFilter,
+  invoices,
+  customer,
+  payment,
+  products,
+  dashboard_icon,
+  invoice_settings,
+  payment_integration,
+  notification,
+  profile_settings,
+  subscription,
+  user_management,
+  settings,
+  success,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
@@ -92,7 +140,7 @@ export const assets: AssetCollection = {
 };
 
 // Individual exports for backward compatibility
-export { placeholderImage, reactIcon };
+export { placeholderImage };
 
 // Utility function to get asset by category and name
 export const getAsset = (
