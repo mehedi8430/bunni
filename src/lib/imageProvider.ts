@@ -2,14 +2,31 @@
 import apple from "../assets/icons/apple.svg"; // Assuming you have an apple icon
 import arrowLeft from "../assets/icons/arrow_left.svg"; // Example of another icon
 import arrowRight from "../assets/icons/arrow_right.svg"; // Example of another icon
+import check from "../assets/icons/check.svg";
+import document from "../assets/icons/document.svg";
+import file from "../assets/icons/file.svg";
+import getPaid from "../assets/icons/getPaid.svg";
 import google from "../assets/icons/google.svg";
+import navLogo from "../assets/icons/Logo.svg";
+import reportingFilter from "../assets/icons/reportingFilter.svg";
+import requring from "../assets/icons/requring.svg";
+import rightArrow from "../assets/icons/rightArrow.svg";
+import taskIcon1 from "../assets/icons/task_icon1.svg";
+import taskIcon2 from "../assets/icons/task_icon2.svg";
+import taskIcon3 from "../assets/icons/task_icon3.svg";
+import threeStar from "../assets/icons/three_star.svg";
+import user from "../assets/icons/user.svg";
 import authBackground from "../assets/images/Background_Rectangles.svg";
+import banner from "../assets/images/Banner.svg";
 import chartCard from "../assets/images/chart_card.svg"; // Assuming you have a chard card icon
+import dashboard from "../assets/images/Dashboard.png";
+import myCard from "../assets/images/myCard.svg";
 import placeholderImage from "../assets/images/placeholder.svg";
 import reactIcon from "../assets/react.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
+  [key: string]: string;
   react: string;
   google: string;
   apple: string;
@@ -19,6 +36,7 @@ export interface IconAssets {
 }
 
 export interface ImageAssets {
+  [key: string]: string;
   placeholder: string;
   authBackground: string;
   chartCard: string; // Assuming you have a chard card image
@@ -37,6 +55,19 @@ export const icons: IconAssets = {
   apple: apple,
   arrowLeft: arrowLeft,
   arrowRight: arrowRight,
+  taskIcon1,
+  taskIcon2,
+  taskIcon3,
+  threeStar,
+  navLogo: navLogo,
+  rightArrow: rightArrow,
+  user,
+  document,
+  getPaid,
+  check,
+  file,
+  requring,
+  reportingFilter,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -45,9 +76,10 @@ export const icons: IconAssets = {
 export const images: ImageAssets = {
   placeholder: placeholderImage,
   authBackground: authBackground,
-  chartCard: chartCard, // Assuming you have a chart card image
-  // Add more images here as needed
-  // Example: banners, avatars, backgrounds, etc.
+  chartCard: chartCard,
+  banner: banner,
+  dashboard: dashboard,
+  myCard: myCard,
 };
 
 // Asset categories for better organization
@@ -79,30 +111,6 @@ export const hasAsset = (
 ): boolean => {
   return name in assets[category];
 };
-
-/*
-USAGE EXAMPLES:
-
-1. Import specific assets:
-   import { icons, images } from '@/lib/imageProvider';
-   <img src={icons.react} alt="React" />
-   <img src={images.placeholder} alt="Placeholder" />
-
-2. Use utility functions:
-   import { getAsset, hasAsset } from '@/lib/imageProvider';
-   const reactIcon = getAsset('icons', 'react');
-   const exists = hasAsset('images', 'placeholder');
-
-3. Import all assets:
-   import assets from '@/lib/imageProvider';
-   <img src={assets.icons.react} alt="React" />
-   <img src={assets.images.placeholder} alt="Placeholder" />
-
-4. Get all assets of a category:
-   import { getAssetsByCategory } from '@/lib/imageProvider';
-   const allIcons = getAssetsByCategory('icons');
-   const allImages = getAssetsByCategory('images');
-*/
 
 // Default export
 export default assets;
