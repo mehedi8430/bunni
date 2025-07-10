@@ -5,13 +5,11 @@ import Navbar from "./Navbar";
 export default function Banner() {
   return (
     <section className="relative w-full">
-      <div className="absolute inset-x-0 top-0 -z-10 h-[550px] overflow-hidden md:h-[720px] lg:h-[75%] xl:h-[75%]">
-        <Image
+      <div className="absolute inset-x-0 top-0 -z-10 h-[550px] md:h-[720px] lg:h-[75%] xl:h-[75%]">
+        <img
           src={images.banner}
           alt="Background Banner"
-          fill
-          priority
-          className="object-cover object-center"
+          className="object-cover object-center h-full w-full"
         />
       </div>
       <Navbar />
