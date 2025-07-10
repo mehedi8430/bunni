@@ -10,6 +10,15 @@ import banner from "../assets/images/Banner.svg";
 import navLogo from "../assets/icons/Logo.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
 import dashboard from "../assets/images/Dashboard.png";
+import user from "../assets/icons/user.svg";
+import document from "../assets/icons/document.svg";
+import getPaid from "../assets/icons/getPaid.svg";
+import myCard from "../assets/images/myCard.svg";
+import check from "../assets/icons/check.svg";
+import sendMoney from "../assets/images/sendMoney.svg";
+import file from "../assets/icons/file.svg";
+import requring from "../assets/icons/requring.svg";
+import reportingFilter from "../assets/icons/reportingFilter.svg";
 
 import invoices from "../assets/icons/invoices.svg";
 import customer from "../assets/icons/customer.svg";
@@ -60,7 +69,9 @@ export interface ImageAssets {
   authBackground: string;
   banner: string;
   dashboard: string;
-  // Add more image types here as needed
+  myCard: string;
+  sendMoney: string;
+  [key: string]: string;
 }
 
 export interface AssetCollection {
@@ -96,8 +107,6 @@ export const icons: IconAssets = {
   subscription,
   user_management,
   settings,
-  // Add more icons here as needed
-  // Example: user, settings, dashboard, etc.
 };
 
 // Images collection - typically larger assets used for content
@@ -108,8 +117,6 @@ export const images: ImageAssets = {
   dashboard: dashboard,
   myCard: myCard,
   sendMoney: sendMoney,
-  // Add more images here as needed
-  // Example: banners, avatars, backgrounds, etc.
 };
 
 // Asset categories for better organization
