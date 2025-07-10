@@ -7,11 +7,10 @@ import { Button } from "../ui/button";
 export default function SlideCard() {
   const [active, setActive] = useState(0);
   const [prevActive, setPrevActive] = useState(0);
-  const totalCards = 5;
+  const totalCards = 4;
 
   // Calculate position for each card based on active index
   const getCardPosition = (index: number, activeIndex: number) => {
-    const totalCards = 5;
     let position = index - activeIndex;
 
     // Normalize position to be between 0 and totalCards-1
