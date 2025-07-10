@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { InputOTP, InputOTPGroup } from "@/components/ui/input-otp";
 import useConfirmationCode from "@/hooks/use-confirmation-code";
 import { toast } from "sonner";
+import LoginSuccessModal from "./LoginSuccessModal";
 import OtpSlot from "./OtpSlot";
 
 export default function ConfirmationCodeForm({
@@ -92,6 +93,7 @@ export default function ConfirmationCodeForm({
           </div>
         </div>
       </form>
+      <LoginSuccessModal />
     </Form>
   );
 }
