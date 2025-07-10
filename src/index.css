@@ -56,6 +56,15 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --description: oklch(65% 0 0);
+  --footer-input-background: oklch(34.85% 0 0);
+  --footer-form-background: oklch(26.45% 0 0);
+
+  /* ============
+   Custom Colors for project
+   =============
+  */
+  --disabled: oklch(72.516% 0.00008 271.152);
+  --paragraph: oklch(35.879% 0.04397 275.255);
 }
 
 @theme inline {
@@ -97,6 +106,15 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-description: var(--description);
+<<<<<<< HEAD
+  --color-footer-input-background: var(--footer-input-background);
+  --color-footer-form-background: var(--footer-form-background);
+=======
+
+  /* Custom Colors for project */
+  --color-disabled: var(--disabled);
+  --color-paragraph: var(--paragraph);
+>>>>>>> rashad
 }
 
 .dark {

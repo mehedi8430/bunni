@@ -40,7 +40,6 @@ import user_management from "../assets/icons/user_management.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
-  react: string;
   taskIcon1: string;
   taskIcon2: string;
   taskIcon3: string;
