@@ -41,6 +41,7 @@ export default function SelectInput({
   contentClassName,
   name,
   required = false,
+  ...props
 }: SelectInputProps) {
   return (
     <Select
@@ -50,6 +51,7 @@ export default function SelectInput({
       disabled={disabled}
       name={name}
       required={required}
+      {...props}
     >
       <SelectTrigger className={triggerClassName}>
         <SelectValue placeholder={placeholder} />

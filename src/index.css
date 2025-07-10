@@ -56,8 +56,6 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --description: oklch(65% 0 0);
-  --footer-input-background: oklch(34.85% 0 0);
-  --footer-form-background: oklch(26.45% 0 0);
 }
 
 @theme inline {
@@ -99,8 +97,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-description: var(--description);
-  --color-footer-input-background: var(--footer-input-background);
-  --color-footer-form-background: var(--footer-form-background);
 }
 
 .dark {

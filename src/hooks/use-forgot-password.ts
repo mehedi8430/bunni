@@ -5,18 +5,14 @@ import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
-  rememberMe: z.boolean().optional(),
 });
 
-export default function useLogin() {
+export default function useForgotPassword() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
-      rememberMe: false,
     },
   });
 
@@ -25,7 +21,7 @@ export default function useLogin() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    toast.success("Login successful!");
+    toast.success("Password reset code sent to your email!");
   }
 
   return { form, onSubmit };
