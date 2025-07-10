@@ -14,6 +14,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { useParams } from "react-router";
 import { toast } from "sonner";
 
 export default function VerificationCodeForm({
@@ -21,6 +22,15 @@ export default function VerificationCodeForm({
   ...props
 }: React.ComponentProps<"form">) {
   const { form, onSubmit } = useVerification();
+  const params = useParams<{
+    token: string;
+    email: string;
+  }>();
+
+  if (!params.token || !params.email) {
+    toast.error("Invalid verification link. Please try again.");
+    return null;
+  }
 
   // Reusable slot component with error styling
   const OTPSlot = ({
@@ -52,7 +62,7 @@ export default function VerificationCodeForm({
           <h1 className="text-4xl leading-14 font-bold">Verification Code</h1>
           <p className="text-muted-description text-lg leading-7 text-balance">
             Enter verification code sent to your email address <br />
-            <span className="font-bold">abcdef@gmail.com</span>
+            <span className="font-bold">{params.email}</span>
           </p>
         </div>
 

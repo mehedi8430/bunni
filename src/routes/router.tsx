@@ -97,7 +97,7 @@ export const Router = createBrowserRouter([
         element: <ForgotPasswordForm />,
       },
       {
-        path: "verification/:token",
+        path: "verification/:token/:email",
         element: <VerificationCodeForm />,
       },
     ],
