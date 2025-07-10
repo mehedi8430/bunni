@@ -4,8 +4,10 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogOverlay,
   DialogTitle,
 } from "@/components/ui/dialog";
+
 import { Link, useSearchParams } from "react-router";
 import { Button } from "../ui/button";
 
@@ -21,7 +23,8 @@ export default function LoginSuccessModal() {
         setSearchParams(searchParams);
       }}
     >
-      <DialogContent className="sm:max-w-sm">
+      <DialogOverlay className="z-[999] bg-black/5 backdrop-blur-sm" />
+      <DialogContent className="z-[9999] sm:max-w-sm">
         <DialogHeader className="space-y-4">
           <DialogTitle className="text-center text-7xl">🎉</DialogTitle>
           <DialogTitle className="text-center text-3xl leading-7">
