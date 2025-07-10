@@ -4,7 +4,9 @@ import { LoginForm } from "@/components/authentication/LoginForm";
 import RegistrationForm from "@/components/authentication/RegistrationForm";
 import ResetYourPasswordForm from "@/components/authentication/ResetYourPasswordForm";
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
+import BusinessInformationForm from "@/components/businessSetup/BusinessInformationForm";
 import AuthLayout from "@/layout/AuthLayout";
+import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CustomerPage from "@/pages/Dashboard/Customer";
@@ -115,6 +117,22 @@ export const Router = createBrowserRouter([
       {
         path: "reset-password",
         element: <ResetYourPasswordForm />,
+      },
+    ],
+  },
+
+  {
+    path: "business-setup",
+    element: <BusinessInformationLayout />,
+    errorElement: <div>Error occurred</div>,
+    children: [
+      {
+        index: true,
+        element: <BusinessInformationForm />,
+      },
+      {
+        path: "1",
+        element: <BusinessInformationForm />,
       },
     ],
   },

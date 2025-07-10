@@ -24,7 +24,7 @@
   --radius: 0.625rem;
   --background: oklch(97.37% 0.003 286.35);
   --foreground: oklch(35.88% 0.044 275.25);
-  --foreground01: oklch(28.91% 0.000 0);
+  --foreground01: oklch(28.91% 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -56,7 +56,13 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --description: oklch(65% 0 0);
-  
+
+  /* ============
+   Custom Colors for project
+   =============
+  */
+  --disabled: oklch(72.516% 0.00008 271.152);
+  --paragraph: oklch(35.879% 0.04397 275.255);
 }
 
 @theme inline {
@@ -98,6 +104,10 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-description: var(--description);
+
+  /* Custom Colors for project */
+  --color-disabled: var(--disabled);
+  --color-paragraph: var(--paragraph);
 }
 
 .dark {

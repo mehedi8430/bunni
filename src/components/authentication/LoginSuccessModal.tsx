@@ -35,7 +35,7 @@ export default function LoginSuccessModal() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button className="w-full" asChild>
+          <Button className="w-full" asChild size="lg">
             <Link to="/onboarding">Answer some question</Link>
           </Button>
         </DialogFooter>
