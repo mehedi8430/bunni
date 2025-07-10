@@ -16,6 +16,9 @@ import getPaid from '../assets/icons/getPaid.svg';
 import myCard from '../assets/images/myCard.svg';
 import check from '../assets/icons/check.svg';
 import sendMoney from '../assets/images/sendMoney.svg';
+import file from '../assets/icons/file.svg';
+import requring from '../assets/icons/requring.svg';
+import reportingFilter from '../assets/icons/reportingFilter.svg';
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -54,6 +57,9 @@ export const icons: IconAssets = {
   document,
   getPaid,
   check,
+  file,
+  requring,
+  reportingFilter,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
