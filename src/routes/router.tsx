@@ -1,5 +1,6 @@
 import ForgotPasswordForm from "@/components/authentication/ForgotPasswordForm";
 import { LoginForm } from "@/components/authentication/LoginForm";
+import RegistrationForm from "@/components/authentication/RegistrationForm";
 import ResetYourPasswordForm from "@/components/authentication/ResetYourPasswordForm";
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
 import AuthLayout from "@/layout/AuthLayout";
@@ -88,6 +89,11 @@ export const Router = createBrowserRouter([
       {
         index: true,
         element: <LoginForm />,
+      },
+
+      {
+        path: "register",
+        element: <RegistrationForm />,
       },
       {
         path: "login",
