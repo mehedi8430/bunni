@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -6,37 +8,22 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import useVerification from "@/hooks/use-verification";
 import { cn } from "@/lib/utils";
 
 import { InputOTP, InputOTPGroup } from "@/components/ui/input-otp";
-import { useParams } from "react-router";
+import useConfirmationCode from "@/hooks/use-confirmation-code";
 import { toast } from "sonner";
 import OtpSlot from "./OtpSlot";
 
-interface VerificationCodeFormProps {
-  className?: string;
-  formTitle?: string;
-  formDescription?: string;
-  confirmationPage?: boolean; // Optional prop to indicate if it's a confirmation page
-}
-
-export default function VerificationCodeForm({
-  className,
-
+export default function ConfirmationCodeForm({
+  className, // Default to false if not provided
   ...props
-}: VerificationCodeFormProps & React.ComponentProps<"form">) {
-  const { form, onSubmit } = useVerification();
+}: React.ComponentProps<"form">) {
+  const { form, onSubmit } = useConfirmationCode();
 
-  const params = useParams<{
-    token: string;
-    email: string;
-  }>();
-
-  if (!params.token || !params.email) {
-    toast.error("Invalid verification link. Please try again.");
-    return null;
-  }
+  const user = {
+    email: "abcdef@gmail.com",
+  };
 
   return (
     <Form {...form}>
@@ -46,10 +33,11 @@ export default function VerificationCodeForm({
         {...props}
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-4xl leading-14 font-bold">Verification Code</h1>
+          <h1 className="text-4xl leading-14 font-bold">Confirmation Code</h1>
           <p className="text-description text-lg leading-7 text-balance">
-            Enter verification code sent to your email address <br />
-            <span className="font-bold">{params.email}</span>
+            Enter Confirmation code that sent to your email address
+            <br />
+            <span className="font-bold">{user.email}</span>
           </p>
         </div>
 

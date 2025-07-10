@@ -1,3 +1,4 @@
+import ConfirmationCodeForm from "@/components/authentication/ConfirmationCodeForm";
 import ForgotPasswordForm from "@/components/authentication/ForgotPasswordForm";
 import { LoginForm } from "@/components/authentication/LoginForm";
 import RegistrationForm from "@/components/authentication/RegistrationForm";
@@ -107,7 +108,10 @@ export const Router = createBrowserRouter([
         path: "verification/:token/:email",
         element: <VerificationCodeForm />,
       },
-
+      {
+        path: "confirmation-code",
+        element: <ConfirmationCodeForm />,
+      },
       {
         path: "reset-password",
         element: <ResetYourPasswordForm />,
