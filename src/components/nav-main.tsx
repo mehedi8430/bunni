@@ -61,10 +61,10 @@ export function NavMain({
                 <SidebarMenuButton
                   tooltip={item.title}
                   className={cn(
-                    "p-5 hover:bg-primary hover:text-white text-lg font-normal hover:data-[state=open]:bg-primary hover:data-[state=open]:text-white",
+                    "hover:bg-primary hover:data-[state=open]:bg-primary p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white",
                     {
                       "bg-primary text-white": isActive(item.url),
-                    }
+                    },
                   )}
                   onClick={() => navigate(item.url)}
                 >
@@ -83,10 +83,10 @@ export function NavMain({
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
                           className={cn(
-                            "p-5 hover:bg-primary hover:text-white text-lg font-normal mt-1",
+                            "hover:bg-primary mt-1 p-5 text-lg font-normal hover:text-white",
                             {
                               "bg-primary text-white": isActive(subItem.url),
-                            }
+                            },
                           )}
                           onClick={() => navigate(subItem?.url)}
                         >

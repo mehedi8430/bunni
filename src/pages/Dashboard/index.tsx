@@ -8,14 +8,14 @@ import ProPlanCard from "./components/ProPlanCard";
 
 export default function DashboardPage() {
   return (
-    <main className="px-4 lg:px-10 space-y-6 pb-6">
-      <section className="space-y-2">
+    <section className="space-y-6">
+      <div className="space-y-2">
         <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
-        <p className="text-[20px] font-normal text-foreground/50">
+        <p className="text-foreground/50 text-[20px] font-normal">
           Today is Thursday, June 19, 2025
         </p>
 
-        <div className="flex flex-col md:flex-row gap-2 items-center mt-6">
+        <div className="mt-6 flex flex-col items-center gap-2 md:flex-row">
           <Button
             variant={"primary"}
             size={"lg"}
@@ -41,27 +41,27 @@ export default function DashboardPage() {
             New Products
           </Button>
         </div>
-      </section>
+      </div>
 
-      <section>
+      <div>
         <div className="grid grid-cols-3 gap-6">
-          <div className="bg-sidebar col-span-3 xl:col-span-2 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-2">
             <BalanceAnalytics />
           </div>
-          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
             <ThingsToDo />
           </div>
-          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
             <BarChartSection />
           </div>
-          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
             <AreaChartSection />
           </div>
-          <div className="bg-sidebar col-span-3 xl:col-span-1 p-4 rounded-2xl">
+          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
             <ProPlanCard />
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
