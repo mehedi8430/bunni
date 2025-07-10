@@ -4,9 +4,12 @@ import arrowLeft from "../assets/icons/arrow_left.svg"; // Example of another ic
 import arrowRight from "../assets/icons/arrow_right.svg"; // Example of another icon
 import check from "../assets/icons/check.svg";
 import document from "../assets/icons/document.svg";
+import file from "../assets/icons/file.svg";
 import getPaid from "../assets/icons/getPaid.svg";
 import google from "../assets/icons/google.svg";
 import navLogo from "../assets/icons/Logo.svg";
+import reportingFilter from "../assets/icons/reportingFilter.svg";
+import requring from "../assets/icons/requring.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
 import taskIcon1 from "../assets/icons/task_icon1.svg";
 import taskIcon2 from "../assets/icons/task_icon2.svg";
@@ -54,6 +57,9 @@ export const icons: IconAssets = {
   document,
   getPaid,
   check,
+  file,
+  requring,
+  reportingFilter,
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
