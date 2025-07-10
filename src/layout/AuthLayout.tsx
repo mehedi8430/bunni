@@ -1,5 +1,4 @@
-import Image from "@/components/shared/Image";
-import { images } from "@/lib/imageProvider";
+import AuthSlider from "@/components/authentication/AuthSlider";
 import { Outlet } from "react-router";
 
 export default function AuthLayout() {
@@ -14,15 +13,7 @@ export default function AuthLayout() {
               </div>
             </div>
           </div>
-          <div className="relative hidden lg:block">
-            <Image
-              src={images.authBackground}
-              alt="Authentication background"
-              fill
-              priority
-              className="dark:brightness-[0.2] dark:grayscale h-full w-full"
-            />
-          </div>
+          <AuthSlider />
         </div>
       </section>
     </main>
