@@ -11,6 +11,7 @@ import navLogo from "../assets/icons/Logo.svg";
 import reportingFilter from "../assets/icons/reportingFilter.svg";
 import requring from "../assets/icons/requring.svg";
 import rightArrow from "../assets/icons/rightArrow.svg";
+import success from "../assets/icons/success.svg"; // Assuming you have a success icon
 import taskIcon1 from "../assets/icons/task_icon1.svg";
 import taskIcon2 from "../assets/icons/task_icon2.svg";
 import taskIcon3 from "../assets/icons/task_icon3.svg";
@@ -69,6 +70,7 @@ export const icons: IconAssets = {
   file,
   requring,
   reportingFilter,
+  success,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

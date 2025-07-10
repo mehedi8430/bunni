@@ -50,7 +50,7 @@ export default function ConfirmationCodeForm({
               <FormItem>
                 <FormControl>
                   <InputOTP maxLength={6} {...field} className="flex-1">
-                    <InputOTPGroup className="flex w-full justify-between">
+                    <InputOTPGroup className="flex w-full justify-between gap-1">
                       {Array.from({ length: 6 }).map((_, index) => (
                         <OtpSlot
                           key={index}

@@ -2,11 +2,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useSearchParams } from "react-router";
-import { ReactSVG } from "react-svg";
+import { Link, useSearchParams } from "react-router";
+import { Button } from "../ui/button";
 
 export default function LoginSuccessModal() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,16 +21,21 @@ export default function LoginSuccessModal() {
         setSearchParams(searchParams);
       }}
     >
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>
-            <ReactSVG src="/path/to/success-icon.svg" />
+      <DialogContent className="sm:max-w-sm">
+        <DialogHeader className="space-y-4">
+          <DialogTitle className="text-center text-7xl">🎉</DialogTitle>
+          <DialogTitle className="text-center text-3xl leading-7">
+            Account Create Successfully
           </DialogTitle>
-          <DialogDescription>
-            You have successfully logged in to your account. account and remove
-            your data from our servers.
+          <DialogDescription className="text-description text-center text-lg leading-7">
+            Answer some question about your business.
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <Button className="w-full" asChild>
+            <Link to="/onboarding">Answer some question</Link>
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
