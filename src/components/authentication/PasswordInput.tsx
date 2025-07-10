@@ -22,9 +22,10 @@ const PasswordInput = forwardRef<
         type="button"
         variant="ghost"
         size="sm"
-        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+        className="absolute top-0 right-0 h-full cursor-pointer px-3 py-2 hover:bg-transparent"
         onClick={() => setShowPassword((prev) => !prev)}
-        disabled={props.value === "" || props.disabled}>
+        disabled={props.value === "" || props.disabled}
+      >
         {showPassword ? (
           <EyeOff className="h-4 w-4" aria-hidden="true" />
         ) : (
