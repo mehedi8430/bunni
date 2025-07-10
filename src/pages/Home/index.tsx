@@ -4,6 +4,7 @@ import BusinessFeatures from "./components/BusinessFeatures";
 import StreamlineInvoicesTools from "./components/StreamlineInvoicesTools";
 import KeyBenefits from "./components/KeyBenefits";
 import FAQ from "./components/FAQ";
+import Footer from "./components/Footer";
 
 export default function HomePage() {
   return <main>
@@ -13,5 +14,6 @@ export default function HomePage() {
     <StreamlineInvoicesTools />
     <KeyBenefits />
     <FAQ />
+    <Footer />
   </main>;
 }
