@@ -1,3 +1,4 @@
+import ForgotPasswordForm from "@/components/authentication/ForgotPasswordForm";
 import { LoginForm } from "@/components/authentication/LoginForm";
 import AuthLayout from "@/layout/AuthLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
@@ -89,6 +90,10 @@ export const Router = createBrowserRouter([
       {
         path: "login",
         element: <LoginForm />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPasswordForm />,
       },
     ],
   },
