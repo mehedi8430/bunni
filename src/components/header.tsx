@@ -1,8 +1,9 @@
-import { Bell, Headset } from "lucide-react";
+import { Headset } from "lucide-react";
 import SelectInput from "./SelectInput";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { icons } from "@/lib/imageProvider";
 import { ReactSVG } from "react-svg";
+import Notification from "./notification";
 
 export default function Header() {
   return (
@@ -34,10 +35,8 @@ export default function Header() {
                 placeholder="En"
                 triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-5 [&>svg]:stroke-black [&>svg]:opacity-80 [&>svg]:ml-[-8px] data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg text-foreground text-lg"
               />
-              <button className="p-1 rounded-full border border-border">
-                {/* <Bell className="size-4" /> */}
-                <ReactSVG src={icons.notification} />
-              </button>
+
+              <Notification />
             </div>
 
             <div className="flex items-center">

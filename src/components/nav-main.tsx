@@ -1,6 +1,10 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import {
+  ChevronRight,
+  CircleChevronRight,
+  type LucideIcon,
+} from "lucide-react";
 import { ReactSVG } from "react-svg";
 
 import {
@@ -68,7 +72,7 @@ export function NavMain({
                   {/* {item.icon && <item.icon className="w-6 h-6 mr-1" />} */}
                   <span>{item.title}</span>
                   {item?.items?.length && (
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    <CircleChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   )}
                 </SidebarMenuButton>
               </CollapsibleTrigger>
