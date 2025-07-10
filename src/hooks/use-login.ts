@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -10,6 +11,8 @@ const formSchema = z.object({
 });
 
 export default function useLogin() {
+  const navigate = useNavigate();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -26,6 +29,8 @@ export default function useLogin() {
     // ✅ This will be type-safe and validated.
     console.log(values);
     toast.success("Login successful!");
+    // Navigate to the dashboard or home page after successful login
+    navigate("/dashboard", { replace: true });
   }
 
   return { form, onSubmit };
