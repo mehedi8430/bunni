@@ -28,7 +28,6 @@ import reactIcon from "../assets/react.svg";
 // Type definitions for better type safety
 export interface IconAssets {
   [key: string]: string;
-  [key: string]: string;
   react: string;
   google: string;
   apple: string;
@@ -38,7 +37,6 @@ export interface IconAssets {
 }
 
 export interface ImageAssets {
-  [key: string]: string;
   [key: string]: string;
   placeholder: string;
   authBackground: string;
@@ -71,19 +69,7 @@ export const icons: IconAssets = {
   file,
   requring,
   reportingFilter,
-  taskIcon1,
-  taskIcon2,
-  taskIcon3,
-  threeStar,
-  navLogo: navLogo,
-  rightArrow: rightArrow,
-  user,
-  document,
-  getPaid,
-  check,
-  file,
-  requring,
-  reportingFilter,
+
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
 };
@@ -97,10 +83,6 @@ export const images: ImageAssets = {
   dashboard: dashboard,
   myCard: myCard,
   sendMoney: sendMoney,
-  chartCard: chartCard,
-  banner: banner,
-  dashboard: dashboard,
-  myCard: myCard,
 };
 
 // Asset categories for better organization
