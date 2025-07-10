@@ -38,7 +38,7 @@ export default function SlideCard({
       <h2 className="text-primary-foreground text-center text-4xl leading-14 font-bold">
         {steps[active]?.title || "Take Control of Your Business Finances"}
       </h2>
-      <p className="text-muted-foreground mt-4 text-center text-xl leading-8">
+      <p className="text-subtitle mt-4 text-center text-xl leading-8">
         {steps[active]?.describe ||
           "Create invoices, request payments, and track every transaction—all in one secure, powerful platform."}
       </p>

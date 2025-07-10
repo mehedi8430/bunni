@@ -65,6 +65,7 @@
   */
   --disabled: oklch(72.516% 0.00008 271.152);
   --paragraph: oklch(35.879% 0.04397 275.255);
+  --subtitle: oklch(92.862% 0.00446 135.79);
 }
 
 @theme inline {
@@ -112,6 +113,7 @@
   /* Custom Colors for project */
   --color-disabled: var(--disabled);
   --color-paragraph: var(--paragraph);
+  --color-subtitle: var(--subtitle);
 }
 
 .dark {
