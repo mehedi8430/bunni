@@ -93,7 +93,7 @@ export default function Header() {
                 {/* Notifications */}
                 <div className="flex items-center justify-between p-2">
                   <span className="text-sm font-medium">Notifications</span>
-                  <Notification mobile />
+                  <Notification />
                 </div>
 
                 {/* Profile Section */}
