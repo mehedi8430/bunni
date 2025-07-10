@@ -20,15 +20,9 @@ import authBackground from "../assets/images/Background_Rectangles.svg";
 import banner from "../assets/images/Banner.svg";
 import chartCard from "../assets/images/chart_card.svg"; // Assuming you have a chard card icon
 import dashboard from "../assets/images/Dashboard.png";
-import user from "../assets/icons/user.svg";
-import document from "../assets/icons/document.svg";
-import getPaid from "../assets/icons/getPaid.svg";
 import myCard from "../assets/images/myCard.svg";
-import check from "../assets/icons/check.svg";
 import sendMoney from "../assets/images/sendMoney.svg";
-import file from "../assets/icons/file.svg";
-import requring from "../assets/icons/requring.svg";
-import reportingFilter from "../assets/icons/reportingFilter.svg";
+import placeholderImage from "../assets/images/placeholder.svg";
 
 import invoices from "../assets/icons/invoices.svg";
 import customer from "../assets/icons/customer.svg";
@@ -82,7 +76,6 @@ export interface ImageAssets {
   dashboard: string;
   myCard: string;
   sendMoney: string;
-  [key: string]: string;
   chartCard: string; // Assuming you have a chard card image
   // Add more image types here as needed
 }
@@ -94,7 +87,6 @@ export interface AssetCollection {
 
 // Icons collection - typically smaller assets used for UI elements
 export const icons: IconAssets = {
-  react: reactIcon,
   google: google,
   apple: apple,
   arrowLeft: arrowLeft,
@@ -147,7 +139,7 @@ export const assets: AssetCollection = {
 };
 
 // Individual exports for backward compatibility
-export { placeholderImage, reactIcon };
+export { placeholderImage };
 
 // Utility function to get asset by category and name
 export const getAsset = (
