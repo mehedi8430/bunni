@@ -1,5 +1,6 @@
 import ForgotPasswordForm from "@/components/authentication/ForgotPasswordForm";
 import { LoginForm } from "@/components/authentication/LoginForm";
+import ResetYourPasswordForm from "@/components/authentication/ResetYourPasswordForm";
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
 import AuthLayout from "@/layout/AuthLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
@@ -99,6 +100,11 @@ export const Router = createBrowserRouter([
       {
         path: "verification/:token/:email",
         element: <VerificationCodeForm />,
+      },
+
+      {
+        path: "reset-password",
+        element: <ResetYourPasswordForm />,
       },
     ],
   },

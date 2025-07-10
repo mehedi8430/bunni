@@ -22,6 +22,7 @@ export default function VerificationCodeForm({
   ...props
 }: React.ComponentProps<"form">) {
   const { form, onSubmit } = useVerification();
+
   const params = useParams<{
     token: string;
     email: string;
@@ -60,7 +61,7 @@ export default function VerificationCodeForm({
       >
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-4xl leading-14 font-bold">Verification Code</h1>
-          <p className="text-muted-description text-lg leading-7 text-balance">
+          <p className="text-description text-lg leading-7 text-balance">
             Enter verification code sent to your email address <br />
             <span className="font-bold">{params.email}</span>
           </p>
