@@ -39,7 +39,6 @@ import settings from "../assets/icons/settings.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
-  react: string;
   taskIcon1: string;
   taskIcon2: string;
   taskIcon3: string;
