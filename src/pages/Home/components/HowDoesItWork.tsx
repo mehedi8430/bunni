@@ -4,7 +4,7 @@ import { icons } from "@/lib/imageProvider";
 
 export default function HowDoesItWork() {
     return (
-        <section className="container mx-auto my-16 md:my-20 lg:my-28 px-5">
+        <section id="how-it-works" className="container mx-auto my-16 md:my-20 lg:my-28 px-5">
             {/* Section title */}
             <SectionTitle title="How Does It Work?" subtitle="From sign-up to getting paid—every step is built for speed, clarity, and control" />
             {/* Cards Container */}
