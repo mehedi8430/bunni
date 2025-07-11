@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
-import { DataTableDemo } from "./components/DataTableDemo";
+// import { DataTableDemo } from "./components/DataTableDemo";
 
 // Define the type for customer data
 type Customer = {
@@ -124,7 +124,7 @@ export default function CustomerPage() {
   ];
 
   // Actions for each row
-  const actions = (row: Customer) => (
+  const actions = () => (
     <div className="flex space-x-2">
       <Button variant="outline" size="sm">
         View
@@ -150,7 +150,7 @@ export default function CustomerPage() {
         <div className="card_container col-span-2 xl:col-span-1">chart 2</div>
 
         <div className="card_container col-span-2">
-          {/* <DataTable
+          <DataTable
             data={data}
             columns={columns}
             isLoading={false}
@@ -160,8 +160,8 @@ export default function CustomerPage() {
             onPageChange={setPage}
             onLimitChange={setLimit}
             actions={actions}
-          /> */}
-          <DataTableDemo />
+          />
+          {/* <DataTableDemo /> */}
         </div>
       </div>
     </section>
