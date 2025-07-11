@@ -3,10 +3,10 @@ import SelectInput from "./SelectInput";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { icons } from "@/lib/imageProvider";
 import { ReactSVG } from "react-svg";
-import Notification from "./notification";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Link } from "react-router";
+import NotificationContent from "./notification-content";
 
 export default function Header() {
   return (
@@ -40,7 +40,17 @@ export default function Header() {
                 triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-5 [&>svg]:stroke-black [&>svg]:opacity-80 [&>svg]:ml-[-8px] data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg text-foreground text-lg"
               />
 
-              <Notification />
+              {/* Notification */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="border-border cursor-pointer rounded-full border p-1">
+                    <ReactSVG src={icons.notification} />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="custom-scrollbar border-border z-50 max-h-[80vh] w-80 overflow-y-auto border px-6 py-8 shadow-2xl md:w-120">
+                  <NotificationContent />
+                </PopoverContent>
+              </Popover>
             </div>
 
             <div className="flex items-center">
