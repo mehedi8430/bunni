@@ -41,7 +41,7 @@ export interface DataTableProps<TData, TValue> {
   total: number;
   onPageChange: (page: number) => void;
   onLimitChange: (limit: number) => void;
-  actions?: (row: TData) => React.ReactNode;
+  actions?: boolean;
   isPagination?: boolean;
 }
 
@@ -108,11 +108,7 @@ function DataTableInner<TData, TValue>(
               {headerGroup.headers.map((header, i) => (
                 <TableHead
                   key={i}
-                  className={`text-muted-foreground px-2 py-2 text-xs sm:px-8 sm:py-3 sm:text-sm ${
-                    !actions && headerGroup.headers.length - 1 === i
-                      ? "text-center"
-                      : ""
-                  }`}
+                  className={`text-muted-foreground px-2 py-2 text-center text-xs sm:px-8 sm:py-3 sm:text-sm`}
                   style={{ width: header.column.getSize() }}
                 >
                   <div className="truncate">
@@ -125,11 +121,6 @@ function DataTableInner<TData, TValue>(
                   </div>
                 </TableHead>
               ))}
-              {actions && (
-                <TableHead className="text-muted-foreground px-2 py-2 text-center text-xs sm:px-4 sm:py-3 sm:text-sm">
-                  <div className="truncate">Actions</div>
-                </TableHead>
-              )}
             </TableRow>
           ))}
         </TableHeader>
@@ -141,7 +132,7 @@ function DataTableInner<TData, TValue>(
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="hover:bg-muted border-border/30 my-1 border-t last:border-b sm:my-2"
+                className="hover:bg-muted border-border/30 my-1 border-t text-center last:border-b sm:my-2"
               >
                 {row.getVisibleCells().map((cell, i) => (
                   <TableCell
@@ -157,19 +148,12 @@ function DataTableInner<TData, TValue>(
                     </div>
                   </TableCell>
                 ))}
-                {actions && (
-                  <TableCell className="px-2 py-2 sm:px-4 sm:py-3">
-                    <div className="flex justify-center">
-                      {actions(row.original)}
-                    </div>
-                  </TableCell>
-                )}
               </TableRow>
             ))
           ) : (
             <TableRow>
               <TableCell
-                colSpan={columns.length + (actions ? 1 : 0)}
+                colSpan={columns.length}
                 className="text-muted-foreground h-16 px-2 py-4 text-center text-xs sm:h-24 sm:px-4 sm:py-6 sm:text-sm"
               >
                 No results.
