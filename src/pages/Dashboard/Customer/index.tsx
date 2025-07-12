@@ -1,8 +1,17 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 // import { DataTableDemo } from "./components/DataTableDemo";
 
 // Define the type for customer data
@@ -57,6 +66,31 @@ export default function CustomerPage() {
 
   // Define columns
   const columns: ColumnDef<Customer>[] = [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+          className="border-border"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+          className="border-border"
+        />
+      ),
+      size: 50,
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       accessorKey: "id",
       header: "ID",
@@ -125,14 +159,23 @@ export default function CustomerPage() {
 
   // Actions for each row
   const actions = () => (
-    <div className="flex space-x-2">
-      <Button variant="outline" size="sm">
-        View
-      </Button>
-      <Button variant="outline" size="sm">
-        Edit
-      </Button>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="h-8 w-8 p-0">
+          <span className="sr-only">Open menu</span>
+          <MoreHorizontal />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        <DropdownMenuItem onClick={() => console.log("Copy payment ID")}>
+          Copy payment ID
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>View customer</DropdownMenuItem>
+        <DropdownMenuItem>View payment details</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 
   return (
@@ -149,7 +192,7 @@ export default function CustomerPage() {
         <div className="card_container col-span-2 xl:col-span-1">chart 1</div>
         <div className="card_container col-span-2 xl:col-span-1">chart 2</div>
 
-        <div className="card_container col-span-2">
+        <div className="bg-sidebar col-span-2 rounded-2xl py-4">
           <DataTable
             data={data}
             columns={columns}

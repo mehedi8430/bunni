@@ -101,18 +101,18 @@ function DataTableInner<TData, TValue>(
   return (
     <div className="flex w-full flex-col space-y-4">
       {/* Table Container with Horizontal Scroll */}
-      <Table className="border-separate border-spacing-y-1 sm:border-spacing-y-2">
+      <Table className="">
         <TableHeader className="[&_tr]:border-b-0">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className="hover:bg-transparent">
               {headerGroup.headers.map((header, i) => (
                 <TableHead
                   key={i}
-                  className={`text-muted-foreground min-w-[80px] px-2 py-2 text-xs sm:min-w-[120px] sm:px-4 sm:py-3 sm:text-sm ${
+                  className={`text-muted-foreground px-2 py-2 text-xs sm:px-8 sm:py-3 sm:text-sm ${
                     !actions && headerGroup.headers.length - 1 === i
                       ? "text-center"
                       : ""
-                  } `}
+                  }`}
                   style={{ width: header.column.getSize() }}
                 >
                   <div className="truncate">
@@ -126,7 +126,7 @@ function DataTableInner<TData, TValue>(
                 </TableHead>
               ))}
               {actions && (
-                <TableHead className="text-muted-foreground min-w-[80px] px-2 py-2 text-center text-xs sm:min-w-[120px] sm:px-4 sm:py-3 sm:text-sm">
+                <TableHead className="text-muted-foreground px-2 py-2 text-center text-xs sm:px-4 sm:py-3 sm:text-sm">
                   <div className="truncate">Actions</div>
                 </TableHead>
               )}
@@ -141,17 +141,13 @@ function DataTableInner<TData, TValue>(
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="bg-muted/50 hover:bg-muted my-1 rounded-md border-0 sm:my-2"
+                className="hover:bg-muted border-border/30 my-1 border-t last:border-b sm:my-2"
               >
                 {row.getVisibleCells().map((cell, i) => (
                   <TableCell
                     key={i}
                     style={{ width: cell.column.getSize() }}
-                    className={`min-w-[80px] px-2 py-2 text-xs sm:min-w-[120px] sm:px-4 sm:py-3 sm:text-sm ${i === 0 ? "rounded-l-lg sm:rounded-l-2xl" : ""} ${
-                      row.getVisibleCells().length - 1 === i && !actions
-                        ? "rounded-r-lg sm:rounded-r-2xl"
-                        : ""
-                    } `}
+                    className={`px-2 py-2 text-xs sm:px-8 sm:py-3 sm:text-sm`}
                   >
                     <div className="truncate">
                       {flexRender(
@@ -162,7 +158,7 @@ function DataTableInner<TData, TValue>(
                   </TableCell>
                 ))}
                 {actions && (
-                  <TableCell className="min-w-[80px] rounded-r-lg px-2 py-2 sm:min-w-[120px] sm:rounded-r-2xl sm:px-4 sm:py-3">
+                  <TableCell className="px-2 py-2 sm:px-4 sm:py-3">
                     <div className="flex justify-center">
                       {actions(row.original)}
                     </div>
