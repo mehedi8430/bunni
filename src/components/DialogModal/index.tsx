@@ -35,10 +35,10 @@ export function DialogModal({
   className = "",
 }: DialogModalProps) {
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className={cn("!max-w-2xl", className)}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange} >
+      <DialogContent className={cn("!max-w-2xl p-0", className)}>
         <DialogHeader>
-          <DialogTitle className="border-b pb-5 text-2xl font-semibold">{title}</DialogTitle>
+          <DialogTitle className="border-b p-5 text-2xl font-semibold">{title}</DialogTitle>
         </DialogHeader>
         <div className="mt-4">{children}</div>
         {showButtons && (

@@ -41,8 +41,8 @@ interface CustomerFormProps {
 
 export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
   const [defaultFirstName, defaultLastName] = customer.name
-  ? customer.name.split(' ', 2)
-  : ["", ""];
+    ? customer.name.split(' ', 2)
+    : ["", ""];
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -76,17 +76,89 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="flex flex-col md:flex-row items-center gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="space-y-4 px-5">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-lg font-normal">First Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Write here"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-lg font-normal">Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Write here"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-lg font-normal">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g., john@example.com"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-lg font-normal">Phone Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g., +123-456-7890"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={form.control}
-            name="firstName"
+            name="company"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="text-lg font-normal">First Name</FormLabel>
+              <FormItem className="">
+                <FormLabel className="text-lg font-normal">Company</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Write here"
+                    placeholder="e.g., ABC Corp"
                     {...field}
                     className="custom-focus"
                   />
@@ -97,13 +169,47 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
           />
           <FormField
             control={form.control}
-            name="lastName"
+            name="address"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="text-lg font-normal">Last Name</FormLabel>
+              <FormItem className="">
+                <FormLabel className="text-lg font-normal">Address</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Write here"
+                    placeholder="e.g., 123 Main St, NY"
+                    {...field}
+                    className="custom-focus"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="truncated_tokens"
+            render={({ field }) => (
+              <FormItem className="">
+                <FormLabel className="text-lg font-normal">Credit Card Token</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="1234567890XYZ"
+                    {...field}
+                    className="custom-focus"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="achToken"
+            render={({ field }) => (
+              <FormItem className="">
+                <FormLabel className="text-lg font-normal">ACH Token</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="•••• 723532345 "
                     {...field}
                     className="custom-focus"
                   />
@@ -113,112 +219,8 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             )}
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center gap-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="text-lg font-normal">Email</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g., john@example.com"
-                    {...field}
-                    className="custom-focus"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="text-lg font-normal">Phone Number</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g., +123-456-7890"
-                    {...field}
-                    className="custom-focus"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <FormField
-          control={form.control}
-          name="company"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="text-lg font-normal">Company</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g., ABC Corp"
-                  {...field}
-                  className="custom-focus"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="text-lg font-normal">Address</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g., 123 Main St, NY"
-                  {...field}
-                  className="custom-focus"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="truncated_tokens"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="text-lg font-normal">Credit Card Token</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="1234567890XYZ"
-                  {...field}
-                  className="custom-focus"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="achToken"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="text-lg font-normal">ACH Token</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="•••• 723532345 "
-                  {...field}
-                  className="custom-focus"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
-        <div className="flex justify-end gap-3 mt-5">
+        <div className="flex justify-end gap-3 p-5">
           <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
             Cancel
           </Button>

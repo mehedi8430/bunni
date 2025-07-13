@@ -254,9 +254,8 @@ export default function CustomerPage() {
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
         title="View Details"
-        onCancel={() => setIsViewOpen(false)}
       >
-        <CustomerDetails customerId={selectedCustomer?.id || ""} />
+        <CustomerDetails onClose={() => setIsViewOpen(false)} customerId={selectedCustomer?.id || ""} />
       </DialogModal>
 
       {/* Edit Modal with CustomerForm */}
