@@ -27,19 +27,25 @@ import sendMoney from "../assets/images/sendMoney.svg";
 
 import customer from "../assets/icons/customer.svg";
 import dashboard_icon from "../assets/icons/dashboard_icon.svg";
+import doc from "../assets/icons/doc.svg";
+import doller_up from "../assets/icons/doller_up.svg";
+import export_icon from "../assets/icons/export_icon.svg";
 import invoice_settings from "../assets/icons/invoice_settings.svg";
 import invoices from "../assets/icons/invoices.svg";
+import notSure from "../assets/icons/not-sure.svg";
 import notification from "../assets/icons/notification.svg";
 import payment from "../assets/icons/payment.svg";
 import payment_integration from "../assets/icons/payment_integration.svg";
+import payroll from "../assets/icons/payroll.svg";
+import pending from "../assets/icons/pending.svg";
 import products from "../assets/icons/products.svg";
 import profile_settings from "../assets/icons/profile_settings.svg";
 import settings from "../assets/icons/settings.svg";
 import subscription from "../assets/icons/subscription.svg";
 import user_management from "../assets/icons/user_management.svg";
-import export_icon from "../assets/icons/export_icon.svg";
-import doller_up from "../assets/icons/doller_up.svg";
-import pending from "../assets/icons/pending.svg";
+
+import arrowDown from "../assets/icons/ArrowDown.svg";
+import calender from "../assets/icons/Calendar.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -126,6 +132,11 @@ export const icons: IconAssets = {
   export_icon,
   doller_up,
   pending,
+  calender,
+  arrowDown,
+  doc,
+  payroll,
+  notSure,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

@@ -12,12 +12,19 @@ import useBusinessInformation from "@/hooks/use-business-information";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router";
 import SelectInput from "../SelectInput";
+import { businessCountryOptions } from "./businessCountryData";
+import { businessCurrencyOptions } from "./businessCurrencyData";
+import { businessDoOptions } from "./businessDoData";
+import { businessLegalStructureOptions } from "./businessLegalStructureData";
+import { businessTypeOptions } from "./businessTypeData";
 
 export default function BusinessInformationForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
   const { form, onSubmit } = useBusinessInformation();
+  const businessLegalStructure = form.watch("businessLegalStructure");
+  console.log(form.formState.errors);
 
   return (
     <Form {...form}>
@@ -89,11 +96,7 @@ export default function BusinessInformationForm({
                   <FormLabel>What Dose Your Business Do?</FormLabel>
                   <FormControl>
                     <SelectInput
-                      options={[
-                        { value: "consulting", label: "Consulting" },
-                        { value: "ecommerce", label: "E-commerce" },
-                        { value: "software", label: "Software Development" },
-                      ]}
+                      options={businessDoOptions}
                       onValueChange={field.onChange}
                       placeholder="here..."
                       triggerClassName="w-full py-5"
@@ -116,11 +119,73 @@ export default function BusinessInformationForm({
                   </FormLabel>
                   <FormControl>
                     <SelectInput
-                      options={[
-                        { value: "consulting", label: "Consulting" },
-                        { value: "ecommerce", label: "E-commerce" },
-                        { value: "software", label: "Software Development" },
-                      ]}
+                      options={businessLegalStructureOptions}
+                      onValueChange={field.onChange}
+                      placeholder="here..."
+                      triggerClassName="w-full py-5"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Conditionally render extra field */}
+          {businessLegalStructure === "others" && (
+            <div className="col-span-full grid gap-3">
+              <FormField
+                control={form.control}
+                name="businessType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Is It One Of These Business Type?</FormLabel>
+                    <FormControl>
+                      <SelectInput
+                        options={businessTypeOptions}
+                        onValueChange={field.onChange}
+                        placeholder="here..."
+                        triggerClassName="w-full py-5"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          )}
+
+          <div className="col-span-full grid gap-3">
+            <FormField
+              control={form.control}
+              name="businessCountry"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Business Country</FormLabel>
+                  <FormControl>
+                    <SelectInput
+                      options={businessCountryOptions}
+                      onValueChange={field.onChange}
+                      placeholder="here..."
+                      triggerClassName="w-full py-5"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="col-span-full grid gap-3">
+            <FormField
+              control={form.control}
+              name="businessCurrency"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Business Currency</FormLabel>
+                  <FormControl>
+                    <SelectInput
+                      options={businessCurrencyOptions}
                       onValueChange={field.onChange}
                       placeholder="here..."
                       triggerClassName="w-full py-5"
