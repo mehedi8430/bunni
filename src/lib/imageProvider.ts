@@ -39,6 +39,10 @@ import subscription from "../assets/icons/subscription.svg";
 import user_management from "../assets/icons/user_management.svg";
 import export_icon from "../assets/icons/export_icon.svg";
 
+
+import calender from '../assets/icons/Calendar.svg';
+import arrowDown from '../assets/icons/ArrowDown.svg';
+
 // Type definitions for better type safety
 export interface IconAssets {
   taskIcon1: string;
@@ -120,6 +124,8 @@ export const icons: IconAssets = {
   settings,
   success,
   export_icon,
+  calender,
+  arrowDown,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
