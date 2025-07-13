@@ -38,6 +38,8 @@ import settings from "../assets/icons/settings.svg";
 import subscription from "../assets/icons/subscription.svg";
 import user_management from "../assets/icons/user_management.svg";
 import export_icon from "../assets/icons/export_icon.svg";
+import doller_up from "../assets/icons/doller_up.svg";
+import pending from "../assets/icons/pending.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -67,6 +69,8 @@ export interface IconAssets {
   user_management: string;
   settings: string;
   export_icon: string;
+  doller_up: string;
+  pending: string;
   [key: string]: string;
 }
 
@@ -120,6 +124,8 @@ export const icons: IconAssets = {
   settings,
   success,
   export_icon,
+  doller_up,
+  pending,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

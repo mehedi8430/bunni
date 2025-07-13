@@ -43,7 +43,7 @@ export default function SearchInput({
   return (
     <div
       className={cn(
-        "border-border flex items-center rounded-md border px-4 py-2 md:px-6 md:py-3",
+        "border-border flex items-center rounded-md border px-4 py-2 md:px-6 md:py-2.5",
         className,
       )}
     >
