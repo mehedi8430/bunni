@@ -1,10 +1,10 @@
-// components/CustomerTableActions.tsx
 import { Button } from "@/components/ui/button";
 import { CirclePlus } from "lucide-react";
 import SearchInput from "@/components/SearchInput";
 import { ReactSVG } from "react-svg";
 import assets from "@/lib/imageProvider";
 import YearPicker from "@/components/YearPicker";
+import { useState } from "react";
 
 interface CustomerTableActionsProps {
   searchTerm: string;
@@ -15,6 +15,10 @@ export function CustomerTableActions({
   searchTerm,
   handleFilterChange,
 }: CustomerTableActionsProps) {
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear(),
+  );
+
   return (
     <div className="flex items-center justify-between p-4">
       <div className="flex items-center gap-6">
@@ -27,12 +31,10 @@ export function CustomerTableActions({
         />
 
         <div className="flex items-center gap-3">
-          <YearPicker />
+          <YearPicker value={selectedYear} onYearChange={setSelectedYear} />
 
           <Button
-            variant="outline"
-            size="lg"
-            className="border-border text-muted-foreground rounded-full bg-white p-3 text-sm font-normal"
+            variant="filter_button"
             onClick={() => {
               console.log("Add customer");
             }}
@@ -41,9 +43,7 @@ export function CustomerTableActions({
             Customer name
           </Button>
           <Button
-            variant="outline"
-            size="lg"
-            className="border-border text-muted-foreground rounded-full bg-white p-3 text-sm font-normal"
+            variant="filter_button"
             onClick={() => {
               console.log("Add Phone");
             }}
@@ -54,11 +54,7 @@ export function CustomerTableActions({
         </div>
       </div>
 
-      <Button
-        variant="outline"
-        size="lg"
-        className="border-border text-muted-foreground rounded-xl bg-white p-3 text-sm font-normal"
-      >
+      <Button variant="filter_button" className="rounded-lg">
         <ReactSVG
           src={assets.icons.export_icon}
           className="text-muted-foreground"
