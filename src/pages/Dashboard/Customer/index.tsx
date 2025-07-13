@@ -16,6 +16,7 @@ import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { CustomerForm } from "./components/CustomerForm";
 import CustomerDetails from "./components/CustomerDetails";
+import { CustomerFilter } from "./components/CustomerFilter";
 
 export default function CustomerPage() {
   const [page, setPage] = useState(1);
@@ -23,6 +24,12 @@ export default function CustomerPage() {
   const [data, setData] = useState<Customer[]>([]);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [filters, setFilters] = useState({
+    search: "",
+    name: "",
+    email: "",
+    company: "",
+  });
 
   // Modal states
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
@@ -34,7 +41,7 @@ export default function CustomerPage() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [customerToDelete, setCustomerToDelete] = useState<string | null>(null);
 
-  // Fetch customers when page or limit changes
+  // Fetch customers when page, limit, or filters change
   useEffect(() => {
     const fetchCustomers = async () => {
       setIsLoading(true);
@@ -42,11 +49,15 @@ export default function CustomerPage() {
         const customers = await customerApi.getCustomers({
           page,
           limit,
+          search: filters.search || undefined,
+          name: filters.name || undefined,
+          email: filters.email || undefined,
+          company: filters.company || undefined,
         });
         console.log({ customers });
 
         setData(customers.data);
-        setTotal(customers.total); // Use total from API response
+        setTotal(customers.total);
       } catch (error) {
         console.error("Error fetching customers:", error);
         setData([]);
@@ -57,7 +68,7 @@ export default function CustomerPage() {
     };
 
     fetchCustomers();
-  }, [page, limit]);
+  }, [page, limit, filters]);
 
   const columns: ColumnDef<Customer>[] = [
     {
@@ -70,7 +81,7 @@ export default function CustomerPage() {
           }
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
-          className="border-border"
+          className="border-foreground/50"
         />
       ),
       cell: ({ row }) => (
@@ -135,6 +146,8 @@ export default function CustomerPage() {
     },
     {
       id: "actions",
+      header: "Actions",
+      size: 100,
       enableHiding: false,
       cell: ({ row }) => {
         const customer = row.original;
@@ -191,6 +204,16 @@ export default function CustomerPage() {
     }
   };
 
+  const handleFilterChange = (newFilters: {
+    search?: string;
+    name?: string;
+    email?: string;
+    company?: string;
+  }) => {
+    setFilters(newFilters);
+    setPage(1); // Reset to first page when filters change
+  };
+
   return (
     <section className="space-y-10">
       <div className="flex items-center justify-between">
@@ -214,6 +237,8 @@ export default function CustomerPage() {
         <div className="card_container col-span-2 xl:col-span-1">chart 2</div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
+          <CustomerFilter onFilterChange={handleFilterChange} />
+
           <DataTable
             data={data}
             columns={columns}

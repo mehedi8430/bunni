@@ -10,7 +10,7 @@ export interface Customer {
   company: string;
   businessName: string;
   address: string;
-  achToken: string; // Added achToken as a string
+  achToken: string;
 }
 
 const mockCustomers: Customer[] = [
@@ -34,7 +34,7 @@ const mockCustomers: Customer[] = [
     company: "Johnson & Johnson",
     businessName: "Johnson Solutions",
     address: "789 Pine Ln, Village, State, 10111",
-    achToken: "",
+    achToken: "tok_ach_xxxx5678",
   },
   {
     id: "cust_003",
@@ -45,7 +45,7 @@ const mockCustomers: Customer[] = [
     company: "Brown Industries",
     businessName: "Brown Design",
     address: "101 Maple St, Hamlet, State, 12131",
-    achToken: "",
+    achToken: "tok_ach_xxxx5678",
   },
   {
     id: "cust_004",
@@ -56,7 +56,95 @@ const mockCustomers: Customer[] = [
     company: "Wonder Innovations",
     businessName: "Wonder Innovations",
     address: "202 Amazon Way, Paradise, State, 14151",
-    achToken: "",
+    achToken: "tok_ach_xxxx5678",
+  },
+  {
+    id: "cust_005",
+    name: "Eve Adams",
+    email: "eve.a@example.com",
+    phone: "+15551112222",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "Adams Analytics",
+    businessName: "Adams Data Solutions",
+    address: "303 Cedar Dr, Cityville, State, 98765",
+    achToken: "tok_ach_xxxx9012",
+  },
+  {
+    id: "cust_006",
+    name: "Frank White",
+    email: "frank.w@example.com",
+    phone: "+16664445555",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "White Holdings",
+    businessName: "White & Sons",
+    address: "505 Birch Rd, Countryside, State, 23456",
+    achToken: "tok_ach_xxxx5678",
+  },
+  {
+    id: "cust_007",
+    name: "Grace Taylor",
+    email: "grace.t@example.com",
+    phone: "+13337778888",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "Taylor Tech",
+    businessName: "Taylor Solutions Group",
+    address: "606 Spruce Ct, Metropolis, State, 34567",
+    achToken: "tok_ach_xxxx3456",
+  },
+  {
+    id: "cust_008",
+    name: "Henry Green",
+    email: "henry.g@example.com",
+    phone: "+14449990000",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "Green Innovations",
+    businessName: "Green Energy Systems",
+    address: "707 Willow Way, Suburbia, State, 45678",
+    achToken: "tok_ach_xxxx5678",
+  },
+  {
+    id: "cust_009",
+    name: "Ivy Lee",
+    email: "ivy.l@example.com",
+    phone: "+18881112222",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "Lee Consulting",
+    businessName: "Lee & Associates",
+    address: "808 Poplar Ave, Downtown, State, 56789",
+    achToken: "tok_ach_xxxx7890",
+  },
+  {
+    id: "cust_010",
+    name: "Jack King",
+    email: "jack.k@example.com",
+    phone: "+19993334444",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "King Enterprises",
+    businessName: "King Global",
+    address: "909 Elm St, Uptown, State, 67890",
+    achToken: "tok_ach_xxxx5678",
+  },
+  {
+    id: "cust_011",
+    name: "Jack King",
+    email: "jack.k@example.com",
+    phone: "+19993334444",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "King Enterprises",
+    businessName: "King Global",
+    address: "909 Elm St, Uptown, State, 67890",
+    achToken: "tok_ach_xxxx5678",
+  },
+  {
+    id: "cust_012",
+    name: "Jack King",
+    email: "jack.k@example.com",
+    phone: "+19993334444",
+    truncated_tokens: "1Z999AA10123456784",
+    company: "King Enterprises",
+    businessName: "King Global",
+    address: "909 Elm St, Uptown, State, 67890",
+    achToken: "tok_ach_xxxx5678",
   },
 ];
 

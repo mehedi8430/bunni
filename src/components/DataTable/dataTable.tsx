@@ -104,11 +104,14 @@ function DataTableInner<TData, TValue>(
       <Table className="">
         <TableHeader className="[&_tr]:border-b-0">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="hover:bg-transparent">
+            <TableRow
+              key={headerGroup.id}
+              className="bg-border/50 hover:bg-border/50"
+            >
               {headerGroup.headers.map((header, i) => (
                 <TableHead
                   key={i}
-                  className={`text-muted-foreground px-2 py-2 text-center text-xs sm:px-8 sm:py-3 sm:text-sm`}
+                  className={`text-foreground px-2 py-2 text-center sm:px-8 sm:py-3`}
                   style={{ width: header.column.getSize() }}
                 >
                   <div className="truncate">
