@@ -144,7 +144,7 @@ export default function DetailCompanyNameForm({
             type="submit"
             className="disabled:bg-disabled w-full cursor-pointer md:col-span-full"
             size={"lg"}
-            // disabled={!form.formState.isValid || form.formState.isSubmitting}
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
           >
             Next
           </Button>

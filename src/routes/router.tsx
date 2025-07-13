@@ -6,6 +6,7 @@ import ResetYourPasswordForm from "@/components/authentication/ResetYourPassword
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
 import BusinessInformationForm from "@/components/businessSetup/BusinessInformationForm";
 import DetailCompanyNameForm from "@/components/businessSetup/DetailCompanyNameForm";
+import WhatWouldLikeToDoForm from "@/components/businessSetup/WhatWouldLikeToDoForm";
 import AuthLayout from "@/layout/AuthLayout";
 import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
@@ -134,6 +135,10 @@ export const Router = createBrowserRouter([
       {
         path: "1",
         element: <DetailCompanyNameForm />,
+      },
+      {
+        path: "2",
+        element: <WhatWouldLikeToDoForm />,
       },
     ],
   },
