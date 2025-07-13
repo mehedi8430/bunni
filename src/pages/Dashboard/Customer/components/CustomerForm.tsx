@@ -77,7 +77,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-4">
           <FormField
             control={form.control}
             name="firstName"
@@ -113,7 +113,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             )}
           />
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-4">
           <FormField
             control={form.control}
             name="email"
