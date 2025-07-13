@@ -132,7 +132,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "1",
-        element: <BusinessInformationForm />,
+        element: <>Next</>,
       },
     ],
   },

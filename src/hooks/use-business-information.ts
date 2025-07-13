@@ -1,7 +1,7 @@
 import { steps } from "@/components/businessSetup/steps";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -12,9 +12,13 @@ const formSchema = z.object({
   businessLegalStructure: z
     .string()
     .min(1, "Business legal structure is required"),
+  businessType: z.string().optional(),
+  businessCountry: z.string().min(1, "Business country is required"),
+  businessCurrency: z.string().min(1, "Business currency is required"),
 });
 
 export default function useBusinessInformation() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const active = parseInt(searchParams.get("active") || "0", 10);
   // 1. Define your form.
@@ -26,6 +30,9 @@ export default function useBusinessInformation() {
       businessName: "",
       businessDocument: "",
       businessLegalStructure: "",
+      businessType: "",
+      businessCountry: "",
+      businessCurrency: "",
     },
   });
 
@@ -39,6 +46,7 @@ export default function useBusinessInformation() {
       ((active - 1 + steps.length) % steps.length) + "",
     );
     setSearchParams(searchParams);
+    navigate("1");
   }
   return { form, onSubmit };
 }
