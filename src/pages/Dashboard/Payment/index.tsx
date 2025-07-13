@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { CustomerTableActions } from "../Customer/components/CustomerTableActions";
 import { useState } from "react";
+import { ReactSVG } from "react-svg";
+import assets from "@/lib/imageProvider";
+import { PaymentTableActions } from "./components/PaymentTableActions";
 
 export default function PaymentPage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -37,11 +39,32 @@ export default function PaymentPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <div className="card_container col-span-2 xl:col-span-1">erjerg</div>
-        <div className="card_container col-span-2 xl:col-span-1">weqijwef</div>
+        <div className="card_container col-span-2 space-y-5 xl:col-span-1">
+          <div className="flex items-center gap-2">
+            <div className="bg-primary/20 flex items-center justify-center rounded-full p-2">
+              <ReactSVG src={assets.icons.doller_up} />
+            </div>
+            <p className="text-muted-foreground text-[16px] font-normal">
+              Total payment
+            </p>
+          </div>
+          <p className="text-2xl font-bold">$ 2,567</p>
+        </div>
+
+        <div className="card_container col-span-2 space-y-5 xl:col-span-1">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center rounded-full bg-[#FFF8DF] p-2">
+              <ReactSVG src={assets.icons.pending} />
+            </div>
+            <p className="text-muted-foreground text-[16px] font-normal">
+              Pending payments
+            </p>
+          </div>
+          <p className="text-2xl font-bold">$ 4,212</p>
+        </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <CustomerTableActions
+          <PaymentTableActions
             searchTerm={searchTerm}
             handleFilterChange={handleFilterChange}
           />

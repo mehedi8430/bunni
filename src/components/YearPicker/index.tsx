@@ -40,7 +40,7 @@ export default function YearPicker({ value, onYearChange }: YearPickerProps) {
             <ChevronDown className="ml-1" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="ring-border/60 w-48 space-y-1 rounded-md bg-white py-1 shadow-lg ring-1 focus:outline-none">
+        <DropdownMenuContent className="w-48 space-y-1 rounded-md">
           {years.map((year) => (
             <DropdownMenuItem
               key={year}
