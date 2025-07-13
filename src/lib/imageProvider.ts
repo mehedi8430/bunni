@@ -37,6 +37,7 @@ import profile_settings from "../assets/icons/profile_settings.svg";
 import settings from "../assets/icons/settings.svg";
 import subscription from "../assets/icons/subscription.svg";
 import user_management from "../assets/icons/user_management.svg";
+import export_icon from "../assets/icons/export_icon.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -65,6 +66,7 @@ export interface IconAssets {
   subscription: string;
   user_management: string;
   settings: string;
+  export_icon: string;
   [key: string]: string;
 }
 
@@ -117,6 +119,7 @@ export const icons: IconAssets = {
   user_management,
   settings,
   success,
+  export_icon,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

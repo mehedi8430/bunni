@@ -16,7 +16,7 @@ import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { CustomerForm } from "./components/CustomerForm";
 import CustomerDetails from "./components/CustomerDetails";
-import { CustomerFilter } from "./components/CustomerFilter";
+import { CustomerTableActions } from "./components/CustomerTableActions";
 
 export default function CustomerPage() {
   const [page, setPage] = useState(1);
@@ -24,12 +24,7 @@ export default function CustomerPage() {
   const [data, setData] = useState<Customer[]>([]);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [filters, setFilters] = useState({
-    search: "",
-    name: "",
-    email: "",
-    company: "",
-  });
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Modal states
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
@@ -49,10 +44,7 @@ export default function CustomerPage() {
         const customers = await customerApi.getCustomers({
           page,
           limit,
-          search: filters.search || undefined,
-          name: filters.name || undefined,
-          email: filters.email || undefined,
-          company: filters.company || undefined,
+          search: searchTerm || undefined,
         });
         console.log({ customers });
 
@@ -68,7 +60,7 @@ export default function CustomerPage() {
     };
 
     fetchCustomers();
-  }, [page, limit, filters]);
+  }, [page, limit, searchTerm]);
 
   const columns: ColumnDef<Customer>[] = [
     {
@@ -204,14 +196,9 @@ export default function CustomerPage() {
     }
   };
 
-  const handleFilterChange = (newFilters: {
-    search?: string;
-    name?: string;
-    email?: string;
-    company?: string;
-  }) => {
-    setFilters(newFilters);
-    setPage(1); // Reset to first page when filters change
+  const handleFilterChange = (search: string) => {
+    setSearchTerm(search);
+    setPage(1);
   };
 
   return (
@@ -237,7 +224,10 @@ export default function CustomerPage() {
         <div className="card_container col-span-2 xl:col-span-1">chart 2</div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <CustomerFilter onFilterChange={handleFilterChange} />
+          <CustomerTableActions
+            searchTerm={searchTerm}
+            handleFilterChange={handleFilterChange}
+          />
 
           <DataTable
             data={data}
