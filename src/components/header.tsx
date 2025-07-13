@@ -3,9 +3,10 @@ import SelectInput from "./SelectInput";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { icons } from "@/lib/imageProvider";
 import { ReactSVG } from "react-svg";
-import Notification from "./notification";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
+import { Link } from "react-router";
+import NotificationContent from "./notification-content";
 
 export default function Header() {
   return (
@@ -39,7 +40,17 @@ export default function Header() {
                 triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-5 [&>svg]:stroke-black [&>svg]:opacity-80 [&>svg]:ml-[-8px] data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg text-foreground text-lg"
               />
 
-              <Notification />
+              {/* Notification */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="border-border cursor-pointer rounded-full border p-1">
+                    <ReactSVG src={icons.notification} />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="custom-scrollbar border-border z-50 max-h-[80vh] w-80 overflow-y-auto border px-6 py-8 shadow-2xl md:w-120">
+                  <NotificationContent />
+                </PopoverContent>
+              </Popover>
             </div>
 
             <div className="flex items-center">
@@ -63,59 +74,68 @@ export default function Header() {
 
         {/* Mobile View */}
         <div className="hidden max-md:block max-md:pr-4">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="mt-2 mr-4 w-56 p-2">
-              <div className="flex flex-col gap-4">
-                {/* Support Section */}
-                <div className="flex items-center gap-2 p-2">
-                  <Headset className="size-4" />
-                  <span className="text-sm font-medium">Support</span>
-                </div>
-
-                {/* Language Selector */}
-                <div className="flex items-center justify-between p-2">
-                  <span className="text-sm font-medium">Language</span>
-                  <SelectInput
-                    options={[
-                      { value: "en", label: "En" },
-                      { value: "bn", label: "Bn" },
-                    ]}
-                    placeholder="En"
-                    triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-4 [&>svg]:stroke-black [&>svg]:opacity-80 data-[placeholder]:text-foreground data-[placeholder]:text-sm data-[select-trigger]:text-foreground data-[select-trigger]:text-sm text-foreground text-sm"
-                  />
-                </div>
-
-                {/* Notifications */}
-                <div className="flex items-center justify-between p-2">
-                  <span className="text-sm font-medium">Notifications</span>
-                  <Notification mobile />
-                </div>
-
-                {/* Profile Section */}
-                <div className="flex items-center gap-3 p-2">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                      className="object-cover"
+          <div className="flex items-center gap-2">
+            {/* Notifications */}
+            <div className="flex items-center justify-between p-2">
+              <Link
+                to={`/dashboard/notifications`}
+                className="border-border cursor-pointer rounded-full border p-1"
+              >
+                <ReactSVG src={icons.notification} />
+              </Link>
+            </div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="size-5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="mt-2 mr-4 w-56 p-2">
+                <div className="flex flex-col gap-4">
+                  {/* Support Section */}
+                  <div className="flex items-center gap-2 p-2">
+                    <Headset className="size-4" />
+                    <SelectInput
+                      options={[]}
+                      placeholder="Support"
+                      triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:border [&>svg]:border-border [&>svg]:rounded-full [&>svg]:opacity-80 [&>svg]:size-5 [&>svg]:stroke-black data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg"
                     />
-                    <AvatarFallback>SC</AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium">Acme Inc.</span>
-                    <span className="text-muted-foreground text-xs">
-                      View profile
-                    </span>
+                  </div>
+
+                  {/* Language Selector */}
+                  <div className="flex items-center justify-between p-2">
+                    <span className="text-sm font-medium">Language</span>
+                    <SelectInput
+                      options={[
+                        { value: "en", label: "En" },
+                        { value: "bn", label: "Bn" },
+                      ]}
+                      placeholder="En"
+                      triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-4 [&>svg]:stroke-black [&>svg]:opacity-80 data-[placeholder]:text-foreground data-[placeholder]:text-sm data-[select-trigger]:text-foreground data-[select-trigger]:text-sm text-foreground text-sm"
+                    />
+                  </div>
+
+                  {/* Profile Section */}
+                  <div className="flex items-center gap-3 p-2">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                        className="object-cover"
+                      />
+                      <AvatarFallback>SC</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">Acme Inc.</span>
+                      <span className="text-muted-foreground text-xs">
+                        View profile
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </PopoverContent>
-          </Popover>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
       </div>
     </header>

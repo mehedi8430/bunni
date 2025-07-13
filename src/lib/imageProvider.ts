@@ -28,6 +28,8 @@ import sendMoney from "../assets/images/sendMoney.svg";
 import customer from "../assets/icons/customer.svg";
 import dashboard_icon from "../assets/icons/dashboard_icon.svg";
 import doc from "../assets/icons/doc.svg";
+import doller_up from "../assets/icons/doller_up.svg";
+import export_icon from "../assets/icons/export_icon.svg";
 import invoice_settings from "../assets/icons/invoice_settings.svg";
 import invoices from "../assets/icons/invoices.svg";
 import notSure from "../assets/icons/not-sure.svg";
@@ -35,11 +37,15 @@ import notification from "../assets/icons/notification.svg";
 import payment from "../assets/icons/payment.svg";
 import payment_integration from "../assets/icons/payment_integration.svg";
 import payroll from "../assets/icons/payroll.svg";
+import pending from "../assets/icons/pending.svg";
 import products from "../assets/icons/products.svg";
 import profile_settings from "../assets/icons/profile_settings.svg";
 import settings from "../assets/icons/settings.svg";
 import subscription from "../assets/icons/subscription.svg";
 import user_management from "../assets/icons/user_management.svg";
+
+import arrowDown from "../assets/icons/ArrowDown.svg";
+import calender from "../assets/icons/Calendar.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -68,6 +74,9 @@ export interface IconAssets {
   subscription: string;
   user_management: string;
   settings: string;
+  export_icon: string;
+  doller_up: string;
+  pending: string;
   [key: string]: string;
 }
 
@@ -120,6 +129,11 @@ export const icons: IconAssets = {
   user_management,
   settings,
   success,
+  export_icon,
+  doller_up,
+  pending,
+  calender,
+  arrowDown,
   doc,
   payroll,
   notSure,

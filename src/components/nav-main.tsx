@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ChevronRight,
-  CircleChevronRight,
-  type LucideIcon,
-} from "lucide-react";
+import { CircleChevronRight } from "lucide-react";
 import { ReactSVG } from "react-svg";
 
 import {
@@ -30,12 +26,12 @@ export function NavMain({
   items: {
     title: string;
     url: string;
-    icon?: string | LucideIcon;
+    icon?: string;
     isActive?: boolean;
     items?: {
       title: string;
       url: string;
-      icon?: string | LucideIcon;
+      icon?: string;
     }[];
   }[];
 }) {
