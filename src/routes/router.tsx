@@ -5,6 +5,7 @@ import RegistrationForm from "@/components/authentication/RegistrationForm";
 import ResetYourPasswordForm from "@/components/authentication/ResetYourPasswordForm";
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
 import BusinessInformationForm from "@/components/businessSetup/BusinessInformationForm";
+import DetailCompanyNameForm from "@/components/businessSetup/DetailCompanyNameForm";
 import AuthLayout from "@/layout/AuthLayout";
 import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
@@ -132,7 +133,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "1",
-        element: <>Next</>,
+        element: <DetailCompanyNameForm />,
       },
     ],
   },
