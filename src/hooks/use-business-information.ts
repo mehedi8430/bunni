@@ -46,7 +46,7 @@ export default function useBusinessInformation() {
       "active",
       ((active + 1 + steps.length) % steps.length) + "",
     );
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { replace: true });
   }
   return { form, onSubmit };
 }
