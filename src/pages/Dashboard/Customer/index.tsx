@@ -17,6 +17,8 @@ import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { CustomerForm } from "./components/CustomerForm";
 import CustomerDetails from "./components/CustomerDetails";
 import { CustomerTableActions } from "./components/CustomerTableActions";
+import TopPayingCustomerChart from "./components/TopPayingCustomerChart";
+import HighestUnpaidBalanceChart from "./components/HighestUnpaidBalanceChart";
 
 export default function CustomerPage() {
   const [page, setPage] = useState(1);
@@ -220,8 +222,12 @@ export default function CustomerPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <div className="card_container col-span-2 xl:col-span-1">chart 1</div>
-        <div className="card_container col-span-2 xl:col-span-1">chart 2</div>
+        <div className="card_container col-span-2 xl:col-span-1">
+          <TopPayingCustomerChart />
+        </div>
+        <div className="card_container col-span-2 xl:col-span-1">
+          <HighestUnpaidBalanceChart />
+        </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
           <CustomerTableActions

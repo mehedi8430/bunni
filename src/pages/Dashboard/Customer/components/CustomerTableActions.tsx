@@ -4,6 +4,7 @@ import { CirclePlus } from "lucide-react";
 import SearchInput from "@/components/SearchInput";
 import { ReactSVG } from "react-svg";
 import assets from "@/lib/imageProvider";
+import YearPicker from "@/components/YearPicker";
 
 interface CustomerTableActionsProps {
   searchTerm: string;
@@ -26,6 +27,8 @@ export function CustomerTableActions({
         />
 
         <div className="flex items-center gap-3">
+          <YearPicker />
+
           <Button
             variant="outline"
             size="lg"
