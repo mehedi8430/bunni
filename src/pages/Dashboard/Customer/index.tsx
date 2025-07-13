@@ -264,6 +264,7 @@ export default function CustomerPage() {
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
         title={editCustomer.id ? "Edit Customer" : "Add New Customer"}
+        className="!max-w-4xl"
       >
         <CustomerForm
           customer={editCustomer}
