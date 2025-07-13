@@ -4,7 +4,6 @@ import SearchInput from "@/components/SearchInput";
 import { ReactSVG } from "react-svg";
 import assets from "@/lib/imageProvider";
 import YearPicker from "@/components/YearPicker";
-import { useState } from "react";
 
 interface CustomerTableActionsProps {
   searchTerm: string;
@@ -15,10 +14,6 @@ export function CustomerTableActions({
   searchTerm,
   handleFilterChange,
 }: CustomerTableActionsProps) {
-  const [selectedYear, setSelectedYear] = useState<number>(
-    new Date().getFullYear(),
-  );
-
   return (
     <div className="flex items-center justify-between p-4">
       <div className="flex items-center gap-6">
@@ -31,7 +26,7 @@ export function CustomerTableActions({
         />
 
         <div className="flex items-center gap-3">
-          <YearPicker value={selectedYear} onYearChange={setSelectedYear} />
+          <YearPicker />
 
           <Button
             variant="filter_button"
