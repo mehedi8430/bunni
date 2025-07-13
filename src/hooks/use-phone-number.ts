@@ -4,17 +4,21 @@ import { useNavigate } from "react-router";
 import { z } from "zod";
 
 export const formSchema = z.object({
-  likeToDo: z.string().min(1, "Please select at least one option"),
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .regex(/^\+?[1-9][0-9\s\-()]{7,20}$/, "Invalid phone number format")
+    .transform((val) => val.replace(/[\s\-()]/g, "")),
 });
 
-export default function useWhatWouldLikeToDo() {
+export default function usePhoneNumber() {
   const navigate = useNavigate();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      likeToDo: "",
+      phone: "",
     },
   });
 
@@ -23,7 +27,7 @@ export default function useWhatWouldLikeToDo() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    navigate(`/business-setup/add-phone-number`, { replace: true });
+    navigate(`/dashboard`, { replace: true });
   }
   return { form, onSubmit };
 }

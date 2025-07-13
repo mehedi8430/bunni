@@ -4,6 +4,7 @@ import { LoginForm } from "@/components/authentication/LoginForm";
 import RegistrationForm from "@/components/authentication/RegistrationForm";
 import ResetYourPasswordForm from "@/components/authentication/ResetYourPasswordForm";
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
+import AddPhoneNumber from "@/components/businessSetup/AddPhoneNumber";
 import BusinessInformationForm from "@/components/businessSetup/BusinessInformationForm";
 import DetailCompanyNameForm from "@/components/businessSetup/DetailCompanyNameForm";
 import WhatWouldLikeToDoForm from "@/components/businessSetup/WhatWouldLikeToDoForm";
@@ -144,6 +145,10 @@ export const Router = createBrowserRouter([
       {
         path: "2",
         element: <WhatWouldLikeToDoForm />,
+      },
+      {
+        path: "add-phone-number",
+        element: <AddPhoneNumber />,
       },
     ],
   },
