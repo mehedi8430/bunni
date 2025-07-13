@@ -41,12 +41,12 @@ export default function useBusinessInformation() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    navigate("/business-setup/1");
     searchParams.set(
       "active",
-      ((active - 1 + steps.length) % steps.length) + "",
+      ((active + 1 + steps.length) % steps.length) + "",
     );
     setSearchParams(searchParams);
-    navigate("1");
   }
   return { form, onSubmit };
 }

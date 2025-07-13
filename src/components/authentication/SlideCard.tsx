@@ -35,6 +35,11 @@ export default function SlideCard({
 
   return (
     <div className="space-y-10">
+      {steps.length > 1 && (
+        <p className="text-muted text-center text-lg">
+          Step {active + 1} of {steps.length}
+        </p>
+      )}
       <h2 className="text-primary-foreground text-center text-4xl leading-14 font-bold">
         {steps[active]?.title || "Take Control of Your Business Finances"}
       </h2>
