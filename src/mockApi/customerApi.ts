@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { simulateApiResponse } from ".";
 
-interface PaymentMethod {
-  id: string;
-  type: "Card" | "ACH";
-  last4: string;
-  brand?: string; // e.g., 'Visa', 'Mastercard'
-  bankName?: string;
-  truncatedToken: string;
-}
-
 export interface Customer {
   id: string;
   name: string;
@@ -19,7 +10,7 @@ export interface Customer {
   company: string;
   businessName: string;
   address: string;
-  paymentMethods: PaymentMethod[];
+  achToken: string; // Added achToken as a string
 }
 
 const mockCustomers: Customer[] = [
@@ -32,22 +23,7 @@ const mockCustomers: Customer[] = [
     company: "Mitsubishi Motors",
     businessName: "Smith & Co.",
     address: "456 Oak Ave, Town, State, 67890",
-    paymentMethods: [
-      {
-        id: "pm_001",
-        type: "Card",
-        last4: "1234",
-        brand: "Visa",
-        truncatedToken: "tok_visa_xxxx1234",
-      },
-      {
-        id: "pm_002",
-        type: "ACH",
-        bankName: "Bank of America",
-        last4: "5678",
-        truncatedToken: "tok_ach_xxxx5678",
-      },
-    ],
+    achToken: "tok_ach_xxxx5678",
   },
   {
     id: "cust_002",
@@ -58,7 +34,7 @@ const mockCustomers: Customer[] = [
     company: "Johnson & Johnson",
     businessName: "Johnson Solutions",
     address: "789 Pine Ln, Village, State, 10111",
-    paymentMethods: [],
+    achToken: "",
   },
   {
     id: "cust_003",
@@ -69,15 +45,7 @@ const mockCustomers: Customer[] = [
     company: "Brown Industries",
     businessName: "Brown Design",
     address: "101 Maple St, Hamlet, State, 12131",
-    paymentMethods: [
-      {
-        id: "pm_003",
-        type: "Card",
-        last4: "9012",
-        brand: "Mastercard",
-        truncatedToken: "tok_mc_xxxx9012",
-      },
-    ],
+    achToken: "",
   },
   {
     id: "cust_004",
@@ -88,22 +56,30 @@ const mockCustomers: Customer[] = [
     company: "Wonder Innovations",
     businessName: "Wonder Innovations",
     address: "202 Amazon Way, Paradise, State, 14151",
-    paymentMethods: [],
+    achToken: "",
   },
 ];
 
 export const customerApi = {
   /**
-   * Simulates fetching a list of customers.
-   * @param {object} [filters={}] - Optional filters (search)
-   * @returns {Promise<Customer[]>}
+   * Simulates fetching a list of customers with pagination.
+   * @param {object} params - Filters and pagination parameters
+   * @returns {Promise<{ data: Customer[], total: number }>}
    */
-  getCustomers: async (
-    filters: { search?: string } = {},
-  ): Promise<Customer[]> => {
+  getCustomers: async ({
+    search,
+    page = 1,
+    limit = 10,
+  }: {
+    search?: string;
+    page?: number;
+    limit?: number;
+  } = {}): Promise<{ data: Customer[]; total: number }> => {
     let filteredCustomers: Customer[] = [...mockCustomers];
-    if (filters.search) {
-      const searchTerm = filters.search.toLowerCase();
+
+    // Apply search filter
+    if (search) {
+      const searchTerm = search.toLowerCase();
       filteredCustomers = filteredCustomers.filter(
         (cust) =>
           cust.name.toLowerCase().includes(searchTerm) ||
@@ -111,7 +87,16 @@ export const customerApi = {
           cust.businessName.toLowerCase().includes(searchTerm),
       );
     }
-    return simulateApiResponse(filteredCustomers);
+
+    // Calculate pagination
+    const total = filteredCustomers.length;
+    const startIndex = (page - 1) * limit;
+    const paginatedCustomers = filteredCustomers.slice(
+      startIndex,
+      startIndex + limit,
+    );
+
+    return simulateApiResponse({ data: paginatedCustomers, total });
   },
 
   /**
@@ -123,90 +108,6 @@ export const customerApi = {
     const customer = mockCustomers.find((cust) => cust.id === customerId);
     if (customer) {
       return simulateApiResponse(customer);
-    }
-    return simulateApiResponse(null as any, 500, false);
-  },
-
-  /**
-   * Simulates creating a new customer.
-   * @param {Omit<Customer, 'id' | 'paymentMethods'>} customerData
-   * @returns {Promise<Customer>}
-   */
-  createCustomer: async (
-    customerData: Omit<Customer, "id" | "paymentMethods">,
-  ): Promise<Customer> => {
-    const newId = `cust_${Date.now()}`;
-    const newCustomer: Customer = {
-      id: newId,
-      paymentMethods: [],
-      ...customerData,
-    };
-    mockCustomers.push(newCustomer);
-    console.log("Mock Create Customer:", newCustomer);
-    return simulateApiResponse(newCustomer);
-  },
-
-  /**
-   * Simulates updating an existing customer.
-   * @param {string} customerId
-   * @param {Partial<Customer>} updateData
-   * @returns {Promise<Customer>}
-   */
-  updateCustomer: async (
-    customerId: string,
-    updateData: Partial<Customer>,
-  ): Promise<Customer> => {
-    const index = mockCustomers.findIndex((cust) => cust.id === customerId);
-    if (index > -1) {
-      mockCustomers[index] = { ...mockCustomers[index], ...updateData };
-      console.log("Mock Update Customer:", mockCustomers[index]);
-      return simulateApiResponse(mockCustomers[index]);
-    }
-    return simulateApiResponse(null as any, 500, false);
-  },
-
-  /**
-   * Simulates adding a payment method to a customer.
-   * @param {string} customerId
-   * @param {Omit<PaymentMethod, 'id'>} paymentMethodData
-   * @returns {Promise<Customer>}
-   */
-  addPaymentMethod: async (
-    customerId: string,
-    paymentMethodData: Omit<PaymentMethod, "id">,
-  ): Promise<Customer> => {
-    const customer = mockCustomers.find((cust) => cust.id === customerId);
-    if (customer) {
-      const newPmId = `pm_${Date.now()}`;
-      customer.paymentMethods.push({ id: newPmId, ...paymentMethodData });
-      console.log(
-        `Mock Added Payment Method for ${customerId}:`,
-        paymentMethodData,
-      );
-      return simulateApiResponse(customer);
-    }
-    return simulateApiResponse(null as any, 500, false);
-  },
-
-  /**
-   * Simulates deleting a payment method from a customer.
-   * @param {string} customerId
-   * @param {string} paymentMethodId
-   * @returns {Promise<{message: string}>}
-   */
-  deletePaymentMethod: async (
-    customerId: string,
-    paymentMethodId: string,
-  ): Promise<{ message: string }> => {
-    const customer = mockCustomers.find((cust) => cust.id === customerId);
-    if (customer) {
-      customer.paymentMethods = customer.paymentMethods.filter(
-        (pm) => pm.id !== paymentMethodId,
-      );
-      console.log(
-        `Mock Deleted Payment Method ${paymentMethodId} from ${customerId}`,
-      );
-      return simulateApiResponse({ message: "Payment method deleted." });
     }
     return simulateApiResponse(null as any, 500, false);
   },

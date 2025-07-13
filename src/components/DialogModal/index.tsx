@@ -29,15 +29,15 @@ export function DialogModal({
   confirmText = "Save",
   onCancel,
   cancelText = "Cancel",
-  showButtons = true,
+  showButtons = false,
 }: DialogModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">{children}</div>
+        <div className="mt-4">{children}</div>
         {showButtons && (
           <DialogFooter>
             {onCancel && (

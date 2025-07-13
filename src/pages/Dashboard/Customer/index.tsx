@@ -12,26 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { customerApi, type Customer } from "@/mockApi/customerApi";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { DialogModal } from "@/components/DialogModal";
+import { AlertDialogModal } from "@/components/AlertDialogModal";
+import { CustomerForm } from "./components/CustomerForm";
+import CustomerDetails from "./components/CustomerDetails";
 
 export default function CustomerPage() {
   const [page, setPage] = useState(1);
@@ -55,9 +39,14 @@ export default function CustomerPage() {
     const fetchCustomers = async () => {
       setIsLoading(true);
       try {
-        const customers = await customerApi.getCustomers();
-        setData(customers);
-        setTotal(customers.length);
+        const customers = await customerApi.getCustomers({
+          page,
+          limit,
+        });
+        console.log({ customers });
+
+        setData(customers.data);
+        setTotal(customers.total); // Use total from API response
       } catch (error) {
         console.error("Error fetching customers:", error);
         setData([]);
@@ -70,7 +59,6 @@ export default function CustomerPage() {
     fetchCustomers();
   }, [page, limit]);
 
-  // Define columns
   const columns: ColumnDef<Customer>[] = [
     {
       id: "select",
@@ -138,6 +126,14 @@ export default function CustomerPage() {
       ),
     },
     {
+      accessorKey: "achToken",
+      header: "ACH Token",
+      size: 200,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("achToken")}</div>
+      ),
+    },
+    {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
@@ -183,40 +179,25 @@ export default function CustomerPage() {
     },
   ];
 
-  // Handle Edit Form Submission
-  const handleEditSubmit = async () => {
-    if (editCustomer.id) {
-      const updatedCustomer = await customerApi.updateCustomer(
-        editCustomer.id,
-        editCustomer,
-      );
-      setData((prev) =>
-        prev.map((cust) =>
-          cust.id === updatedCustomer.id ? updatedCustomer : cust,
-        ),
-      );
-      setIsEditOpen(false);
-    }
-  };
-
-  // Handle Delete Confirmation
-  const handleDeleteConfirm = async () => {
-    if (customerToDelete) {
-      await customerApi.updateCustomer(customerToDelete, { isDeleted: true }); // Mock deletion
-      setData((prev) => prev.filter((cust) => cust.id !== customerToDelete));
-      setTotal((prev) => prev - 1);
-      setIsDeleteOpen(false);
-      setCustomerToDelete(null);
+  const handleSave = (updatedCustomer: Customer) => {
+    setData((prev) =>
+      prev.map((cust) =>
+        cust.id === updatedCustomer.id ? updatedCustomer : cust,
+      ),
+    );
+    if (!updatedCustomer.id) {
+      setData((prev) => [...prev, updatedCustomer]);
+      setTotal((prev) => prev + 1);
     }
   };
 
   return (
     <section className="space-y-10">
       <div className="flex items-center justify-between">
-        <h1 className="text-[32px] font-semibold">Customers</h1>
+        <h1 className="text-2xl font-semibold md:text-[32px]">Customers</h1>
         <Button
-          variant={"primary"}
-          size={"lg"}
+          variant="primary"
+          size="lg"
           className="text-lg font-normal"
           onClick={() => {
             setEditCustomer({});
@@ -248,229 +229,47 @@ export default function CustomerPage() {
       </div>
 
       {/* View Details Modal */}
-      <Dialog open={isViewOpen} onOpenChange={setIsViewOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>View Details</DialogTitle>
-          </DialogHeader>
-          {selectedCustomer && (
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <span className="col-span-3">{selectedCustomer.name}</span>
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="email" className="text-right">
-                  Email
-                </Label>
-                <span className="col-span-3">{selectedCustomer.email}</span>
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="phone" className="text-right">
-                  Phone
-                </Label>
-                <span className="col-span-3">{selectedCustomer.phone}</span>
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="company" className="text-right">
-                  Company
-                </Label>
-                <span className="col-span-3">{selectedCustomer.company}</span>
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="truncated_tokens" className="text-right">
-                  Truncated ACH Tokens
-                </Label>
-                <span className="col-span-3">
-                  {selectedCustomer.truncated_tokens}
-                </span>
-              </div>
-              {selectedCustomer.paymentMethods.length > 0 && (
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="paymentMethod" className="text-right">
-                    Payment Method
-                  </Label>
-                  <span className="col-span-3">
-                    {selectedCustomer.paymentMethods[0].brand ||
-                      selectedCustomer.paymentMethods[0].type}{" "}
-                    ****{selectedCustomer.paymentMethods[0].last4}
-                  </span>
-                </div>
-              )}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="address" className="text-right">
-                  Billing Address
-                </Label>
-                <span className="col-span-3">{selectedCustomer.address}</span>
-              </div>
-            </div>
-          )}
-          <DialogFooter>
-            <Button variant="default" onClick={() => setIsViewOpen(false)}>
-              Done
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <DialogModal
+        isOpen={isViewOpen}
+        onOpenChange={setIsViewOpen}
+        title="View Details"
+        onCancel={() => setIsViewOpen(false)}
+      >
+        <CustomerDetails customerId={selectedCustomer?.id || ""} />
+      </DialogModal>
 
-      {/* Edit Modal */}
-      <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>
-              {editCustomer.id ? "Edit Customer" : "Add New Customer"}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="firstName">First name</Label>
-              <Input
-                id="firstName"
-                value={editCustomer.name?.split(" ")[0] || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    name: `${e.target.value} ${prev.name?.split(" ")[1] || ""}`,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input
-                id="lastName"
-                value={editCustomer.name?.split(" ")[1] || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    name: `${prev.name?.split(" ")[0] || ""} ${e.target.value}`,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                value={editCustomer.email || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    email: e.target.value,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="phone">Phone Number</Label>
-              <Input
-                id="phone"
-                value={editCustomer.phone || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    phone: e.target.value,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="company">Company</Label>
-              <Input
-                id="company"
-                value={editCustomer.company || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    company: e.target.value,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="address">Address</Label>
-              <Input
-                id="address"
-                value={editCustomer.address || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    address: e.target.value,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="creditCardToken">Credit Card token</Label>
-              <Input
-                id="creditCardToken"
-                value={editCustomer.truncated_tokens || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    truncated_tokens: e.target.value,
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="achToken">ACH token</Label>
-              <Input
-                id="achToken"
-                value={editCustomer.paymentMethods?.[0]?.truncatedToken || ""}
-                onChange={(e) =>
-                  setEditCustomer((prev) => ({
-                    ...prev,
-                    paymentMethods: [
-                      {
-                        ...(prev.paymentMethods?.[0] || {}),
-                        truncatedToken: e.target.value,
-                      },
-                    ],
-                  }))
-                }
-                className="col-span-3"
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditOpen(false)}>
-              Cancel
-            </Button>
-            <Button variant="default" onClick={handleEditSubmit}>
-              Save
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Edit Modal with CustomerForm */}
+      <DialogModal
+        isOpen={isEditOpen}
+        onOpenChange={setIsEditOpen}
+        title={editCustomer.id ? "Edit Customer" : "Add New Customer"}
+      >
+        <CustomerForm
+          customer={editCustomer}
+          onClose={() => setIsEditOpen(false)}
+          onSave={handleSave}
+        />
+      </DialogModal>
 
       {/* Delete Alert Dialog */}
-      <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to delete this customer? This action cannot
-              be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteConfirm}>
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <AlertDialogModal
+        isOpen={isDeleteOpen}
+        onOpenChange={setIsDeleteOpen}
+        title="Confirm Delete"
+        description="Are you sure you want to delete this customer? This action cannot be undone."
+        onConfirm={async () => {
+          if (customerToDelete) {
+            console.log("Customer To Be Deleted:", customerToDelete);
+            // Prepare for future API call if implemented
+            setData((prev) =>
+              prev.filter((cust) => cust.id !== customerToDelete),
+            );
+            setTotal((prev) => prev - 1);
+            setIsDeleteOpen(false);
+            setCustomerToDelete(null);
+          }
+        }}
+      />
     </section>
   );
 }
