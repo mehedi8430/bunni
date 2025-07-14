@@ -167,7 +167,7 @@ function DataTableInner<TData, TValue>(
       </Table>
 
       {/* Pagination Section */}
-      {/* {isPagination && (
+      {isPagination && (
         <div className="flex flex-col items-center justify-between gap-3 px-2 sm:flex-row sm:gap-4 sm:px-4">
           <div className="order-2 text-center text-xs text-[#54607A] sm:order-1 sm:text-left sm:text-sm">
             <span className="block sm:inline">
@@ -184,14 +184,6 @@ function DataTableInner<TData, TValue>(
             />
           </div>
         </div>
-      )} */}
-      {isPagination && (
-        <AppPagination
-          total={total}
-          limit={limit}
-          page={page}
-          onPageChange={onPageChange}
-        />
       )}
     </div>
   );
