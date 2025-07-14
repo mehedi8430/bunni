@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 interface DialogModalProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ interface DialogModalProps {
   onCancel?: () => void;
   cancelText?: string;
   showButtons?: boolean;
+  className?: string;
 }
 
 export function DialogModal({
@@ -30,12 +32,13 @@ export function DialogModal({
   onCancel,
   cancelText = "Cancel",
   showButtons = false,
+  className = "",
 }: DialogModalProps) {
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent>
+    <Dialog open={isOpen} onOpenChange={onOpenChange} >
+      <DialogContent className={cn("!max-w-2xl p-0", className)}>
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle className="border-b p-5 text-2xl font-semibold">{title}</DialogTitle>
         </DialogHeader>
         <div className="mt-4">{children}</div>
         {showButtons && (
