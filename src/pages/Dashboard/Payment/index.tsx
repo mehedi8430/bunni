@@ -302,9 +302,9 @@ export default function PaymentPage() {
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
         title="View Details"
-        
+        className="!w-md"
       >
-        <PaymentDetails paymentInvoice={selectedPayment?.invoice || ""} />
+        <PaymentDetails paymentInvoice={selectedPayment?.invoice || ""} onClose={() => setIsViewOpen(false)} />
       </DialogModal>
 
       {/* Edit Modal with PaymentForm */}
