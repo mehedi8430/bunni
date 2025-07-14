@@ -11,7 +11,7 @@ export default function DashboardPage() {
     <section className="space-y-6">
       <div className="space-y-2">
         <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
-        <p className="text-foreground/50 text-[20px] font-normal">
+        <p className="text-muted-foreground text-[20 px] font-normal">
           Today is Thursday, June 19, 2025
         </p>
 
