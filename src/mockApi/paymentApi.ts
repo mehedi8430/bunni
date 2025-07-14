@@ -1,0 +1,356 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { simulateApiResponse } from ".";
+
+export interface Payment {
+  invoice: string;
+  customerName: string;
+  date: string;
+  amount: number;
+  status: "Paid" | "Unpaid" | "Save";
+  paymentMethod: "Credit Card" | "Bank Transfer";
+}
+
+const mockPayments: Payment[] = [
+  {
+    invoice: "INV-000001",
+    customerName: "David Johnson",
+    date: "05 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Emily Carter",
+    date: "06 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Michael Smith",
+    date: "07 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Sarah Thompson",
+    date: "08 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Jessica Lee",
+    date: "09 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Matthew Brown",
+    date: "10 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Olivia Wilson",
+    date: "11 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "12 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "13 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "David Johnson",
+    date: "05 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Emily Carter",
+    date: "06 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Michael Smith",
+    date: "07 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Sarah Thompson",
+    date: "08 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Jessica Lee",
+    date: "09 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Matthew Brown",
+    date: "10 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Olivia Wilson",
+    date: "11 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "12 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "13 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "David Johnson",
+    date: "05 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Emily Carter",
+    date: "06 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Michael Smith",
+    date: "07 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Sarah Thompson",
+    date: "08 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Jessica Lee",
+    date: "09 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Matthew Brown",
+    date: "10 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Olivia Wilson",
+    date: "11 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "12 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "13 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "David Johnson",
+    date: "05 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Emily Carter",
+    date: "06 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Michael Smith",
+    date: "07 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Sarah Thompson",
+    date: "08 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Jessica Lee",
+    date: "09 Feb, 2025",
+    amount: 635,
+    status: "Save",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Matthew Brown",
+    date: "10 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "Olivia Wilson",
+    date: "11 Feb, 2025",
+    amount: 635,
+    status: "Unpaid",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "12 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV-000001",
+    customerName: "James Garcia",
+    date: "13 Feb, 2025",
+    amount: 635,
+    status: "Paid",
+    paymentMethod: "Bank Transfer",
+  },
+];
+
+export const paymentApi = {
+  /**
+   * Simulates fetching a list of payments with pagination.
+   * @param {object} params - Filters and pagination parameters
+   * @returns {Promise<{ data: Payment[], total: number }>}
+   */
+  getPayments: async ({
+    search,
+    page = 1,
+    limit = 10,
+  }: {
+    search?: string;
+    page?: number;
+    limit?: number;
+  } = {}): Promise<{ data: Payment[]; total: number }> => {
+    let filteredPayments: Payment[] = [...mockPayments];
+
+    // Apply search filter
+    if (search) {
+      const searchTerm = search.toLowerCase();
+      filteredPayments = filteredPayments.filter(
+        (pay) =>
+          pay.customerName.toLowerCase().includes(searchTerm) ||
+          pay.invoice.toLowerCase().includes(searchTerm) ||
+          pay.status.toLowerCase().includes(searchTerm) ||
+          pay.paymentMethod.toLowerCase().includes(searchTerm),
+      );
+    }
+
+    // Calculate pagination
+    const total = filteredPayments.length;
+    const startIndex = (page - 1) * limit;
+    const paginatedPayments = filteredPayments.slice(
+      startIndex,
+      startIndex + limit,
+    );
+
+    return simulateApiResponse({ data: paginatedPayments, total });
+  },
+
+  /**
+   * Simulates fetching a single payment by invoice number.
+   * @param {string} invoiceNumber
+   * @returns {Promise<Payment>}
+   */
+  getPaymentByInvoice: async (invoiceNumber: string): Promise<Payment> => {
+    const payment = mockPayments.find((pay) => pay.invoice === invoiceNumber);
+    if (payment) {
+      return simulateApiResponse(payment);
+    }
+    return simulateApiResponse(null as any, 500, false);
+  },
+};

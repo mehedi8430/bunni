@@ -35,66 +35,89 @@ export default function SlideCard({
 
   return (
     <div className="space-y-10">
-      <h2 className="text-primary-foreground text-center text-4xl leading-14 font-bold">
-        {steps[active]?.title || "Take Control of Your Business Finances"}
-      </h2>
-      <p className="text-subtitle mt-4 text-center text-xl leading-8">
-        {steps[active]?.describe ||
-          "Create invoices, request payments, and track every transaction—all in one secure, powerful platform."}
-      </p>
+      {steps.length > 1 ||
+        (steps.length === active && (
+          <p className="text-muted text-center text-lg">
+            Step {active + 1} of {steps.length}
+          </p>
+        ))}
+      {steps.length !== active + 1 && (
+        <>
+          <h2 className="text-primary-foreground text-center text-4xl leading-14 font-bold">
+            {steps[active]?.title || "Take Control of Your Business Finances"}
+          </h2>
+          <p className="text-subtitle mt-4 text-center text-xl leading-8">
+            {steps[active]?.describe ||
+              "Create invoices, request payments, and track every transaction—all in one secure, powerful platform."}
+          </p>
+        </>
+      )}
 
-      <div className="relative flex h-[400px]">
-        {Array.from({ length: totalCards }).map((_, index) => {
-          const position = getCardPosition(index, active);
-          const isActive = position === 0;
-          const isGoingToBack = isTransitioningToBack(index);
+      {steps.length === active + 1 && (
+        <>
+          <h2 className="text-primary-foreground text-center text-4xl leading-14 font-bold">
+            Thank you, Alex!
+          </h2>
+          <p className="text-subtitle mt-4 text-center text-xl leading-8">
+            What can we assist you with next?
+          </p>
+        </>
+      )}
 
-          return (
-            <div
-              key={index}
-              className={cn(
-                `absolute flex cursor-pointer items-center justify-center transition-all duration-700 ease-in-out`,
-                isGoingToBack && "animate-[swipeToBack_0.7s_ease-in-out]",
-              )}
-              style={{
-                width: isActive ? "100%" : `${100 - (position + 1) * 8}%`,
-                height: isActive ? "100%" : `${100 - (position + 1) * 5}%`,
-                zIndex: isActive ? 50 : isGoingToBack ? 45 : 40 - position,
-                opacity: isActive ? 1 : Math.max(0.3, 0.8 - position * 0.2),
-                left: "50%",
-                top: "50%",
-                transform: isGoingToBack
-                  ? `translate(-50%, -50%) translateY(-50px) scale(0.8)`
-                  : `translate(-50%, -50%) translateY(${
-                      isActive
-                        ? 0
-                        : position === 1
-                          ? 45
-                          : position === 2
-                            ? 75
-                            : position * 35
-                    }px)`,
-                transition: `all 0.7s ease-in-out ${isActive ? "0.2s" : "0s"}`,
-              }}
-              onClick={() => {
-                searchParams.set("active", index.toString());
-                searchParams.set("prevActive", active.toString());
-                setSearchParams(searchParams);
-              }}
-            >
-              <ReactSVG
-                beforeInjection={(svg) => {
-                  svg.setAttribute(
-                    "class",
-                    "h-full w-full object-cover object-center",
-                  );
+      {steps.length !== active + 1 && (
+        <div className="relative flex h-[400px]">
+          {Array.from({ length: totalCards }).map((_, index) => {
+            const position = getCardPosition(index, active);
+            const isActive = position === 0;
+            const isGoingToBack = isTransitioningToBack(index);
+
+            return (
+              <div
+                key={index}
+                className={cn(
+                  `absolute flex cursor-pointer items-center justify-center transition-all duration-700 ease-in-out`,
+                  isGoingToBack && "animate-[swipeToBack_0.7s_ease-in-out]",
+                )}
+                style={{
+                  width: isActive ? "100%" : `${100 - (position + 1) * 8}%`,
+                  height: isActive ? "100%" : `${100 - (position + 1) * 5}%`,
+                  zIndex: isActive ? 50 : isGoingToBack ? 45 : 40 - position,
+                  opacity: isActive ? 1 : Math.max(0.3, 0.8 - position * 0.2),
+                  left: "50%",
+                  top: "50%",
+                  transform: isGoingToBack
+                    ? `translate(-50%, -50%) translateY(-50px) scale(0.8)`
+                    : `translate(-50%, -50%) translateY(${
+                        isActive
+                          ? 0
+                          : position === 1
+                            ? 45
+                            : position === 2
+                              ? 75
+                              : position * 35
+                      }px)`,
+                  transition: `all 0.7s ease-in-out ${isActive ? "0.2s" : "0s"}`,
                 }}
-                src={images.chartCard}
-              />
-            </div>
-          );
-        })}
-      </div>
+                onClick={() => {
+                  searchParams.set("active", index.toString());
+                  searchParams.set("prevActive", active.toString());
+                  setSearchParams(searchParams);
+                }}
+              >
+                <ReactSVG
+                  beforeInjection={(svg) => {
+                    svg.setAttribute(
+                      "class",
+                      "h-full w-full object-cover object-center",
+                    );
+                  }}
+                  src={images.chartCard}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Optional: Add dots indicator */}
       {!isBusiness && (

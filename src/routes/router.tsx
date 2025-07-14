@@ -4,13 +4,17 @@ import { LoginForm } from "@/components/authentication/LoginForm";
 import RegistrationForm from "@/components/authentication/RegistrationForm";
 import ResetYourPasswordForm from "@/components/authentication/ResetYourPasswordForm";
 import VerificationCodeForm from "@/components/authentication/VerificationCodeForm";
+import AddPhoneNumber from "@/components/businessSetup/AddPhoneNumber";
 import BusinessInformationForm from "@/components/businessSetup/BusinessInformationForm";
+import DetailCompanyNameForm from "@/components/businessSetup/DetailCompanyNameForm";
+import WhatWouldLikeToDoForm from "@/components/businessSetup/WhatWouldLikeToDoForm";
 import AuthLayout from "@/layout/AuthLayout";
 import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CustomerPage from "@/pages/Dashboard/Customer";
 import InvoicesPage from "@/pages/Dashboard/Invoices";
+import NotificationPageForMobile from "@/pages/Dashboard/NotificationPageForMobile";
 import PaymentPage from "@/pages/Dashboard/Payment";
 import ProductsPage from "@/pages/Dashboard/Products";
 import HomePage from "@/pages/Home";
@@ -82,6 +86,10 @@ export const Router = createBrowserRouter([
         path: "settings/payment",
         element: <PaymentIntegrationPage />,
       },
+      {
+        path: "notifications",
+        element: <NotificationPageForMobile />,
+      },
     ],
   },
   {
@@ -132,7 +140,15 @@ export const Router = createBrowserRouter([
       },
       {
         path: "1",
-        element: <BusinessInformationForm />,
+        element: <DetailCompanyNameForm />,
+      },
+      {
+        path: "2",
+        element: <WhatWouldLikeToDoForm />,
+      },
+      {
+        path: "add-phone-number",
+        element: <AddPhoneNumber />,
       },
     ],
   },

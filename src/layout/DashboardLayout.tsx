@@ -18,7 +18,7 @@ export default function DashboardLayout() {
           <div className="fixed z-50 -mt-12 ml-4 md:mt-2 md:-ml-4">
             <SidebarTrigger />
           </div>
-          <main className="px-4 py-8 md:px-6">
+          <main className="px-4 py-8 md:px-8">
             <Outlet />
           </main>
         </SidebarInset>

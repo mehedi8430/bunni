@@ -43,23 +43,21 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div>
-        <div className="grid grid-cols-3 gap-6">
-          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-2">
-            <BalanceAnalytics />
-          </div>
-          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
-            <ThingsToDo />
-          </div>
-          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
-            <BarChartSection />
-          </div>
-          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
-            <AreaChartSection />
-          </div>
-          <div className="bg-sidebar col-span-3 rounded-2xl p-4 xl:col-span-1">
-            <ProPlanCard />
-          </div>
+      <div className="grid grid-cols-3 gap-6">
+        <div className="card_container col-span-3 xl:col-span-2">
+          <BalanceAnalytics />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <ThingsToDo />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <BarChartSection />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <AreaChartSection />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <ProPlanCard />
         </div>
       </div>
     </section>
