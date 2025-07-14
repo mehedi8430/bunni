@@ -14,6 +14,7 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CustomerPage from "@/pages/Dashboard/Customer";
 import InvoicesPage from "@/pages/Dashboard/Invoices";
+import InvoiceTemplatesPage from "@/pages/Dashboard/InvoiceTemplatesPage";
 import NotificationPageForMobile from "@/pages/Dashboard/NotificationPageForMobile";
 import PaymentPage from "@/pages/Dashboard/Payment";
 import ProductsPage from "@/pages/Dashboard/Products";
@@ -45,6 +46,10 @@ export const Router = createBrowserRouter([
       {
         path: "invoices",
         element: <InvoicesPage />,
+      },
+      {
+        path: "invoices/templates",
+        element: <InvoiceTemplatesPage />,
       },
       {
         path: "customer",
