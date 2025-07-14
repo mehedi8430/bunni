@@ -122,25 +122,6 @@ interface PlatformSettings {
   }[];
 }
 
-interface Transaction {
-  transactionId: string;
-  status: "success" | "failed" | "pending";
-  amount: number;
-  customer: string; // Customer ID
-  tenderType: string;
-  timestamp: string; // ISO string
-}
-
-interface RecurringBillingItem {
-  id: string;
-  invoiceNumber: string;
-  customer: { id: string; name: string };
-  amount: number;
-  nextBillingDate: string; // YYYY-MM-DD
-  frequency: "daily" | "weekly" | "monthly" | "quarterly" | "yearly";
-  status: "active" | "paused" | "cancelled";
-}
-
 // --- Mock Data Definitions ---
 
 const mockUsers: User[] = [
@@ -698,109 +679,6 @@ export const invoiceApi = {
       });
     }
     return simulateApiResponse(null as any, 500, false);
-  },
-};
-
-export const paymentsApi = {
-  /**
-   * Simulates processing a transaction via virtual terminal.
-   * @param {object} transactionData - { amount, customerId, cardDetails }
-   * @returns {Promise<Transaction>}
-   */
-  processVirtualTerminalTransaction: async (transactionData: {
-    amount: number;
-    customerId: string;
-    cardDetails: object;
-  }): Promise<Transaction> => {
-    console.log("Mock Virtual Terminal Transaction:", transactionData);
-    // Simulate success or failure based on some mock logic
-    if (transactionData.amount > 0) {
-      return simulateApiResponse({
-        transactionId: `txn_${Date.now()}`,
-        status: "success",
-        amount: transactionData.amount,
-        customer: transactionData.customerId,
-        tenderType: "Card (Manual)",
-        timestamp: new Date().toISOString(),
-      });
-    }
-    return simulateApiResponse(null as any, 500, false);
-  },
-
-  /**
-   * Simulates generating a pay-by-link.
-   * @param {number} amount
-   * @param {string} [customerId]
-   * @returns {Promise<{payLink: string}>}
-   */
-  generatePayByLink: async (
-    amount: number,
-    customerId: string | null = null,
-  ): Promise<{ payLink: string }> => {
-    const link = `https://mockapi.com/pay/${Date.now()}?amount=${amount}${customerId ? `&customer=${customerId}` : ""}`;
-    console.log("Mock Pay By Link Generated:", link);
-    return simulateApiResponse({ payLink: link });
-  },
-
-  /**
-   * Simulates fetching a list of recurring billing setups.
-   * @returns {Promise<RecurringBillingItem[]>}
-   */
-  getRecurringBillings: async (): Promise<RecurringBillingItem[]> => {
-    // For simplicity, we'll just return recurring invoices from mockInvoices
-    const recurringInvoices = mockInvoices.filter((inv) => inv.recurring);
-    return simulateApiResponse(
-      recurringInvoices.map((inv) => ({
-        id: inv.id,
-        invoiceNumber: inv.invoiceNumber,
-        customer: inv.customer,
-        amount: inv.amount,
-        nextBillingDate: "2023-08-01", // Mock next billing date
-        frequency: "monthly", // Mock frequency
-        status: "active",
-      })),
-    );
-  },
-
-  /**
-   * Simulates creating a new recurring billing setup.
-   * @param {Omit<RecurringBillingItem, 'id' | 'status' | 'nextBillingDate'>} recurringData
-   * @returns {Promise<RecurringBillingItem>}
-   */
-  createRecurringBilling: async (
-    recurringData: Omit<
-      RecurringBillingItem,
-      "id" | "status" | "nextBillingDate"
-    >,
-  ): Promise<RecurringBillingItem> => {
-    const newId = `rec_${Date.now()}`;
-    const newRecurring: RecurringBillingItem = {
-      id: newId,
-      status: "active",
-      nextBillingDate: "2023-08-01",
-      ...recurringData,
-    }; // Mock next date
-    console.log("Mock Create Recurring Billing:", newRecurring);
-    return simulateApiResponse(newRecurring);
-  },
-
-  /**
-   * Simulates updating a recurring billing setup.
-   * @param {string} recurringId
-   * @param {Partial<RecurringBillingItem>} updateData
-   * @returns {Promise<RecurringBillingItem>}
-   */
-  updateRecurringBilling: async (
-    recurringId: string,
-    updateData: Partial<RecurringBillingItem>,
-  ): Promise<RecurringBillingItem> => {
-    console.log(`Mock Update Recurring Billing ${recurringId}:`, updateData);
-    // In a real scenario, you'd update the specific recurring record.
-    return simulateApiResponse({
-      id: recurringId,
-      ...updateData,
-      message: "Recurring billing updated.",
-    } as RecurringBillingItem);
   },
 };
 
