@@ -1,1 +1,1 @@
-// export * from './example.type';
+export * from "./invoice.type";

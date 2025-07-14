@@ -1,35 +1,36 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Edit, Eye, MoreHorizontal, Plus, Trash } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
-import { invoiceApi, type Invoice } from "@/mockApi/invoiceApi";
+import { invoiceApi } from "@/mockApi/invoiceApi";
 import { cn } from "@/lib/utils";
+import InvoiceDetails from "./components/InvoiceDetails";
+import InvoiceForm from "./components/InvoiceForm";
+import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
+import type { TInvoice } from "@/types";
+import { useNavigate } from "react-router";
 
 export default function InvoicesPage() {
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [data, setData] = useState<Invoice[]>([]);
+  const [data, setData] = useState<TInvoice[]>([]);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Modal states
-  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
+  const [selectedInvoice, setSelectedInvoice] = useState<TInvoice | null>(null);
   const [isViewOpen, setIsViewOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [editInvoice, setEditInvoice] = useState<Partial<Invoice>>({});
+  const [editInvoice, setEditInvoice] = useState<Partial<TInvoice>>({});
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [invoiceToDelete, setInvoiceToDelete] = useState<string | null>(null);
 
@@ -57,7 +58,7 @@ export default function InvoicesPage() {
     fetchInvoices();
   }, [page, limit, searchTerm]);
 
-  const columns: ColumnDef<Invoice>[] = [
+  const columns: ColumnDef<TInvoice>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -161,47 +162,21 @@ export default function InvoicesPage() {
       cell: ({ row }) => {
         const invoice = row.original;
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => {
-                  setSelectedInvoice(invoice);
-                  setIsViewOpen(true);
-                }}
-              >
-                <Eye className="mr-2 h-4 w-4" /> View
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditInvoice(invoice);
-                  setIsEditOpen(true);
-                }}
-              >
-                <Edit className="mr-2 h-4 w-4" /> Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setInvoiceToDelete(invoice.id);
-                  setIsDeleteOpen(true);
-                }}
-              >
-                <Trash className="mr-2 h-4 w-4" /> Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <InvoiceTableRowActions
+            invoice={invoice}
+            setSelectedInvoice={setSelectedInvoice}
+            setIsViewOpen={setIsViewOpen}
+            setEditInvoice={setEditInvoice}
+            setIsEditOpen={setIsEditOpen}
+            setInvoiceToDelete={setInvoiceToDelete}
+            setIsDeleteOpen={setIsDeleteOpen}
+          />
         );
       },
     },
   ];
 
-  const handleSave = (updatedInvoice: Invoice) => {
+  const handleSave = (updatedInvoice: TInvoice) => {
     setData((prev) =>
       prev.map((inv) => (inv.id === updatedInvoice.id ? updatedInvoice : inv)),
     );
@@ -220,7 +195,12 @@ export default function InvoicesPage() {
     <section className="space-y-10">
       <div className="flex items-start justify-between">
         <h1 className="text-2xl font-semibold md:text-[32px]">Invoices</h1>
-        <Button variant="primary" size="lg" className="text-lg font-normal">
+        <Button
+          variant="primary"
+          size="lg"
+          className="text-lg font-normal"
+          onClick={() => navigate("/dashboard/invoices/templates")}
+        >
           <Plus />
           Create Invoices
         </Button>
@@ -295,16 +275,16 @@ export default function InvoicesPage() {
       </div>
 
       {/* View Details Modal */}
-      {/* <DialogModal
+      <DialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
         title="View Details"
       >
-        <InvoiceDetails invoiceId={selectedInvoice?.id || ""} onClose={() => setIsViewOpen(false)} />
-      </DialogModal> */}
+        <InvoiceDetails invoiceId={selectedInvoice?.id || ""} />
+      </DialogModal>
 
       {/* Edit Modal with InvoiceForm */}
-      {/* <DialogModal
+      <DialogModal
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
         title={editInvoice.id ? "Edit Invoice" : "Add New Invoice"}
@@ -314,7 +294,7 @@ export default function InvoicesPage() {
           onClose={() => setIsEditOpen(false)}
           onSave={handleSave}
         />
-      </DialogModal> */}
+      </DialogModal>
 
       {/* Delete Alert Dialog */}
       <AlertDialogModal

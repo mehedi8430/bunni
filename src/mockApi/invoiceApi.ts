@@ -1,17 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { TInvoice } from "@/types";
 import { simulateApiResponse } from ".";
 
-export interface Invoice {
-  id: string;
-  customerName: string;
-  status: "Paid" | "Unpaid" | "Save";
-  orderNumber: string;
-  amount: number;
-  tenderType: "Credit Card" | "Bank Transfer";
-  date: string;
-}
-
-const mockInvoices: Invoice[] = [
+const mockInvoices: TInvoice[] = [
   {
     id: "INV-000001-1",
     customerName: "David Johnson",
@@ -100,8 +91,8 @@ export const invoiceApi = {
     search?: string;
     page?: number;
     limit?: number;
-  } = {}): Promise<{ data: Invoice[]; total: number }> => {
-    let filteredInvoices: Invoice[] = [...mockInvoices];
+  } = {}): Promise<{ data: TInvoice[]; total: number }> => {
+    let filteredInvoices: TInvoice[] = [...mockInvoices];
 
     // Apply search filter
     if (search) {
@@ -132,7 +123,7 @@ export const invoiceApi = {
    * @param {string} id
    * @returns {Promise<Invoice>}
    */
-  getInvoiceById: async (id: string): Promise<Invoice> => {
+  getInvoiceById: async (id: string): Promise<TInvoice> => {
     const invoice = mockInvoices.find((inv) => inv.id === id);
     if (invoice) {
       return simulateApiResponse(invoice);
