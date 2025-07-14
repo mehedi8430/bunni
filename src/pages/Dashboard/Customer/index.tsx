@@ -50,6 +50,9 @@ export default function CustomerPage() {
         });
         console.log({ customers });
 
+        const allCustomerName = customers.data.map((cust) => cust.name);
+        console.log("All Customer Names:", allCustomerName);
+
         setData(customers.data);
         setTotal(customers.total);
       } catch (error) {

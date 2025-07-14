@@ -20,6 +20,7 @@ import { paymentApi, type Payment } from "@/mockApi/paymentApi";
 import PaymentDetails from "./components/PaymentDetails";
 import { PaymentForm } from "./components/PaymentForm";
 import { cn } from "@/lib/utils";
+import { AddPaymentForm } from "./components/AddPaymentForm";
 
 export default function PaymentPage() {
   const [page, setPage] = useState(1);
@@ -36,6 +37,8 @@ export default function PaymentPage() {
   const [editPayment, setEditPayment] = useState<Partial<Payment>>({});
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [paymentToDelete, setPaymentToDelete] = useState<string | null>(null);
+  const [isAddPaymentOpen, setIsAddPaymentOpen] = useState<boolean>(false);
+
 
   // Fetch payments when page, limit, or filters change
   useEffect(() => {
@@ -62,6 +65,7 @@ export default function PaymentPage() {
 
     fetchPayments();
   }, [page, limit, searchTerm]);
+
 
   const columns: ColumnDef<Payment>[] = [
     {
@@ -229,7 +233,7 @@ export default function PaymentPage() {
             <Plus />
             Virtual Terminal
           </Button>
-          <Button variant="primary" size="lg" className="text-lg font-normal">
+          <Button onClick={() => setIsAddPaymentOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
             <Plus />
             pay by link
           </Button>
@@ -280,12 +284,25 @@ export default function PaymentPage() {
         </div>
       </div>
 
+      {/* Add payment modal */}
+      <DialogModal
+        title="Add Payment"
+        isOpen={isAddPaymentOpen}
+        onOpenChange={setIsAddPaymentOpen}
+        className="w-xl"
+      >
+        <AddPaymentForm
+          onClose={() => setIsAddPaymentOpen(false)}
+          onSend={(data) => console.log("Send Payment:", data)}
+        />
+      </DialogModal>
+
       {/* View Details Modal */}
       <DialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
         title="View Details"
-        onCancel={() => setIsViewOpen(false)}
+        
       >
         <PaymentDetails paymentInvoice={selectedPayment?.invoice || ""} />
       </DialogModal>
