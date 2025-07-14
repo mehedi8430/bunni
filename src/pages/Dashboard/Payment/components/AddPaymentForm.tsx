@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -14,13 +14,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { customerApi, type Customer } from "@/mockApi/customerApi";
 import SelectInput from "@/components/SelectInput";
 import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
 import { Copy, Link2, Mail, MessageSquareMore } from "lucide-react";
 import { toast } from "sonner";
-import { icons } from "@/lib/imageProvider";
 import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
 
 
