@@ -21,6 +21,7 @@ import PaymentDetails from "./components/PaymentDetails";
 import { PaymentForm } from "./components/PaymentForm";
 import { cn } from "@/lib/utils";
 import { AddPaymentForm } from "./components/AddPaymentForm";
+import RecurringBillingForm from "./components/RecurringBillingForm";
 
 export default function PaymentPage() {
   const [page, setPage] = useState(1);
@@ -38,6 +39,7 @@ export default function PaymentPage() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [paymentToDelete, setPaymentToDelete] = useState<string | null>(null);
   const [isAddPaymentOpen, setIsAddPaymentOpen] = useState<boolean>(false);
+  const [isRecurringBillingOpen, setIsRecurringBillingOpen] = useState<boolean>(false);
 
 
   // Fetch payments when page, limit, or filters change
@@ -225,7 +227,7 @@ export default function PaymentPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold md:text-[32px]">Payment</h1>
         <div className="flex items-center gap-6">
-          <Button variant="primary" size="lg" className="text-lg font-normal">
+          <Button onClick={() => setIsRecurringBillingOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
             <Plus />
             Recurring Billing
           </Button>
@@ -283,6 +285,19 @@ export default function PaymentPage() {
           />
         </div>
       </div>
+      
+      {/* Add Recurring Billing Form */}
+      <DialogModal
+        title="Set Up Recurring Billing"
+        isOpen={isRecurringBillingOpen}
+        onOpenChange={setIsRecurringBillingOpen}
+        className="w-xl"
+      >
+        <RecurringBillingForm
+          onClose={() => setIsRecurringBillingOpen(false)}
+          onSend={(data) => console.log("Recurring Billing Data:", data)}
+        />
+      </DialogModal>
 
       {/* Add payment modal */}
       <DialogModal
@@ -304,7 +319,10 @@ export default function PaymentPage() {
         title="View Details"
         className="!w-md"
       >
-        <PaymentDetails paymentInvoice={selectedPayment?.invoice || ""} onClose={() => setIsViewOpen(false)} />
+        <PaymentDetails
+          paymentInvoice={selectedPayment?.invoice || ""}
+          onClose={() => setIsViewOpen(false)}
+        />
       </DialogModal>
 
       {/* Edit Modal with PaymentForm */}
