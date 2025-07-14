@@ -26,6 +26,7 @@ import React, {
   type ForwardedRef,
 } from "react";
 import AppPagination from "../AppPagination.tsx";
+import SelectInput, { type SelectOption } from "../SelectInput/index.tsx";
 
 export interface DataTableHandle<TData> {
   table: TableType<TData>;
@@ -56,6 +57,7 @@ function DataTableInner<TData, TValue>(
     onPageChange,
     actions,
     isPagination = true,
+    onLimitChange,
   }: DataTableProps<TData, TValue>,
   ref: ForwardedRef<DataTableHandle<TData>>,
 ) {
@@ -97,6 +99,12 @@ function DataTableInner<TData, TValue>(
         )}
       </TableRow>
     ));
+
+  const limitOptions: SelectOption[] = [
+    { value: "10", label: "10" },
+    { value: "20", label: "20" },
+    { value: "50", label: "50" },
+  ];
 
   return (
     <div className="flex w-full flex-col space-y-4">
@@ -169,13 +177,22 @@ function DataTableInner<TData, TValue>(
       {/* Pagination Section */}
       {isPagination && (
         <div className="flex flex-col items-center justify-between gap-3 px-2 sm:flex-row sm:gap-4 sm:px-4">
-          <div className="order-2 text-center text-xs text-[#54607A] sm:order-1 sm:text-left sm:text-sm">
+          <div className="order-2 flex items-center text-center text-xs text-[#54607A] sm:text-left sm:text-sm">
             <span className="block sm:inline">
-              Showing {limit <= total ? limit : total} Results
+              Showing 1 to {limit <= total ? limit : total}
             </span>
-            <span className="block sm:ml-1 sm:inline">from {total} Total</span>
+            <span className="mr-2 block sm:ml-1 sm:inline">
+              of {total} entries
+            </span>
+            <SelectInput
+              options={limitOptions}
+              value={limit.toString()}
+              onValueChange={(value) => onLimitChange(Number(value))}
+              placeholder="Select limit"
+              triggerClassName="bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
+            />
           </div>
-          <div className="order-1 sm:order-2">
+          <div className="order-1">
             <AppPagination
               total={total}
               limit={limit}

@@ -1,3 +1,4 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Pagination,
@@ -30,7 +31,7 @@ export default function AppPagination({
               disabled={page === 1}
               className="py-[1.1rem]"
             >
-              Previous
+              <ChevronLeftIcon />
             </Button>
           </PaginationItem>
 
@@ -69,7 +70,7 @@ export default function AppPagination({
               disabled={page * limit >= total}
               className="py-[1.1rem]"
             >
-              Next
+              <ChevronRightIcon />
             </Button>
           </PaginationItem>
         </PaginationContent>
