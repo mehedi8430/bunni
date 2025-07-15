@@ -7,7 +7,7 @@ export interface Payment {
   date: string;
   amount: number;
   status: "Paid" | "Unpaid" | "Save";
-  paymentMethod: "Credit Card" | "Bank Transfer";
+  paymentMethod: "Credit Card" | "Bank Transfer" | "PayPal" | "Other";
 }
 
 const mockPayments: Payment[] = [

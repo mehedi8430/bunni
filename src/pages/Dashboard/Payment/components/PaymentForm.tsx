@@ -1,3 +1,5 @@
+import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
+import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,6 +21,7 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
     status: payment?.status || "Save",
     paymentMethod: payment?.paymentMethod || "Credit Card",
   });
+  console.log("Form Data:", formData.date);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,10 +29,31 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
     onClose();
   };
 
+  const paymentMethodOptions = [
+    { value: "Credit Card", label: "Credit Card" },
+    { value: "Bank Transfer", label: "Bank Transfer" },
+    { value: "PayPal", label: "PayPal" },
+    { value: "Other", label: "Other" },
+  ];
+
+  const statusOptions = [
+    { value: "Save", label: "Save" },
+    { value: "Paid", label: "Paid" },
+    { value: "Unpaid", label: "Unpaid" },
+  ];
+
+  function formatShortDate(date?: Date): string {
+    if (!date) return "";
+    const day = date.getDate().toString().padStart(2, "0");
+    const monthShort = date.toLocaleString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    return `${day} ${monthShort}, ${year}`;
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <Label htmlFor="invoice">Invoice</Label>
+        <Label className="text-lg font-normal" htmlFor="invoice">Invoice</Label>
         <Input
           id="invoice"
           value={formData.invoice}
@@ -37,10 +61,11 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
             setFormData({ ...formData, invoice: e.target.value })
           }
           placeholder="Enter invoice number"
+          className="custom-focus"
         />
       </div>
       <div>
-        <Label htmlFor="customerName">Customer Name</Label>
+        <Label className="text-lg font-normal" htmlFor="customerName">Customer Name</Label>
         <Input
           id="customerName"
           value={formData.customerName}
@@ -48,19 +73,24 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
             setFormData({ ...formData, customerName: e.target.value })
           }
           placeholder="Enter customer name"
+          className="custom-focus"
         />
       </div>
       <div>
-        <Label htmlFor="date">Date</Label>
-        <Input
-          id="date"
-          type="date"
-          value={formData.date}
-          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+        <Label className="text-lg font-normal" htmlFor="date"></Label>
+        <CustomDatePicker
+          defaultDate={formData.date}
+          label="Date"
+          onDateChange={(date) =>
+            setFormData({
+              ...formData,
+              date: date ? formatShortDate(date) : "",
+            })
+          }
         />
       </div>
       <div>
-        <Label htmlFor="amount">Amount</Label>
+        <Label className="text-lg font-normal" htmlFor="amount">Amount</Label>
         <Input
           id="amount"
           type="number"
@@ -69,48 +99,44 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
             setFormData({ ...formData, amount: Number(e.target.value) })
           }
           placeholder="Enter amount"
+          className="custom-focus"
         />
       </div>
       <div>
-        <Label htmlFor="status">Status</Label>
-        <select
-          id="status"
-          value={formData.status}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              status: e.target.value as "Paid" | "Unpaid" | "Save",
-            })
+        <Label className="text-lg font-normal" htmlFor="status">Status</Label>
+        <SelectInput
+          options={statusOptions.map((option) => ({
+            value: option.value,
+            label: option.label,
+          }))}
+          onValueChange={
+            (value) => setFormData({ ...formData, status: value as "Paid" | "Unpaid" | "Save" })
           }
-          className="w-full rounded border p-2"
-        >
-          <option value="Save">Save</option>
-          <option value="Paid">Paid</option>
-          <option value="Unpaid">Unpaid</option>
-        </select>
+          triggerClassName="w-full py-5"
+          value={formData.status}
+        />
       </div>
       <div>
-        <Label htmlFor="paymentMethod">Payment Method</Label>
-        <select
-          id="paymentMethod"
-          value={formData.paymentMethod}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              paymentMethod: e.target.value as "Credit Card" | "Bank Transfer",
-            })
+        <Label className="text-lg font-normal" htmlFor="paymentMethod">Payment Method</Label>
+        <SelectInput
+          options={paymentMethodOptions.map((option) => ({
+            value: option.value,
+            label: option.label,
+          }))}
+          onValueChange={
+            (value) => setFormData({ ...formData, paymentMethod: value as "Credit Card" | "Bank Transfer" | "PayPal" | "Other" })
           }
-          className="w-full rounded border p-2"
-        >
-          <option value="Credit Card">Credit Card</option>
-          <option value="Bank Transfer">Bank Transfer</option>
-        </select>
+          triggerClassName="w-full py-5"
+          value={formData.paymentMethod}
+        />
       </div>
-      <div className="flex justify-end gap-2">
-        <Button type="button" variant="secondary" onClick={onClose}>
+      <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
+      {/* Buttons */}
+      <div className="flex justify-end gap-3 p-5">
+        <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
           Cancel
         </Button>
-        <Button type="submit">Save</Button>
+        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
       </div>
     </form>
   );

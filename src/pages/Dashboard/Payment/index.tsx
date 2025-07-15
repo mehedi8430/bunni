@@ -288,7 +288,7 @@ export default function PaymentPage() {
         </div>
       </div>
 
-      {/* Virtual Terminal Form */}
+      {/* Virtual Terminal Form modal */}
       <DialogModal
         title="Virtual Terminal"
         isOpen={isVirtualTerminalOpen}
@@ -301,7 +301,7 @@ export default function PaymentPage() {
         />
       </DialogModal>
       
-      {/* Add Recurring Billing Form */}
+      {/* Add Recurring Billing Form modal */}
       <DialogModal
         title="Set Up Recurring Billing"
         isOpen={isRecurringBillingOpen}
@@ -314,7 +314,7 @@ export default function PaymentPage() {
         />
       </DialogModal>
 
-      {/* Add payment modal */}
+      {/* Add payment form modal */}
       <DialogModal
         title="Add Payment"
         isOpen={isAddPaymentOpen}
