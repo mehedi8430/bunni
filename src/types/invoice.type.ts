@@ -7,3 +7,19 @@ export type TInvoice = {
   tenderType: "Credit Card" | "Bank Transfer";
   date: string;
 };
+
+export type TDiscount = {
+  id: string;
+  name: string;
+  amount: string;
+  createdDate: string;
+  status: "Active" | "Inactive";
+};
+
+export type TTaxRate = {
+  id: string;
+  name: string;
+  amount: string;
+  createdDate: string;
+  lastLogin: string;
+};

@@ -42,17 +42,24 @@ export function NavMain({
     return url === activePath;
   };
 
+  // Check if any subitem's URL matches the active path
+  const isSubItemActive = (subItems?: { url: string }[]) => {
+    return subItems?.some((subItem) => subItem.url === activePath) || false;
+  };
+
   return (
     <SidebarGroup className="py-8">
       <SidebarMenu className="space-y-2">
         {items.map((item) => {
           const hasSubItems = !!item.items?.length;
+          // Open the collapsible if the item is active or any subitem is active
+          const isOpen = item.isActive || isSubItemActive(item.items);
 
           return (
             <Collapsible
               key={item.title}
               asChild
-              defaultOpen={item.isActive}
+              defaultOpen={isOpen}
               className="group/collapsible"
             >
               <SidebarMenuItem>
