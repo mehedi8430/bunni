@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -14,13 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { customerApi, type Customer } from "@/mockApi/customerApi";
 import SelectInput from "@/components/SelectInput";
 import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
 import { Copy, Link2, Mail, MessageSquareMore } from "lucide-react";
 import { toast } from "sonner";
-import { icons } from "@/lib/imageProvider";
+import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
 
 
 // Zod schema
@@ -54,9 +53,8 @@ export function AddPaymentForm({
     const [selectedMethod, setSelectedMethod] = useState<"email" | "sms" | "link">(
         "email"
     );
-    const [customers, setCustomers] = useState<Customer[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
+    const { customers } = useCustomerApi();
 
     const form = useForm<PaymentFormValues>({
         resolver: zodResolver(paymentFormSchema),
@@ -67,26 +65,6 @@ export function AddPaymentForm({
             recipientEmail: "",
         },
     });
-
-    // Fetch customers when page, limit, or filters change
-    useEffect(() => {
-        const fetchCustomers = async () => {
-            setIsLoading(true);
-            try {
-                const customers = await customerApi.getCustomers();
-                console.log({ customers });
-
-                setCustomers(customers?.data);
-            } catch (error) {
-                console.error("Error fetching customers:", error);
-                setCustomers([]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchCustomers();
-    }, []);
 
     const handleMethodSelect = (method: "email" | "sms" | "link") => {
         setSelectedMethod(method);
