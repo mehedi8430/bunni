@@ -46,6 +46,7 @@ import user_management from "../assets/icons/user_management.svg";
 
 import arrowDown from "../assets/icons/ArrowDown.svg";
 import calender from "../assets/icons/Calendar.svg";
+import email from '../assets/icons/email.svg';
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -137,6 +138,7 @@ export const icons: IconAssets = {
   doc,
   payroll,
   notSure,
+  email,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

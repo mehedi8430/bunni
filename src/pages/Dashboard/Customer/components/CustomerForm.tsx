@@ -34,13 +34,13 @@ const formSchema = z.object({
 });
 
 interface CustomerFormProps {
-  customer: Partial<Customer>;
+  customer?: Partial<Customer>;
   onClose: () => void;
   onSave: (customer: Customer) => void;
 }
 
 export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
-  const [defaultFirstName, defaultLastName] = customer.name
+  const [defaultFirstName, defaultLastName] = customer?.name
     ? customer.name.split(' ', 2)
     : ["", ""];
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,25 +48,25 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
     defaultValues: {
       firstName: defaultFirstName,
       lastName: defaultLastName,
-      email: customer.email || "",
-      phone: customer.phone || "",
-      truncated_tokens: customer.truncated_tokens || "",
-      company: customer.company || "",
-      address: customer.address || "",
-      achToken: customer.achToken || "",
+      email: customer?.email || "",
+      phone: customer?.phone || "",
+      truncated_tokens: customer?.truncated_tokens || "",
+      company: customer?.company || "",
+      address: customer?.address || "",
+      achToken: customer?.achToken || "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("Submitted form data:", values);
     const submittedCustomer: Customer = {
-      id: customer.id || `cust_${Date.now()}`,
+      id: customer?.id || `cust_${Date.now()}`,
       name: `${values.firstName} ${values.lastName}`,
       email: values.email,
       phone: values.phone,
       truncated_tokens: values.truncated_tokens,
       company: values.company,
-      businessName: customer.businessName || "",
+      businessName: customer?.businessName || "",
       address: values.address,
       achToken: values.achToken,
     };
