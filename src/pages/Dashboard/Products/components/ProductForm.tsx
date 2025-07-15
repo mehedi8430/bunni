@@ -1,125 +1,152 @@
 // components/ProductForm.tsx
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import type { TProduct } from "@/types";
+import type { ProductFormProps } from "../hooks/use-product";
+import useProduct from "../hooks/use-product";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import SelectInput from "@/components/SelectInput";
+import { Textarea } from "@/components/ui/textarea";
 
-interface ProductFormProps {
-  product?: Partial<TProduct>;
-  onClose: () => void;
-  onSave: (product: TProduct) => void;
-}
+
 
 export default function ProductForm({
   product,
   onClose,
   onSave,
 }: ProductFormProps) {
-  const [formData, setFormData] = useState<Partial<TProduct>>({
-    id: product?.id || "",
-    name: product?.name || "",
-    type: product?.type || "Product",
-    unit: product?.unit || "per hour",
-    price: product?.price || 0,
-    description: product?.description || "",
+
+  const { form, onSubmit } = useProduct({
+    product,
+    onSave,
+    onClose,
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newProduct: TProduct = {
-      id:
-        formData.id || `PROD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      name: formData.name || "",
-      type: formData.type as "Product" | "Service",
-      unit: formData.unit || "per hour",
-      price: Number(formData.price) || 0,
-      description: formData.description || "",
-    };
-    onSave(newProduct as TProduct);
-    onClose();
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label className="mb-1 block text-sm font-medium text-gray-600">
-          Product Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          placeholder="Enter product name"
-          required
-        />
-      </div>
-      <div className="flex space-x-4">
-        <div className="w-1/2">
-          <label className="mb-1 block text-sm font-medium text-gray-600">
-            Price
-          </label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            step="0.01"
-            placeholder="$0.00"
-            required
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4">
+
+          {/* Product Name */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-normal">Product Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter product name"
+                    {...field}
+                    className="custom-focus"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="w-1/2">
-          <label className="mb-1 block text-sm font-medium text-gray-600">
-            Type
-          </label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            className="w-full rounded-md border p-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            required
-          >
-            <option value="Product">Product</option>
-            <option value="Service">Service</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label className="mb-1 block text-sm font-medium text-gray-600">
-          Description
-        </label>
-        <input
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          placeholder="Enter product description"
-          required
-        />
-      </div>
-      <div className="flex justify-end gap-4">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onClose}
-          className="bg-gray-200 text-gray-700 hover:bg-gray-300"
-        >
-          Cancel
-        </Button>
-        <Button variant={"primary"} type="submit">
-          Save
-        </Button>
-      </div>
-    </form>
+
+          {/* Price and Type in flex row */}
+          <div className="flex space-x-4">
+            {/* Price */}
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem className="w-1/2">
+                  <FormLabel className="text-lg font-normal">Price</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      placeholder="$0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Type */}
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <FormItem className="w-1/2">
+                  <FormLabel className="text-lg font-normal">Type</FormLabel>
+                  <FormControl>
+                    <SelectInput
+                      options={[
+                        { value: "Product", label: "Product" },
+                        { value: "Service", label: "Service" },
+                      ]}
+                      placeholder="Select type"
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      triggerClassName="custom-focus w-full"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Unit */}
+          <FormField
+            control={form.control}
+            name="unit"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-normal">Unit</FormLabel>
+                <FormControl>
+                  <SelectInput
+                    options={[
+                      { value: "per hour", label: "Per Hour" },
+                      { value: "per month", label: "Per Month" },
+                    ]}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    triggerClassName="w-full py-5"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Description */}
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-normal">Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Enter product description"
+                    {...field}
+                    className="focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 h-20 resize-none"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
+          {/* Buttons */}
+          <div className="flex items-center justify-center md:justify-end gap-3">
+            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+              Cancel
+            </Button>
+            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
+          </div>
+        </form>
+      </Form>
+    </>
+
   );
 }
