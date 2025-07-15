@@ -22,6 +22,7 @@ import { PaymentForm } from "./components/PaymentForm";
 import { cn } from "@/lib/utils";
 import { AddPaymentForm } from "./components/AddPaymentForm";
 import RecurringBillingForm from "./components/RecurringBillingForm";
+import VirtualTerminalForm from "./components/VirtualTerminalForm";
 
 export default function PaymentPage() {
   const [page, setPage] = useState(1);
@@ -40,6 +41,7 @@ export default function PaymentPage() {
   const [paymentToDelete, setPaymentToDelete] = useState<string | null>(null);
   const [isAddPaymentOpen, setIsAddPaymentOpen] = useState<boolean>(false);
   const [isRecurringBillingOpen, setIsRecurringBillingOpen] = useState<boolean>(false);
+  const [isVirtualTerminalOpen, setIsVirtualTerminalOpen] = useState<boolean>(false);
 
 
   // Fetch payments when page, limit, or filters change
@@ -231,7 +233,7 @@ export default function PaymentPage() {
             <Plus />
             Recurring Billing
           </Button>
-          <Button variant="primary" size="lg" className="text-lg font-normal">
+          <Button onClick={() => setIsVirtualTerminalOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
             <Plus />
             Virtual Terminal
           </Button>
@@ -285,6 +287,19 @@ export default function PaymentPage() {
           />
         </div>
       </div>
+
+      {/* Virtual Terminal Form */}
+      <DialogModal
+        title="Virtual Terminal"
+        isOpen={isVirtualTerminalOpen}
+        onOpenChange={setIsVirtualTerminalOpen}
+        className="w-xl"
+      >
+        <VirtualTerminalForm
+          onClose={() => setIsVirtualTerminalOpen(false)}
+          onSend={(data) => console.log("Virtual Terminal Data:", data)}
+        />
+      </DialogModal>
       
       {/* Add Recurring Billing Form */}
       <DialogModal
