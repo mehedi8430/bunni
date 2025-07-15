@@ -11,7 +11,7 @@ export type TInvoice = {
 export type TDiscount = {
   id: string;
   name: string;
-  amount: string;
+  amount: number;
   createdDate: string;
   status: "Active" | "Inactive";
 };
@@ -19,7 +19,7 @@ export type TDiscount = {
 export type TTaxRate = {
   id: string;
   name: string;
-  amount: string;
+  amount: number;
   createdDate: string;
   lastLogin: string;
 };
