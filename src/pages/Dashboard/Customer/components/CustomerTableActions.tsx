@@ -15,8 +15,8 @@ export function CustomerTableActions({
   handleFilterChange,
 }: CustomerTableActionsProps) {
   return (
-    <div className="flex items-center justify-center lg:justify-between p-4">
-      <div className="flex flex-col lg:flex-row items-center gap-6">
+    <div className="flex justify-center lg:justify-between p-4">
+      <div className="flex flex-wrap items-center justify-center gap-6">
         <SearchInput
           value={searchTerm}
           onChange={handleFilterChange}

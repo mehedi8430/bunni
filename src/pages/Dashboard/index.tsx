@@ -5,14 +5,16 @@ import BarChartSection from "./components/BarChartSection";
 import AreaChartSection from "./components/AreaChartSection";
 import ThingsToDo from "./components/ThingsToDo";
 import ProPlanCard from "./components/ProPlanCard";
+import { format } from "date-fns";
 
 export default function DashboardPage() {
+  const formatted = format(new Date(), 'EEEE, MMMM d, yyyy');
   return (
     <section className="space-y-6">
       <div className="space-y-2">
         <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
-        <p className="text-muted-foreground text-[20 px] font-normal">
-          Today is Thursday, June 19, 2025
+        <p className="text-muted-foreground text-[20px] font-normal">
+          Today is {formatted}
         </p>
 
         <div className="mt-6 flex flex-col items-center gap-2 md:flex-row">

@@ -226,9 +226,9 @@ export default function PaymentPage() {
 
   return (
     <section className="space-y-10">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row items-center justify-between space-y-5">
         <h1 className="text-2xl font-semibold md:text-[32px]">Payment</h1>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-6">
           <Button onClick={() => setIsRecurringBillingOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
             <Plus />
             Recurring Billing
@@ -288,7 +288,7 @@ export default function PaymentPage() {
         </div>
       </div>
 
-      {/* Virtual Terminal Form */}
+      {/* Virtual Terminal Form modal */}
       <DialogModal
         title="Virtual Terminal"
         isOpen={isVirtualTerminalOpen}
@@ -301,7 +301,7 @@ export default function PaymentPage() {
         />
       </DialogModal>
       
-      {/* Add Recurring Billing Form */}
+      {/* Add Recurring Billing Form modal */}
       <DialogModal
         title="Set Up Recurring Billing"
         isOpen={isRecurringBillingOpen}
@@ -314,7 +314,7 @@ export default function PaymentPage() {
         />
       </DialogModal>
 
-      {/* Add payment modal */}
+      {/* Add payment form modal */}
       <DialogModal
         title="Add Payment"
         isOpen={isAddPaymentOpen}

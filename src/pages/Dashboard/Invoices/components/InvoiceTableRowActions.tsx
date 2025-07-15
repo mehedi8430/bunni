@@ -2,21 +2,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import {
-  Ban,
-  BanknoteArrowDown,
-  Copy,
-  Download,
-  Edit,
-  Eye,
-  MoreHorizontal,
-  SendToBack,
-  Trash,
-} from "lucide-react";
+import { MoreHorizontal,} from "lucide-react";
 import type { TInvoice } from "@/types";
 
 type InvoiceTableRowActionsProps = {
@@ -47,23 +36,26 @@ export default function InvoiceTableRowActions({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+      <DropdownMenuContent align="end" className="p-0 border border-border">
 
         <DropdownMenuItem
           onClick={() => {
             console.log("Download Invoice");
           }}
+          className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
         >
-          <Download className="mr-2 h-4 w-4" /> Download
+          {/* <Download className="h-4 w-4" /> */}
+          Download
         </DropdownMenuItem>
 
         <DropdownMenuItem
           onClick={() => {
             console.log("Copy Link");
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <Copy className="mr-2 h-4 w-4" /> Copy Link
+          {/* <Copy className="h-4 w-4" />  */}
+          Copy Link
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -71,32 +63,40 @@ export default function InvoiceTableRowActions({
             setSelectedInvoice(invoice);
             setIsViewOpen(true);
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <Eye className="mr-2 h-4 w-4" /> Preview
+          {/* <Eye className="h-4 w-4" />  */}
+          Preview
         </DropdownMenuItem>
 
         <DropdownMenuItem
           onClick={() => {
             console.log("Void Invoice");
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <Ban className="mr-2 h-4 w-4" /> Void
+          {/* <Ban className="h-4 w-4" />  */}
+          Void
         </DropdownMenuItem>
 
         <DropdownMenuItem
           onClick={() => {
             console.log("Refund Invoice");
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <BanknoteArrowDown className="mr-2 h-4 w-4" /> Refund
+          {/* <BanknoteArrowDown className="h-4 w-4" />  */}
+          Refund
         </DropdownMenuItem>
 
         <DropdownMenuItem
           onClick={() => {
             console.log("Resend Invoice");
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <SendToBack className="mr-2 h-4 w-4" /> Resend
+          {/* <SendToBack className="h-4 w-4" />  */}
+          Resend
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -104,16 +104,20 @@ export default function InvoiceTableRowActions({
             setEditInvoice(invoice);
             setIsEditOpen(true);
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <Edit className="mr-2 h-4 w-4" /> Edit
+          {/* <Edit className="h-4 w-4" />  */}
+          Edit
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
             setInvoiceToDelete(invoice.id);
             setIsDeleteOpen(true);
           }}
+          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
         >
-          <Trash className="mr-2 h-4 w-4" /> Delete
+          {/* <Trash className="h-4 w-4" />  */}
+          Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

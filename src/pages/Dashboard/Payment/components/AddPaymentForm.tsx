@@ -154,16 +154,16 @@ export function AddPaymentForm({
                                             className="w-full mt-1 "
                                         >
                                             <TabsList className="grid grid-cols-3 w-full border border-border">
-                                                <TabsTrigger value="email" className="text-muted-foreground focus:text-white text-base">
-                                                    <Mail className="size-6" />
+                                                <TabsTrigger value="email" className="text-muted-foreground focus:text-white text-sm md:text-base">
+                                                    <Mail className="size-4 md:size-6" />
                                                     Email
                                                 </TabsTrigger>
-                                                <TabsTrigger value="sms" className="text-muted-foreground focus-within:text-white text-base">
-                                                    <MessageSquareMore className="size-6" />
+                                                <TabsTrigger value="sms" className="text-muted-foreground focus-within:text-white text-sm md:text-base">
+                                                    <MessageSquareMore className="size-4 md:size-6" />
                                                     SMS
                                                 </TabsTrigger>
-                                                <TabsTrigger value="link" className="text-muted-foreground focus-within:text-white text-base">
-                                                    <Link2 className="-rotate-45 size-6" />
+                                                <TabsTrigger value="link" className="text-muted-foreground focus-within:text-white text-sm md:text-base">
+                                                    <Link2 className="-rotate-45 size-4 md:size-6" />
                                                     Copy link
                                                 </TabsTrigger>
                                             </TabsList>
@@ -215,7 +215,7 @@ export function AddPaymentForm({
                                         <Input
                                             readOnly
                                             value={shareableLink}
-                                            className="bg-muted cursor-default pr-10 custom-focus"
+                                            className="bg-muted cursor-default pr-10 text-sm md:text-base custom-focus"
                                         />
                                     </FormControl>
                                 </FormItem>
@@ -228,7 +228,7 @@ export function AddPaymentForm({
                                         toast.success("Link copied to clipboard!");
                                     }}
                                 >
-                                    <Copy className="w-4 h-4" />
+                                    <Copy className="size-4" />
                                 </button>
                             </div>
                         )}
@@ -236,7 +236,7 @@ export function AddPaymentForm({
 
                     <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
                     {/* Buttons */}
-                    <div className="flex justify-end gap-3 p-5">
+                    <div className="flex justify-center md:justify-end gap-3 p-5">
                         <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
                             Cancel
                         </Button>
