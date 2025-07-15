@@ -201,3 +201,7 @@ html {
 .custom-focus {
   @apply focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 p-5;
 }
+
+.custom-action-button {
+  @apply border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center;
+}

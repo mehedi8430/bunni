@@ -1,13 +1,12 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Edit, MoreHorizontal, SendToBack, Trash } from "lucide-react";
+import {  MoreHorizontal,} from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
@@ -111,30 +110,35 @@ export default function UserManagementPage() {
                 <MoreHorizontal />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuContent align="end" className="p-0">
               <DropdownMenuItem
                 onClick={() => {
                   setEditUser(user);
                   setIsEditOpen(true);
                 }}
+                className="custom-action-button"
               >
-                <Edit className="mr-2 h-4 w-4" /> Edit
+                {/* <Edit className="mr-2 h-4 w-4" /> */}
+                 Edit
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
                   console.log("Resend Invite");
                 }}
+                className="custom-action-button"
               >
-                <SendToBack className="mr-2 h-4 w-4" /> Resend Invite
+                {/* <SendToBack className="mr-2 h-4 w-4" /> */}
+                 Resend Invite
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
                   setUserToDelete(user.id);
                   setIsDeleteOpen(true);
                 }}
+                className="custom-action-button"
               >
-                <Trash className="mr-2 h-4 w-4" /> Delete
+                {/* <Trash className="mr-2 h-4 w-4" /> */}
+                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
