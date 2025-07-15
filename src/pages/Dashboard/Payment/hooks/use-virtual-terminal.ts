@@ -1,4 +1,5 @@
 import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
+import { useInvoiceApi } from "@/redux/features/customers/useInvoiceApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -6,6 +7,7 @@ import { z } from "zod";
 // Zod schema
 export const virtualTerminalFormSchema = z.object({
     customer: z.string().min(2, { message: "Customer is required" }),
+    invoice: z.string().min(1, { message: "Invoice is required" }),
     amount: z
         .number({ invalid_type_error: "Enter a valid amount" })
         .positive({ message: "Amount must be positive" }),
@@ -19,10 +21,8 @@ export const virtualTerminalFormSchema = z.object({
     cardCVC: z.string().min(1, { message: "Card CVC is required" }),
     cardHolderName: z.string().min(2, { message: "Card holder name is required" }),
     discountOrTax: z.enum([
-        "discount_10",
-        "discount_5",
-        "tax_vat_15",
-        "tax_gst_5",
+        "discount",
+        "tax",
     ], {
         errorMap: () => ({ message: "Please select a valid discount or tax." }),
     }),
@@ -38,8 +38,7 @@ export interface VirtualTerminalFormProps {
 export default function useVirtualTerminal() {
 
     const { customers } = useCustomerApi();
-    const {invoices} = useInvoiceApi();
-
+    const { invoices } = useInvoiceApi();
 
     const form = useForm<VirtualTerminalFormValues>({
         resolver: zodResolver(virtualTerminalFormSchema),
@@ -55,5 +54,5 @@ export default function useVirtualTerminal() {
         console.log(data);
     }
 
-    return { form, onSubmit, customers };
+    return { form, onSubmit, customers, invoices };
 }

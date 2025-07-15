@@ -1,9 +1,10 @@
-import { invoiceApi } from "@/mockApi";
+import { invoiceApi } from "@/mockApi/invoiceApi";
+import type { TInvoice } from "@/types";
 import { useEffect, useState } from "react";
 
 
 export function useInvoiceApi() {
-    const [invoices, setInvoices] = useState<Invoice[]>([]);
+    const [invoices, setInvoices] = useState<TInvoice[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     // Fetch invoices when page, limit, or filters change
     useEffect(() => {

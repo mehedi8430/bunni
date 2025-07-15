@@ -10,14 +10,12 @@ import SelectInput from "@/components/SelectInput";
 
 
 export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProps) {
-    const { form, onSubmit, customers } = useVirtualTerminal();
+    const { form, onSubmit, customers, invoices } = useVirtualTerminal();
     const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
 
     const discountOrTaxOptions = [
-        { value: "discount_10", label: "10% Off" },
-        { value: "discount_5", label: "$5 Off" },
-        { value: "tax_vat_15", label: "VAT 15%" },
-        { value: "tax_gst_5", label: "GST 5%" },
+        { value: "discount", label: "Discount" },
+        { value: "tax", label: "Tax" },
     ];
 
     return (
@@ -58,6 +56,29 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                         >
                             + Add Customer
                         </Button>
+
+                        {/* invoice */}
+                        <FormField
+                            control={form.control}
+                            name="invoice"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-lg font-normal">Invoice</FormLabel>
+                                    <FormControl>
+                                        <SelectInput
+                                            options={invoices.map((invoice) => ({
+                                                value: invoice.id,
+                                                label: invoice.id,
+                                            }))}
+                                            placeholder="Select an invoice"
+                                            onValueChange={field.onChange}
+                                            triggerClassName="w-full py-5"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
                         {/* Payment Amount */}
                         <FormField
