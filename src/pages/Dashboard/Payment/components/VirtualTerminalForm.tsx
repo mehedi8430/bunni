@@ -218,7 +218,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
 
                     <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
                     {/* Buttons */}
-                    <div className="flex justify-end gap-3 p-5">
+                    <div className="flex items-center justify-center md:justify-end gap-3 p-5">
                         <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
                             Cancel
                         </Button>
