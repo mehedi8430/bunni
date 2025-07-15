@@ -1,21 +1,13 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Edit, Eye, MoreHorizontal, Plus, Trash } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { productApi } from "@/mockApi/productApi";
 import ProductForm from "./components/ProductForm";
-import ProductDetails from "./components/ProductDetails";
 import { ProductTableActions } from "./components/ProductTableActions";
 import type { TProduct } from "@/types";
 
@@ -28,8 +20,6 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Modal states
-  const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null);
-  const [isViewOpen, setIsViewOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editProduct, setEditProduct] = useState<Partial<TProduct>>({});
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -129,41 +119,30 @@ export default function ProductsPage() {
       cell: ({ row }) => {
         const product = row.original;
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => {
-                  setSelectedProduct(product);
-                  setIsViewOpen(true);
-                }}
-              >
-                <Eye className="mr-2 h-4 w-4" /> View
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditProduct(product);
-                  setIsEditOpen(true);
-                }}
-              >
-                <Edit className="mr-2 h-4 w-4" /> Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setProductToDelete(product.id);
-                  setIsDeleteOpen(true);
-                }}
-              >
-                <Trash className="mr-2 h-4 w-4" /> Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="space-x-2">
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              onClick={() => {
+                setEditProduct(product);
+                setIsEditOpen(true);
+              }}
+              className="cursor-pointer bg-white"
+            >
+              Edit
+            </Button>
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              onClick={() => {
+                setProductToDelete(product.id);
+                setIsDeleteOpen(true);
+              }}
+              className="cursor-pointer bg-black text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-black/80 hover:text-white"
+            >
+              Delete
+            </Button>
+          </div>
         );
       },
     },
@@ -222,16 +201,6 @@ export default function ProductsPage() {
           actions={true}
         />
       </div>
-
-      {/* View Details Modal */}
-      <DialogModal
-        isOpen={isViewOpen}
-        onOpenChange={setIsViewOpen}
-        title="View Details"
-        onCancel={() => setIsViewOpen(false)}
-      >
-        <ProductDetails productId={selectedProduct?.id || ""} />
-      </DialogModal>
 
       {/* Edit Modal with ProductForm */}
       <DialogModal

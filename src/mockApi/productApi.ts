@@ -81,7 +81,7 @@ export const productApi = {
   /**
    * Simulates fetching a list of products with pagination.
    * @param {object} params - Filters and pagination parameters
-   * @returns {Promise<{ data: Product[], total: number }>}
+   * @returns {Promise<{ data: TProduct[], total: number }>}
    */
   getProducts: async ({
     search,
