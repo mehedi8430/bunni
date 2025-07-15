@@ -47,6 +47,11 @@ import user_management from "../assets/icons/user_management.svg";
 import arrowDown from "../assets/icons/ArrowDown.svg";
 import calender from "../assets/icons/Calendar.svg";
 import email from '../assets/icons/email.svg';
+import revinue from '../assets/icons/revinue.svg';
+import groupuser from '../assets/icons/groupuser.svg';
+import dolar from '../assets/icons/dolar.svg';
+import outstanding from '../assets/icons/outstanding.svg';
+
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -139,6 +144,10 @@ export const icons: IconAssets = {
   payroll,
   notSure,
   email,
+  revinue,
+  groupuser,
+  dolar,
+  outstanding,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

@@ -15,6 +15,10 @@ import InvoiceForm from "./components/InvoiceForm";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import type { TInvoice } from "@/types";
 import { useNavigate } from "react-router";
+import { format } from "date-fns";
+import TopCard from "./components/TopCard";
+import { ReactSVG } from "react-svg";
+import { icons } from "@/lib/imageProvider";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -191,14 +195,23 @@ export default function InvoicesPage() {
     setPage(1);
   };
 
+
+
+  const formatted = format(new Date(), 'EEEE, MMMM d, yyyy');
+
   return (
     <section className="space-y-10">
-      <div className="flex items-start justify-between">
-        <h1 className="text-2xl font-semibold md:text-[32px]">Invoices</h1>
+      <div className="flex flex-col md:flex-row items-start justify-between space-y-4">
+        <div className="space-y-2">
+          <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
+          <p className="text-muted-foreground text-[20px] font-normal">
+            Today is {formatted}
+          </p>
+        </div>
         <Button
           variant="primary"
           size="lg"
-          className="text-lg font-normal"
+          className="text-lg font-normal max-sm:mx-auto"
           onClick={() => navigate("/dashboard/invoices/templates")}
         >
           <Plus />
@@ -207,54 +220,34 @@ export default function InvoicesPage() {
       </div>
 
       <div className="grid grid-cols-4 gap-6">
-        <div className="card_container col-span-1 space-y-5 xl:col-span-1">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center rounded-full bg-[#FFF8DF] p-2">
-              {/* <ReactSVG src={assets.icons.pending} /> */}
-            </div>
-            <p className="text-muted-foreground text-[16px] font-normal">
-              Pending payments
-            </p>
-          </div>
-          <p className="text-2xl font-bold">$ 4,212</p>
-        </div>
-
-        <div className="card_container col-span-1 space-y-5 xl:col-span-1">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center rounded-full bg-[#FFF8DF] p-2">
-              {/* <ReactSVG src={assets.icons.pending} /> */}
-            </div>
-            <p className="text-muted-foreground text-[16px] font-normal">
-              Pending payments
-            </p>
-          </div>
-          <p className="text-2xl font-bold">$ 4,212</p>
-        </div>
-
-        <div className="card_container col-span-1 space-y-5 xl:col-span-1">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center rounded-full bg-[#FFF8DF] p-2">
-              {/* <ReactSVG src={assets.icons.pending} /> */}
-            </div>
-            <p className="text-muted-foreground text-[16px] font-normal">
-              Pending payments
-            </p>
-          </div>
-          <p className="text-2xl font-bold">$ 4,212</p>
-        </div>
-
-        <div className="card_container col-span-1 space-y-5 xl:col-span-1">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center rounded-full bg-[#FFF8DF] p-2">
-              {/* <ReactSVG src={assets.icons.pending} /> */}
-            </div>
-            <p className="text-muted-foreground text-[16px] font-normal">
-              Pending payments
-            </p>
-          </div>
-          <p className="text-2xl font-bold">$ 4,212</p>
-        </div>
-
+        <TopCard
+          icon={<ReactSVG src={icons.outstanding} />}
+          title="Outstanding Invoices"
+          value="$1,637"
+          iconBgColor="bg-red-100"
+          valueColor="text-red-400"
+        />
+        <TopCard
+          icon={<ReactSVG src={icons.dolar} />}
+          title="Recent Payments"
+          value="$3,847"
+          iconBgColor="bg-purple-100"
+          valueColor="text-foreground"
+        />
+        <TopCard
+          icon={<ReactSVG src={icons.groupuser} />}
+          title="Total Customer"
+          value="$2,567"
+          iconBgColor="bg-yellow-50"
+          valueColor="text-foreground"
+        />
+        <TopCard
+          icon={<ReactSVG src={icons.revinue} />}
+          title="Revenue this month"
+          value="$4,212"
+          iconBgColor="bg-green-100"
+          valueColor="text-foreground"
+        />
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
           <InvoiceTableActions
             searchTerm={searchTerm}
