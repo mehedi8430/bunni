@@ -3,7 +3,7 @@ export type TInvoice = {
   customerName: string;
   status: "Paid" | "Unpaid" | "Save";
   orderNumber: string;
-  amount: number;
+  amount: string | number;
   tenderType: "Credit Card" | "Bank Transfer";
   date: string;
 };
@@ -11,7 +11,7 @@ export type TInvoice = {
 export type TDiscount = {
   id: string;
   name: string;
-  amount: number;
+  amount: string | number;
   createdDate: string;
   status: "Active" | "Inactive";
 };
@@ -19,7 +19,7 @@ export type TDiscount = {
 export type TTaxRate = {
   id: string;
   name: string;
-  amount: number;
+  amount: string | number;
   createdDate: string;
   lastLogin: string;
 };

@@ -214,7 +214,7 @@ export const invoiceApi = {
       filteredDiscounts = filteredDiscounts.filter(
         (disc) =>
           disc.name.toLowerCase().includes(searchTerm) ||
-          disc.amount.toLowerCase().includes(searchTerm) ||
+          String(disc.amount).toLowerCase().includes(searchTerm) ||
           disc.status.toLowerCase().includes(searchTerm) ||
           disc.createdDate.toLowerCase().includes(searchTerm),
       );
@@ -264,7 +264,7 @@ export const invoiceApi = {
       filteredTaxRates = filteredTaxRates.filter(
         (tax) =>
           tax.name.toLowerCase().includes(searchTerm) ||
-          tax.amount.toLowerCase().includes(searchTerm) ||
+          String(tax.amount).toLowerCase().includes(searchTerm) ||
           tax.lastLogin.toLowerCase().includes(searchTerm) ||
           tax.createdDate.toLowerCase().includes(searchTerm),
       );

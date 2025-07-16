@@ -35,7 +35,8 @@ export default function TaxRateForm({
     if (!formData.name?.trim()) {
       newErrors.name = "Name is required";
     }
-    if (formData.amount === undefined || formData.amount < 0) {
+    const amountNum = typeof formData.amount === "string" ? parseFloat(formData.amount) : formData.amount;
+    if (amountNum === undefined || isNaN(amountNum) || amountNum < 0) {
       newErrors.amount = "Amount must be a non-negative number";
     }
     setErrors(newErrors);
