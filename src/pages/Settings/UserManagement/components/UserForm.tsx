@@ -1,134 +1,166 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import type { TUser } from "@/types";
+import useUser, { type UserFormProps } from "../hooks/use-user";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import SelectInput from "@/components/SelectInput";
 
-interface UserFormProps {
-  user?: Partial<TUser>;
-  onClose: () => void;
-  onSave: (user: TUser) => void;
-}
+
 
 export default function UserForm({ user, onClose, onSave }: UserFormProps) {
 
-  const [formData, setFormData] = useState<Partial<TUser>>({
-    id: user?.id || "",
-    memberName: user?.memberName || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    permissions: user?.permissions || "Admin",
-    lastLogin: user?.lastLogin || "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newUser: TUser = {
-      id:
-        formData.id || `USER-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      memberName: formData.memberName || "",
-      email: formData.email || "",
-      phone: formData.phone || "",
-      permissions: formData.permissions as "Owner" | "Admin",
-      lastLogin: formData.lastLogin || "Pending Invitation",
-    };
-    onSave(newUser as TUser);
-    onClose();
-  };
+  const { form, onSubmit } = useUser({ user, onSave, onClose });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label className="mb-1 block text-sm font-medium text-gray-600">
-          Member Name
-        </label>
-        <input
-          type="text"
-          name="memberName"
-          value={formData.memberName}
-          onChange={handleChange}
-          className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          placeholder="Enter member name"
-          required
-        />
-      </div>
-      <div>
-        <label className="mb-1 block text-sm font-medium text-gray-600">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          placeholder="Enter email"
-          required
-        />
-      </div>
-      <div className="flex space-x-4">
-        <div className="w-1/2">
-          <label className="mb-1 block text-sm font-medium text-gray-600">
-            Phone
-          </label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            placeholder="(+XX) XXX XXX XXX"
-            required
-          />
-        </div>
-        <div className="w-1/2">
-          <label className="mb-1 block text-sm font-medium text-gray-600">
-            Permissions
-          </label>
-          <select
-            name="permissions"
-            value={formData.permissions}
-            onChange={handleChange}
-            className="w-full rounded-md border p-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            required
-          >
-            <option value="Admin">Admin</option>
-            <option value="Owner">Owner</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label className="mb-1 block text-sm font-medium text-gray-600">
-          Last Login
-        </label>
-        <input
-          type="text"
-          name="lastLogin"
-          value={formData.lastLogin}
-          onChange={handleChange}
-          className="w-full rounded-md border p-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          placeholder="e.g., Pending Invitation or Jun 28, 2025, 6:03 AM"
-          required
-        />
-      </div>
-      <div className="flex justify-end gap-4">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onClose}
-          className="bg-gray-200 text-gray-700 hover:bg-gray-300"
-        >
-          Cancel
-        </Button>
-        <Button type="submit" variant="primary">
-          Save
-        </Button>
-      </div>
-    </form>
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4">
+          <div>
+            {/* First Name */}
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">First Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter first name"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Last Name */}
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter last name"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* email */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter email"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* phone number */}
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">Phone Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter phone number"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* location */}
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">Location</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter location"
+                      {...field}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* commission */}
+            <FormField
+              control={form.control}
+              name="commission"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">Commission</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Enter commission"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* admin permissions */}
+            <FormField
+              control={form.control}
+              name="permissions"
+              render={({ field }) => (
+                <FormItem className="w-1/2">
+                  <FormLabel className="text-lg font-normal">Permissions</FormLabel>
+                  <FormControl>
+                    <SelectInput
+                      options={[
+                        { value: "Admin", label: "Admin" },
+                        { value: "Owner", label: "Owner" },
+                      ]}
+                      placeholder="Select type"
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      triggerClassName="custom-focus w-full"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
+          {/* Buttons */}
+          <div className="flex items-center justify-center md:justify-end gap-3">
+            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+              Cancel
+            </Button>
+            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
+          </div>
+        </form>
+      </Form >
+    </>
   );
 }

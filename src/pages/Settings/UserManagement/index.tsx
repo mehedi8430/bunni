@@ -148,10 +148,16 @@ export default function UserManagementPage() {
   ];
 
   const handleSave = (updatedUser: TUser) => {
-    setData((prev) =>
-      prev.map((user) => (user.id === updatedUser.id ? updatedUser : user)),
-    );
-    if (!updatedUser.id) {
+    // console.log("handleSave called with:", updatedUser);
+    // console.log("editUser.id:", editUser.id);
+    
+    // If editUser.id exists, we're editing an existing user
+    if (editUser.id) {
+      setData((prev) =>
+        prev.map((user) => (user.id === updatedUser.id ? updatedUser : user)),
+      );
+    } else {
+      // If editUser.id doesn't exist, we're adding a new user
       setData((prev) => [...prev, updatedUser]);
       setTotal((prev) => prev + 1);
     }
