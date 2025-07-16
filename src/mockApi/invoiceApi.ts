@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { TDiscount, TInvoice, TTaxRate } from "@/types";
+import type { TDiscount, TInvoice, TInvoiceTemplate, TTaxRate } from "@/types";
 import { simulateApiResponse } from ".";
 
 const mockDiscounts: TDiscount[] = [
@@ -136,6 +136,37 @@ const mockInvoices: TInvoice[] = [
     amount: 829,
     tenderType: "Bank Transfer",
     date: "08 Feb, 2025",
+  },
+];
+
+export const templates: TInvoiceTemplate[] = [
+  {
+    id: "1",
+    name: "Invoice Template",
+    type: "default",
+    color: "blue",
+    preview: "Default",
+  },
+  {
+    id: "2",
+    name: "Budget Report",
+    type: "professional",
+    color: "orange",
+    preview: "Default",
+  },
+  {
+    id: "3",
+    name: "Invoice Template",
+    type: "modern",
+    color: "blue",
+    preview: "Professional",
+  },
+  {
+    id: "4",
+    name: "Budget Report",
+    type: "professional",
+    color: "orange",
+    preview: "New Invoice",
   },
 ];
 

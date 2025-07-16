@@ -23,3 +23,35 @@ export type TTaxRate = {
   createdDate: string;
   lastLogin: string;
 };
+
+export type TInvoiceItem = {
+  id: string;
+  description: string;
+  quantity: number;
+  price: number;
+  tax: number;
+  amount: number;
+};
+
+export type TInvoiceTemplate = {
+  id: string;
+  name: string;
+  type: "default" | "professional" | "modern";
+  color: "blue" | "orange" | "green" | "purple";
+  preview: string;
+};
+
+export type TInvoiceData = {
+  title: string;
+  customer: string;
+  invoiceNumber: string;
+  orderNumber: string;
+  invoiceDate: string;
+  serviceDate: string;
+  dueDate: string;
+  footerTerms: string;
+  items: TInvoiceItem[];
+  subtotal: number;
+  discount: number;
+  total: number;
+};
