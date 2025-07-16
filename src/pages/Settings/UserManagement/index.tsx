@@ -197,7 +197,8 @@ export default function UserManagementPage() {
       <DialogModal
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
-        title={editUser.id ? "Edit User" : "Add New User"}
+        title={editUser.id ? "Edit Member" : "Add New Member"}
+        className="!w-4xl" 
       >
         <UserForm
           user={editUser}
