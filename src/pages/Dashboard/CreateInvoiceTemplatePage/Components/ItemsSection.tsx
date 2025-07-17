@@ -1,0 +1,187 @@
+import type { TInvoiceData, TInvoiceItem } from "@/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ImageIcon, Trash2 } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { taxOptions } from "@/mockApi/invoiceApi";
+
+export default function ItemsSection({
+  invoiceData,
+  setInvoiceData,
+}: {
+  invoiceData: TInvoiceData;
+  setInvoiceData: React.Dispatch<React.SetStateAction<TInvoiceData>>;
+}) {
+  const handleItemChange = (
+    itemId: string,
+    field: keyof TInvoiceItem,
+    value: string | number,
+  ) => {
+    setInvoiceData((prev) => ({
+      ...prev,
+      items: prev.items.map((item) =>
+        item.id === itemId ? { ...item, [field]: value } : item,
+      ),
+    }));
+  };
+
+  const removeItem = (itemId: string) => {
+    setInvoiceData((prev) => ({
+      ...prev,
+      items: prev.items.filter((item) => item.id !== itemId),
+    }));
+  };
+
+  const calculateTotal = () => {
+    const subtotal = invoiceData.items.reduce(
+      (sum, item) => sum + item.amount,
+      0,
+    );
+    const total = subtotal - invoiceData.discount;
+    return { subtotal, total };
+  };
+
+  const handleInputChange = (
+    field: keyof TInvoiceData,
+    value: string | number,
+  ) => {
+    setInvoiceData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="px-4 text-2xl font-semibold">Select Item</h3>
+        <div className="border-border mt-5 border-t" />
+      </div>
+
+      <h3 className="font-noramal text-lg">Item Table</h3>
+
+      {/* Item Table */}
+      <Table>
+        <TableHeader>
+          <TableRow className="bg-gray-50 dark:bg-gray-800">
+            <TableHead className="w-[40%] text-left">Item Details</TableHead>
+            <TableHead className="w-[15%] text-center">Quantity</TableHead>
+            <TableHead className="w-[15%] text-center">Price</TableHead>
+            <TableHead className="w-[15%] text-center">Tax</TableHead>
+            <TableHead className="w-[15%] text-right">Amount</TableHead>
+            <TableHead className="w-[5%] text-right"></TableHead>{" "}
+            {/* For delete button */}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {invoiceData.items.map((item) => (
+            <TableRow key={item.id}>
+              {/* Item Details */}
+              <TableCell className="py-2">
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="h-5 w-5 text-gray-400" />
+                  <Input
+                    type="text"
+                    placeholder="Type or click to select a..."
+                    value={item.description}
+                    onChange={(e) =>
+                      handleItemChange(item.id, "description", e.target.value)
+                    }
+                    className="flex-grow rounded-md border px-2 py-1"
+                  />
+                </div>
+              </TableCell>
+
+              {/* Quantity */}
+              <TableCell className="py-2">
+                <Input
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) =>
+                    handleItemChange(
+                      item.id,
+                      "quantity",
+                      Number(e.target.value),
+                    )
+                  }
+                  className="w-full rounded-md border px-2 py-1 text-center"
+                  min="0"
+                />
+              </TableCell>
+
+              {/* Price */}
+              <TableCell className="py-2">
+                <Input
+                  type="number"
+                  value={item.price.toFixed(2)} // Format to 2 decimal places
+                  onChange={(e) =>
+                    handleItemChange(item.id, "price", Number(e.target.value))
+                  }
+                  className="w-full rounded-md border px-2 py-1 text-center"
+                  min="0"
+                />
+              </TableCell>
+
+              {/* Tax */}
+              <TableCell className="py-2">
+                <Select
+                  value={item.taxId}
+                  onValueChange={(value) =>
+                    handleItemChange(item.id, "taxId", value)
+                  }
+                >
+                  <SelectTrigger className="w-full rounded-md border px-2 py-1 text-center">
+                    <SelectValue placeholder="Select a Tax" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {taxOptions.map((tax) => (
+                      <SelectItem key={tax.id} value={tax.id}>
+                        {tax.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </TableCell>
+
+              {/* Amount */}
+              <TableCell className="py-2 text-right">
+                <Input
+                  type="number"
+                  value={item.amount.toFixed(2)} // Display calculated amount
+                  readOnly
+                  className="w-full rounded-md border bg-gray-50 px-2 py-1 text-right dark:bg-gray-700"
+                />
+              </TableCell>
+
+              {/* Delete Button */}
+              <TableCell className="py-2 text-right">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => removeItem(item.id)}
+                  className="text-gray-500 hover:text-red-500"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}

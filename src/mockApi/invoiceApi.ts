@@ -2,6 +2,13 @@
 import type { TDiscount, TInvoice, TTaxRate } from "@/types";
 import { simulateApiResponse } from ".";
 
+export const taxOptions = [
+  { id: "no-tax", name: "No Tax", rate: 0 },
+  { id: "gst-5", name: "GST 5%", rate: 0.05 },
+  { id: "vat-10", name: "VAT 10%", rate: 0.1 },
+  { id: "sales-7", name: "Sales Tax 7%", rate: 0.07 },
+];
+
 const mockDiscounts: TDiscount[] = [
   {
     id: "DISC-0001",
