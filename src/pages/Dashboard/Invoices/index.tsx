@@ -1,24 +1,25 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import type { ColumnDef } from "@tanstack/react-table";
+import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { InvoiceTableActions } from "./components/InvoiceTableActions";
-import { invoiceApi } from "@/mockApi/invoiceApi";
-import { cn } from "@/lib/utils";
-import InvoiceDetails from "./components/InvoiceDetails";
-import InvoiceForm from "./components/InvoiceForm";
-import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
-import type { TInvoice } from "@/types";
-import { useNavigate } from "react-router";
-import { format } from "date-fns";
-import TopCard from "./components/TopCard";
-import { ReactSVG } from "react-svg";
+import { DialogModal } from "@/components/DialogModal";
 import { icons } from "@/lib/imageProvider";
+import { cn } from "@/lib/utils";
+import { invoiceApi } from "@/mockApi/invoiceApi";
+import type { TInvoice } from "@/types";
+import { PDFViewer } from "@react-pdf/renderer";
+import { format } from "date-fns";
+import { useNavigate } from "react-router";
+import { ReactSVG } from "react-svg";
+import MyDocument from "./components/Document";
+import InvoiceForm from "./components/InvoiceForm";
+import { InvoiceTableActions } from "./components/InvoiceTableActions";
+import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
+import TopCard from "./components/TopCard";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -195,13 +196,11 @@ export default function InvoicesPage() {
     setPage(1);
   };
 
-
-
-  const formatted = format(new Date(), 'EEEE, MMMM d, yyyy');
+  const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
 
   return (
     <section className="space-y-10">
-      <div className="flex flex-col md:flex-row items-start justify-between space-y-4">
+      <div className="flex flex-col items-start justify-between space-y-4 md:flex-row">
         <div className="space-y-2">
           <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
           <p className="text-muted-foreground text-[20px] font-normal">
@@ -273,7 +272,11 @@ export default function InvoicesPage() {
         onOpenChange={setIsViewOpen}
         title="View Details"
       >
-        <InvoiceDetails invoiceId={selectedInvoice?.id || ""} />
+        <PDFViewer className="h-[600px] w-full">
+          <MyDocument />
+        </PDFViewer>
+
+        {/* <InvoiceDetails invoiceId={selectedInvoice?.id || ""} /> */}
       </DialogModal>
 
       {/* Edit Modal with InvoiceForm */}
