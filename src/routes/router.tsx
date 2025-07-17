@@ -12,6 +12,7 @@ import AuthLayout from "@/layout/AuthLayout";
 import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
+import CreateInvoiceTemplatePage from "@/pages/Dashboard/CreateInvoiceTemplatePage";
 import CustomerPage from "@/pages/Dashboard/Customer";
 import InvoicesPage from "@/pages/Dashboard/Invoices";
 import InvoiceTemplatesPage from "@/pages/Dashboard/InvoiceTemplatesPage";
@@ -49,6 +50,10 @@ export const Router = createBrowserRouter([
       {
         path: "invoices/templates",
         element: <InvoiceTemplatesPage />,
+      },
+      {
+        path: "invoices/template/:id",
+        element: <CreateInvoiceTemplatePage />,
       },
       {
         path: "customer",

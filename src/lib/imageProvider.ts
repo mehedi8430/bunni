@@ -46,13 +46,14 @@ import user_management from "../assets/icons/user_management.svg";
 
 import arrowDown from "../assets/icons/ArrowDown.svg";
 import calender from "../assets/icons/Calendar.svg";
-import email from '../assets/icons/email.svg';
-import revinue from '../assets/icons/revinue.svg';
-import groupuser from '../assets/icons/groupuser.svg';
-import dolar from '../assets/icons/dolar.svg';
-import outstanding from '../assets/icons/outstanding.svg';
-import successIcon from '../assets/icons/successIcon.svg';
+import email from "../assets/icons/email.svg";
+import revinue from "../assets/icons/revinue.svg";
+import groupuser from "../assets/icons/groupuser.svg";
+import dolar from "../assets/icons/dolar.svg";
+import outstanding from "../assets/icons/outstanding.svg";
 
+import invoice_template from "../assets/images/invoice_template.svg";
+import budget_report_template from "../assets/images/budget_report_template.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -95,7 +96,9 @@ export interface ImageAssets {
   dashboard: string;
   myCard: string;
   sendMoney: string;
-  chartCard: string; // Assuming you have a chard card image
+  chartCard: string;
+  invoice_template: string;
+  budget_report_template: string;
   // Add more image types here as needed
 }
 
@@ -164,6 +167,9 @@ export const images: ImageAssets = {
   dashboard: dashboard,
   myCard: myCard,
   sendMoney: sendMoney,
+  invoice_template: invoice_template,
+  budget_report_template: budget_report_template,
+  // Add more images here as needed
 };
 
 // Asset categories for better organization

@@ -66,8 +66,8 @@
   --disabled: oklch(72.516% 0.00008 271.152);
   --paragraph: oklch(35.879% 0.04397 275.255);
   --subtitle: oklch(92.862% 0.00446 135.79);
-  --gradient: linear-gradient(180deg, #27A376 0%, #38988A 100%);
-  --button-border: oklch(54.18% 0.105 163.66)
+  --gradient: linear-gradient(180deg, #27a376 0%, #38988a 100%);
+  --button-border: oklch(54.18% 0.105 163.66);
 }
 
 @theme inline {
@@ -198,10 +198,17 @@ html {
   background-color: rgba(115, 115, 115, 0.5);
 }
 
+/* custom focus for input fiield */
 .custom-focus {
-  @apply focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 p-5;
+  @apply p-5 focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0;
 }
 
+/* label class */
+.custom-label {
+  @apply text-muted-foreground text-lg font-normal;
+}
+
+/* custom action button */
 .custom-action-button {
-  @apply border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center;
+  @apply border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent;
 }
