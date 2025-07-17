@@ -3,8 +3,12 @@ export type TUser = {
   memberName: string;
   email: string;
   phone: string;
-  location: string;
-  commission: number;
-  permissions: "Owner" | "Admin";
+  businessName?: string;
+  businessAddress?: string;
+  location?: string;
+  commission?: number;
+  permissions?: "Owner" | "Admin";
   lastLogin?: string;
+  currentPassword?: string;
+  newPassword?: string;
 };
