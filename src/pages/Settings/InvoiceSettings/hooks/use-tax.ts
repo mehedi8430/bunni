@@ -8,7 +8,7 @@ import { z } from "zod";
 export const taxFormSchema = z.object({
     id: z.string().optional(),
     name: z.string().min(1, { message: "Name is required" }),
-    rate: z.string().min(1, { message: "Please select a valid tax rate." }),
+    rate: z.string().min(1, { message: "Rate type is required" }),
     amount: z
         .number({ invalid_type_error: "Enter a valid amount" })
         .positive({ message: "Amount must be positive" })
@@ -36,7 +36,7 @@ export default function useTax({
         defaultValues: {
             id: taxRate?.id || "",
             name: taxRate?.name || "",
-            rate: taxRate?.rate || "5%",
+            rate: taxRate?.rate || "Percentage",
             amount: typeof taxRate?.amount === "number"
                 ? taxRate.amount
                 : typeof taxRate?.amount === "string" && taxRate.amount !== ""
