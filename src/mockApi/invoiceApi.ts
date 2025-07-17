@@ -16,6 +16,7 @@ const mockDiscounts: TDiscount[] = [
     amount: "10%",
     createdDate: "Jun 28, 2025, 6:03 AM",
     status: "Active",
+    type: "Percentage",
   },
   {
     id: "DISC-0002",
@@ -23,6 +24,7 @@ const mockDiscounts: TDiscount[] = [
     amount: "$50.00",
     createdDate: "Jun 28, 2025, 6:03 AM",
     status: "Inactive",
+    type: "Fixed Amount",
   },
   {
     id: "DISC-0003",
@@ -30,6 +32,7 @@ const mockDiscounts: TDiscount[] = [
     amount: "15%",
     createdDate: "Jun 28, 2025, 2:03 PM",
     status: "Inactive",
+    type: "Percentage",
   },
   {
     id: "DISC-0004",
@@ -37,6 +40,7 @@ const mockDiscounts: TDiscount[] = [
     amount: "5%",
     createdDate: "Jun 28, 2025, 2:03 PM",
     status: "Active",
+    type: "Percentage",
   },
 ];
 
