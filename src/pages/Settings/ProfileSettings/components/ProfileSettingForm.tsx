@@ -4,10 +4,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { ImageUpload } from "@/components/ui/image-upload";
 
+interface ProfileSettingFormProps {
+    onSuccess?: () => void;
+}
 
-export default function ProfileSettingForm() {
+export default function ProfileSettingForm({ onSuccess }: ProfileSettingFormProps) {
 
-    const { form, onSubmit } = UseProfileForm();
+    const { form, onSubmit } = UseProfileForm({ onSuccess });
 
     return (
         <>

@@ -152,6 +152,7 @@ export const icons: IconAssets = {
   groupuser,
   dolar,
   outstanding,
+  successIcon,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
