@@ -1,6 +1,6 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Edit, Eye, MoreHorizontal, Plus, Trash } from "lucide-react";
+import { MoreHorizontal, Plus, } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -8,7 +8,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DialogModal } from "@/components/DialogModal";
@@ -174,31 +173,33 @@ export default function PaymentPage() {
                 <MoreHorizontal />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuContent align="end" className="p-0 border border-border">
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedPayment(payment);
                   setIsViewOpen(true);
                 }}
+                className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
               >
-                <Eye className="mr-2 h-4 w-4" /> View
+                View
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
                   setEditPayment(payment);
                   setIsEditOpen(true);
                 }}
+                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
               >
-                <Edit className="mr-2 h-4 w-4" /> Edit
+                Edit
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
                   setPaymentToDelete(payment.invoice);
                   setIsDeleteOpen(true);
                 }}
+                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
               >
-                <Trash className="mr-2 h-4 w-4" /> Delete
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
