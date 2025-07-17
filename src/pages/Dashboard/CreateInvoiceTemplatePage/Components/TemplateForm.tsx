@@ -1,21 +1,18 @@
+import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { Textarea } from "@/components/ui/textarea";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
-import type { TInvoiceData, TInvoiceItem } from "@/types";
+import type { TInvoiceData } from "@/types";
 import type { TCustomer } from "@/types/customer.type";
 import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useState } from "react";
+import { CustomerForm } from "../../Customer/components/CustomerForm";
+import ItemsSection from "./ItemsSection";
 
 const initialInvoiceData: TInvoiceData = {
   title: "",
@@ -35,6 +32,7 @@ const initialInvoiceData: TInvoiceData = {
       price: 10.0,
       tax: 0,
       amount: 100.0,
+      taxId: "1234",
     },
     {
       id: "2",
@@ -43,6 +41,7 @@ const initialInvoiceData: TInvoiceData = {
       price: 0.0,
       tax: 0,
       amount: 0.0,
+      taxId: "5678",
     },
   ],
   subtotal: 100.0,
@@ -53,6 +52,7 @@ const initialInvoiceData: TInvoiceData = {
 export default function TemplateForm() {
   const [invoiceData, setInvoiceData] =
     useState<TInvoiceData>(initialInvoiceData);
+  const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
 
   const { customers } = useCustomerApi();
 
@@ -64,35 +64,6 @@ export default function TemplateForm() {
       ...prev,
       [field]: value,
     }));
-  };
-
-  const handleItemChange = (
-    itemId: string,
-    field: keyof TInvoiceItem,
-    value: string | number,
-  ) => {
-    setInvoiceData((prev) => ({
-      ...prev,
-      items: prev.items.map((item) =>
-        item.id === itemId ? { ...item, [field]: value } : item,
-      ),
-    }));
-  };
-
-  const removeItem = (itemId: string) => {
-    setInvoiceData((prev) => ({
-      ...prev,
-      items: prev.items.filter((item) => item.id !== itemId),
-    }));
-  };
-
-  const calculateTotal = () => {
-    const subtotal = invoiceData.items.reduce(
-      (sum, item) => sum + item.amount,
-      0,
-    );
-    const total = subtotal - invoiceData.discount;
-    return { subtotal, total };
   };
 
   return (
@@ -126,7 +97,11 @@ export default function TemplateForm() {
             triggerClassName="w-full"
           />
           <div className="flex justify-end">
-            <Button variant="link" className="text-sm font-normal">
+            <Button
+              variant="link"
+              className="text-sm font-normal"
+              onClick={() => setIsAddCustomerOpen(true)}
+            >
               <Plus /> Add Customer
             </Button>
           </div>
@@ -210,125 +185,19 @@ export default function TemplateForm() {
       </div>
 
       {/* Items Section */}
-      <div className="space-y-6">
-        <div>
-          <h3 className="px-4 text-2xl font-semibold">Select Item</h3>
-          <div className="border-border mt-5 border-t" />
-        </div>
+      <ItemsSection invoiceData={invoiceData} setInvoiceData={setInvoiceData} />
 
-        <div className="space-y-3">
-          <div className="grid grid-cols-12 gap-2 text-sm font-medium text-gray-600">
-            <div className="col-span-4">Item Details</div>
-            <div className="col-span-2">Quantity</div>
-            <div className="col-span-2">Price</div>
-            <div className="col-span-2">Tax</div>
-            <div className="col-span-2">Amount</div>
-          </div>
-
-          {invoiceData.items.map((item) => (
-            <div key={item.id} className="grid grid-cols-12 items-center gap-2">
-              <div className="col-span-4">
-                <Input
-                  placeholder="Type or click to select..."
-                  value={item.description}
-                  onChange={(e) =>
-                    handleItemChange(item.id, "description", e.target.value)
-                  }
-                  className="custom-focus"
-                />
-              </div>
-              <div className="col-span-2">
-                <Input
-                  type="number"
-                  value={item.quantity}
-                  onChange={(e) =>
-                    handleItemChange(
-                      item.id,
-                      "quantity",
-                      parseFloat(e.target.value) || 0,
-                    )
-                  }
-                  className="custom-focus"
-                />
-              </div>
-              <div className="col-span-2">
-                <Input
-                  type="number"
-                  step="0.01"
-                  value={item.price}
-                  onChange={(e) =>
-                    handleItemChange(
-                      item.id,
-                      "price",
-                      parseFloat(e.target.value) || 0,
-                    )
-                  }
-                  className="custom-focus"
-                />
-              </div>
-              <div className="col-span-2">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a Tax" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="0">No Tax</SelectItem>
-                    <SelectItem value="10">10%</SelectItem>
-                    <SelectItem value="20">20%</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="col-span-1">
-                <Input
-                  type="number"
-                  step="0.01"
-                  value={item.amount}
-                  onChange={(e) =>
-                    handleItemChange(
-                      item.id,
-                      "amount",
-                      parseFloat(e.target.value) || 0,
-                    )
-                  }
-                />
-              </div>
-              <div className="col-span-1 flex justify-center">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => removeItem(item.id)}
-                  className="h-8 w-8 p-0"
-                >
-                  <Trash2 className="h-4 w-4 text-red-500" />
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="space-y-2 border-t pt-4">
-          <div className="flex justify-between">
-            <span>Sub Total</span>
-            <span>{calculateTotal().subtotal.toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Discount</span>
-            <Input
-              type="number"
-              step="0.01"
-              value={invoiceData.discount}
-              onChange={(e) =>
-                handleInputChange("discount", parseFloat(e.target.value) || 0)
-              }
-              className="w-20 text-right"
-            />
-          </div>
-          <div className="flex justify-between text-lg font-semibold">
-            <span>Total</span>
-            <span>{calculateTotal().total.toFixed(2)}</span>
-          </div>
-        </div>
-      </div>
+      {/* Add Customer Modal */}
+      <DialogModal
+        isOpen={isAddCustomerOpen}
+        onOpenChange={setIsAddCustomerOpen}
+        title="Add New Customer"
+      >
+        <CustomerForm
+          onSave={() => console.log("Customer saved!")}
+          onClose={() => setIsAddCustomerOpen(false)}
+        />
+      </DialogModal>
     </div>
   );
 }

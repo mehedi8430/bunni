@@ -34,6 +34,7 @@ export type TInvoiceItem = {
   price: number;
   tax: number;
   amount: number;
+  taxId: string;
 };
 
 export type TInvoiceTemplate = {
