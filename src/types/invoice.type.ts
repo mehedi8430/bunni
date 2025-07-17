@@ -39,6 +39,7 @@ export type TInvoiceTemplate = {
   type: "default" | "professional" | "modern";
   color: "blue" | "orange" | "green" | "purple";
   preview: string;
+  image: string;
 };
 
 export type TInvoiceData = {

@@ -1,3 +1,4 @@
+import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +10,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
 import type { TInvoiceData, TInvoiceItem } from "@/types";
+import type { TCustomer } from "@/types/customer.type";
 import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -46,6 +49,8 @@ export default function TemplateForm() {
     discount: 0,
     total: 100.0,
   });
+
+  const { customers } = useCustomerApi();
 
   const handleInputChange = (
     field: keyof TInvoiceData,
@@ -103,93 +108,113 @@ export default function TemplateForm() {
 
   return (
     <div className="space-y-6 px-6 pt-6">
-      <div className="space-y-4">
-        <div>
-          <Label htmlFor="title">Invoice title</Label>
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <Label htmlFor="title" className="custom-label">
+            Invoice title
+          </Label>
           <Input
             id="title"
             placeholder="Let your customer know what this invoice is for"
             value={invoiceData.title}
             onChange={(e) => handleInputChange("title", e.target.value)}
+            className="custom-focus"
           />
         </div>
 
-        <div>
-          <Label htmlFor="customer">Customer</Label>
-          <Select
+        <div className="space-y-2">
+          <Label htmlFor="customer" className="custom-label">
+            Customer
+          </Label>
+          <SelectInput
+            options={customers.map((customer: TCustomer) => ({
+              value: customer.id,
+              label: customer.name,
+            }))}
+            placeholder="Select a customer"
             value={invoiceData.customer}
             onValueChange={(value) => handleInputChange("customer", value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="John" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="john">John</SelectItem>
-              <SelectItem value="jane">Jane</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button
-            variant="link"
-            className="mt-1 h-auto p-0 text-sm text-blue-600"
-          >
-            + Add Customer
-          </Button>
+            triggerClassName="w-full"
+          />
+          <div className="flex justify-end">
+            <Button variant="link" className="text-sm font-normal">
+              <Plus /> Add Customer
+            </Button>
+          </div>
         </div>
 
-        <div>
-          <Label htmlFor="invoice-number">Invoice</Label>
+        <div className="space-y-2">
+          <Label htmlFor="invoice-number" className="custom-label">
+            Invoice
+          </Label>
           <Input
             id="invoice-number"
             value={invoiceData.invoiceNumber}
             onChange={(e) => handleInputChange("invoiceNumber", e.target.value)}
+            className="custom-focus"
           />
         </div>
 
-        <div>
-          <Label htmlFor="order-number">Order Number</Label>
+        <div className="space-y-2">
+          <Label htmlFor="order-number" className="custom-label">
+            Order Number
+          </Label>
           <Input
             id="order-number"
             placeholder="Enter order number"
             value={invoiceData.orderNumber}
             onChange={(e) => handleInputChange("orderNumber", e.target.value)}
+            className="custom-focus"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="invoice-date">Invoice Date</Label>
+          <div className="space-y-2">
+            <Label htmlFor="invoice-date" className="custom-label">
+              Invoice Date
+            </Label>
             <Input
               id="invoice-date"
               value={invoiceData.invoiceDate}
               onChange={(e) => handleInputChange("invoiceDate", e.target.value)}
+              className="custom-focus"
             />
           </div>
-          <div>
-            <Label htmlFor="service-date">Service Date</Label>
+          <div className="space-y-2">
+            <Label htmlFor="service-date" className="custom-label">
+              Service Date
+            </Label>
             <Input
               id="service-date"
               value={invoiceData.serviceDate}
               onChange={(e) => handleInputChange("serviceDate", e.target.value)}
+              className="custom-focus"
             />
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="due-date">Due Date</Label>
+        <div className="space-y-2">
+          <Label htmlFor="due-date" className="custom-label">
+            Due Date
+          </Label>
           <Input
             id="due-date"
             value={invoiceData.dueDate}
             onChange={(e) => handleInputChange("dueDate", e.target.value)}
+            className="custom-focus"
           />
         </div>
 
-        <div>
-          <Label htmlFor="footer-terms">Footer & Terms</Label>
+        <div className="space-y-2">
+          <Label htmlFor="footer-terms" className="custom-label">
+            Footer & Terms
+          </Label>
           <Textarea
             id="footer-terms"
             value={invoiceData.footerTerms}
             onChange={(e) => handleInputChange("footerTerms", e.target.value)}
             rows={3}
+            className="custom-focus"
           />
         </div>
       </div>
@@ -222,6 +247,7 @@ export default function TemplateForm() {
                   onChange={(e) =>
                     handleItemChange(item.id, "description", e.target.value)
                   }
+                  className="custom-focus"
                 />
               </div>
               <div className="col-span-2">
@@ -235,6 +261,7 @@ export default function TemplateForm() {
                       parseFloat(e.target.value) || 0,
                     )
                   }
+                  className="custom-focus"
                 />
               </div>
               <div className="col-span-2">
@@ -249,6 +276,7 @@ export default function TemplateForm() {
                       parseFloat(e.target.value) || 0,
                     )
                   }
+                  className="custom-focus"
                 />
               </div>
               <div className="col-span-2">
