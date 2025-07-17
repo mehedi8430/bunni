@@ -1,5 +1,5 @@
 import type { TInvoiceTemplate } from "@/types";
-import { ReactSVG } from "react-svg";
+// import { ReactSVG } from "react-svg";
 
 export default function TemplateCard({
   template,
@@ -10,8 +10,13 @@ export default function TemplateCard({
     <article className="bg-sidebar hover:border-border rounded-xl p-[16px] transition-all duration-200 hover:border">
       <div className="space-y-4">
         {/* Template Preview */}
-        <div className="flex h-[210px] w-full items-center justify-center rounded-xl">
-          <ReactSVG src={template.image} />
+        <div className="flex h-full w-full justify-center rounded-xl">
+          {/* <ReactSVG src={template.image} /> */}
+          <img
+            src={template.image}
+            alt="Template Image"
+            className="object-cover"
+          />
         </div>
 
         {/* Template Info */}
