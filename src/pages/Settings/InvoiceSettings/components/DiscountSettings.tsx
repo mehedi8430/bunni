@@ -151,7 +151,7 @@ export default function DiscountSettings() {
       <DialogModal
         isOpen={isEditDiscountOpen}
         onOpenChange={setIsEditDiscountOpen}
-        title={editDiscount.id ? "Edit Discount" : "Add New Discount"}
+        title={editDiscount.id ? "Edit Discount" : "Create  Discount"}
       >
         <DiscountForm
           discount={editDiscount}
