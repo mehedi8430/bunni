@@ -1,4 +1,6 @@
 import { icons } from "@/lib/imageProvider";
+import { CircleX } from "lucide-react";
+import { Link } from "react-router";
 
 interface SuccessChangeProps {
     onClose?: () => void;
@@ -6,25 +8,23 @@ interface SuccessChangeProps {
 
 export default function SuccessChange({ onClose }: SuccessChangeProps) {
     return (
-        <div className="bg-white rounded-2xl shadow-xl w-full p-8 text-center relative">
+        <div className="bg-white rounded-2xl shadow-xl max-w-2xl p-8  text-center relative">
             {/* Close Button */}
-            <div 
-                className="absolute top-4 right-4 bg-blue-50 rounded-full p-2 cursor-pointer flex items-center justify-center w-10 h-10 transition-colors duration-200 hover:bg-blue-100"
+            <div
+                className="absolute top-5 right-5 text-primary flex items-center justify-center"
                 onClick={onClose}
             >
-                <svg className="text-teal-700 text-xl" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+                <CircleX strokeWidth={1.5} size={28} className="cursor-pointer" />
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-semibold text-gray-800 mt-4 mb-2">
-                Profile Updated Successfully!
+            <h1 className="text-3xl font-normal text-foreground leading-12 mt-4 mb-2">
+                Password Changed <br /> Successfully!
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base text-gray-600 mb-8">
-                Your profile settings have been saved successfully
+            <p className="text-lg font-normal text-foreground/40 mb-8">
+                You can now sign in with your new password
             </p>
 
             {/* Image */}
@@ -37,26 +37,28 @@ export default function SuccessChange({ onClose }: SuccessChangeProps) {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button 
-                    className="py-3 px-6 rounded-xl font-medium transition-colors duration-200 w-full
-                             bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
-                    onClick={onClose}
-                >
-                    Close
-                </button>
-                <button 
-                    className="py-3 px-6 rounded-xl font-medium transition-colors duration-200 w-full
-                             bg-green-500 text-white border border-green-500 hover:bg-green-600"
-                    onClick={onClose}
-                >
-                    Continue
-                </button>
+            <div className="flex flex-col sm:flex-row gap-6 mb-8">
+                <Link to={"/dashboard"} className="w-full">
+                    <button
+                        className="py-3 px-8 rounded-md text-lg font-normal w-full
+                             bg-white border border-primary text-foreground text-nowrap cursor-pointer"
+                    >
+                        Back to Dashboard
+                    </button>
+                </Link>
+                <Link to={"/auth/login"} className="w-full">
+                    <button
+                        className="py-3 px-8 rounded-md text-lg font-medium w-full
+                             bg-primary text-white text-nowrap cursor-pointer"
+                    >
+                        Sign in Now
+                    </button>
+                </Link>
             </div>
 
             {/* Footer Text */}
-            <p className="text-sm text-gray-400">
-                Your profile changes have been saved successfully
+            <p className="text-sm text-foreground/40 font-normal md:text-nowrap">
+                Remember to keep your password secure and never share it with anyone
             </p>
         </div>
     )
