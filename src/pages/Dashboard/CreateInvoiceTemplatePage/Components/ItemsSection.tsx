@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Plus, Trash2 } from "lucide-react";
+import { ImageIcon, Plus, Trash2, X } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -43,6 +43,23 @@ export default function ItemsSection({
     setInvoiceData((prev) => ({
       ...prev,
       items: prev.items.filter((item) => item.id !== itemId),
+    }));
+  };
+
+  const addNewItem = () => {
+    const newItem: TInvoiceItem = {
+      id: crypto.randomUUID(),
+      description: "",
+      quantity: 1,
+      price: 0,
+      tax: 0,
+      taxId: mockTaxRates[0]?.id || "",
+      amount: 0,
+    };
+
+    setInvoiceData((prev) => ({
+      ...prev,
+      items: [...prev.items, newItem],
     }));
   };
 
@@ -96,7 +113,7 @@ export default function ItemsSection({
               <TableHead className="border-border w-[15%] border-r-2 text-right">
                 Amount
               </TableHead>
-              <TableHead className="w-[5%] text-right"></TableHead>{" "}
+              <TableHead className="w-[5%] text-right"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -139,7 +156,7 @@ export default function ItemsSection({
                 <TableCell className="border-border border-r-2 py-2">
                   <Input
                     type="number"
-                    value={item.price.toFixed(2)} // Format to 2 decimal places
+                    value={item.price.toFixed(2)}
                     onChange={(e) =>
                       handleItemChange(item.id, "price", Number(e.target.value))
                     }
@@ -173,7 +190,7 @@ export default function ItemsSection({
                 <TableCell className="border-border border-r-2 py-2 text-right">
                   <Input
                     type="number"
-                    value={item.amount.toFixed(2)} // Display calculated amount
+                    value={item.amount.toFixed(2)}
                     readOnly
                     className="w-full rounded-md border bg-gray-50 px-2 py-1 text-right dark:bg-gray-700"
                   />
@@ -187,7 +204,7 @@ export default function ItemsSection({
                     onClick={() => removeItem(item.id)}
                     className="text-gray-500 hover:text-red-500"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <X className="size-5" />
                   </Button>
                 </TableCell>
               </TableRow>
@@ -197,12 +214,16 @@ export default function ItemsSection({
       </div>
 
       <div className="flex justify-center">
-        <Button variant={"link"} className="text-muted-foreground text-sm">
+        <Button
+          variant="link"
+          className="text-muted-foreground text-sm"
+          onClick={addNewItem}
+        >
           <Plus /> Add New Row
         </Button>
       </div>
 
-      {/* Totals Section (Optional, based on image, but good to include) */}
+      {/* Totals Section */}
       <div className="space-y-4">
         <div className="flex justify-between">
           <span className="text-lg font-normal">Subtotal:</span>

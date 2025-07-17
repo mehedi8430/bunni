@@ -150,7 +150,7 @@ export default function TaxRatesSettings() {
       <DialogModal
         isOpen={isEditTaxRateOpen}
         onOpenChange={setIsEditTaxRateOpen}
-        title={editTaxRate.id ? "Edit Tax Rate" : "Add New Tax Rate"}
+        title={editTaxRate.id ? "Edit Tax Rates Settings" : "Create Tax Rates Settings"}
       >
         <TaxRateForm
           taxRate={editTaxRate}

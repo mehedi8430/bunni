@@ -43,7 +43,7 @@ export default function PricingPlanCard({
             </div>
             <div>
                 <button
-                    className={`w-full py-3.5 px-6 rounded-lg font-normal text-lg bg-primary text-white ${isCurrentPlan}`}
+                    className={`w-full py-3.5 px-6 rounded-lg font-normal text-lg bg-primary text-white cursor-pointer ${isCurrentPlan}`}
                 >
                     {buttonText}
                 </button>
