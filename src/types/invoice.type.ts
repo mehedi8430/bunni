@@ -14,6 +14,7 @@ export type TDiscount = {
   amount: string | number;
   createdDate: string;
   status: "Active" | "Inactive";
+  type: "Percentage" | "Fixed Amount" | "Free Shipping";
 };
 
 export type TTaxRate = {
