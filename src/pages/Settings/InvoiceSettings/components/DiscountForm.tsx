@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import type { TDiscount } from "@/types";
+import useDiscount from "../hooks/use-discount";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import SelectInput from "@/components/SelectInput";
 
 interface DiscountFormProps {
   discount: Partial<TDiscount>;
@@ -15,98 +16,167 @@ export default function DiscountForm({
   onSave,
   onClose,
 }: DiscountFormProps) {
-  const [formData, setFormData] = useState<Partial<TDiscount>>({
-    id: discount.id || "",
-    name: discount.name || "",
-    amount: discount.amount || 0,
-    status: discount.status || "Active",
+
+  const { form, onSubmit } = useDiscount({
+    discount,
+    onSave,
+    onClose,
   });
-  const [errors, setErrors] = useState<{ name?: string; amount?: string }>({});
 
-  useEffect(() => {
-    setFormData({
-      id: discount.id || "",
-      name: discount.name || "",
-      amount: discount.amount || 0,
-      status: discount.status || "Active",
-    });
-  }, [discount]);
+  // const [formData, setFormData] = useState<Partial<TDiscount>>({
+  //   id: discount.id || "",
+  //   name: discount.name || "",
+  //   amount: discount.amount || 0,
+  //   status: discount.status || "Active",
+  // });
+  // const [errors, setErrors] = useState<{ name?: string; amount?: string }>({});
 
-  const validateForm = () => {
-    const newErrors: { name?: string; amount?: string } = {};
-    if (!formData.name?.trim()) {
-      newErrors.name = "Name is required";
-    }
-    const amountNum = typeof formData.amount === "string" ? parseFloat(formData.amount) : formData.amount;
-    if (amountNum === undefined || isNaN(amountNum) || amountNum < 0) {
-      newErrors.amount = "Amount must be a non-negative number";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  // useEffect(() => {
+  //   setFormData({
+  //     id: discount.id || "",
+  //     name: discount.name || "",
+  //     amount: discount.amount || 0,
+  //     status: discount.status || "Active",
+  //   });
+  // }, [discount]);
 
-  const handleSubmit = () => {
-    if (!validateForm()) return;
+  // const validateForm = () => {
+  //   const newErrors: { name?: string; amount?: string } = {};
+  //   if (!formData.name?.trim()) {
+  //     newErrors.name = "Name is required";
+  //   }
+  //   const amountNum = typeof formData.amount === "string" ? parseFloat(formData.amount) : formData.amount;
+  //   if (amountNum === undefined || isNaN(amountNum) || amountNum < 0) {
+  //     newErrors.amount = "Amount must be a non-negative number";
+  //   }
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
-    const updatedDiscount: TDiscount = {
-      id: formData.id || `discount-${Date.now()}`,
-      name: formData.name || "",
-      amount: formData.amount || 0,
-      status: formData.status || "Active",
-      createdDate: formData.id
-        ? discount.createdDate || new Date().toISOString()
-        : new Date().toISOString(),
-    };
+  // const handleSubmit = () => {
+  //   if (!validateForm()) return;
 
-    onSave(updatedDiscount);
-    onClose();
-  };
+  //   const updatedDiscount: TDiscount = {
+  //     id: formData.id || `discount-${Date.now()}`,
+  //     name: formData.name || "",
+  //     amount: formData.amount || 0,
+  //     status: formData.status || "Active",
+  //     createdDate: formData.id
+  //       ? discount.createdDate || new Date().toISOString()
+  //       : new Date().toISOString(),
+  //   };
+
+  //   onSave(updatedDiscount);
+  //   onClose();
+  // };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <Label htmlFor="name" className="text-sm font-medium">
-          Discount Name
-        </Label>
-        <Input
-          id="name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="mt-1"
-          placeholder="Enter discount name"
-        />
-        {errors.name && (
-          <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-        )}
-      </div>
-      <div>
-        <Label htmlFor="amount" className="text-sm font-medium">
-          Amount (%)
-        </Label>
-        <Input
-          id="amount"
-          type="number"
-          value={formData.amount}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              amount: parseFloat(e.target.value) || 0,
-            })
-          }
-          className="mt-1"
-          placeholder="Enter discount amount"
-          min="0"
-        />
-        {errors.amount && (
-          <p className="mt-1 text-sm text-red-500">{errors.amount}</p>
-        )}
-      </div>
-      <div className="flex justify-end space-x-2">
-        <Button variant="outline" onClick={onClose}>
-          Cancel
-        </Button>
-        <Button onClick={handleSubmit}>Save</Button>
-      </div>
-    </div>
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4">
+
+          {/* Product Name */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-normal">Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Let your customer kno what this Invoice is for"
+                    {...field}
+                    className="custom-focus"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+
+          {/* Type */}
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-lg font-normal">Type</FormLabel>
+                <FormControl>
+                  <SelectInput
+                    options={[
+                      { value: "Percentage", label: "Percentage" },
+                      { value: "Fixed Amount", label: "Fixed Amount" },
+                      { value: "Free Shipping", label: "Free Shipping" },
+                    ]}
+                    placeholder="Select type"
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    triggerClassName="custom-focus w-full"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+            {/* Price */}
+            <FormField
+              control={form.control}
+              name="amount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-normal">Amount</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      placeholder="e.g. 10 for 10% or 50 for $50"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                      className="custom-focus"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+
+            {/* Status */}
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="text-lg font-normal">Status</FormLabel>
+                  <FormControl>
+                    <SelectInput
+                      options={[
+                        { value: "Active", label: "Active" },
+                        { value: "Inactive", label: "Inactive" },
+                      ]}
+                      placeholder="Select type"
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      triggerClassName="custom-focus w-full"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+          <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
+          {/* Buttons */}
+          <div className="flex items-center justify-center md:justify-end gap-3">
+            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+              Cancel
+            </Button>
+            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Next</Button>
+          </div>
+        </form>
+      </Form>
+    </>
   );
 }

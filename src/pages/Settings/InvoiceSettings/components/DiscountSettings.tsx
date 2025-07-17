@@ -1,15 +1,7 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { invoiceApi } from "@/mockApi/invoiceApi";
 import type { TDiscount } from "@/types";
@@ -90,33 +82,30 @@ export default function DiscountSettings() {
       cell: ({ row }) => {
         const discount = row.original;
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => {
+           <div className="space-x-2">
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              onClick={() => {
                   setEditDiscount(discount);
                   setIsEditDiscountOpen(true);
                 }}
-              >
-                <Edit className="mr-2 h-4 w-4" /> Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
+              className="cursor-pointer bg-white"
+            >
+              Edit
+            </Button>
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              onClick={() => {
                   setDiscountToDelete(discount.id);
                   setIsDeleteDiscountOpen(true);
                 }}
-              >
-                <Trash className="mr-2 h-4 w-4" /> Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              className="cursor-pointer bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white border-none"
+            >
+              Delete
+            </Button>
+          </div>
         );
       },
     },
@@ -146,7 +135,7 @@ export default function DiscountSettings() {
         searchTerm={searchTermDiscount}
         handleFilterChange={handleFilterChangeDiscount}
         setIsEditOpen={setIsEditDiscountOpen}
-        setEditProduct={setEditDiscount}
+        setEditDiscount={setEditDiscount}
       />
       <DataTable
         data={dataDiscount}

@@ -1,20 +1,20 @@
 import SearchInput from "@/components/SearchInput";
 import { Button } from "@/components/ui/button";
-import type { TProduct } from "@/types";
+import type { TDiscount,} from "@/types";
 import { Funnel, Plus } from "lucide-react";
 
 type DiscountTableActionsProps = {
   searchTerm: string;
   handleFilterChange: (search: string) => void;
   setIsEditOpen: (open: boolean) => void;
-  setEditProduct: (product: Partial<TProduct>) => void;
+  setEditDiscount: (product: Partial<TDiscount>) => void;
 };
 
 export default function DiscountTableActions({
   searchTerm,
   handleFilterChange,
   setIsEditOpen,
-  setEditProduct,
+  setEditDiscount,
 }: DiscountTableActionsProps) {
   return (
     <div className="flex flex-col items-center justify-between p-4 max-md:gap-4 md:flex-row">
@@ -39,11 +39,11 @@ export default function DiscountTableActions({
         className="text-sm font-normal md:text-lg"
         onClick={() => {
           setIsEditOpen(true);
-          setEditProduct({});
+          setEditDiscount({});
         }}
       >
         <Plus />
-        Add Member
+        Add Discount
       </Button>
     </div>
   );
