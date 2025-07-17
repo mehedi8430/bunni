@@ -17,7 +17,11 @@ export const useFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof useFormSchema>;
 
-export default function UseProfileForm() {
+interface UseProfileFormProps {
+    onSuccess?: () => void;
+}
+
+export default function UseProfileForm({ onSuccess }: UseProfileFormProps = {}) {
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(useFormSchema),
@@ -38,6 +42,12 @@ export default function UseProfileForm() {
     const onSubmit = (data: ProfileFormValues) => {
         // Handle form submission logic here
         console.log("Form submitted with data:", data);
+        
+        // Simulate API call or actual submission
+        // After successful submission, call the success callback
+        if (onSuccess) {
+            onSuccess();
+        }
     }
 
     return { form, onSubmit }

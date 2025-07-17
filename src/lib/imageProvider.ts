@@ -51,6 +51,7 @@ import revinue from '../assets/icons/revinue.svg';
 import groupuser from '../assets/icons/groupuser.svg';
 import dolar from '../assets/icons/dolar.svg';
 import outstanding from '../assets/icons/outstanding.svg';
+import successIcon from '../assets/icons/successIcon.svg';
 
 
 // Type definitions for better type safety
@@ -148,6 +149,7 @@ export const icons: IconAssets = {
   groupuser,
   dolar,
   outstanding,
+  successIcon,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
