@@ -13,42 +13,46 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
 import type { TInvoiceData, TInvoiceItem } from "@/types";
 import type { TCustomer } from "@/types/customer.type";
+import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
 import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
+const initialInvoiceData: TInvoiceData = {
+  title: "",
+  customer: "",
+  invoiceNumber: "",
+  orderNumber: "",
+  invoiceDate: getTodayDate(),
+  serviceDate: getTodayDateWithTime(),
+  dueDate: "05 Feb 2025",
+  footerTerms:
+    "Payment is due within 15 days from the date of invoice. Please make checks payable to Acme Inc. or use the online payment link provided in this email.",
+  items: [
+    {
+      id: "1",
+      description: "",
+      quantity: 10,
+      price: 10.0,
+      tax: 0,
+      amount: 100.0,
+    },
+    {
+      id: "2",
+      description: "",
+      quantity: 100,
+      price: 0.0,
+      tax: 0,
+      amount: 0.0,
+    },
+  ],
+  subtotal: 100.0,
+  discount: 0,
+  total: 100.0,
+};
+
 export default function TemplateForm() {
-  const [invoiceData, setInvoiceData] = useState<TInvoiceData>({
-    title: "",
-    customer: "",
-    invoiceNumber: "INV-000003",
-    orderNumber: "",
-    invoiceDate: "05 Feb 2025",
-    serviceDate: "05 Feb 2025  8:52pm",
-    dueDate: "05 Feb 2025",
-    footerTerms:
-      "Payment is due within 15 days from the date of invoice. Please make checks payable to Acme Inc. or use the online payment link provided in this email.",
-    items: [
-      {
-        id: "1",
-        description: "",
-        quantity: 10,
-        price: 10.0,
-        tax: 0,
-        amount: 100.0,
-      },
-      {
-        id: "2",
-        description: "",
-        quantity: 100,
-        price: 0.0,
-        tax: 0,
-        amount: 0.0,
-      },
-    ],
-    subtotal: 100.0,
-    discount: 0,
-    total: 100.0,
-  });
+  const [invoiceData, setInvoiceData] =
+    useState<TInvoiceData>(initialInvoiceData);
 
   const { customers } = useCustomerApi();
 
@@ -152,6 +156,7 @@ export default function TemplateForm() {
             value={invoiceData.invoiceNumber}
             onChange={(e) => handleInputChange("invoiceNumber", e.target.value)}
             className="custom-focus"
+            placeholder="Enter invoice number"
           />
         </div>
 

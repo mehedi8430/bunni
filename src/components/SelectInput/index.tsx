@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 export interface SelectOption {
   value: string;
@@ -53,7 +54,9 @@ export default function SelectInput({
       required={required}
       {...props}
     >
-      <SelectTrigger className={triggerClassName}>
+      <SelectTrigger
+        className={cn("text-muted-foreground text-[16px]", triggerClassName)}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className={contentClassName}>

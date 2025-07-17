@@ -54,6 +54,7 @@ import outstanding from "../assets/icons/outstanding.svg";
 
 import invoice_template from "../assets/images/invoice_template.svg";
 import budget_report_template from "../assets/images/budget_report_template.svg";
+import successIcon from "../assets/icons/successIcon.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
