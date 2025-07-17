@@ -23,53 +23,6 @@ export default function DiscountForm({
     onClose,
   });
 
-  // const [formData, setFormData] = useState<Partial<TDiscount>>({
-  //   id: discount.id || "",
-  //   name: discount.name || "",
-  //   amount: discount.amount || 0,
-  //   status: discount.status || "Active",
-  // });
-  // const [errors, setErrors] = useState<{ name?: string; amount?: string }>({});
-
-  // useEffect(() => {
-  //   setFormData({
-  //     id: discount.id || "",
-  //     name: discount.name || "",
-  //     amount: discount.amount || 0,
-  //     status: discount.status || "Active",
-  //   });
-  // }, [discount]);
-
-  // const validateForm = () => {
-  //   const newErrors: { name?: string; amount?: string } = {};
-  //   if (!formData.name?.trim()) {
-  //     newErrors.name = "Name is required";
-  //   }
-  //   const amountNum = typeof formData.amount === "string" ? parseFloat(formData.amount) : formData.amount;
-  //   if (amountNum === undefined || isNaN(amountNum) || amountNum < 0) {
-  //     newErrors.amount = "Amount must be a non-negative number";
-  //   }
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
-
-  // const handleSubmit = () => {
-  //   if (!validateForm()) return;
-
-  //   const updatedDiscount: TDiscount = {
-  //     id: formData.id || `discount-${Date.now()}`,
-  //     name: formData.name || "",
-  //     amount: formData.amount || 0,
-  //     status: formData.status || "Active",
-  //     createdDate: formData.id
-  //       ? discount.createdDate || new Date().toISOString()
-  //       : new Date().toISOString(),
-  //   };
-
-  //   onSave(updatedDiscount);
-  //   onClose();
-  // };
-
   return (
     <>
       <Form {...form}>

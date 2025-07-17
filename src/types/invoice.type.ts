@@ -22,7 +22,9 @@ export type TTaxRate = {
   name: string;
   amount: string | number;
   createdDate: string;
-  lastLogin: string;
+  lastLogin?: string;
+  rate: string;
+  status: "Active" | "Inactive";
 };
 
 export type TInvoiceItem = {
