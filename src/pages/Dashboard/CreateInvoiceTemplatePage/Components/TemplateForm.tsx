@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
+import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import type { TInvoiceData, TInvoiceItem } from "@/types";
 import type { TCustomer } from "@/types/customer.type";
 import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
@@ -76,21 +76,6 @@ export default function TemplateForm() {
       items: prev.items.map((item) =>
         item.id === itemId ? { ...item, [field]: value } : item,
       ),
-    }));
-  };
-
-  const addNewItem = () => {
-    const newItem: TInvoiceItem = {
-      id: Date.now().toString(),
-      description: "",
-      quantity: 1,
-      price: 0,
-      tax: 0,
-      amount: 0,
-    };
-    setInvoiceData((prev) => ({
-      ...prev,
-      items: [...prev.items, newItem],
     }));
   };
 
@@ -225,13 +210,10 @@ export default function TemplateForm() {
       </div>
 
       {/* Items Section */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Select Item</h3>
-          <Button variant="outline" size="sm" onClick={addNewItem}>
-            <Plus className="mr-1 h-4 w-4" />
-            Add New Row
-          </Button>
+      <div className="space-y-6">
+        <div>
+          <h3 className="px-4 text-2xl font-semibold">Select Item</h3>
+          <div className="border-border mt-5 border-t" />
         </div>
 
         <div className="space-y-3">

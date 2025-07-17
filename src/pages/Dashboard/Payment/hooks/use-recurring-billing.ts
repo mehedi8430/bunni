@@ -1,48 +1,47 @@
-import { useCustomerApi } from "@/redux/features/customers/useCustomerApi";
+import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 // Zod schema
 export const recurringBillingFormSchema = z.object({
-    customer: z.string().min(1, { message: "Customer is required" }),
-    amount: z
-        .number({ invalid_type_error: "Enter a valid amount" })
-        .positive({ message: "Amount must be positive" }),
-    interval: z.enum(["Monthly", "Quarterly", "Annually", "Weekly", "Daily"], {
-        errorMap: () => ({ message: "Please select a valid interval." }),
-    }),
-    paymentMethod: z.enum(["Card", "Bank Transfer", "PayPal", "Other"], {
-        errorMap: () => ({ message: "Please select a valid payment method." }),
-    }),
+  customer: z.string().min(1, { message: "Customer is required" }),
+  amount: z
+    .number({ invalid_type_error: "Enter a valid amount" })
+    .positive({ message: "Amount must be positive" }),
+  interval: z.enum(["Monthly", "Quarterly", "Annually", "Weekly", "Daily"], {
+    errorMap: () => ({ message: "Please select a valid interval." }),
+  }),
+  paymentMethod: z.enum(["Card", "Bank Transfer", "PayPal", "Other"], {
+    errorMap: () => ({ message: "Please select a valid payment method." }),
+  }),
 });
 
 type RecurringBillingFormValues = z.infer<typeof recurringBillingFormSchema>;
 
 export interface RecurringBillingFormProps {
-    onClose: () => void;
-    onSend: (data: RecurringBillingFormValues) => void;
+  onClose: () => void;
+  onSend: (data: RecurringBillingFormValues) => void;
 }
 
 export default function useRecurringBilling() {
+  const { customers } = useCustomerApi();
 
-    const { customers } = useCustomerApi();
+  const form = useForm<RecurringBillingFormValues>({
+    resolver: zodResolver(recurringBillingFormSchema),
+    defaultValues: {
+      customer: customers[0]?.id ?? "",
+      amount: 0,
+      interval: "Monthly",
+      paymentMethod: "Card",
+    },
+  });
 
-    const form = useForm<RecurringBillingFormValues>({
-        resolver: zodResolver(recurringBillingFormSchema),
-        defaultValues: {
-            customer: customers[0]?.id ?? "",
-            amount: 0,
-            interval: "Monthly",
-            paymentMethod: "Card",
-        },
-    });
-
-    // 2. Define a submit handler.
-    function onSubmit(data: RecurringBillingFormValues) {
-        // Do something with the form values.
-        // This will be type-safe and validated.
-        console.log(data);
-    }
-    return { form, onSubmit, customers };
+  // 2. Define a submit handler.
+  function onSubmit(data: RecurringBillingFormValues) {
+    // Do something with the form values.
+    // This will be type-safe and validated.
+    console.log(data);
+  }
+  return { form, onSubmit, customers };
 }
