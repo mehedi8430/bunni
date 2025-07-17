@@ -101,7 +101,7 @@ export function ImageUpload({ value, onChange, className, disabled }: ImageUploa
                         </div>
                     ) : (
                         <div className="relative flex items-center justify-center rounded-full h-20 w-20 mb-2">
-                            <img src="https://avatar.iran.liara.run/public" alt="" className={`size-20 rounded-full`} />
+                            <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" alt="" className={`size-20 rounded-full`} />
                             <div onClick={handleClick} className="absolute bottom-0 right-0 bg-primary text-white rounded-full p-2 cursor-pointer">
                                 <Pencil size={16} />
                             </div>

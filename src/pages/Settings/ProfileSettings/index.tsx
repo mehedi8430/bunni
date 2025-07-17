@@ -18,7 +18,7 @@ export default function ProfileSettingsPage() {
 
       {/* Success Modal */}
       <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
-        <DialogContent className="max-w-2xl p-0 bg-transparent border-none shadow-none">
+        <DialogContent className="p-0 bg-transparent border-none shadow-none">
           <SuccessChange onClose={() => setIsSuccessOpen(false)} />
         </DialogContent>
       </Dialog>
