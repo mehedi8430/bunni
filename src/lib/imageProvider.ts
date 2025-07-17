@@ -55,6 +55,10 @@ import outstanding from "../assets/icons/outstanding.svg";
 import invoice_template from "../assets/images/invoice_template.svg";
 import budget_report_template from "../assets/images/budget_report_template.svg";
 import successIcon from "../assets/icons/successIcon.svg";
+import checkIcon from '../assets/icons/checkIcon.svg';
+import crossIcon from '../assets/icons/crossIcon.svg';
+import starIcon from '../assets/icons/starIcon.svg';
+import stripeIcon from '../assets/icons/stripeIcon.svg';
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -154,6 +158,10 @@ export const icons: IconAssets = {
   dolar,
   outstanding,
   successIcon,
+  checkIcon,
+  crossIcon,
+  starIcon,
+  stripeIcon,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

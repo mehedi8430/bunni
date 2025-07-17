@@ -44,6 +44,8 @@ export const mockTaxRates: TTaxRate[] = [
     amount: "10%",
     createdDate: "Jun 28, 2025, 6:03 AM",
     lastLogin: "Pending Invitation",
+    rate: "Percentage",
+    status: "Active",
   },
   {
     id: "TAX-0002",
@@ -51,6 +53,8 @@ export const mockTaxRates: TTaxRate[] = [
     amount: "$50.00",
     createdDate: "Jun 28, 2025, 6:03 AM",
     lastLogin: "Jun 28, 2025, 6:03 AM",
+    rate: "Fixed Amount",
+    status: "Inactive",
   },
   {
     id: "TAX-0003",
@@ -58,6 +62,8 @@ export const mockTaxRates: TTaxRate[] = [
     amount: "15%",
     createdDate: "Jun 28, 2025, 2:03 PM",
     lastLogin: "Jun 28, 2025, 2:03 PM",
+    rate: "Percentage",
+    status: "Inactive",
   },
   {
     id: "TAX-0004",
@@ -65,6 +71,8 @@ export const mockTaxRates: TTaxRate[] = [
     amount: "5%",
     createdDate: "Jun 28, 2025, 2:03 PM",
     lastLogin: "Jun 28, 2025, 2:03 PM",
+    rate: "Percentage",
+    status: "Active",
   },
 ];
 
@@ -269,7 +277,7 @@ export const invoiceApi = {
         (tax) =>
           tax.name.toLowerCase().includes(searchTerm) ||
           String(tax.amount).toLowerCase().includes(searchTerm) ||
-          tax.lastLogin.toLowerCase().includes(searchTerm) ||
+          tax.lastLogin?.toLowerCase().includes(searchTerm) ||
           tax.createdDate.toLowerCase().includes(searchTerm),
       );
     }

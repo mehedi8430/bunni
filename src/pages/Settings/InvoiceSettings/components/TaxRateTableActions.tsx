@@ -43,7 +43,7 @@ export default function TaxRateTableActions({
         }}
       >
         <Plus />
-        Add Member
+        Add Tax Rate
       </Button>
     </div>
   );
