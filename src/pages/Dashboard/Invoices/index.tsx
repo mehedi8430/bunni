@@ -32,7 +32,7 @@ export default function InvoicesPage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Modal states
-  const [selectedInvoice, setSelectedInvoice] = useState<TInvoice | null>(null);
+  const [, setSelectedInvoice] = useState<TInvoice | null>(null);
   const [isViewOpen, setIsViewOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editInvoice, setEditInvoice] = useState<Partial<TInvoice>>({});
