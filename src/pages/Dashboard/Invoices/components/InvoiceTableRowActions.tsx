@@ -1,12 +1,14 @@
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal,} from "lucide-react";
 import type { TInvoice } from "@/types";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { MoreHorizontal } from "lucide-react";
+import MyDocument from "./Document";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
@@ -36,23 +38,23 @@ export default function InvoiceTableRowActions({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="p-0 border border-border">
-
+      <DropdownMenuContent align="end" className="border-border border p-0">
         <DropdownMenuItem
           onClick={() => {
             console.log("Download Invoice");
           }}
-          className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
         >
-          {/* <Download className="h-4 w-4" /> */}
-          Download
+          <PDFDownloadLink document={<MyDocument />} fileName="invoice.pdf">
+            {({ loading }) => (loading ? "Preparing document..." : "Download")}
+          </PDFDownloadLink>
         </DropdownMenuItem>
 
         <DropdownMenuItem
           onClick={() => {
             console.log("Copy Link");
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Copy className="h-4 w-4" />  */}
           Copy Link
@@ -63,7 +65,7 @@ export default function InvoiceTableRowActions({
             setSelectedInvoice(invoice);
             setIsViewOpen(true);
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Eye className="h-4 w-4" />  */}
           Preview
@@ -73,7 +75,7 @@ export default function InvoiceTableRowActions({
           onClick={() => {
             console.log("Void Invoice");
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Ban className="h-4 w-4" />  */}
           Void
@@ -83,7 +85,7 @@ export default function InvoiceTableRowActions({
           onClick={() => {
             console.log("Refund Invoice");
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <BanknoteArrowDown className="h-4 w-4" />  */}
           Refund
@@ -93,7 +95,7 @@ export default function InvoiceTableRowActions({
           onClick={() => {
             console.log("Resend Invoice");
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <SendToBack className="h-4 w-4" />  */}
           Resend
@@ -104,7 +106,7 @@ export default function InvoiceTableRowActions({
             setEditInvoice(invoice);
             setIsEditOpen(true);
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Edit className="h-4 w-4" />  */}
           Edit
@@ -114,7 +116,7 @@ export default function InvoiceTableRowActions({
             setInvoiceToDelete(invoice.id);
             setIsDeleteOpen(true);
           }}
-          className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Trash className="h-4 w-4" />  */}
           Delete
