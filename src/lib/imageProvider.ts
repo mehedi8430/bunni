@@ -55,10 +55,11 @@ import outstanding from "../assets/icons/outstanding.svg";
 import invoice_template from "../assets/images/invoice_template.svg";
 import budget_report_template from "../assets/images/budget_report_template.svg";
 import successIcon from "../assets/icons/successIcon.svg";
-import checkIcon from '../assets/icons/checkIcon.svg';
-import crossIcon from '../assets/icons/crossIcon.svg';
-import starIcon from '../assets/icons/starIcon.svg';
-import stripeIcon from '../assets/icons/stripeIcon.svg';
+import checkIcon from "../assets/icons/checkIcon.svg";
+import crossIcon from "../assets/icons/crossIcon.svg";
+import starIcon from "../assets/icons/starIcon.svg";
+import stripeIcon from "../assets/icons/stripeIcon.svg";
+import addIcon from "../assets/icons/add-icon.svg";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -90,6 +91,7 @@ export interface IconAssets {
   export_icon: string;
   doller_up: string;
   pending: string;
+  addIcon: string;
   [key: string]: string;
 }
 
@@ -162,6 +164,7 @@ export const icons: IconAssets = {
   crossIcon,
   starIcon,
   stripeIcon,
+  addIcon,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.

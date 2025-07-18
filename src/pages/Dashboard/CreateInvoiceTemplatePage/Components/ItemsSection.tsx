@@ -1,14 +1,7 @@
 import type { TInvoiceData, TInvoiceItem } from "@/types";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Plus, Trash2, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -18,6 +11,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { mockTaxRates } from "@/mockApi/invoiceApi";
+import { ReactSVG } from "react-svg";
+import assets from "@/lib/imageProvider";
+import SelectInput from "@/components/SelectInput";
 
 export default function ItemsSection({
   invoiceData,
@@ -46,7 +42,7 @@ export default function ItemsSection({
     }));
   };
 
-  const addNewItem = () => {
+  const addNewRow = () => {
     const newItem: TInvoiceItem = {
       id: crypto.randomUUID(),
       description: "",
@@ -98,19 +94,19 @@ export default function ItemsSection({
         <Table>
           <TableHeader className="border-b-2">
             <TableRow className="bg-gray-50 dark:bg-gray-800">
-              <TableHead className="border-border w-[40%] border-r-2 text-left">
+              <TableHead className="border-border w-[40%] border-r-2 text-left text-sm font-normal">
                 Item Details
               </TableHead>
-              <TableHead className="border-border w-[15%] border-r-2 text-center">
+              <TableHead className="border-border w-[15%] border-r-2 text-center text-sm font-normal">
                 Quantity
               </TableHead>
-              <TableHead className="border-border w-[15%] border-r-2 text-center">
+              <TableHead className="border-border w-[15%] border-r-2 text-center text-sm font-normal">
                 Price
               </TableHead>
-              <TableHead className="border-border w-[15%] border-r-2 text-center">
+              <TableHead className="border-border w-[15%] border-r-2 text-center text-sm font-normal">
                 Tax
               </TableHead>
-              <TableHead className="border-border w-[15%] border-r-2 text-right">
+              <TableHead className="border-border w-[15%] border-r-2 text-right text-sm font-normal">
                 Amount
               </TableHead>
               <TableHead className="w-[5%] text-right"></TableHead>
@@ -122,78 +118,50 @@ export default function ItemsSection({
                 {/* Item Details */}
                 <TableCell className="border-border border-r-2 py-2">
                   <div className="flex items-center gap-2">
-                    <ImageIcon className="h-5 w-5 text-gray-400" />
+                    <button type="button" className="h-8 w-8">
+                      <ReactSVG src={assets.icons.addIcon} />
+                    </button>
+
                     <Input
                       type="text"
-                      placeholder="Type or click to select a..."
+                      placeholder="Type or click to select a item.."
                       value={item.description}
                       onChange={(e) =>
                         handleItemChange(item.id, "description", e.target.value)
                       }
-                      className="flex-grow rounded-md border px-2 py-1"
+                      className="text-muted-foreground border-0 text-[16px] shadow-none focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
                     />
                   </div>
                 </TableCell>
 
                 {/* Quantity */}
                 <TableCell className="border-border border-r-2 py-2">
-                  <Input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      handleItemChange(
-                        item.id,
-                        "quantity",
-                        Number(e.target.value),
-                      )
-                    }
-                    className="w-full rounded-md border px-2 py-1 text-center"
-                    min="0"
-                  />
+                  <span>10</span>
                 </TableCell>
 
                 {/* Price */}
                 <TableCell className="border-border border-r-2 py-2">
-                  <Input
-                    type="number"
-                    value={item.price.toFixed(2)}
-                    onChange={(e) =>
-                      handleItemChange(item.id, "price", Number(e.target.value))
-                    }
-                    className="w-full rounded-md border px-2 py-1 text-center"
-                    min="0"
-                  />
+                  <span>10</span>
                 </TableCell>
 
                 {/* Tax */}
                 <TableCell className="border-border border-r-2 py-2">
-                  <Select
-                    value={item.taxId}
+                  <SelectInput
+                    options={mockTaxRates.map((tax) => ({
+                      label: tax.name,
+                      value: tax.id,
+                    }))}
                     onValueChange={(value) =>
                       handleItemChange(item.id, "taxId", value)
                     }
-                  >
-                    <SelectTrigger className="w-full rounded-md border px-2 py-1 text-center">
-                      <SelectValue placeholder="Select a Tax" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {mockTaxRates.map((tax) => (
-                        <SelectItem key={tax.id} value={tax.id}>
-                          {tax.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
+                    placeholder="Select a Tax"
+                  />
                 </TableCell>
 
                 {/* Amount */}
                 <TableCell className="border-border border-r-2 py-2 text-right">
-                  <Input
-                    type="number"
-                    value={item.amount.toFixed(2)}
-                    readOnly
-                    className="w-full rounded-md border bg-gray-50 px-2 py-1 text-right dark:bg-gray-700"
-                  />
+                  <span>10</span>
                 </TableCell>
 
                 {/* Delete Button */}
@@ -217,7 +185,7 @@ export default function ItemsSection({
         <Button
           variant="link"
           className="text-muted-foreground text-sm"
-          onClick={addNewItem}
+          onClick={addNewRow}
         >
           <Plus /> Add New Row
         </Button>
@@ -236,7 +204,7 @@ export default function ItemsSection({
           <div className="flex justify-between gap-4">
             <div className="border-border flex w-full items-center rounded-md border">
               <Input
-                type="text"
+                type="number"
                 value={invoiceData.discount.toFixed(2)}
                 onChange={(e) =>
                   handleInputChange("discount", Number(e.target.value))
