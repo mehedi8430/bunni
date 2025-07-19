@@ -11,6 +11,8 @@ import { useState } from "react";
 import type { Customer } from "@/mockApi/customerApi";
 import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "./Customer/components/CustomerForm";
+import ProductForm from "./Products/components/ProductForm";
+import type { TProduct } from "@/types";
 
 export default function DashboardPage() {
   const formatted = format(new Date(), 'EEEE, MMMM d, yyyy');
@@ -20,6 +22,26 @@ export default function DashboardPage() {
   const [, setData] = useState<Customer[]>([]);
   const [, setTotal] = useState(0);
 
+  // add product state
+  const [isProductEditOpen, setIsProductEditOpen] = useState(false);
+  const [editProduct, setEditProduct] = useState<Partial<TProduct>>({});
+  const [, setProductData] = useState<TProduct[]>([]);
+  const [, setProductTotal] = useState(0);
+
+  // Handle save for product form
+  const handleProductSave = (updatedProduct: TProduct) => {
+    setProductData((prev) =>
+      prev.map((prod) =>
+        prod.id === updatedProduct.id ? updatedProduct : prod,
+      ),
+    );
+    if (!updatedProduct.id) {
+      setProductData((prev) => [...prev, updatedProduct]);
+      setProductTotal((prev) => prev + 1);
+    }
+  };
+
+  // Handle save for customer form
   const handleSave = (updatedCustomer: Customer) => {
     setData((prev) =>
       prev.map((cust) =>
@@ -66,6 +88,10 @@ export default function DashboardPage() {
             variant={"primary"}
             size={"lg"}
             className="text-lg font-normal"
+            onClick={() => {
+              setIsProductEditOpen(true);
+              setEditProduct({});
+            }}
           >
             <Plus />
             New Products
@@ -102,6 +128,19 @@ export default function DashboardPage() {
           customer={editCustomer}
           onClose={() => setIsEditOpen(false)}
           onSave={handleSave}
+        />
+      </DialogModal>
+
+      {/* Edit Modal with ProductForm */}
+      <DialogModal
+        isOpen={isProductEditOpen}
+        onOpenChange={setIsProductEditOpen}
+        title={editProduct.id ? "Edit Product" : "Add New Product"}
+      >
+        <ProductForm
+          product={editProduct}
+          onClose={() => setIsProductEditOpen(false)}
+          onSave={handleProductSave}
         />
       </DialogModal>
     </section>
