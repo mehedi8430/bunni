@@ -218,35 +218,38 @@ export default function InvoicesPage() {
         </Button>
       </div>
 
+      <div className="flex overflow-x-auto pb-3 md:pb-0 md:grid md:grid-cols-4 gap-6">
+          <TopCard
+            icon={<ReactSVG src={icons.outstanding} />}
+            title="Outstanding Invoices"
+            value="$1,637"
+            iconBgColor="bg-red-100"
+            valueColor="text-red-400"
+          />
+          <TopCard
+            icon={<ReactSVG src={icons.dolar} />}
+            title="Recent Payments"
+            value="$3,847"
+            iconBgColor="bg-purple-100"
+            valueColor="text-foreground"
+          />
+          <TopCard
+            icon={<ReactSVG src={icons.groupuser} />}
+            title="Total Customer"
+            value="$2,567"
+            iconBgColor="bg-yellow-50"
+            valueColor="text-foreground"
+          />
+          <TopCard
+            icon={<ReactSVG src={icons.revinue} />}
+            title="Revenue this month"
+            value="$4,212"
+            iconBgColor="bg-green-100"
+            valueColor="text-foreground"
+          />
+        </div>
+
       <div className="grid grid-cols-4 gap-6">
-        <TopCard
-          icon={<ReactSVG src={icons.outstanding} />}
-          title="Outstanding Invoices"
-          value="$1,637"
-          iconBgColor="bg-red-100"
-          valueColor="text-red-400"
-        />
-        <TopCard
-          icon={<ReactSVG src={icons.dolar} />}
-          title="Recent Payments"
-          value="$3,847"
-          iconBgColor="bg-purple-100"
-          valueColor="text-foreground"
-        />
-        <TopCard
-          icon={<ReactSVG src={icons.groupuser} />}
-          title="Total Customer"
-          value="$2,567"
-          iconBgColor="bg-yellow-50"
-          valueColor="text-foreground"
-        />
-        <TopCard
-          icon={<ReactSVG src={icons.revinue} />}
-          title="Revenue this month"
-          value="$4,212"
-          iconBgColor="bg-green-100"
-          valueColor="text-foreground"
-        />
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
           <InvoiceTableActions
             searchTerm={searchTerm}

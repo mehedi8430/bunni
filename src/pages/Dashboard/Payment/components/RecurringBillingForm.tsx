@@ -61,10 +61,11 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             type="button"
                             variant="link"
                             size="sm"
-                            onClick={() => setIsAddCustomerOpen(true)}
                             className="text-primary px-2 py-1 w-full flex justify-end mb-0"
                         >
-                            + Add Customer
+                            <span onClick={() => setIsAddCustomerOpen(true)}>
+                                + Add Customer
+                            </span>
                         </Button>
 
                         {/* Payment Amount */}
