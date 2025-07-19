@@ -1,4 +1,5 @@
 import { icons } from "@/lib/imageProvider";
+import { Link } from "react-router";
 
 // Define interfaces for better type checking
 interface NavLink {
@@ -37,11 +38,13 @@ export default function Footer() {
                         <div className="mb-10">
                             {/* Logo - Replace with your actual logo */}
                             <div className="flex items-center mb-4">
-                                <img
-                                    src={icons.navLogo}
-                                    alt="Bunni Logo"
-                                    className="h-24 w-auto"
-                                />
+                                <Link to="/">
+                                    <img
+                                        src={icons.navLogo}
+                                        alt="Bunni Logo"
+                                        className="h-24 w-auto"
+                                    />
+                                </Link>
                             </div>
                             <p className="text-sm lg:text-xl leading-relaxed text-white">
                                 We provide secure, smart, and easy-to-use Invoicing and payment solutions that help businesses get paid faster, manage clients effortlessly, and create impactful presentations. Whether you're a freelancer or a growing enterprise, our platform empowers you to streamline operations and scale with confidence.
@@ -80,14 +83,14 @@ export default function Footer() {
                                 <h3 className="text-lg md:text-xl text-white mb-5">Hot Link</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <a href="tel:+14650351237" className="text-sm md:text-lg text-description">
+                                        <p className="text-sm md:text-lg text-description">
                                             Phone: +(1)(465) 035-1237
-                                        </a>
+                                        </p>
                                     </li>
                                     <li>
-                                        <a href="mailto:amnelson0121@gmail.com" className="text-sm md:text-lg text-description">
+                                        <p className="text-sm md:text-lg text-description">
                                             Email: amnelson0121@gmail.com
-                                        </a>
+                                        </p>
                                     </li>
                                 </ul>
                             </div>
