@@ -11,9 +11,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { mockTaxRates } from "@/mockApi/invoiceApi";
-import { ReactSVG } from "react-svg";
-import assets from "@/lib/imageProvider";
 import SelectInput from "@/components/SelectInput";
+import ItemSelectionField from "./ItemSelectionField";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function ItemsSection({
   invoiceData,
@@ -68,16 +73,6 @@ export default function ItemsSection({
     return { subtotal, total };
   };
 
-  const handleInputChange = (
-    field: keyof TInvoiceData,
-    value: string | number,
-  ) => {
-    setInvoiceData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
   const { subtotal, total } = calculateTotal();
 
   return (
@@ -117,21 +112,7 @@ export default function ItemsSection({
               <TableRow key={item.id} className="border-border border-b-2">
                 {/* Item Details */}
                 <TableCell className="border-border border-r-2 py-2">
-                  <div className="flex items-center gap-2">
-                    <button type="button" className="h-8 w-8">
-                      <ReactSVG src={assets.icons.addIcon} />
-                    </button>
-
-                    <Input
-                      type="text"
-                      placeholder="Type or click to select a item.."
-                      value={item.description}
-                      onChange={(e) =>
-                        handleItemChange(item.id, "description", e.target.value)
-                      }
-                      className="text-muted-foreground border-0 text-[16px] shadow-none focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
-                    />
-                  </div>
+                  <ItemSelectionField />
                 </TableCell>
 
                 {/* Quantity */}
@@ -205,12 +186,9 @@ export default function ItemsSection({
             <div className="border-border flex w-full items-center rounded-md border">
               <Input
                 type="number"
-                value={invoiceData.discount.toFixed(2)}
-                onChange={(e) =>
-                  handleInputChange("discount", Number(e.target.value))
-                }
                 className="text-muted-foreground border-0 p-5 text-[16px] shadow-none focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
                 min="0"
+                placeholder="0.00"
               />
               <span className="border-border border-l px-4 py-2">%</span>
             </div>
@@ -223,6 +201,36 @@ export default function ItemsSection({
           <span className="text-lg font-semibold">Total:</span>
           <span className="text-[16px] font-normal">${total.toFixed(2)}</span>
         </div>
+      </div>
+
+      <hr className="border-border border" />
+
+      <div className="flex justify-end gap-4">
+        <Button variant={"outline"} size={"lg"} className="bg-sidebar">
+          Save
+        </Button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant={"primary"} size={"lg"}>
+              Sent Via
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="border-border border p-0"
+            side="right"
+          >
+            <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent">
+              SMS
+            </DropdownMenuItem>
+            <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent">
+              Email
+            </DropdownMenuItem>
+            <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent">
+              Copy Link
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );
