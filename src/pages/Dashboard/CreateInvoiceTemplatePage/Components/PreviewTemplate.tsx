@@ -1,4 +1,6 @@
 import { images } from "@/lib/imageProvider";
+import { useAppSelector } from "@/redux/hooks";
+import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
 
 type BillToFrom = {
   name: string;
@@ -49,10 +51,14 @@ export default function PreviewTemplate({
   tax = 10,
   total = 1010,
 }: Partial<PreviewTemplateProps>) {
+  const { color } = useAppSelector(templateSelector);
+
+  console.log(color);
+
   return (
     <div
       className="max-w-xl min-w-xl overflow-hidden rounded-lg bg-white shadow-lg"
-      style={{ color: titleColor }}
+      style={{ color: color || titleColor }}
     >
       {/* Header */}
       <div className="mb-2 flex flex-col items-center">
@@ -61,7 +67,10 @@ export default function PreviewTemplate({
           alt="Logo"
           className="mx-auto h-[100px] w-[200px] object-contain"
         />
-        <h1 className="text-4xl font-extrabold" style={{ color: titleColor }}>
+        <h1
+          className="text-4xl font-extrabold"
+          style={{ color: color || titleColor }}
+        >
           INVOICE
         </h1>
       </div>
@@ -104,7 +113,7 @@ export default function PreviewTemplate({
       {/* Product Table */}
       <table className="mx-auto w-full max-w-md border-collapse overflow-hidden">
         <thead>
-          <tr style={{ backgroundColor: titleColor, color: "#fff" }}>
+          <tr style={{ backgroundColor: color || titleColor, color: "#fff" }}>
             <th className="w-1/12 px-4 py-1 text-left text-xs font-bold">
               Item
             </th>
@@ -162,13 +171,13 @@ export default function PreviewTemplate({
 
             <td
               className="w-fit px-4 py-1 text-right text-xs font-bold"
-              style={{ backgroundColor: titleColor, color: "#fff" }}
+              style={{ backgroundColor: color || titleColor, color: "#fff" }}
             >
               Total:
             </td>
             <td
               className="w-fit px-4 py-1 text-xs font-bold"
-              style={{ backgroundColor: titleColor, color: "#fff" }}
+              style={{ backgroundColor: color || titleColor, color: "#fff" }}
             >
               ${total}
             </td>
@@ -177,7 +186,10 @@ export default function PreviewTemplate({
       </table>
 
       <div className="mx-auto mt-10 max-w-md">
-        <div className="text-lg font-bold" style={{ color: titleColor }}>
+        <div
+          className="text-lg font-bold"
+          style={{ color: color || titleColor }}
+        >
           Thank you!
         </div>
         <div className="mt-2 mb-6 text-xs">
@@ -190,7 +202,7 @@ export default function PreviewTemplate({
       {/* Footer */}
       <div
         className="flex items-center justify-between px-6 py-1"
-        style={{ backgroundColor: titleColor, color: "#fff" }}
+        style={{ backgroundColor: color || titleColor, color: "#fff" }}
       >
         <div className="mx-auto flex w-full max-w-md justify-between">
           <span className="text-sm font-bold">+01234345</span>

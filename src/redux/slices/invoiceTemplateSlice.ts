@@ -1,7 +1,7 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { TInvoiceData, TInvoiceItem, TProduct } from "@/types";
 import { mockTaxRates } from "@/mockApi/invoiceApi";
+import type { TInvoiceData, TInvoiceItem, TProduct } from "@/types";
 import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 // Define the initial state based on TInvoiceData
 interface InvoiceState extends TInvoiceData {
@@ -17,6 +17,7 @@ interface InvoiceState extends TInvoiceData {
   subtotal: number;
   discount: number;
   total: number;
+  color: string;
 }
 
 const initialState: InvoiceState = {
@@ -44,6 +45,7 @@ const initialState: InvoiceState = {
   subtotal: 100.0,
   discount: 0,
   total: 100.0,
+  color: "#38988A", // Default color
 };
 
 const invoiceTemplateSlice = createSlice({
@@ -101,6 +103,10 @@ const invoiceTemplateSlice = createSlice({
       state.items[index].price = product.price;
       calculateAmount(state, index);
     },
+
+    setColor: (state, action: PayloadAction<string>) => {
+      state.color = action.payload;
+    },
   },
 });
 
@@ -138,6 +144,14 @@ const calculateTotals = (state: InvoiceState) => {
   state.total = subtotal - state.discount;
 };
 
-export const { updateField, addItem, removeItem, updateItem, selectProduct } =
-  invoiceTemplateSlice.actions;
+export const {
+  updateField,
+  addItem,
+  removeItem,
+  updateItem,
+  selectProduct,
+  setColor,
+} = invoiceTemplateSlice.actions;
+export const templateSelector = (state: { invoiceTemplate: InvoiceState }) =>
+  state.invoiceTemplate;
 export default invoiceTemplateSlice.reducer;
