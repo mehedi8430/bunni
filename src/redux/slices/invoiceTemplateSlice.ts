@@ -26,7 +26,7 @@ const initialState: InvoiceState = {
   orderNumber: "",
   invoiceDate: getTodayDate(),
   serviceDate: getTodayDateWithTime(),
-  dueDate: "05 Feb 2025",
+  dueDate: getTodayDate(),
   footerTerms:
     "Payment is due within 15 days from the date of invoice. Please make checks payable to Acme Inc. or use the online payment link provided in this email.",
   items: [
