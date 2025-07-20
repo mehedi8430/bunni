@@ -144,12 +144,12 @@ export default function Header() {
                         <span className="text-sm font-medium">Acme Inc.</span>
                       </div>
                     </div>
-                    <div className="space-y-3">
-                      <p className="flex items-center gap-1">
-                        <User strokeWidth={1.5} />
-                        My profile
-                      </p>
-                      <p className="flex items-center gap-1 text-red-500"><LogOut strokeWidth={1.25} /> Logout</p>
+                    <div className="flex flex-col gap-3">
+                      <Link to={"/dashboard/settings/profile"} className="flex items-center gap-1">
+                          <User strokeWidth={1.5} />
+                          My profile
+                      </Link>
+                      <button className="flex items-center gap-1 text-red-500"><LogOut strokeWidth={1.25} /> Logout</button>
                     </div>
                   </div>
                 </div>
