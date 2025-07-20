@@ -8,487 +8,328 @@ import {
   View,
 } from "@react-pdf/renderer";
 
-// Dynamic style function
-const createStyles = (props: { titleColor?: string }) =>
-  StyleSheet.create({
-    document: {
-      flexDirection: "column",
-      fontSize: 12,
-      color: props.titleColor,
-    },
-    page: {
-      flexDirection: "column",
-      fontSize: 12,
-      color: props.titleColor,
-      height: "100%",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-    },
-    container: {
-      maxWidth: "80%",
-      width: "100%",
-      margin: "0 auto",
-    },
-    image: {
-      marginVertical: 15,
-      marginHorizontal: 100,
-      width: 200,
-      height: 100,
-      objectFit: "contain",
-      alignSelf: "center",
-    },
-    title: {
-      fontSize: "60px",
-      textAlign: "center",
-      marginBottom: 20,
-      fontWeight: 800,
-      color: props.titleColor || "#000", // use prop here
-    },
-    date: {
-      backgroundColor: "#DDDDDD",
-      paddingVertical: 10,
-      flexDirection: "row",
-      justifyContent: "space-evenly",
-    },
-    // ...other styles
-  });
-
-type BillToFrom = {
-  name: string;
-  address: string;
-  phone: string;
-};
-
-type PaymentDetails = {
-  accountType: string;
-  accountNumber: string;
-  paymentMethod: string;
-  bankName: string;
-};
-
-interface PreviewTemplateProps {
-  titleColor?: string;
-  invoiceNumber?: string;
-  date?: string;
-  billTo?: BillToFrom;
-  billFrom?: BillToFrom;
-  paymentDetails?: PaymentDetails;
-  subTotal?: number;
-  tax?: number; // Optional tax amount
-  total?: number; // Total amount after tax
-  // Optional payment details
-}
-
-export default function InvoiceTemplate({
-  titleColor = "#38988A",
-  invoiceNumber = "123344",
-  date = "12/12/24",
-  billTo = {
-    name: "John Doe",
-    address: "123 Main St\nCity, State, Zip",
-    phone: "555-1234",
+const styles = StyleSheet.create({
+  document: {
+    fontSize: 12,
+    color: "#222",
+    fontFamily: "Helvetica",
+    backgroundColor: "#fff",
   },
-  billFrom = {
+  page: {
+    padding: 32,
+    backgroundColor: "#fff",
+  },
+  header: {
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  logo: {
+    width: 200,
+    height: 100,
+    objectFit: "contain",
+    marginBottom: 8,
+  },
+  invoiceTitle: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#38988A",
+    marginBottom: 8,
+    letterSpacing: 2,
+  },
+  infoRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#E5E7EB",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+    marginBottom: 24,
+  },
+  infoText: {
+    fontSize: 10,
+    fontWeight: 600,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+  },
+  section: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 24,
+    gap: 16,
+  },
+  sectionBlock: {
+    flex: 1,
+    paddingRight: 8,
+  },
+  sectionBlockRight: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingLeft: 8,
+  },
+  label: {
+    fontSize: 11,
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    marginBottom: 2,
+    color: "#38988A",
+  },
+  value: {
+    fontSize: 10,
+    marginBottom: 2,
+    fontWeight: 500,
+  },
+  table: {
+    width: "100%",
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    borderRadius: 4,
+    overflow: "hidden",
+  },
+  tableHeader: {
+    flexDirection: "row",
+    backgroundColor: "#38988A",
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+  },
+  tableHeaderCell: {
+    flex: 1,
+    fontWeight: "bold",
+    fontSize: 12,
+    paddingHorizontal: 4,
+  },
+  tableRow: {
+    flexDirection: "row",
+    fontSize: 11,
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E5E7EB",
+    borderBottomStyle: "solid",
+  },
+  tableCell: {
+    flex: 1,
+    paddingHorizontal: 4,
+  },
+  tableCellRight: {
+    flex: 1,
+    textAlign: "right",
+    paddingHorizontal: 4,
+  },
+  tableFooterRow: {
+    flexDirection: "row",
+    fontSize: 11,
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+    backgroundColor: "#F3F4F6",
+  },
+  tableFooterCell: {
+    flex: 4,
+    textAlign: "right",
+    fontWeight: "bold",
+    paddingHorizontal: 4,
+  },
+  tableFooterValue: {
+    flex: 1,
+    textAlign: "right",
+    fontWeight: "bold",
+    paddingHorizontal: 4,
+  },
+  totalRow: {
+    flexDirection: "row",
+    fontSize: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+    backgroundColor: "#38988A",
+    color: "#fff",
+  },
+  totalLabel: {
+    flex: 4,
+    textAlign: "right",
+    fontWeight: "bold",
+    fontSize: 12,
+    paddingHorizontal: 4,
+  },
+  totalValue: {
+    flex: 1,
+    textAlign: "right",
+    fontWeight: "bold",
+    fontSize: 12,
+    paddingHorizontal: 4,
+  },
+  thankYou: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#38988A",
+    marginTop: 32,
+    marginBottom: 8,
+  },
+  footerNote: {
+    fontSize: 10,
+    marginBottom: 16,
+    color: "#444",
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#38988A",
+    color: "#fff",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+    fontSize: 11,
+    fontWeight: "bold",
+  },
+});
+
+type InvoiceTemplateProps = {
+  invoice: {
+    color?: string;
+    footerTerms?: string;
+    invoiceNumber: string;
+    invoiceDate: string;
+    billTo: {
+      name: string;
+      address: string;
+      phone: string;
+    };
+    paymentDetails: {
+      accountType: string;
+      accountNumber: string;
+      paymentMethod: string;
+      bankName: string;
+    };
+    items: {
+      description: string;
+      price: number;
+      quantity: number;
+      amount: number;
+    }[];
+    subtotal: number;
+    totalTax: number;
+    total: number;
+  };
+};
+
+export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
+  const {
+    color,
+    footerTerms,
+    invoiceNumber,
+    invoiceDate,
+    billTo,
+    paymentDetails,
+    items,
+    subtotal,
+    totalTax,
+    total,
+  } = invoice;
+
+  const billFrom = {
     name: "Jane Smith",
     address: "456 Elm St\nCity, State, Zip",
     phone: "555-5678",
-  },
-  paymentDetails = {
-    accountType: "Bank Acc",
-    accountNumber: "123456789",
-    paymentMethod: "Bank",
-    bankName: "Bank name",
-  },
-  subTotal = 1000,
-  tax = 10, // Optional tax amount
-  total = 1010, // Total amount after tax
-}: PreviewTemplateProps) {
-  const styles = createStyles({ titleColor });
+  };
 
   return (
     <Document style={styles.document}>
-      <Page size="A4" style={styles.page} wrap={false}>
+      <Page size="A4" style={styles.page}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Image style={styles.logo} src={images.templateLogo} />
+          <Text style={{ ...styles.invoiceTitle, color: color || "#38988A" }}>
+            INVOICE
+          </Text>
+        </View>
+
+        {/* Invoice Info */}
+        <View style={styles.infoRow}>
+          <Text style={styles.infoText}>Invoice n° {invoiceNumber}</Text>
+          <Text style={styles.infoText}>Date: {invoiceDate}</Text>
+        </View>
+
+        {/* Parties & Payment */}
         <View style={styles.section}>
-          <Image style={styles.image} src={images.templateLogo} />
-          <Text style={styles.title}>INVOICE</Text>
-        </View>
-
-        {/* Date and invoice number */}
-        <View style={styles.date}>
-          <View
-            style={{
-              ...styles.container,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={{ textTransform: "uppercase" }}>
-              Invoice n° {invoiceNumber}
-            </Text>
-            <Text style={{ textTransform: "uppercase" }}>Date: {date}</Text>
+          <View style={styles.sectionBlock}>
+            <Text style={styles.label}>Bill To</Text>
+            <Text style={styles.value}>{billTo.name}</Text>
+            <Text style={styles.value}>{billTo.address}</Text>
+            <Text style={styles.value}>{billTo.phone}</Text>
           </View>
-        </View>
-
-        {/* Payment details */}
-        <View
-          style={{
-            ...styles.container,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 20,
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  marginBottom: 5,
-                }}
-              >
-                Bill To
-              </Text>
-              <Text style={{ fontWeight: "bold", fontSize: 12 }}>
-                {billTo.name}
-              </Text>
-              <Text style={{ fontSize: 12 }}>{billTo.address}</Text>
-              <Text style={{ fontSize: 12 }}>{billTo.phone}</Text>
-            </View>
-            <View>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  marginBottom: 5,
-                }}
-              >
-                Bill From
-              </Text>
-              <Text style={{ fontWeight: "bold", fontSize: 12 }}>
-                {billFrom.name}
-              </Text>
-              <Text style={{ fontSize: 12 }}>{billFrom.address}</Text>
-              <Text style={{ fontSize: 12 }}>{billFrom.phone}</Text>
-            </View>
+          <View style={styles.sectionBlock}>
+            <Text style={styles.label}>Bill From</Text>
+            <Text style={styles.value}>{billFrom.name}</Text>
+            <Text style={styles.value}>{billFrom.address}</Text>
+            <Text style={styles.value}>{billFrom.phone}</Text>
           </View>
-
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "flex-end",
-              flexDirection: "row",
-            }}
-          >
-            <View
-              style={{
-                alignItems: "flex-end",
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  marginBottom: 5,
-                }}
-              >
-                Payment
-              </Text>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 12,
-                  textTransform: "uppercase",
-                }}
-              >
-                Paid by
-              </Text>
-              <Text style={{ fontSize: 12 }}>{paymentDetails.accountType}</Text>
-              <Text style={{ fontSize: 12 }}>
-                {paymentDetails.accountNumber}
-              </Text>
-
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 12,
-                  textTransform: "uppercase",
-                }}
-              >
-                {paymentDetails.paymentMethod}
-              </Text>
-              <Text style={{ fontSize: 12 }}>{paymentDetails.bankName}</Text>
-            </View>
+          <View style={styles.sectionBlockRight}>
+            <Text style={styles.label}>Payment</Text>
+            <Text style={styles.value}>Paid by</Text>
+            <Text style={styles.value}>{paymentDetails.accountType}</Text>
+            <Text style={styles.value}>{paymentDetails.accountNumber}</Text>
+            <Text style={styles.value}>{paymentDetails.paymentMethod}</Text>
+            <Text style={styles.value}>{paymentDetails.bankName}</Text>
           </View>
         </View>
 
         {/* Table */}
-        <View
-          style={{
-            ...styles.container,
-            backgroundColor: titleColor,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            padding: 10,
-            color: "#fff",
-            marginTop: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: 18,
-            }}
-          >
-            Item
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: 18,
-            }}
-          >
-            Description
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: 18,
-            }}
-          >
-            Price
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: 18,
-            }}
-          >
-            Qty.
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "#fff",
-              fontSize: 18,
-            }}
-          >
-            Total
-          </Text>
-        </View>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <View
-            key={index}
-            style={{
-              ...styles.container,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              padding: 10,
-              backgroundColor: index % 2 === 0 ? "#fff" : "#f0f0f0",
-            }}
-          >
-            <Text>1</Text>
-            <Text>Service</Text>
-            <Text>$100</Text>
-            <Text>2</Text>
-            <Text>$200</Text>
-          </View>
-        ))}
-
-        {/* Sub Total */}
-        <View
-          style={{
-            ...styles.container,
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            padding: 10,
-          }}
-        >
-          <View
-            style={{
-              marginLeft: "auto",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              maxWidth: "150px",
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 12,
-                }}
-              >
-                Subtotal:
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                }}
-              >
-                ${subTotal}
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Tax */}
-        <View
-          style={{
-            ...styles.container,
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            padding: 10,
-          }}
-        >
-          <View
-            style={{
-              marginLeft: "auto",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              maxWidth: "150px",
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 12,
-                }}
-              >
-                Tax
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                }}
-              >
-                ${tax}
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Total */}
-        <View
-          style={{
-            ...styles.container,
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            padding: 10,
-          }}
-        >
-          <View
-            style={{
-              marginLeft: "auto",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              maxWidth: "150px",
-              backgroundColor: titleColor,
-              color: "#fff",
-              padding: 8,
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 12,
-                  fontWeight: "bold",
-                }}
-              >
-                Total
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                  fontWeight: "bold",
-                }}
-              >
-                ${total}
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Footer */}
-        <View
-          style={{
-            ...styles.container,
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            marginTop: 20,
-          }}
-        >
-          <Text style={{ fontSize: 18, color: titleColor, fontWeight: "bold" }}>
-            Thank you!
-          </Text>
-          <Text style={{ fontSize: 12, marginTop: 10, paddingBottom: 20 }}>
-            The origin of the first constellation data back to prehistoric times
-            purpose was to tell stories of their beliefs, experiences, Creation,
-            or mythology.
-          </Text>
-        </View>
-
-        <View
-          style={{
-            backgroundColor: titleColor,
-          }}
-        >
-          <View
-            style={{
-              ...styles.container,
-              paddingVertical: 10,
-              flexDirection: "row",
-              color: "#fff",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: "bold",
-              }}
-            >
-              +01234345
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <Text style={[styles.tableHeaderCell, { flex: 0.7 }]}>Item</Text>
+            <Text style={[styles.tableHeaderCell, { flex: 2 }]}>
+              Description
             </Text>
-            <Text
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              support@example.com
-            </Text>
+            <Text style={[styles.tableHeaderCell, { flex: 1 }]}>Price</Text>
+            <Text style={[styles.tableHeaderCell, { flex: 1 }]}>Qty.</Text>
+            <Text style={[styles.tableHeaderCell, { flex: 1 }]}>Total</Text>
           </View>
+          {items.map((item, idx) => (
+            <View
+              key={idx}
+              style={[
+                styles.tableRow,
+                { backgroundColor: idx % 2 === 0 ? "#fff" : "#F3F4F6" },
+              ]}
+            >
+              <Text style={[styles.tableCell, { flex: 0.7 }]}>{idx + 1}</Text>
+              <Text style={[styles.tableCell, { flex: 2 }]}>
+                {item.description}
+              </Text>
+              <Text style={[styles.tableCellRight, { flex: 1 }]}>
+                ${item.price.toFixed(2)}
+              </Text>
+              <Text style={[styles.tableCellRight, { flex: 1 }]}>
+                {item.quantity}
+              </Text>
+              <Text style={[styles.tableCellRight, { flex: 1 }]}>
+                ${item.amount.toFixed(2)}
+              </Text>
+            </View>
+          ))}
+          {/* Table Footer */}
+          <View style={styles.tableFooterRow}>
+            <Text style={styles.tableFooterCell}>Subtotal:</Text>
+            <Text style={styles.tableFooterValue}>${subtotal.toFixed(2)}</Text>
+          </View>
+          <View style={styles.tableFooterRow}>
+            <Text style={styles.tableFooterCell}>Tax:</Text>
+            <Text style={styles.tableFooterValue}>${totalTax.toFixed(2)}</Text>
+          </View>
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Total:</Text>
+            <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
+          </View>
+        </View>
+
+        {/* Thank You & Footer */}
+        <Text style={styles.thankYou}>Thank you!</Text>
+        <Text style={styles.footerNote}>{footerTerms}</Text>
+        <View style={styles.footer}>
+          <Text>+01234345</Text>
+          <Text>support@example.com</Text>
         </View>
       </Page>
     </Document>

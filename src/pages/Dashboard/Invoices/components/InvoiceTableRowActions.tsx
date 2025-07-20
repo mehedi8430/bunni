@@ -5,11 +5,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAppSelector } from "@/redux/hooks";
+import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
 import type { TInvoice } from "@/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
-import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
 import { useNavigate } from "react-router";
+import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
@@ -28,6 +30,8 @@ export default function InvoiceTableRowActions({
 }: InvoiceTableRowActionsProps) {
   const navigate = useNavigate();
 
+  const invoiceData = useAppSelector(templateSelector);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -38,15 +42,10 @@ export default function InvoiceTableRowActions({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="border-border border p-0">
-        <DropdownMenuItem
-          onClick={() => {
-            console.log("Download Invoice");
-          }}
-          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
-        >
+        <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base">
           <PDFDownloadLink
-            document={<InvoiceTemplate />}
-            fileName="invoice.pdf"
+            document={<InvoiceTemplate invoice={invoiceData} />}
+            fileName={`invoice-${invoiceData.invoiceNumber}.pdf`}
           >
             Download
           </PDFDownloadLink>
