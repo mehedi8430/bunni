@@ -20,26 +20,19 @@ import {
   addItem,
   removeItem,
   selectProduct,
+  templateSelector,
   updateItem,
 } from "@/redux/slices/invoiceTemplateSlice";
 import { type TInvoiceItem, type TProduct } from "@/types";
 import { Plus, X } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ItemSelectionField from "./ItemSelectionField";
-
-interface RootState {
-  invoiceTemplate: {
-    items: TInvoiceItem[];
-    subtotal: number;
-    total: number;
-  };
-}
+import { useAppSelector } from "@/redux/hooks";
 
 export default function ItemsSection() {
   const dispatch = useDispatch();
-  const { items, subtotal, total, discount } = useSelector(
-    (state: RootState) => state.invoiceTemplate,
-  );
+
+  const { items, subtotal, total, discount } = useAppSelector(templateSelector);
 
   const handleItemSelect = (index: number, product: TProduct) => {
     dispatch(selectProduct({ index, product }));
@@ -54,7 +47,6 @@ export default function ItemsSection() {
   };
 
   const totalTax = items.reduce((acc, item) => acc + item.tax, 0);
-  const totalDiscount = items.reduce((acc, item) => acc + item.discount, 0);
 
   return (
     <div className="space-y-6">

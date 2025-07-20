@@ -13,6 +13,8 @@ import { CustomerForm } from "../../Customer/components/CustomerForm";
 import ItemsSection from "./ItemsSection";
 import { updateField } from "@/redux/slices/invoiceTemplateSlice";
 import type { TInvoiceItem } from "@/types";
+import { useLocation } from "react-router";
+import { useInvoiceApi } from "@/mock-api-hook/features/customers/useInvoiceApi";
 
 interface RootState {
   invoiceTemplate: {
@@ -45,6 +47,11 @@ export default function TemplateForm() {
     dueDate,
     footerTerms,
   } = useSelector((state: RootState) => state.invoiceTemplate);
+
+  const { state: invoiceId } = useLocation();
+  console.log({ invoiceId });
+  const { invoice } = useInvoiceApi(invoiceId);
+  console.log({ invoice });
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
