@@ -47,14 +47,14 @@ export default function PreviewTemplate({
     footerTerms,
     invoiceNumber,
     invoiceDate,
-    customer,
+    customerId,
     items,
     subtotal,
     totalTax,
     total,
   } = useAppSelector(templateSelector);
 
-  const { customer: selectedCustomer } = useCustomerApi(customer);
+  const { customer: selectedCustomer } = useCustomerApi(customerId);
 
   return (
     <div

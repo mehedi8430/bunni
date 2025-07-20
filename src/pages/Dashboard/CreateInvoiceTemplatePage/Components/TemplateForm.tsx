@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
@@ -8,49 +8,50 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import type { TCustomer } from "@/types/customer.type";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
 import ItemsSection from "./ItemsSection";
-import { updateField } from "@/redux/slices/invoiceTemplateSlice";
-import type { TInvoiceItem } from "@/types";
-
-interface RootState {
-  invoiceTemplate: {
-    title: string;
-    customer: string;
-    invoiceNumber: string;
-    orderNumber: string;
-    invoiceDate: string;
-    serviceDate: string;
-    dueDate: string;
-    footerTerms: string;
-    items: TInvoiceItem[];
-    subtotal: number;
-    discount: number;
-    total: number;
-  };
-}
+import {
+  setInvoice,
+  templateSelector,
+  updateField,
+} from "@/redux/slices/invoiceTemplateSlice";
+import { useLocation } from "react-router";
+import { useInvoiceApi } from "@/mock-api-hook/features/customers/useInvoiceApi";
+import { useAppSelector } from "@/redux/hooks";
+import type { TInvoice, TInvoiceData } from "@/types";
 
 export default function TemplateForm() {
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
   const { customers } = useCustomerApi();
+  const { state: invoiceId } = useLocation();
+  const { invoice } = useInvoiceApi(invoiceId);
+  console.log({ invoice });
+
   const dispatch = useDispatch();
   const {
     title,
-    customer,
+    customerId,
     invoiceNumber,
     orderNumber,
     invoiceDate,
     serviceDate,
     dueDate,
     footerTerms,
-  } = useSelector((state: RootState) => state.invoiceTemplate);
+  } = useAppSelector(templateSelector);
+
+  // Populate form with invoice data when available
+  useEffect(() => {
+    if (invoice) {
+      dispatch(setInvoice(invoice as TInvoiceData & TInvoice));
+    }
+  }, [invoice, dispatch]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", {
       title,
-      customer,
+      customerId,
       invoiceNumber,
       orderNumber,
       invoiceDate,
@@ -89,9 +90,9 @@ export default function TemplateForm() {
                 label: customer.name,
               }))}
               placeholder="Select a customer"
-              value={customer}
+              value={customerId}
               onValueChange={(value) =>
-                dispatch(updateField({ field: "customer", value }))
+                dispatch(updateField({ field: "customerId", value }))
               }
               triggerClassName="w-full"
             />

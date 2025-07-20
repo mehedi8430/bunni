@@ -50,7 +50,7 @@ export type TInvoiceTemplate = {
 
 export type TInvoiceData = {
   title: string;
-  customer: string;
+  customerId: string;
   invoiceNumber: string;
   orderNumber: string;
   invoiceDate: string;
@@ -61,4 +61,6 @@ export type TInvoiceData = {
   subtotal: number;
   discount: number;
   total: number;
+  color: string;
+  totalTax: number;
 };
