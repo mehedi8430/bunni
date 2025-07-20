@@ -32,6 +32,8 @@ export default function InvoiceTableRowActions({
 
   const invoiceData = useAppSelector(templateSelector);
 
+  console.log(invoiceData, invoice);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
