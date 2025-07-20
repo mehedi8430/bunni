@@ -18,6 +18,7 @@ interface InvoiceState extends TInvoiceData {
   discount: number;
   total: number;
   color: string;
+  totalTax: number;
 }
 
 const initialState: InvoiceState = {
@@ -44,6 +45,7 @@ const initialState: InvoiceState = {
   ],
   subtotal: 100.0,
   discount: 0,
+  totalTax: 0,
   total: 100.0,
   color: "#38988A", // Default color
 };
@@ -73,6 +75,7 @@ const invoiceTemplateSlice = createSlice({
         amount: 0,
         discount: 0,
       });
+
       calculateTotals(state);
     },
     removeItem: (state, action: PayloadAction<number>) => {
@@ -140,8 +143,16 @@ const calculateAmount = (state: InvoiceState, index: number) => {
 // Helper function to calculate subtotal and total
 const calculateTotals = (state: InvoiceState) => {
   const subtotal = state.items.reduce((sum, item) => sum + item.amount, 0);
+  const totalTax = state.items.reduce((sum, item) => sum + item.tax, 0);
+  const totalDiscount = state.items.reduce(
+    (sum, item) => sum + item.price * item.quantity * (item.discount / 100),
+    0,
+  );
+
+  state.totalTax = totalTax;
   state.subtotal = subtotal;
-  state.total = subtotal - state.discount;
+  state.discount = totalDiscount;
+  state.total = subtotal - totalDiscount + totalTax;
 };
 
 export const {

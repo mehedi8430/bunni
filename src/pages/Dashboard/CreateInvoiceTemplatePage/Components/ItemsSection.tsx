@@ -1,7 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Input } from "@/components/ui/input";
+import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
-import { Plus, X } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -11,21 +16,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { mockTaxRates } from "@/mockApi/invoiceApi";
-import SelectInput from "@/components/SelectInput";
-import ItemSelectionField from "./ItemSelectionField";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { type TInvoiceItem, type TProduct } from "@/types";
 import {
   addItem,
   removeItem,
-  updateItem,
   selectProduct,
+  updateItem,
 } from "@/redux/slices/invoiceTemplateSlice";
+import { type TInvoiceItem, type TProduct } from "@/types";
+import { Plus, X } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import ItemSelectionField from "./ItemSelectionField";
 
 interface RootState {
   invoiceTemplate: {
@@ -37,7 +37,7 @@ interface RootState {
 
 export default function ItemsSection() {
   const dispatch = useDispatch();
-  const { items, subtotal, total } = useSelector(
+  const { items, subtotal, total, discount } = useSelector(
     (state: RootState) => state.invoiceTemplate,
   );
 
@@ -218,7 +218,7 @@ export default function ItemsSection() {
         <div className="flex justify-between">
           <span className="text-lg font-normal">Total Discount:</span>
           <span className="text-[16px] font-normal">
-            ${totalDiscount.toFixed(2)}
+            ${discount.toFixed(2)}
           </span>
         </div>
         <div className="flex justify-between">

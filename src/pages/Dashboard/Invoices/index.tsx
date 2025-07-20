@@ -6,7 +6,6 @@ import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { DialogModal } from "@/components/DialogModal";
 import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { icons } from "@/lib/imageProvider";
 import { cn } from "@/lib/utils";
@@ -16,7 +15,6 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router";
 import { ReactSVG } from "react-svg";
 import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemplate";
-import InvoiceForm from "./components/InvoiceForm";
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
@@ -35,8 +33,6 @@ export default function InvoicesPage() {
   // Modal states
   const [, setSelectedInvoice] = useState<TInvoice | null>(null);
   const [isViewOpen, setIsViewOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [editInvoice, setEditInvoice] = useState<Partial<TInvoice>>({});
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [invoiceToDelete, setInvoiceToDelete] = useState<string | null>(null);
 
@@ -172,8 +168,6 @@ export default function InvoicesPage() {
             invoice={invoice}
             setSelectedInvoice={setSelectedInvoice}
             setIsViewOpen={setIsViewOpen}
-            setEditInvoice={setEditInvoice}
-            setIsEditOpen={setIsEditOpen}
             setInvoiceToDelete={setInvoiceToDelete}
             setIsDeleteOpen={setIsDeleteOpen}
           />
@@ -181,16 +175,6 @@ export default function InvoicesPage() {
       },
     },
   ];
-
-  const handleSave = (updatedInvoice: TInvoice) => {
-    setData((prev) =>
-      prev.map((inv) => (inv.id === updatedInvoice.id ? updatedInvoice : inv)),
-    );
-    if (!updatedInvoice.id) {
-      setData((prev) => [...prev, updatedInvoice]);
-      setTotal((prev) => prev + 1);
-    }
-  };
 
   const handleFilterChange = (search: string) => {
     setSearchTerm(search);
@@ -225,36 +209,36 @@ export default function InvoicesPage() {
         </Button>
       </div>
 
-      <div className="flex overflow-x-auto pb-3 md:pb-0 md:grid md:grid-cols-4 gap-6">
-          <TopCard
-            icon={<ReactSVG src={icons.outstanding} />}
-            title="Outstanding Invoices"
-            value="$1,637"
-            iconBgColor="bg-red-100"
-            valueColor="text-red-400"
-          />
-          <TopCard
-            icon={<ReactSVG src={icons.dolar} />}
-            title="Recent Payments"
-            value="$3,847"
-            iconBgColor="bg-purple-100"
-            valueColor="text-foreground"
-          />
-          <TopCard
-            icon={<ReactSVG src={icons.groupuser} />}
-            title="Total Customer"
-            value="$2,567"
-            iconBgColor="bg-yellow-50"
-            valueColor="text-foreground"
-          />
-          <TopCard
-            icon={<ReactSVG src={icons.revinue} />}
-            title="Revenue this month"
-            value="$4,212"
-            iconBgColor="bg-green-100"
-            valueColor="text-foreground"
-          />
-        </div>
+      <div className="flex gap-6 overflow-x-auto pb-3 md:grid md:grid-cols-4 md:pb-0">
+        <TopCard
+          icon={<ReactSVG src={icons.outstanding} />}
+          title="Outstanding Invoices"
+          value="$1,637"
+          iconBgColor="bg-red-100"
+          valueColor="text-red-400"
+        />
+        <TopCard
+          icon={<ReactSVG src={icons.dolar} />}
+          title="Recent Payments"
+          value="$3,847"
+          iconBgColor="bg-purple-100"
+          valueColor="text-foreground"
+        />
+        <TopCard
+          icon={<ReactSVG src={icons.groupuser} />}
+          title="Total Customer"
+          value="$2,567"
+          iconBgColor="bg-yellow-50"
+          valueColor="text-foreground"
+        />
+        <TopCard
+          icon={<ReactSVG src={icons.revinue} />}
+          title="Revenue this month"
+          value="$4,212"
+          iconBgColor="bg-green-100"
+          valueColor="text-foreground"
+        />
+      </div>
 
       <div className="grid grid-cols-4 gap-6">
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
@@ -315,22 +299,7 @@ export default function InvoicesPage() {
         </BlobProvider> */}
 
         <PreviewTemplate />
-
-        {/* <InvoiceDetails invoiceId={selectedInvoice?.id || ""} /> */}
       </PdfDialogModal>
-
-      {/* Edit Modal with InvoiceForm */}
-      <DialogModal
-        isOpen={isEditOpen}
-        onOpenChange={setIsEditOpen}
-        title={editInvoice.id ? "Edit Invoice" : "Add New Invoice"}
-      >
-        <InvoiceForm
-          invoice={editInvoice}
-          onClose={() => setIsEditOpen(false)}
-          onSave={handleSave}
-        />
-      </DialogModal>
 
       {/* Delete Alert Dialog */}
       <AlertDialogModal

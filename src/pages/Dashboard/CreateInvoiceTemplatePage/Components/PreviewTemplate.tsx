@@ -1,6 +1,8 @@
 import { images } from "@/lib/imageProvider";
+import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import { useAppSelector } from "@/redux/hooks";
 import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
+import { formatDateToShort } from "@/utils/dateFormat";
 
 type BillToFrom = {
   name: string;
@@ -28,14 +30,6 @@ interface PreviewTemplateProps {
 }
 
 export default function PreviewTemplate({
-  titleColor = "#38988A",
-  invoiceNumber = "123344",
-  date = "12/12/24",
-  billTo = {
-    name: "John Doe",
-    address: "123 Main St\nCity, State, Zip",
-    phone: "555-1234",
-  },
   billFrom = {
     name: "Jane Smith",
     address: "456 Elm St\nCity, State, Zip",
@@ -47,18 +41,25 @@ export default function PreviewTemplate({
     paymentMethod: "Bank",
     bankName: "Bank name",
   },
-  subTotal = 1000,
-  tax = 10,
-  total = 1010,
 }: Partial<PreviewTemplateProps>) {
-  const { color } = useAppSelector(templateSelector);
+  const {
+    color,
+    footerTerms,
+    invoiceNumber,
+    invoiceDate,
+    customer,
+    items,
+    subtotal,
+    totalTax,
+    total,
+  } = useAppSelector(templateSelector);
 
-  console.log(color);
+  const { customer: selectedCustomer } = useCustomerApi(customer);
 
   return (
     <div
       className="max-w-xl min-w-xl overflow-hidden rounded-lg bg-white shadow-lg"
-      style={{ color: color || titleColor }}
+      style={{ color: color || "#38988A" }}
     >
       {/* Header */}
       <div className="mb-2 flex flex-col items-center">
@@ -69,7 +70,7 @@ export default function PreviewTemplate({
         />
         <h1
           className="text-4xl font-extrabold"
-          style={{ color: color || titleColor }}
+          style={{ color: color || "#38988A" }}
         >
           INVOICE
         </h1>
@@ -79,7 +80,7 @@ export default function PreviewTemplate({
       <div className="mb-6 flex justify-between bg-gray-200 py-1">
         <div className="mx-auto flex w-full max-w-md justify-between text-xs font-medium uppercase">
           <span>Invoice n° {invoiceNumber}</span>
-          <span>Date: {date}</span>
+          <span>Date: {formatDateToShort(invoiceDate)}</span>
         </div>
       </div>
 
@@ -87,9 +88,11 @@ export default function PreviewTemplate({
       <div className="mx-auto mb-8 flex max-w-md flex-wrap justify-between gap-8">
         <div className="flex-1">
           <p className="mb-1 text-sm font-bold uppercase">Bill To</p>
-          <p className="text-xs font-bold">{billTo.name}</p>
-          <p className="text-xs whitespace-pre-line">{billTo.address}</p>
-          <p className="text-xs">{billTo.phone}</p>
+          <p className="text-xs font-bold">{selectedCustomer?.name}</p>
+          <p className="text-xs whitespace-pre-line">
+            {selectedCustomer?.address}
+          </p>
+          <p className="text-xs">{selectedCustomer?.phone}</p>
         </div>
         <div className="flex-1">
           <p className="mb-1 text-sm font-bold uppercase">Bill From</p>
@@ -113,7 +116,7 @@ export default function PreviewTemplate({
       {/* Product Table */}
       <table className="mx-auto w-full max-w-md border-collapse overflow-hidden">
         <thead>
-          <tr style={{ backgroundColor: color || titleColor, color: "#fff" }}>
+          <tr style={{ backgroundColor: color || "#38988A", color: "#fff" }}>
             <th className="w-1/12 px-4 py-1 text-left text-xs font-bold">
               Item
             </th>
@@ -132,16 +135,22 @@ export default function PreviewTemplate({
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {items.map((item, index) => (
             <tr
               key={index}
               className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
             >
-              <td className="w-1/12 px-4 py-1 text-xs">1</td>
-              <td className="w-3/12 px-4 py-1 text-xs">Service</td>
-              <td className="w-2/12 px-4 py-1 text-xs">$100</td>
-              <td className="w-2/12 px-4 py-1 text-xs">2</td>
-              <td className="w-2/12 px-4 py-1 text-xs">$200</td>
+              <td className="w-1/12 px-4 py-1 text-xs">{index + 1}</td>
+              <td className="w-6/12 px-4 py-1 text-xs">{item.description}</td>
+              <td className="w-1/12 px-4 py-1 text-xs">
+                ${item.price.toFixed(2)}
+              </td>
+              <td className="w-1/12 px-4 py-1 text-xs">
+                {item.quantity.toString().padStart(2, "0")}
+              </td>
+              <td className="w-1/12 px-4 py-1 text-xs">
+                ${item.amount.toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -153,7 +162,7 @@ export default function PreviewTemplate({
             >
               Subtotal:
             </td>
-            <td className="px-4 py-1 text-xs">${subTotal}</td>
+            <td className="px-4 py-1 text-xs">${subtotal.toFixed(2)}</td>
           </tr>
           <tr>
             <td
@@ -162,7 +171,7 @@ export default function PreviewTemplate({
             >
               Tax:
             </td>
-            <td className="px-4 py-1 text-xs">${tax}</td>
+            <td className="px-4 py-1 text-xs">${totalTax.toFixed(2)}</td>
           </tr>
           <tr>
             <td className="w-1/12 px-4 py-1 text-xs font-semibold">&nbsp;</td>
@@ -171,38 +180,36 @@ export default function PreviewTemplate({
 
             <td
               className="w-fit px-4 py-1 text-right text-xs font-bold"
-              style={{ backgroundColor: color || titleColor, color: "#fff" }}
+              style={{ backgroundColor: color || "#38988A", color: "#fff" }}
             >
               Total:
             </td>
             <td
               className="w-fit px-4 py-1 text-xs font-bold"
-              style={{ backgroundColor: color || titleColor, color: "#fff" }}
+              style={{ backgroundColor: color || "#38988A", color: "#fff" }}
             >
-              ${total}
+              ${total.toFixed(2)}
             </td>
           </tr>
         </tfoot>
       </table>
 
       <div className="mx-auto mt-10 max-w-md">
-        <div
-          className="text-lg font-bold"
-          style={{ color: color || titleColor }}
-        >
+        <h1 className="text-lg font-bold" style={{ color: color || "#38988A" }}>
           Thank you!
-        </div>
-        <div className="mt-2 mb-6 text-xs">
-          The origin of the first constellation data back to prehistoric times
+        </h1>
+        <p className="mt-2 mb-6 text-xs">
+          {footerTerms}
+          {/* The origin of the first constellation data back to prehistoric times
           purpose was to tell stories of their beliefs, experiences, Creation,
-          or mythology.
-        </div>
+          or mythology. */}
+        </p>
       </div>
 
       {/* Footer */}
       <div
         className="flex items-center justify-between px-6 py-1"
-        style={{ backgroundColor: color || titleColor, color: "#fff" }}
+        style={{ backgroundColor: color || "#38988A", color: "#fff" }}
       >
         <div className="mx-auto flex w-full max-w-md justify-between">
           <span className="text-sm font-bold">+01234345</span>
