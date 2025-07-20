@@ -18,7 +18,7 @@ import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemp
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
-import LoadingPage from "@/components/shared/LoadingPage";
+import LoadingAnimation from "@/components/shared/LoadingAnimation";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -185,7 +185,7 @@ export default function InvoicesPage() {
 
   if(isLoading) return (
     <div>
-      <LoadingPage />
+      <LoadingAnimation />
     </div>
   );
 

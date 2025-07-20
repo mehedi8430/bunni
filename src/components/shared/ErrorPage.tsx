@@ -21,7 +21,7 @@ function ErrorPage() {
                 </span>
               </span>
               <span
-                className="absolute bottom-0 right-0 w-full h-[44px] md:h-14 -mb-2 -mr-2 transition-all duration-200 ease-linear bg-gray-900 rounded-lg"
+                className="absolute bottom-0 right-0 w-full h-[44px] md:h-14 -mb-2 -mr-2 transition-all duration-200 ease-linear bg-foreground rounded-lg"
                 data-rounded="rounded-lg"></span>
             </p>
           </div>
