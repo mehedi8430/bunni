@@ -8,6 +8,7 @@ import AddPhoneNumber from "@/components/businessSetup/AddPhoneNumber";
 import BusinessInformationForm from "@/components/businessSetup/BusinessInformationForm";
 import DetailCompanyNameForm from "@/components/businessSetup/DetailCompanyNameForm";
 import WhatWouldLikeToDoForm from "@/components/businessSetup/WhatWouldLikeToDoForm";
+import ErrorPage from "@/components/shared/ErrorPage";
 import AuthLayout from "@/layout/AuthLayout";
 import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
@@ -33,12 +34,12 @@ export const Router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-    errorElement: <div>Error occurred</div>,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
-    errorElement: <div>Error occurred</div>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -108,7 +109,7 @@ export const Router = createBrowserRouter([
   {
     path: "auth",
     element: <AuthLayout />,
-    errorElement: <div>Error occurred</div>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -145,7 +146,7 @@ export const Router = createBrowserRouter([
   {
     path: "business-setup",
     element: <BusinessInformationLayout />,
-    errorElement: <div>Error occurred</div>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

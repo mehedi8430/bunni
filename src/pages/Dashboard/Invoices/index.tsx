@@ -18,6 +18,7 @@ import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemp
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
+import LoadingAnimation from "@/components/shared/LoadingAnimation";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -181,6 +182,12 @@ export default function InvoicesPage() {
   };
 
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
+
+  if(isLoading) return (
+    <div>
+      <LoadingAnimation />
+    </div>
+  );
 
   return (
     <section className="space-y-10">
