@@ -22,7 +22,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Mitsubishi Motors",
     businessName: "Smith & Co.",
-    address: "456 Oak Ave, Town, State, 67890",
+    address: "456 Oak Ave\nTown, State, 67890",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -33,7 +33,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Johnson & Johnson",
     businessName: "Johnson Solutions",
-    address: "789 Pine Ln, Village, State, 10111",
+    address: "789 Pine Ln\nVillage, State, 10111",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -44,7 +44,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Brown Industries",
     businessName: "Brown Design",
-    address: "101 Maple St, Hamlet, State, 12131",
+    address: "101 Maple St\nHamlet, State, 12131",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -55,7 +55,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Wonder Innovations",
     businessName: "Wonder Innovations",
-    address: "202 Amazon Way, Paradise, State, 14151",
+    address: "202 Amazon Way\nParadise, State, 14151",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -66,7 +66,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Adams Analytics",
     businessName: "Adams Data Solutions",
-    address: "303 Cedar Dr, Cityville, State, 98765",
+    address: "303 Cedar Dr\nCityville, State, 98765",
     achToken: "tok_ach_xxxx9012",
   },
   {
@@ -77,7 +77,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "White Holdings",
     businessName: "White & Sons",
-    address: "505 Birch Rd, Countryside, State, 23456",
+    address: "505 Birch Rd\nCountryside, State, 23456",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -88,7 +88,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Taylor Tech",
     businessName: "Taylor Solutions Group",
-    address: "606 Spruce Ct, Metropolis, State, 34567",
+    address: "606 Spruce Ct\nMetropolis, State, 34567",
     achToken: "tok_ach_xxxx3456",
   },
   {
@@ -99,7 +99,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Green Innovations",
     businessName: "Green Energy Systems",
-    address: "707 Willow Way, Suburbia, State, 45678",
+    address: "707 Willow Way\nSuburbia, State, 45678",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -110,7 +110,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "Lee Consulting",
     businessName: "Lee & Associates",
-    address: "808 Poplar Ave, Downtown, State, 56789",
+    address: "808 Poplar Ave\nDowntown, State, 56789",
     achToken: "tok_ach_xxxx7890",
   },
   {
@@ -121,7 +121,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "King Enterprises",
     businessName: "King Global",
-    address: "909 Elm St, Uptown, State, 67890",
+    address: "909 Elm St\nUptown, State, 67890",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -132,7 +132,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "King Enterprises",
     businessName: "King Global",
-    address: "909 Elm St, Uptown, State, 67890",
+    address: "909 Elm St\nUptown, State, 67890",
     achToken: "tok_ach_xxxx5678",
   },
   {
@@ -143,7 +143,7 @@ const mockCustomers: Customer[] = [
     truncated_tokens: "1Z999AA10123456784",
     company: "King Enterprises",
     businessName: "King Global",
-    address: "909 Elm St, Uptown, State, 67890",
+    address: "909 Elm St\nUptown, State, 67890",
     achToken: "tok_ach_xxxx5678",
   },
 ];

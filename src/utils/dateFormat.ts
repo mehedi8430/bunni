@@ -34,3 +34,12 @@ export function getTodayDateWithTime(): string {
 
   return `${formattedDatePart} ${finalTimePart}`;
 }
+
+export function formatDateToShort(dateStr: string) {
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return dateStr; // fallback if invalid
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}/${month}/${year}`;
+}
