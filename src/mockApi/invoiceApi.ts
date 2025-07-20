@@ -85,6 +85,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
+    templateId: "1",
   },
   {
     id: "INV-000001-2",
@@ -94,6 +95,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
+    templateId: "2",
   },
   {
     id: "INV-000001-3",
@@ -103,6 +105,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Bank Transfer",
     date: "05 Feb, 2025",
+    templateId: "3",
   },
   {
     id: "INV-000001-4",
@@ -112,6 +115,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
+    templateId: "4",
   },
   {
     id: "INV-000001-5",
@@ -121,6 +125,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
+    templateId: "1",
   },
   {
     id: "INV-000001-6",
@@ -130,6 +135,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Bank Transfer",
     date: "05 Feb, 2025",
+    templateId: "2",
   },
   {
     id: "INV-000001-7",
@@ -139,6 +145,7 @@ const mockInvoices: TInvoice[] = [
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
+    templateId: "3",
   },
   {
     id: "INV-000001-8",
@@ -148,6 +155,7 @@ const mockInvoices: TInvoice[] = [
     amount: 829,
     tenderType: "Bank Transfer",
     date: "08 Feb, 2025",
+    templateId: "4",
   },
 ];
 

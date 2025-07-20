@@ -50,7 +50,7 @@ export default function InvoiceTemplatesPage() {
           {templates.map((template) => (
             <Link
               key={template.id}
-              to={`/dashboard/invoices/template/${template.id}`}
+              to={`/dashboard/template/invoice/${template.id}`}
             >
               <TemplateCard template={template} />
             </Link>

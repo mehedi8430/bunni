@@ -6,14 +6,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { TInvoice } from "@/types";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
+import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
+import { useNavigate } from "react-router";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
   setSelectedInvoice: (invoice: TInvoice) => void;
   setIsViewOpen: (isOpen: boolean) => void;
-  setEditInvoice: (invoice: Partial<TInvoice>) => void;
-  setIsEditOpen: (isOpen: boolean) => void;
   setInvoiceToDelete: (invoiceId: string) => void;
   setIsDeleteOpen: (isOpen: boolean) => void;
 };
@@ -22,11 +23,11 @@ export default function InvoiceTableRowActions({
   invoice,
   setSelectedInvoice,
   setIsViewOpen,
-  setEditInvoice,
-  setIsEditOpen,
   setInvoiceToDelete,
   setIsDeleteOpen,
 }: InvoiceTableRowActionsProps) {
+  const navigate = useNavigate();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -43,12 +44,12 @@ export default function InvoiceTableRowActions({
           }}
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
         >
-          {/* <PDFDownloadLink
+          <PDFDownloadLink
             document={<InvoiceTemplate />}
             fileName="invoice.pdf"
           >
-            {({ loading }) => (loading ? "Preparing document..." : "Download")}
-          </PDFDownloadLink> */}
+            Download
+          </PDFDownloadLink>
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -104,8 +105,9 @@ export default function InvoiceTableRowActions({
 
         <DropdownMenuItem
           onClick={() => {
-            setEditInvoice(invoice);
-            setIsEditOpen(true);
+            navigate(`/dashboard/template/invoice/${invoice.templateId}`, {
+              state: invoice.id,
+            });
           }}
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
