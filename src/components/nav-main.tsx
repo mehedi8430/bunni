@@ -68,7 +68,7 @@ export function NavMain({
                     <SidebarMenuButton
                       tooltip={item.title}
                       className={cn(
-                        "hover:bg-primary hover:data-[state=open]:bg-primary p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white",
+                        "hover:bg-primary hover:data-[state=open]:bg-primary p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white cursor-pointer",
                         {
                           "bg-primary text-white": isActive(item.url),
                         },
@@ -99,7 +99,7 @@ export function NavMain({
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton
                               className={cn(
-                                "hover:bg-primary mt-1 p-5 text-lg font-normal hover:text-white",
+                                "hover:bg-primary hover:text-white mt-1 p-5 text-lg font-normal cursor-pointer",
                                 {
                                   "bg-primary text-white": isActive(
                                     subItem.url,

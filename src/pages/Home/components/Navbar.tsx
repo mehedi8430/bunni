@@ -18,12 +18,55 @@ export default function Navbar() {
         { name: 'Contact', path: '#contact' },
     ];
 
+    // Function to handle smooth scrolling to sections
+    const handleSmoothScroll = (targetId: string) => {
+        const element = document.getElementById(targetId);
+        if (element) {
+            const navbarHeight = 100; // Adjust based on your navbar height
+            const elementPosition = element.offsetTop - navbarHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Function to handle mobile nav click
+    const handleMobileNavClick = (e: React.MouseEvent, path: string) => {
+        e.preventDefault(); // Prevent default anchor behavior
+        
+        if (path.startsWith('#')) {
+            // Close mobile menu first
+            setIsMobileMenuOpen(false);
+            // Wait for menu to close, then scroll
+            setTimeout(() => {
+                const targetId = path.substring(1); // Remove the # symbol
+                handleSmoothScroll(targetId);
+            }, 300); // Small delay to ensure sheet closes smoothly
+        } else {
+            // For regular links, close menu and navigate
+            setIsMobileMenuOpen(false);
+        }
+    };
+
+    // Function to handle desktop nav click
+    const handleDesktopNavClick = (e: React.MouseEvent, path: string) => {
+        if (path.startsWith('#')) {
+            e.preventDefault();
+            const targetId = path.substring(1);
+            handleSmoothScroll(targetId);
+        }
+    };
+
     return (
-        <nav className="py-6">
+        <nav className="py-6 sticky top-0 bg-white z-50 shadow-sm">
             <div className="container mx-auto flex items-center justify-between max-md:px-5">
                 {/* Logo Section */}
                 <div className="flex items-center h-10">
-                    <Image src={icons.navLogo} alt="Bunni Logo" className="h-20 w-20 rounded-md" />
+                    <Link to="/">
+                        <Image src={icons.navLogo} alt="Bunni Logo" className="h-20 w-20 rounded-md" />
+                    </Link>
                 </div>
 
                 {/* Hamburger Menu Icon for Mobile using Shadcn DrawerTrigger */}
@@ -62,15 +105,16 @@ export default function Navbar() {
                             {/* Nav links */}
                             <div className="flex flex-col items-start">
                                 {navLinks.map((link) => (
-                                    <SheetClose asChild key={link.name}>
+                                    <div key={link.name} className="w-full">
                                         <a
                                             href={link.path}
-                                            className={`block w-full px-4 py-2 text-sm ${location.hash === link.path || location.pathname === link.path ? 'font-medium text-foreground' : 'text-description'
+                                            onClick={(e) => handleMobileNavClick(e, link.path)}
+                                            className={`block w-full px-4 py-2 text-sm cursor-pointer ${location.hash === link.path || location.pathname === link.path ? 'font-medium text-foreground' : 'text-description'
                                                 }`}
                                         >
                                             {link.name}
                                         </a>
-                                    </SheetClose>
+                                    </div>
                                 ))}
 
                                 <div className="w-full border-t border-gray-200 my-4"></div>
@@ -84,9 +128,11 @@ export default function Navbar() {
                                         </Link>
                                     </SheetClose>
                                     <SheetClose asChild>
-                                        <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
-                                            Registration
-                                        </button>
+                                        <Link to={"/auth/register"}>
+                                            <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
+                                                Registration
+                                            </button>
+                                        </Link>
                                     </SheetClose>
                                 </div>
                             </div>
@@ -100,9 +146,10 @@ export default function Navbar() {
                         <a
                             key={link.name} // Unique key for each mapped item
                             href={link.path}  // The path the link navigates to
+                            onClick={(e) => handleDesktopNavClick(e, link.path)}
                             // isActive is a function that receives an object with isActive property
                             className={
-                                ` text-xl ${location.hash === link.path || location.pathname === link.path ? 'text-foreground' : 'text-description'
+                                ` text-xl cursor-pointer ${location.hash === link.path || location.pathname === link.path ? 'text-foreground' : 'text-description'
                                 }`
                             }
                         >
@@ -118,9 +165,11 @@ export default function Navbar() {
                             Log In
                         </button>
                     </Link>
-                    <button className="px-8 py-3.5 bg-primary text-white rounded-md text-xl">
-                        Registration
-                    </button>
+                    <Link to={"/auth/register"}>
+                        <button className="px-8 py-3.5 bg-primary text-white rounded-md text-xl cursor-pointer">
+                            Registration
+                        </button>
+                    </Link>
                 </div>
             </div>
         </nav>

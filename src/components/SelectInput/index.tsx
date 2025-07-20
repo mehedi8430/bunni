@@ -67,7 +67,7 @@ export default function SelectInput({
               key={option.value}
               value={option.value}
               disabled={option.disabled}
-              className="text-muted-foreground text-[16px]"
+              className="text-muted-foreground"
             >
               {option.label}
             </SelectItem>

@@ -105,10 +105,9 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               type="button"
               variant="link"
               size="sm"
-              onClick={() => setIsAddCustomerOpen(true)}
               className="text-primary mb-0 flex w-full justify-end px-2 py-1"
             >
-              + Add Customer
+              <span onClick={() => setIsAddCustomerOpen(true)}>+ Add Customer</span>
             </Button>
 
             {/* Payment Amount */}
