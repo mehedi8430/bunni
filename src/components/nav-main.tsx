@@ -37,16 +37,24 @@ export function NavMain({
   }[];
 }) {
   const navigate = useNavigate();
-  const activePath = useLocation().pathname;
+  const location = useLocation();
   const { isMobile, setOpenMobile } = useSidebar();
 
   const isActive = (url?: string) => {
-    return url === activePath;
+    if (!url) return false;
+
+    if (url === "/dashboard") {
+      return location.pathname === url;
+    }
+
+    return location.pathname === url || location.pathname.startsWith(`${url}/`);
   };
 
   // Check if any subitem's URL matches the active path
   const isSubItemActive = (subItems?: { url: string }[]) => {
-    return subItems?.some((subItem) => subItem.url === activePath) || false;
+    return (
+      subItems?.some((subItem) => subItem.url === location.pathname) || false
+    );
   };
 
   // Handle navigation and close mobile sidebar
@@ -78,7 +86,7 @@ export function NavMain({
                     <SidebarMenuButton
                       tooltip={item.title}
                       className={cn(
-                        "hover:bg-primary hover:data-[state=open]:bg-primary p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white cursor-pointer",
+                        "hover:bg-primary hover:data-[state=open]:bg-primary cursor-pointer p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white",
                         {
                           "bg-primary text-white": isActive(item.url),
                         },
@@ -109,7 +117,7 @@ export function NavMain({
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton
                               className={cn(
-                                "hover:bg-primary hover:text-white mt-1 p-5 text-lg font-normal cursor-pointer",
+                                "hover:bg-primary mt-1 cursor-pointer p-5 text-lg font-normal hover:text-white",
                                 {
                                   "bg-primary text-white": isActive(
                                     subItem.url,
