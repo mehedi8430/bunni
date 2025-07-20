@@ -50,116 +50,151 @@ export default function PreviewTemplate({
   total = 1010,
 }: Partial<PreviewTemplateProps>) {
   return (
-    <div className="mx-auto max-w-4xl min-w-xl rounded-2xl bg-white p-8 shadow-lg">
+    <div
+      className="max-w-xl min-w-xl overflow-hidden rounded-lg bg-white shadow-lg"
+      style={{ color: titleColor }}
+    >
       {/* Header */}
-      <div className="mb-8 flex flex-col items-center">
+      <div className="mb-2 flex flex-col items-center">
         <img
           src={images.templateLogo}
           alt="Logo"
-          className="mx-auto my-4 h-[100px] w-[200px] object-contain"
+          className="mx-auto h-[100px] w-[200px] object-contain"
         />
-        <h1
-          className="mb-4 text-5xl font-extrabold"
-          style={{ color: titleColor }}
-        >
+        <h1 className="text-4xl font-extrabold" style={{ color: titleColor }}>
           INVOICE
         </h1>
       </div>
 
       {/* Date and invoice number */}
-      <div className="mb-6 flex justify-between rounded bg-gray-200 px-6 py-3 text-sm font-semibold uppercase">
-        <span>Invoice n° {invoiceNumber}</span>
-        <span>Date: {date}</span>
+      <div className="mb-6 flex justify-between bg-gray-200 py-1">
+        <div className="mx-auto flex w-full max-w-md justify-between text-xs font-medium uppercase">
+          <span>Invoice n° {invoiceNumber}</span>
+          <span>Date: {date}</span>
+        </div>
       </div>
 
       {/* Payment details */}
-      <div className="mb-8 flex flex-wrap justify-between gap-8">
-        <div className="min-w-[200px] flex-1">
-          <div className="mb-1 font-bold uppercase">Bill To</div>
-          <div className="font-bold">{billTo.name}</div>
-          <div className="whitespace-pre-line">{billTo.address}</div>
-          <div>{billTo.phone}</div>
+      <div className="mx-auto mb-8 flex max-w-md flex-wrap justify-between gap-8">
+        <div className="flex-1">
+          <p className="mb-1 text-sm font-bold uppercase">Bill To</p>
+          <p className="text-xs font-bold">{billTo.name}</p>
+          <p className="text-xs whitespace-pre-line">{billTo.address}</p>
+          <p className="text-xs">{billTo.phone}</p>
         </div>
-        <div className="min-w-[200px] flex-1">
-          <div className="mb-1 font-bold uppercase">Bill From</div>
-          <div className="font-bold">{billFrom.name}</div>
-          <div className="whitespace-pre-line">{billFrom.address}</div>
-          <div>{billFrom.phone}</div>
+        <div className="flex-1">
+          <p className="mb-1 text-sm font-bold uppercase">Bill From</p>
+          <p className="text-xs font-bold">{billFrom.name}</p>
+          <p className="text-xs whitespace-pre-line">{billFrom.address}</p>
+          <p className="text-xs">{billFrom.phone}</p>
         </div>
-        <div className="min-w-[200px] flex-1 text-right">
-          <div className="mb-1 font-bold uppercase">Payment</div>
-          <div className="font-bold uppercase">Paid by</div>
-          <div>{paymentDetails.accountType}</div>
-          <div>{paymentDetails.accountNumber}</div>
-          <div className="font-bold uppercase">
+        <div className="flex-1 text-right">
+          <p className="mb-1 text-sm font-bold uppercase">Payment</p>
+          <p className="text-xs font-bold uppercase">Paid by</p>
+          <p className="text-xs">{paymentDetails.accountType}</p>
+          <p className="text-xs">{paymentDetails.accountNumber}</p>
+          <p className="text-xs font-bold uppercase">
             {paymentDetails.paymentMethod}
-          </div>
-          <div>{paymentDetails.bankName}</div>
+          </p>
+          <p className="text-xs">{paymentDetails.bankName}</p>
         </div>
       </div>
 
-      {/* Table Header */}
-      <div
-        className="flex justify-between rounded-t px-4 py-3"
-        style={{ backgroundColor: titleColor, color: "#fff" }}
-      >
-        <div className="w-1/12 text-lg font-bold">Item</div>
-        <div className="w-3/12 text-lg font-bold">Description</div>
-        <div className="w-2/12 text-lg font-bold">Price</div>
-        <div className="w-2/12 text-lg font-bold">Qty.</div>
-        <div className="w-2/12 text-lg font-bold">Total</div>
-      </div>
-      {/* Table Rows */}
-      {Array.from({ length: 5 }).map((_, index) => (
-        <div
-          key={index}
-          className={`flex justify-between px-4 py-3 ${
-            index % 2 === 0 ? "bg-white" : "bg-gray-100"
-          }`}
-        >
-          <div className="w-1/12">1</div>
-          <div className="w-3/12">Service</div>
-          <div className="w-2/12">$100</div>
-          <div className="w-2/12">2</div>
-          <div className="w-2/12">$200</div>
-        </div>
-      ))}
+      {/* Product Table */}
+      {/* Product Table */}
+      <table className="mx-auto w-full max-w-md border-collapse overflow-hidden">
+        <thead>
+          <tr style={{ backgroundColor: titleColor, color: "#fff" }}>
+            <th className="w-1/12 px-4 py-1 text-left text-xs font-bold">
+              Item
+            </th>
+            <th className="w-6/12 px-4 py-1 text-left text-xs font-bold">
+              Description
+            </th>
+            <th className="w-1/12 px-4 py-1 text-left text-xs font-bold">
+              Price
+            </th>
+            <th className="w-1/12 px-4 py-1 text-left text-xs font-bold">
+              Qty.
+            </th>
+            <th className="w-1/12 px-4 py-1 text-left text-xs font-bold">
+              Total
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <tr
+              key={index}
+              className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+            >
+              <td className="w-1/12 px-4 py-1 text-xs">1</td>
+              <td className="w-3/12 px-4 py-1 text-xs">Service</td>
+              <td className="w-2/12 px-4 py-1 text-xs">$100</td>
+              <td className="w-2/12 px-4 py-1 text-xs">2</td>
+              <td className="w-2/12 px-4 py-1 text-xs">$200</td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td
+              colSpan={4}
+              className="px-4 py-1 text-right text-xs font-semibold"
+            >
+              Subtotal:
+            </td>
+            <td className="px-4 py-1 text-xs">${subTotal}</td>
+          </tr>
+          <tr>
+            <td
+              colSpan={4}
+              className="px-4 py-1 text-right text-xs font-semibold"
+            >
+              Tax:
+            </td>
+            <td className="px-4 py-1 text-xs">${tax}</td>
+          </tr>
+          <tr>
+            <td className="w-1/12 px-4 py-1 text-xs font-semibold">&nbsp;</td>
+            <td className="w-3/12 px-4 py-1 text-xs font-semibold">&nbsp;</td>
+            <td className="w-2/12 px-4 py-1 text-xs font-semibold">&nbsp;</td>
 
-      {/* Subtotal, Tax, Total */}
-      <div className="mt-6 flex flex-col items-end space-y-2">
-        <div className="flex w-60 justify-between">
-          <span>Subtotal:</span>
-          <span>${subTotal}</span>
-        </div>
-        <div className="flex w-60 justify-between">
-          <span>Tax:</span>
-          <span>${tax}</span>
-        </div>
-        <div
-          className="flex w-60 justify-between rounded px-2 py-1 font-bold"
-          style={{ backgroundColor: titleColor, color: "#fff" }}
-        >
-          <span>Total:</span>
-          <span>${total}</span>
-        </div>
-      </div>
+            <td
+              className="w-fit px-4 py-1 text-right text-xs font-bold"
+              style={{ backgroundColor: titleColor, color: "#fff" }}
+            >
+              Total:
+            </td>
+            <td
+              className="w-fit px-4 py-1 text-xs font-bold"
+              style={{ backgroundColor: titleColor, color: "#fff" }}
+            >
+              ${total}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
 
-      {/* Footer */}
-      <div className="mt-10">
-        <div className="text-xl font-bold" style={{ color: titleColor }}>
+      <div className="mx-auto mt-10 max-w-md">
+        <div className="text-lg font-bold" style={{ color: titleColor }}>
           Thank you!
         </div>
-        <div className="mt-2 mb-6 text-sm">
+        <div className="mt-2 mb-6 text-xs">
           The origin of the first constellation data back to prehistoric times
           purpose was to tell stories of their beliefs, experiences, Creation,
           or mythology.
         </div>
-        <div
-          className="flex items-center justify-between rounded px-6 py-3"
-          style={{ backgroundColor: titleColor, color: "#fff" }}
-        >
-          <span className="font-bold">+01234345</span>
-          <span className="font-bold">support@example.com</span>
+      </div>
+
+      {/* Footer */}
+      <div
+        className="flex items-center justify-between px-6 py-1"
+        style={{ backgroundColor: titleColor, color: "#fff" }}
+      >
+        <div className="mx-auto flex w-full max-w-md justify-between">
+          <span className="text-sm font-bold">+01234345</span>
+          <span className="text-sm font-bold">support@example.com</span>
         </div>
       </div>
     </div>
