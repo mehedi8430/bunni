@@ -13,6 +13,7 @@ import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CreateInvoiceTemplatePage from "@/pages/Dashboard/CreateInvoiceTemplatePage";
+import PreviewTemplate from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import CustomerPage from "@/pages/Dashboard/Customer";
 import InvoicesPage from "@/pages/Dashboard/Invoices";
 import InvoiceTemplatesPage from "@/pages/Dashboard/InvoiceTemplatesPage";
@@ -52,8 +53,15 @@ export const Router = createBrowserRouter([
         element: <InvoiceTemplatesPage />,
       },
       {
-        path: "invoices/template/:id",
+        path: "template",
         element: <CreateInvoiceTemplatePage />,
+        children: [
+          // This is the default route for the template preview
+          {
+            path: "invoice/:id",
+            element: <PreviewTemplate />,
+          },
+        ],
       },
       {
         path: "customer",

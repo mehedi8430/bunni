@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import type React from "react";
@@ -31,7 +25,7 @@ type DialogModalProps = {
   className?: string;
 };
 
-export function DialogModal({
+export function PdfDialogModal({
   isOpen,
   onOpenChange,
   title,
@@ -91,32 +85,13 @@ export function DialogModal({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "w-[95%] p-0 sm:w-[90%] md:w-[80%] lg:!max-w-2xl",
+          "my-auto w-[95%] border-none bg-transparent p-0 shadow-none sm:w-[90%] md:w-[80%] lg:!max-w-2xl",
+          // Try more selectors for the close button:
+          "focus:outline-none [&>button]:hidden",
           className,
         )}
       >
-        <DialogHeader>
-          <DialogTitle className="border-b p-5 text-2xl font-semibold">
-            {title}
-          </DialogTitle>
-        </DialogHeader>
-        <div className="h-auto max-h-[80vh] overflow-y-auto px-4 py-3">
-          {children}
-        </div>
-        {showButtons && (
-          <DialogFooter>
-            {onCancel && (
-              <Button variant="outline" onClick={onCancel}>
-                {cancelText}
-              </Button>
-            )}
-            {onConfirm && (
-              <Button variant="default" onClick={onConfirm}>
-                {confirmText}
-              </Button>
-            )}
-          </DialogFooter>
-        )}
+        <div className="aspect-square">{children}</div>
       </DialogContent>
     </Dialog>
   );

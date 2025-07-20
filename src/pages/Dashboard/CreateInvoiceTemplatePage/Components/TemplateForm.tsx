@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
@@ -6,72 +6,76 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
-import type { TInvoiceData } from "@/types";
 import type { TCustomer } from "@/types/customer.type";
-import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
 import ItemsSection from "./ItemsSection";
+import { updateField } from "@/redux/slices/invoiceTemplateSlice";
+import type { TInvoiceItem } from "@/types";
 
-const defaultInvoiceData: TInvoiceData = {
-  title: "",
-  customer: "",
-  invoiceNumber: "",
-  orderNumber: "",
-  invoiceDate: getTodayDate(),
-  serviceDate: getTodayDateWithTime(),
-  dueDate: "05 Feb 2025",
-  footerTerms:
-    "Payment is due within 15 days from the date of invoice. Please make checks payable to Acme Inc. or use the online payment link provided in this email.",
-  items: [
-    {
-      id: crypto.randomUUID(),
-      description: "",
-      quantity: 1,
-      price: 0,
-      tax: 0,
-      amount: 0,
-      taxId: "",
-      discount: 0,
-    },
-  ],
-  subtotal: 100.0,
-  discount: 0,
-  total: 100.0,
-};
+interface RootState {
+  invoiceTemplate: {
+    title: string;
+    customer: string;
+    invoiceNumber: string;
+    orderNumber: string;
+    invoiceDate: string;
+    serviceDate: string;
+    dueDate: string;
+    footerTerms: string;
+    items: TInvoiceItem[];
+    subtotal: number;
+    discount: number;
+    total: number;
+  };
+}
 
 export default function TemplateForm() {
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
   const { customers } = useCustomerApi();
+  const dispatch = useDispatch();
+  const {
+    title,
+    customer,
+    invoiceNumber,
+    orderNumber,
+    invoiceDate,
+    serviceDate,
+    dueDate,
+    footerTerms,
+  } = useSelector((state: RootState) => state.invoiceTemplate);
 
-  const { control, handleSubmit, setValue, watch } = useForm<TInvoiceData>({
-    defaultValues: defaultInvoiceData,
-  });
-
-  const onSubmit = (data: TInvoiceData) => {
-    console.log("Form submitted:", data);
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", {
+      title,
+      customer,
+      invoiceNumber,
+      orderNumber,
+      invoiceDate,
+      serviceDate,
+      dueDate,
+      footerTerms,
+    });
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 px-6 pt-6">
+      <form onSubmit={onSubmit} className="space-y-6 px-6 pt-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title" className="custom-label">
               Invoice title
             </Label>
-            <Controller
-              name="title"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  id="title"
-                  placeholder="Let your customer know what this invoice is for"
-                  {...field}
-                  className="custom-focus"
-                />
-              )}
+            <Input
+              id="title"
+              placeholder="Let your customer know what this invoice is for"
+              value={title}
+              onChange={(e) =>
+                dispatch(updateField({ field: "title", value: e.target.value }))
+              }
+              className="custom-focus"
             />
           </div>
 
@@ -79,21 +83,17 @@ export default function TemplateForm() {
             <Label htmlFor="customer" className="custom-label">
               Customer
             </Label>
-            <Controller
-              name="customer"
-              control={control}
-              render={({ field }) => (
-                <SelectInput
-                  options={customers.map((customer: TCustomer) => ({
-                    value: customer.id,
-                    label: customer.name,
-                  }))}
-                  placeholder="Select a customer"
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  triggerClassName="w-full"
-                />
-              )}
+            <SelectInput
+              options={customers.map((customer: TCustomer) => ({
+                value: customer.id,
+                label: customer.name,
+              }))}
+              placeholder="Select a customer"
+              value={customer}
+              onValueChange={(value) =>
+                dispatch(updateField({ field: "customer", value }))
+              }
+              triggerClassName="w-full"
             />
             <div className="flex justify-end">
               <Button
@@ -111,17 +111,19 @@ export default function TemplateForm() {
             <Label htmlFor="invoiceNumber" className="custom-label">
               Invoice
             </Label>
-            <Controller
-              name="invoiceNumber"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  id="invoiceNumber"
-                  placeholder="Enter invoice number"
-                  {...field}
-                  className="custom-focus"
-                />
-              )}
+            <Input
+              id="invoiceNumber"
+              placeholder="Enter invoice number"
+              value={invoiceNumber}
+              onChange={(e) =>
+                dispatch(
+                  updateField({
+                    field: "invoiceNumber",
+                    value: e.target.value,
+                  }),
+                )
+              }
+              className="custom-focus"
             />
           </div>
 
@@ -129,17 +131,16 @@ export default function TemplateForm() {
             <Label htmlFor="orderNumber" className="custom-label">
               Order Number
             </Label>
-            <Controller
-              name="orderNumber"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  id="orderNumber"
-                  placeholder="Enter order number"
-                  {...field}
-                  className="custom-focus"
-                />
-              )}
+            <Input
+              id="orderNumber"
+              placeholder="Enter order number"
+              value={orderNumber}
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "orderNumber", value: e.target.value }),
+                )
+              }
+              className="custom-focus"
             />
           </div>
 
@@ -148,24 +149,36 @@ export default function TemplateForm() {
               <Label htmlFor="invoiceDate" className="custom-label">
                 Invoice Date
               </Label>
-              <Controller
-                name="invoiceDate"
-                control={control}
-                render={({ field }) => (
-                  <Input id="invoiceDate" {...field} className="custom-focus" />
-                )}
+              <Input
+                id="invoiceDate"
+                value={invoiceDate}
+                onChange={(e) =>
+                  dispatch(
+                    updateField({
+                      field: "invoiceDate",
+                      value: e.target.value,
+                    }),
+                  )
+                }
+                className="custom-focus"
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="serviceDate" className="custom-label">
                 Service Date
               </Label>
-              <Controller
-                name="serviceDate"
-                control={control}
-                render={({ field }) => (
-                  <Input id="serviceDate" {...field} className="custom-focus" />
-                )}
+              <Input
+                id="serviceDate"
+                value={serviceDate}
+                onChange={(e) =>
+                  dispatch(
+                    updateField({
+                      field: "serviceDate",
+                      value: e.target.value,
+                    }),
+                  )
+                }
+                className="custom-focus"
               />
             </div>
           </div>
@@ -174,12 +187,15 @@ export default function TemplateForm() {
             <Label htmlFor="dueDate" className="custom-label">
               Due Date
             </Label>
-            <Controller
-              name="dueDate"
-              control={control}
-              render={({ field }) => (
-                <Input id="dueDate" {...field} className="custom-focus" />
-              )}
+            <Input
+              id="dueDate"
+              value={dueDate}
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "dueDate", value: e.target.value }),
+                )
+              }
+              className="custom-focus"
             />
           </div>
 
@@ -187,23 +203,22 @@ export default function TemplateForm() {
             <Label htmlFor="footerTerms" className="custom-label">
               Footer & Terms
             </Label>
-            <Controller
-              name="footerTerms"
-              control={control}
-              render={({ field }) => (
-                <Textarea
-                  id="footerTerms"
-                  {...field}
-                  rows={3}
-                  className="custom-focus"
-                />
-              )}
+            <Textarea
+              id="footerTerms"
+              value={footerTerms}
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "footerTerms", value: e.target.value }),
+                )
+              }
+              rows={3}
+              className="custom-focus"
             />
           </div>
         </div>
 
         {/* Items Section */}
-        <ItemsSection control={control} setValue={setValue} watch={watch} />
+        <ItemsSection />
 
         {/* Add Customer Modal */}
         <DialogModal
