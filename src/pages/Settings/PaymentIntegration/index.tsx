@@ -9,15 +9,15 @@ export default function PaymentIntegrationPage() {
           Payment Integration
         </h1>
       </div>
-      <div className="bg-white p-6 rounded-md flex items-center justify-between">
+      <div className="bg-white p-6 rounded-md flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center space-x-8">
           <img src={icons.stripeIcon} alt="Stripe Icon" />
-          <div>
+          <div className="">
             <p className="text-xl font-normal text-foreground">Stripe</p>
             <p className="text-lg font-normal text-foreground/40">An easy, secure, and private way to check out using Stripe</p>
           </div>
         </div>
-        <div>
+        <div className="flex justify-end w-full mt-4 md:mt-0">
           <Button>
             Connect
           </Button>
