@@ -6,6 +6,7 @@ export type TInvoice = {
   amount: string | number;
   tenderType: "Credit Card" | "Bank Transfer";
   date: string;
+  templateId?: string;
 };
 
 export type TDiscount = {
