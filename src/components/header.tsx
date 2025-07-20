@@ -1,4 +1,4 @@
-import { Headset, Menu } from "lucide-react";
+import { ChevronDown, Headset, LogOut, Menu, User } from "lucide-react";
 import SelectInput from "./SelectInput";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { icons } from "@/lib/imageProvider";
@@ -13,8 +13,10 @@ export default function Header() {
     <header className="bg-sidebar border-border fixed top-0 z-50 w-full border-b">
       <div className="flex items-center max-md:justify-center">
         <div className="flex w-[328px] items-center justify-center">
-          <div className="flex h-[78px] w-[109px] items-center justify-center">
-            <ReactSVG src={icons.navLogo} />
+          <div className="flex h-[78px] w-[109px] items-center justify-center overflow-hidden">
+            <Link to="/dashboard">
+              <ReactSVG src={icons.navLogo} />
+            </Link>
           </div>
         </div>
 
@@ -53,7 +55,7 @@ export default function Header() {
               </Popover>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2.5">
               <Avatar className="h-10 w-10">
                 <AvatarImage
                   src="https://github.com/shadcn.png"
@@ -62,12 +64,24 @@ export default function Header() {
                 />
                 <AvatarFallback>SC</AvatarFallback>
               </Avatar>
-
-              <SelectInput
-                options={[]}
-                placeholder="Acme Inc."
-                triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:border [&>svg]:border-border [&>svg]:rounded-full [&>svg]:opacity-80 [&>svg]:size-5 [&>svg]:stroke-black data-[placeholder]:text-foreground data-[placeholder]:text-[16px] data-[select-trigger]:text-foreground data-[select-trigger]:text-lg"
-              />
+              <Popover>
+                <PopoverTrigger asChild className="cursor-pointer">
+                  <div className="flex items-center gap-1.5">Acme Inc.
+                    <ChevronDown strokeWidth={1.5} className="border border-border rounded-full p-0.5" /></div>
+                </PopoverTrigger>
+                <PopoverContent className="w-48 p-4">
+                  <div className="space-y-2">
+                    <Link to={`/dashboard/settings/profile`} className="flex items-center gap-2.5">
+                      <User strokeWidth={1.5} />
+                      <span className="text-lg font-normal">My Profile</span>
+                    </Link>
+                    <button className="flex items-center gap-2.5 text-red-500">
+                      <LogOut strokeWidth={1.5} />
+                      <span className="text-lg font-normal">Logout</span>
+                    </button>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </div>
@@ -116,20 +130,26 @@ export default function Header() {
                   </div>
 
                   {/* Profile Section */}
-                  <div className="flex items-center gap-3 p-2">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src="https://github.com/shadcn.png"
-                        alt="@shadcn"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>SC</AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-medium">Acme Inc.</span>
-                      <span className="text-muted-foreground text-xs">
-                        View profile
-                      </span>
+                  <div className=" p-2">
+                    <div className="flex items-center gap-2 mb-5">
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage
+                          src="https://github.com/shadcn.png"
+                          alt="@shadcn"
+                          className="object-cover"
+                        />
+                        <AvatarFallback>SC</AvatarFallback>
+                      </Avatar>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium">Acme Inc.</span>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <p className="flex items-center gap-1">
+                        <User strokeWidth={1.5} />
+                        My profile
+                      </p>
+                      <p className="flex items-center gap-1 text-red-500"><LogOut strokeWidth={1.25} /> Logout</p>
                     </div>
                   </div>
                 </div>

@@ -212,3 +212,19 @@ html {
 .custom-action-button {
   @apply border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent;
 }
+
+/* Add to your global CSS file */
+.sidebar-menu-button svg,
+.sidebar-menu-button svg * {
+  fill: currentColor !important;
+}
+
+.sidebar-menu-button:hover svg,
+.sidebar-menu-button:hover svg * {
+  fill: white !important;
+}
+
+.sidebar-menu-button.active svg,
+.sidebar-menu-button.active svg * {
+  fill: white !important;
+}
