@@ -3,27 +3,9 @@ import type { TInvoiceData, TInvoiceItem, TProduct } from "@/types";
 import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-// Define the initial state based on TInvoiceData
-interface InvoiceState extends TInvoiceData {
-  title: string;
-  customer: string;
-  invoiceNumber: string;
-  orderNumber: string;
-  invoiceDate: string;
-  serviceDate: string;
-  dueDate: string;
-  footerTerms: string;
-  items: TInvoiceItem[];
-  subtotal: number;
-  discount: number;
-  total: number;
-  color: string;
-  totalTax: number;
-}
-
-const initialState: InvoiceState = {
+const initialState: TInvoiceData = {
   title: "",
-  customer: "",
+  customerId: "",
   invoiceNumber: "",
   orderNumber: "",
   invoiceDate: getTodayDate(),
@@ -54,10 +36,13 @@ const invoiceTemplateSlice = createSlice({
   name: "invoiceTemplate",
   initialState,
   reducers: {
+    setInvoice: (state, action: PayloadAction<TInvoiceData>) => {
+      return { ...state, ...action.payload };
+    },
     updateField: (
       state,
       action: PayloadAction<{
-        field: keyof Omit<InvoiceState, "items" | "subtotal" | "total">;
+        field: keyof Omit<TInvoiceData, "items" | "subtotal" | "total">;
         value: string;
       }>,
     ) => {
@@ -114,7 +99,7 @@ const invoiceTemplateSlice = createSlice({
 });
 
 // Helper function to calculate amount for a single item
-const calculateAmount = (state: InvoiceState, index: number) => {
+const calculateAmount = (state: TInvoiceData, index: number) => {
   const item = state.items[index];
   const baseAmount = item.quantity * item.price;
   const discountAmount = baseAmount * (item.discount / 100);
@@ -141,7 +126,7 @@ const calculateAmount = (state: InvoiceState, index: number) => {
 };
 
 // Helper function to calculate subtotal and total
-const calculateTotals = (state: InvoiceState) => {
+const calculateTotals = (state: TInvoiceData) => {
   const subtotal = state.items.reduce((sum, item) => sum + item.amount, 0);
   const totalTax = state.items.reduce((sum, item) => sum + item.tax, 0);
   const totalDiscount = state.items.reduce(
@@ -156,6 +141,7 @@ const calculateTotals = (state: InvoiceState) => {
 };
 
 export const {
+  setInvoice,
   updateField,
   addItem,
   removeItem,
@@ -163,6 +149,6 @@ export const {
   selectProduct,
   setColor,
 } = invoiceTemplateSlice.actions;
-export const templateSelector = (state: { invoiceTemplate: InvoiceState }) =>
+export const templateSelector = (state: { invoiceTemplate: TInvoiceData }) =>
   state.invoiceTemplate;
 export default invoiceTemplateSlice.reducer;
