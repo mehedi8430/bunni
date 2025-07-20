@@ -22,10 +22,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Check } from "lucide-react";
+import type { TProduct } from "@/types";
 
 interface ItemSelectionFieldProps {
   itemId: string;
-  onItemSelect: (itemId: string, description: string) => void;
+  onItemSelect: (itemId: string, product: TProduct) => void;
 }
 
 interface FormData {
@@ -50,16 +51,25 @@ export default function ItemSelectionField({
 
   const handleSelectChange = (value: string) => {
     const selectedProduct = products.find((product) => product.name === value);
+    console.log({ selectedProduct });
+
     if (selectedProduct) {
       setValue("itemDescription", selectedProduct.name);
-      onItemSelect(itemId, selectedProduct.name);
+      onItemSelect(itemId, selectedProduct);
     }
     setIsOpen(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("itemDescription", e.target.value);
-    onItemSelect(itemId, e.target.value);
+    onItemSelect(itemId, {
+      id: itemId,
+      name: e.target.value,
+      type: "Product",
+      unit: "",
+      price: 0,
+      description: e.target.value,
+    });
     setIsOpen(true);
   };
 
@@ -86,7 +96,14 @@ export default function ItemSelectionField({
               value={itemDescription}
               onValueChange={(value) => {
                 setValue("itemDescription", value);
-                onItemSelect(itemId, value);
+                onItemSelect(itemId, {
+                  id: itemId,
+                  name: value,
+                  type: "Product",
+                  unit: "",
+                  price: 0,
+                  description: value,
+                });
               }}
             />
             <CommandList>

@@ -26,13 +26,14 @@ const defaultInvoiceData: TInvoiceData = {
     "Payment is due within 15 days from the date of invoice. Please make checks payable to Acme Inc. or use the online payment link provided in this email.",
   items: [
     {
-      id: "1",
+      id: crypto.randomUUID(),
       description: "",
-      quantity: 0,
+      quantity: 1,
       price: 0,
       tax: 0,
       amount: 0,
       taxId: "",
+      discount: 0,
     },
   ],
   subtotal: 100.0,
