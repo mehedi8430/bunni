@@ -6,9 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { TInvoice } from "@/types";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
-import MyDocument from "./Document";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
@@ -45,9 +43,12 @@ export default function InvoiceTableRowActions({
           }}
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
         >
-          <PDFDownloadLink document={<MyDocument />} fileName="invoice.pdf">
+          {/* <PDFDownloadLink
+            document={<InvoiceTemplate />}
+            fileName="invoice.pdf"
+          >
             {({ loading }) => (loading ? "Preparing document..." : "Download")}
-          </PDFDownloadLink>
+          </PDFDownloadLink> */}
         </DropdownMenuItem>
 
         <DropdownMenuItem

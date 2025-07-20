@@ -46,20 +46,22 @@ import user_management from "../assets/icons/user_management.svg";
 
 import arrowDown from "../assets/icons/ArrowDown.svg";
 import calender from "../assets/icons/Calendar.svg";
-import email from "../assets/icons/email.svg";
-import revinue from "../assets/icons/revinue.svg";
-import groupuser from "../assets/icons/groupuser.svg";
 import dolar from "../assets/icons/dolar.svg";
+import email from "../assets/icons/email.svg";
+import groupuser from "../assets/icons/groupuser.svg";
 import outstanding from "../assets/icons/outstanding.svg";
+import revinue from "../assets/icons/revinue.svg";
 
-import invoice_template from "../assets/images/invoice_template.svg";
-import budget_report_template from "../assets/images/budget_report_template.svg";
-import successIcon from "../assets/icons/successIcon.svg";
+import addIcon from "../assets/icons/add-icon.svg";
 import checkIcon from "../assets/icons/checkIcon.svg";
 import crossIcon from "../assets/icons/crossIcon.svg";
 import starIcon from "../assets/icons/starIcon.svg";
 import stripeIcon from "../assets/icons/stripeIcon.svg";
-import addIcon from "../assets/icons/add-icon.svg";
+import successIcon from "../assets/icons/successIcon.svg";
+import budget_report_template from "../assets/images/budget_report_template.svg";
+import invoice_template from "../assets/images/invoice_template.svg";
+
+import templateLogo from "../assets/template/assets/logo.png"; // Assuming you have a template logo
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -181,6 +183,7 @@ export const images: ImageAssets = {
   sendMoney: sendMoney,
   invoice_template: invoice_template,
   budget_report_template: budget_report_template,
+  templateLogo: templateLogo, // Template logo for invoice templates
   // Add more images here as needed
 };
 

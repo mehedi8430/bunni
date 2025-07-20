@@ -7,15 +7,15 @@ import { useEffect, useState } from "react";
 
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { DialogModal } from "@/components/DialogModal";
+import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { icons } from "@/lib/imageProvider";
 import { cn } from "@/lib/utils";
 import { invoiceApi } from "@/mockApi/invoiceApi";
 import type { TInvoice } from "@/types";
-import { PDFViewer } from "@react-pdf/renderer";
 import { format } from "date-fns";
 import { useNavigate } from "react-router";
 import { ReactSVG } from "react-svg";
-import MyDocument from "./components/Document";
+import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import InvoiceForm from "./components/InvoiceForm";
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
@@ -267,17 +267,47 @@ export default function InvoicesPage() {
       </div>
 
       {/* View Details Modal */}
-      <DialogModal
+      <PdfDialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
-        title="View Details"
+        className=""
+        title={null}
       >
-        <PDFViewer className="h-[600px] w-full">
-          <MyDocument />
-        </PDFViewer>
+        {/* <BlobProvider document={<InvoiceTemplate />}>
+          {({ blob, url, loading, error }) => {
+            if (loading) return <div>Loading PDF...</div>;
+            if (error) return <div>Error: {error.message}</div>;
+            return (
+              <div>
+                {url && (
+                  <iframe
+                    src={url}
+                    title="Invoice Preview"
+                    width="100%"
+                    height="600px"
+                    style={{ border: "none" }}
+                  />
+                )}
+                <div className="mt-4">
+                  {blob && (
+                    <a
+                      href={url}
+                      download="invoice.pdf"
+                      className="text-blue-600 underline"
+                    >
+                      Download PDF
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          }}
+        </BlobProvider> */}
+
+        <PreviewTemplate />
 
         {/* <InvoiceDetails invoiceId={selectedInvoice?.id || ""} /> */}
-      </DialogModal>
+      </PdfDialogModal>
 
       {/* Edit Modal with InvoiceForm */}
       <DialogModal
