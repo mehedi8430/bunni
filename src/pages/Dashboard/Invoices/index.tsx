@@ -20,6 +20,7 @@ import InvoiceForm from "./components/InvoiceForm";
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
+import LoadingPage from "@/components/shared/LoadingPage";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -197,6 +198,12 @@ export default function InvoicesPage() {
   };
 
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
+
+  if(isLoading) return (
+    <div>
+      <LoadingPage />
+    </div>
+  );
 
   return (
     <section className="space-y-10">
