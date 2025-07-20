@@ -87,9 +87,9 @@ export default function TaxRatesSettings() {
               variant={"outline"}
               size={"sm"}
               onClick={() => {
-                  setEditTaxRate(taxRate);
-                  setIsEditTaxRateOpen(true);
-                }}
+                setEditTaxRate(taxRate);
+                setIsEditTaxRateOpen(true);
+              }}
               className="cursor-pointer bg-white"
             >
               Edit
@@ -98,10 +98,10 @@ export default function TaxRatesSettings() {
               variant={"outline"}
               size={"sm"}
               onClick={() => {
-                  setTaxRateToDelete(taxRate.id);
-                  setIsDeleteTaxRateOpen(true);
-                }}
-              className="cursor-pointer bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white border-none"
+                setTaxRateToDelete(taxRate.id);
+                setIsDeleteTaxRateOpen(true);
+              }}
+              className="cursor-pointer border-none bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white"
             >
               Delete
             </Button>
@@ -144,13 +144,16 @@ export default function TaxRatesSettings() {
         total={totalTaxRate}
         onPageChange={setPageTaxRate}
         onLimitChange={setLimitTaxRate}
-        actions={true}
       />
       {/* Dialog for editing tax rate */}
       <DialogModal
         isOpen={isEditTaxRateOpen}
         onOpenChange={setIsEditTaxRateOpen}
-        title={editTaxRate.id ? "Edit Tax Rates Settings" : "Create Tax Rates Settings"}
+        title={
+          editTaxRate.id
+            ? "Edit Tax Rates Settings"
+            : "Create Tax Rates Settings"
+        }
       >
         <TaxRateForm
           taxRate={editTaxRate}
@@ -158,7 +161,7 @@ export default function TaxRatesSettings() {
           onClose={() => setIsEditTaxRateOpen(false)}
         />
       </DialogModal>
-      
+
       {/* Delete Alert Dialog */}
       <AlertDialogModal
         isOpen={isDeleteTaxRateOpen}

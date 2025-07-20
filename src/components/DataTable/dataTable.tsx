@@ -42,7 +42,6 @@ export interface DataTableProps<TData, TValue> {
   total: number;
   onPageChange: (page: number) => void;
   onLimitChange: (limit: number) => void;
-  actions?: boolean;
   isPagination?: boolean;
 }
 
@@ -55,7 +54,6 @@ function DataTableInner<TData, TValue>(
     limit,
     total,
     onPageChange,
-    actions,
     isPagination = true,
     onLimitChange,
   }: DataTableProps<TData, TValue>,
@@ -92,11 +90,6 @@ function DataTableInner<TData, TValue>(
             <Skeleton className="h-4 w-full sm:h-6" />
           </TableCell>
         ))}
-        {actions && (
-          <TableCell className="flex items-center justify-end p-2 text-right sm:p-4">
-            <Skeleton className="h-4 w-12 sm:h-6 sm:w-16" />
-          </TableCell>
-        )}
       </TableRow>
     ));
 

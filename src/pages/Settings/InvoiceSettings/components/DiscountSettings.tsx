@@ -82,14 +82,14 @@ export default function DiscountSettings() {
       cell: ({ row }) => {
         const discount = row.original;
         return (
-           <div className="space-x-2">
+          <div className="space-x-2">
             <Button
               variant={"outline"}
               size={"sm"}
               onClick={() => {
-                  setEditDiscount(discount);
-                  setIsEditDiscountOpen(true);
-                }}
+                setEditDiscount(discount);
+                setIsEditDiscountOpen(true);
+              }}
               className="cursor-pointer bg-white"
             >
               Edit
@@ -98,10 +98,10 @@ export default function DiscountSettings() {
               variant={"outline"}
               size={"sm"}
               onClick={() => {
-                  setDiscountToDelete(discount.id);
-                  setIsDeleteDiscountOpen(true);
-                }}
-              className="cursor-pointer bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white border-none"
+                setDiscountToDelete(discount.id);
+                setIsDeleteDiscountOpen(true);
+              }}
+              className="cursor-pointer border-none bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white"
             >
               Delete
             </Button>
@@ -146,7 +146,6 @@ export default function DiscountSettings() {
         total={totalDiscount}
         onPageChange={setPageDiscount}
         onLimitChange={setLimitDiscount}
-        actions={true}
       />
       <DialogModal
         isOpen={isEditDiscountOpen}

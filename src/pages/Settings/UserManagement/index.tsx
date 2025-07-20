@@ -1,6 +1,6 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import {  MoreHorizontal,} from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import {
@@ -119,7 +119,7 @@ export default function UserManagementPage() {
                 className="custom-action-button"
               >
                 {/* <Edit className="mr-2 h-4 w-4" /> */}
-                 Edit
+                Edit
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
@@ -128,7 +128,7 @@ export default function UserManagementPage() {
                 className="custom-action-button"
               >
                 {/* <SendToBack className="mr-2 h-4 w-4" /> */}
-                 Resend Invite
+                Resend Invite
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
@@ -138,7 +138,7 @@ export default function UserManagementPage() {
                 className="custom-action-button"
               >
                 {/* <Trash className="mr-2 h-4 w-4" /> */}
-                 Delete
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -150,7 +150,7 @@ export default function UserManagementPage() {
   const handleSave = (updatedUser: TUser) => {
     // console.log("handleSave called with:", updatedUser);
     // console.log("editUser.id:", editUser.id);
-    
+
     // If editUser.id exists, we're editing an existing user
     if (editUser.id) {
       setData((prev) =>
@@ -189,7 +189,6 @@ export default function UserManagementPage() {
           total={total}
           onPageChange={setPage}
           onLimitChange={setLimit}
-          actions={true}
         />
       </div>
 
@@ -198,7 +197,7 @@ export default function UserManagementPage() {
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
         title={editUser.id ? "Edit Member" : "Add New Member"}
-        className="!w-4xl" 
+        className="!w-4xl"
       >
         <UserForm
           user={editUser}

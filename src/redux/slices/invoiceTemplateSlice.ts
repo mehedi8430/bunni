@@ -25,10 +25,10 @@ const initialState: TInvoiceData = {
       discount: 0,
     },
   ],
-  subtotal: 100.0,
-  discount: 0,
-  totalTax: 0,
-  total: 100.0,
+  subtotal: 0.0,
+  discount: 0.0,
+  totalTax: 0.0,
+  total: 0.0,
   color: "#38988A", // Default color
 };
 
@@ -95,6 +95,10 @@ const invoiceTemplateSlice = createSlice({
     setColor: (state, action: PayloadAction<string>) => {
       state.color = action.payload;
     },
+
+    clearInvoice: (state) => {
+      return { ...initialState, color: state.color };
+    },
   },
 });
 
@@ -148,6 +152,7 @@ export const {
   updateItem,
   selectProduct,
   setColor,
+  clearInvoice,
 } = invoiceTemplateSlice.actions;
 export const templateSelector = (state: { invoiceTemplate: TInvoiceData }) =>
   state.invoiceTemplate;

@@ -1,6 +1,6 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus, } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -39,9 +39,10 @@ export default function PaymentPage() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [paymentToDelete, setPaymentToDelete] = useState<string | null>(null);
   const [isAddPaymentOpen, setIsAddPaymentOpen] = useState<boolean>(false);
-  const [isRecurringBillingOpen, setIsRecurringBillingOpen] = useState<boolean>(false);
-  const [isVirtualTerminalOpen, setIsVirtualTerminalOpen] = useState<boolean>(false);
-
+  const [isRecurringBillingOpen, setIsRecurringBillingOpen] =
+    useState<boolean>(false);
+  const [isVirtualTerminalOpen, setIsVirtualTerminalOpen] =
+    useState<boolean>(false);
 
   // Fetch payments when page, limit, or filters change
   useEffect(() => {
@@ -68,7 +69,6 @@ export default function PaymentPage() {
 
     fetchPayments();
   }, [page, limit, searchTerm]);
-
 
   const columns: ColumnDef<Payment>[] = [
     {
@@ -173,13 +173,16 @@ export default function PaymentPage() {
                 <MoreHorizontal />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-0 border border-border">
+            <DropdownMenuContent
+              align="end"
+              className="border-border border p-0"
+            >
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedPayment(payment);
                   setIsViewOpen(true);
                 }}
-                className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
+                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
               >
                 View
               </DropdownMenuItem>
@@ -188,7 +191,7 @@ export default function PaymentPage() {
                   setEditPayment(payment);
                   setIsEditOpen(true);
                 }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
               >
                 Edit
               </DropdownMenuItem>
@@ -197,7 +200,7 @@ export default function PaymentPage() {
                   setPaymentToDelete(payment.invoice);
                   setIsDeleteOpen(true);
                 }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
               >
                 Delete
               </DropdownMenuItem>
@@ -227,18 +230,33 @@ export default function PaymentPage() {
 
   return (
     <section className="space-y-10">
-      <div className="flex flex-col lg:flex-row items-center justify-between space-y-5">
+      <div className="flex flex-col items-center justify-between space-y-5 lg:flex-row">
         <h1 className="text-2xl font-semibold md:text-[32px]">Payment</h1>
         <div className="flex flex-wrap items-center justify-center gap-6">
-          <Button onClick={() => setIsRecurringBillingOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
+          <Button
+            onClick={() => setIsRecurringBillingOpen(true)}
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal"
+          >
             <Plus />
             Recurring Billing
           </Button>
-          <Button onClick={() => setIsVirtualTerminalOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
+          <Button
+            onClick={() => setIsVirtualTerminalOpen(true)}
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal"
+          >
             <Plus />
             Virtual Terminal
           </Button>
-          <Button onClick={() => setIsAddPaymentOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
+          <Button
+            onClick={() => setIsAddPaymentOpen(true)}
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal"
+          >
             <Plus />
             pay by link
           </Button>
@@ -284,7 +302,6 @@ export default function PaymentPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
-            actions={true}
           />
         </div>
       </div>
@@ -301,7 +318,7 @@ export default function PaymentPage() {
           onSend={(data) => console.log("Virtual Terminal Data:", data)}
         />
       </DialogModal>
-      
+
       {/* Add Recurring Billing Form modal */}
       <DialogModal
         title="Set Up Recurring Billing"
