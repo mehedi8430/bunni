@@ -16,6 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router";
@@ -37,6 +38,7 @@ export function NavMain({
 }) {
   const navigate = useNavigate();
   const activePath = useLocation().pathname;
+  const { isMobile, setOpenMobile } = useSidebar();
 
   const isActive = (url?: string) => {
     return url === activePath;
@@ -45,6 +47,14 @@ export function NavMain({
   // Check if any subitem's URL matches the active path
   const isSubItemActive = (subItems?: { url: string }[]) => {
     return subItems?.some((subItem) => subItem.url === activePath) || false;
+  };
+
+  // Handle navigation and close mobile sidebar
+  const handleNavigate = (url: string) => {
+    navigate(url);
+    if (isMobile) {
+      setOpenMobile(false);
+    }
   };
 
   return (
@@ -78,7 +88,7 @@ export function NavMain({
                           // Let CollapsibleTrigger handle toggle; do not navigate
                           // Don't prevent default — it blocks expand!
                         } else if (item.url) {
-                          navigate(item.url);
+                          handleNavigate(item.url);
                         }
                       }}
                     >
@@ -106,7 +116,7 @@ export function NavMain({
                                   ),
                                 },
                               )}
-                              onClick={() => navigate(subItem.url)}
+                              onClick={() => handleNavigate(subItem.url)}
                             >
                               {subItem.icon && <ReactSVG src={subItem.icon} />}
                               <span>{subItem.title}</span>
