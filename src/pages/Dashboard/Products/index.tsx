@@ -198,7 +198,6 @@ export default function ProductsPage() {
           total={total}
           onPageChange={setPage}
           onLimitChange={setLimit}
-          actions={true}
         />
       </div>
 

@@ -255,7 +255,6 @@ export default function InvoicesPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
-            actions={true}
           />
         </div>
       </div>
