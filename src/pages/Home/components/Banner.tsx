@@ -1,6 +1,5 @@
 import Image from "@/components/shared/Image";
 import { icons, images } from "@/lib/imageProvider";
-import Navbar from "./Navbar";
 
 export default function Banner() {
   return (
@@ -12,7 +11,6 @@ export default function Banner() {
           className="object-cover object-center h-full w-full"
         />
       </div>
-      <Navbar />
       <div className="container mx-auto mt-10 md:mt-20">
         <div className="text-center max-sm:px-5">
           <h1 className="text-2xl font-bold md:text-2xl lg:text-4xl xl:text-5xl">
