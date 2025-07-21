@@ -32,7 +32,7 @@ export default function InvoiceTableRowActions({
 
   const invoiceData = useAppSelector(templateSelector);
 
-  console.log(invoiceData, invoice);
+  console.log(invoiceData);
 
   return (
     <DropdownMenu>
@@ -46,7 +46,7 @@ export default function InvoiceTableRowActions({
       <DropdownMenuContent align="end" className="border-border border p-0">
         <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base">
           <PDFDownloadLink
-            document={<InvoiceTemplate invoice={invoiceData} />}
+            document={<InvoiceTemplate />}
             fileName={`invoice-${invoiceData.invoiceNumber}.pdf`}
           >
             Download

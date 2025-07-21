@@ -1,4 +1,6 @@
 import { images } from "@/lib/imageProvider";
+import type { TInvoiceItem } from "@/types";
+import { formatDateToShort } from "@/utils/dateFormat";
 import {
   Document,
   Image,
@@ -18,6 +20,18 @@ const styles = StyleSheet.create({
   page: {
     padding: 32,
     backgroundColor: "#fff",
+  },
+  containerRow: {
+    maxWidth: 800,
+    margin: "0 auto",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+  },
+  containerColumn: {
+    maxWidth: 800,
+    margin: "0 auto",
+    flexDirection: "column",
   },
   header: {
     alignItems: "center",
@@ -55,7 +69,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 24,
-    gap: 16,
   },
   sectionBlock: {
     flex: 1,
@@ -185,79 +198,80 @@ const styles = StyleSheet.create({
   },
 });
 
-type InvoiceTemplateProps = {
-  invoice: {
-    color?: string;
-    footerTerms?: string;
-    invoiceNumber: string;
-    invoiceDate: string;
-    billTo: {
-      name: string;
-      address: string;
-      phone: string;
-    };
-    paymentDetails: {
-      accountType: string;
-      accountNumber: string;
-      paymentMethod: string;
-      bankName: string;
-    };
-    items: {
-      description: string;
-      price: number;
-      quantity: number;
-      amount: number;
-    }[];
-    subtotal: number;
-    totalTax: number;
-    total: number;
+interface InvoiceTemplateProps {
+  color: string;
+  invoiceNumber: string;
+  invoiceDate: string;
+  customer: {
+    name: string;
+    address: string;
+    phone: string;
   };
-};
+  items: TInvoiceItem[];
+  subtotal: number;
+  totalTax: number;
+  total: number;
+  footerTerms: string;
+}
 
-export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
-  const {
-    color,
-    footerTerms,
-    invoiceNumber,
-    invoiceDate,
-    billTo,
-    paymentDetails,
-    items,
-    subtotal,
-    totalTax,
-    total,
-  } = invoice;
-
+export default function InvoiceTemplate({
+  color = "#38988A",
+  invoiceNumber,
+  invoiceDate,
+  customer,
+  items = [],
+  subtotal,
+  totalTax,
+  total,
+  footerTerms,
+}: InvoiceTemplateProps) {
   const billFrom = {
     name: "Jane Smith",
     address: "456 Elm St\nCity, State, Zip",
     phone: "555-5678",
   };
 
+  const paymentDetails = {
+    accountType: "Bank Acc",
+    accountNumber: "123456789",
+    paymentMethod: "Bank",
+    bankName: "Bank name",
+  };
+
   return (
     <Document style={styles.document}>
-      <Page size="A4" style={styles.page}>
+      <Page size="A4">
         {/* Header */}
         <View style={styles.header}>
-          <Image style={styles.logo} src={images.templateLogo} />
-          <Text style={{ ...styles.invoiceTitle, color: color || "#38988A" }}>
-            INVOICE
-          </Text>
+          {images.templateLogo && (
+            <Image style={styles.logo} src={images.templateLogo} />
+          )}
+          <Text style={{ ...styles.invoiceTitle, color }}>INVOICE</Text>
         </View>
 
         {/* Invoice Info */}
         <View style={styles.infoRow}>
-          <Text style={styles.infoText}>Invoice n° {invoiceNumber}</Text>
-          <Text style={styles.infoText}>Date: {invoiceDate}</Text>
+          <View style={styles.containerRow}>
+            <Text style={styles.infoText}>Invoice n° {invoiceNumber}</Text>
+            <Text style={styles.infoText}>
+              Date: {formatDateToShort(invoiceDate)}
+            </Text>
+          </View>
         </View>
 
         {/* Parties & Payment */}
         <View style={styles.section}>
           <View style={styles.sectionBlock}>
             <Text style={styles.label}>Bill To</Text>
-            <Text style={styles.value}>{billTo.name}</Text>
-            <Text style={styles.value}>{billTo.address}</Text>
-            <Text style={styles.value}>{billTo.phone}</Text>
+            <Text style={styles.value}>
+              {customer?.name || "Customer Name"}
+            </Text>
+            <Text style={styles.value}>
+              {customer?.address || "Customer Address"}
+            </Text>
+            <Text style={styles.value}>
+              {customer?.phone || "Customer Phone"}
+            </Text>
           </View>
           <View style={styles.sectionBlock}>
             <Text style={styles.label}>Bill From</Text>
@@ -286,29 +300,49 @@ export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
             <Text style={[styles.tableHeaderCell, { flex: 1 }]}>Qty.</Text>
             <Text style={[styles.tableHeaderCell, { flex: 1 }]}>Total</Text>
           </View>
-          {items.map((item, idx) => (
-            <View
-              key={idx}
-              style={[
-                styles.tableRow,
-                { backgroundColor: idx % 2 === 0 ? "#fff" : "#F3F4F6" },
-              ]}
-            >
-              <Text style={[styles.tableCell, { flex: 0.7 }]}>{idx + 1}</Text>
-              <Text style={[styles.tableCell, { flex: 2 }]}>
-                {item.description}
-              </Text>
-              <Text style={[styles.tableCellRight, { flex: 1 }]}>
-                ${item.price.toFixed(2)}
-              </Text>
-              <Text style={[styles.tableCellRight, { flex: 1 }]}>
-                {item.quantity}
-              </Text>
-              <Text style={[styles.tableCellRight, { flex: 1 }]}>
-                ${item.amount.toFixed(2)}
-              </Text>
+          {Array.isArray(items) && items.length > 0 ? (
+            items
+              .filter((item) => !!item) // Remove null/undefined items
+              .map((item, idx) => (
+                <View
+                  key={idx}
+                  style={[
+                    styles.tableRow,
+                    { backgroundColor: idx % 2 === 0 ? "#fff" : "#F3F4F6" },
+                  ]}
+                >
+                  <Text style={[styles.tableCell, { flex: 0.7 }]}>
+                    {idx + 1}
+                  </Text>
+                  <Text style={[styles.tableCell, { flex: 2 }]}>
+                    {item.description ?? ""}
+                  </Text>
+                  <Text style={[styles.tableCellRight, { flex: 1 }]}>
+                    $
+                    {typeof item.price === "number"
+                      ? item.price.toFixed(2)
+                      : "0.00"}
+                  </Text>
+                  <Text style={[styles.tableCellRight, { flex: 1 }]}>
+                    {item.quantity ?? 0}
+                  </Text>
+                  <Text style={[styles.tableCellRight, { flex: 1 }]}>
+                    $
+                    {typeof item.amount === "number"
+                      ? item.amount.toFixed(2)
+                      : "0.00"}
+                  </Text>
+                </View>
+              ))
+          ) : (
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableCell, { flex: 0.7 }]}>1</Text>
+              <Text style={[styles.tableCell, { flex: 2 }]}>No items</Text>
+              <Text style={[styles.tableCellRight, { flex: 1 }]}>$0.00</Text>
+              <Text style={[styles.tableCellRight, { flex: 1 }]}>0</Text>
+              <Text style={[styles.tableCellRight, { flex: 1 }]}>$0.00</Text>
             </View>
-          ))}
+          )}
           {/* Table Footer */}
           <View style={styles.tableFooterRow}>
             <Text style={styles.tableFooterCell}>Subtotal:</Text>
