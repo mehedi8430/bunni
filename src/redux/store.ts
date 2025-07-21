@@ -1,32 +1,45 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { baseApi } from './api'
-import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, persistReducer, persistStore } from 'redux-persist';
-import authReducer from './slices/authSlice';
-import dialogReducer from './slices/dialogSlice';
-import storage from 'redux-persist/lib/storage';
+import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { baseApi } from "./api";
+import authReducer from "./slices/authSlice";
+import dialogReducer from "./slices/dialogSlice";
+import invoiceTemplateReducer from "./slices/invoiceTemplateSlice";
 
 const persistConfig = {
-  key: 'userInfo',
+  key: "userInfo",
   storage,
 };
-const persistedUserInfoReducer = persistReducer(persistConfig, authReducer);
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+  dialog: dialogReducer,
+  invoiceTemplate: invoiceTemplateReducer,
+  [baseApi.reducerPath]: baseApi.reducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    auth: persistedUserInfoReducer,
-    dialog: dialogReducer,
-    [baseApi.reducerPath]: baseApi.reducer
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
     }).concat(baseApi.middleware),
-})
+});
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export const persistor = persistStore(store);

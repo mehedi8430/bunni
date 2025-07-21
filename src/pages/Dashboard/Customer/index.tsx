@@ -1,6 +1,6 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus, } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -155,13 +155,16 @@ export default function CustomerPage() {
                 <MoreHorizontal />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-0 border border-border">
+            <DropdownMenuContent
+              align="end"
+              className="border-border border p-0"
+            >
               <DropdownMenuItem
                 onClick={() => {
                   setSelectedCustomer(customer);
                   setIsViewOpen(true);
                 }}
-                className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
+                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
               >
                 {/* <Eye className="mr-2 h-4 w-4" /> */}
                 View
@@ -171,7 +174,7 @@ export default function CustomerPage() {
                   setEditCustomer(customer);
                   setIsEditOpen(true);
                 }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
               >
                 Edit
               </DropdownMenuItem>
@@ -180,7 +183,7 @@ export default function CustomerPage() {
                   setCustomerToDelete(customer.id);
                   setIsDeleteOpen(true);
                 }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
+                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
               >
                 Delete
               </DropdownMenuItem>
@@ -249,7 +252,6 @@ export default function CustomerPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
-            actions={true}
           />
         </div>
       </div>
@@ -260,7 +262,10 @@ export default function CustomerPage() {
         onOpenChange={setIsViewOpen}
         title="View Details"
       >
-        <CustomerDetails onClose={() => setIsViewOpen(false)} customerId={selectedCustomer?.id || ""} />
+        <CustomerDetails
+          onClose={() => setIsViewOpen(false)}
+          customerId={selectedCustomer?.id || ""}
+        />
       </DialogModal>
 
       {/* Edit Modal with CustomerForm */}

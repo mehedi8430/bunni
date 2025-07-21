@@ -2,6 +2,8 @@ import TemplateCard from "./components/TemplateCard";
 import { Link } from "react-router";
 import type { TInvoiceTemplate } from "@/types";
 import assets from "@/lib/imageProvider";
+import { useAppDispatch } from "@/redux/hooks";
+import { clearInvoice } from "@/redux/slices/invoiceTemplateSlice";
 
 const templates: TInvoiceTemplate[] = [
   {
@@ -39,6 +41,8 @@ const templates: TInvoiceTemplate[] = [
 ];
 
 export default function InvoiceTemplatesPage() {
+  const dispatch = useAppDispatch();
+
   return (
     <section className="space-y-6 md:space-y-10">
       <h1 className="text-2xl font-semibold md:text-[32px]">Invoices</h1>
@@ -50,7 +54,10 @@ export default function InvoiceTemplatesPage() {
           {templates.map((template) => (
             <Link
               key={template.id}
-              to={`/dashboard/invoices/template/${template.id}`}
+              to={`/dashboard/template/invoice/${template.id}`}
+              onClick={() => {
+                dispatch(clearInvoice());
+              }}
             >
               <TemplateCard template={template} />
             </Link>

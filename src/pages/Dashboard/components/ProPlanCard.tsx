@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { icons } from "@/lib/imageProvider";
 import { ReactSVG } from "react-svg";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 export default function ProPlanCard() {
   return (
@@ -32,13 +33,15 @@ export default function ProPlanCard() {
         </li>
       </ul>
 
-      <Button
-        variant={"primary"}
-        className="w-full cursor-pointer mt-1 text-lg font-normal"
-        size={"lg"}
-      >
-        Upgrade plan
-      </Button>
+      <Link to={"/dashboard/settings/subscription"}>
+        <Button
+          variant={"primary"}
+          className="w-full cursor-pointer mt-1 text-lg font-normal"
+          size={"lg"}
+        >
+          Upgrade plan
+        </Button>
+      </Link>
     </div>
   );
 }

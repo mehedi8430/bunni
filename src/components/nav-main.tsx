@@ -16,6 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { useLocation, useNavigate } from "react-router";
@@ -36,15 +37,32 @@ export function NavMain({
   }[];
 }) {
   const navigate = useNavigate();
-  const activePath = useLocation().pathname;
+  const location = useLocation();
+  const { isMobile, setOpenMobile } = useSidebar();
 
   const isActive = (url?: string) => {
-    return url === activePath;
+    if (!url) return false;
+
+    if (url === "/dashboard") {
+      return location.pathname === url;
+    }
+
+    return location.pathname === url || location.pathname.startsWith(`${url}/`);
   };
 
   // Check if any subitem's URL matches the active path
   const isSubItemActive = (subItems?: { url: string }[]) => {
-    return subItems?.some((subItem) => subItem.url === activePath) || false;
+    return (
+      subItems?.some((subItem) => subItem.url === location.pathname) || false
+    );
+  };
+
+  // Handle navigation and close mobile sidebar
+  const handleNavigate = (url: string) => {
+    navigate(url);
+    if (isMobile) {
+      setOpenMobile(false);
+    }
   };
 
   return (
@@ -68,7 +86,7 @@ export function NavMain({
                     <SidebarMenuButton
                       tooltip={item.title}
                       className={cn(
-                        "hover:bg-primary hover:data-[state=open]:bg-primary p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white",
+                        "hover:bg-primary hover:data-[state=open]:bg-primary cursor-pointer p-5 text-lg font-normal hover:text-white hover:data-[state=open]:text-white",
                         {
                           "bg-primary text-white": isActive(item.url),
                         },
@@ -78,7 +96,7 @@ export function NavMain({
                           // Let CollapsibleTrigger handle toggle; do not navigate
                           // Don't prevent default — it blocks expand!
                         } else if (item.url) {
-                          navigate(item.url);
+                          handleNavigate(item.url);
                         }
                       }}
                     >
@@ -99,14 +117,14 @@ export function NavMain({
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton
                               className={cn(
-                                "hover:bg-primary mt-1 p-5 text-lg font-normal hover:text-white",
+                                "hover:bg-primary mt-1 cursor-pointer p-5 text-lg font-normal hover:text-white",
                                 {
                                   "bg-primary text-white": isActive(
                                     subItem.url,
                                   ),
                                 },
                               )}
-                              onClick={() => navigate(subItem.url)}
+                              onClick={() => handleNavigate(subItem.url)}
                             >
                               {subItem.icon && <ReactSVG src={subItem.icon} />}
                               <span>{subItem.title}</span>

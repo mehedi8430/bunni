@@ -5,17 +5,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAppSelector } from "@/redux/hooks";
+import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
 import type { TInvoice } from "@/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
-import MyDocument from "./Document";
+import { useNavigate } from "react-router";
+import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
   setSelectedInvoice: (invoice: TInvoice) => void;
   setIsViewOpen: (isOpen: boolean) => void;
-  setEditInvoice: (invoice: Partial<TInvoice>) => void;
-  setIsEditOpen: (isOpen: boolean) => void;
   setInvoiceToDelete: (invoiceId: string) => void;
   setIsDeleteOpen: (isOpen: boolean) => void;
 };
@@ -24,11 +25,15 @@ export default function InvoiceTableRowActions({
   invoice,
   setSelectedInvoice,
   setIsViewOpen,
-  setEditInvoice,
-  setIsEditOpen,
   setInvoiceToDelete,
   setIsDeleteOpen,
 }: InvoiceTableRowActionsProps) {
+  const navigate = useNavigate();
+
+  const invoiceData = useAppSelector(templateSelector);
+
+  console.log(invoiceData, invoice);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,14 +44,12 @@ export default function InvoiceTableRowActions({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="border-border border p-0">
-        <DropdownMenuItem
-          onClick={() => {
-            console.log("Download Invoice");
-          }}
-          className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
-        >
-          <PDFDownloadLink document={<MyDocument />} fileName="invoice.pdf">
-            {({ loading }) => (loading ? "Preparing document..." : "Download")}
+        <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base">
+          <PDFDownloadLink
+            document={<InvoiceTemplate invoice={invoiceData} />}
+            fileName={`invoice-${invoiceData.invoiceNumber}.pdf`}
+          >
+            Download
           </PDFDownloadLink>
         </DropdownMenuItem>
 
@@ -103,8 +106,9 @@ export default function InvoiceTableRowActions({
 
         <DropdownMenuItem
           onClick={() => {
-            setEditInvoice(invoice);
-            setIsEditOpen(true);
+            navigate(`/dashboard/template/invoice/${invoice.templateId}`, {
+              state: invoice.id,
+            });
           }}
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >

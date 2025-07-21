@@ -6,6 +6,7 @@ export type TInvoice = {
   amount: string | number;
   tenderType: "Credit Card" | "Bank Transfer";
   date: string;
+  templateId?: string;
 };
 
 export type TDiscount = {
@@ -35,6 +36,7 @@ export type TInvoiceItem = {
   tax: number;
   amount: number;
   taxId: string;
+  discount: number;
 };
 
 export type TInvoiceTemplate = {
@@ -48,7 +50,7 @@ export type TInvoiceTemplate = {
 
 export type TInvoiceData = {
   title: string;
-  customer: string;
+  customerId: string;
   invoiceNumber: string;
   orderNumber: string;
   invoiceDate: string;
@@ -59,4 +61,6 @@ export type TInvoiceData = {
   subtotal: number;
   discount: number;
   total: number;
+  color: string;
+  totalTax: number;
 };

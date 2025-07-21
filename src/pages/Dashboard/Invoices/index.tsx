@@ -6,20 +6,19 @@ import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { DialogModal } from "@/components/DialogModal";
+import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { icons } from "@/lib/imageProvider";
 import { cn } from "@/lib/utils";
 import { invoiceApi } from "@/mockApi/invoiceApi";
 import type { TInvoice } from "@/types";
-import { PDFViewer } from "@react-pdf/renderer";
 import { format } from "date-fns";
 import { useNavigate } from "react-router";
 import { ReactSVG } from "react-svg";
-import MyDocument from "./components/Document";
-import InvoiceForm from "./components/InvoiceForm";
+import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
+import LoadingAnimation from "@/components/shared/LoadingAnimation";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -34,8 +33,6 @@ export default function InvoicesPage() {
   // Modal states
   const [, setSelectedInvoice] = useState<TInvoice | null>(null);
   const [isViewOpen, setIsViewOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [editInvoice, setEditInvoice] = useState<Partial<TInvoice>>({});
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [invoiceToDelete, setInvoiceToDelete] = useState<string | null>(null);
 
@@ -171,8 +168,6 @@ export default function InvoicesPage() {
             invoice={invoice}
             setSelectedInvoice={setSelectedInvoice}
             setIsViewOpen={setIsViewOpen}
-            setEditInvoice={setEditInvoice}
-            setIsEditOpen={setIsEditOpen}
             setInvoiceToDelete={setInvoiceToDelete}
             setIsDeleteOpen={setIsDeleteOpen}
           />
@@ -181,22 +176,18 @@ export default function InvoicesPage() {
     },
   ];
 
-  const handleSave = (updatedInvoice: TInvoice) => {
-    setData((prev) =>
-      prev.map((inv) => (inv.id === updatedInvoice.id ? updatedInvoice : inv)),
-    );
-    if (!updatedInvoice.id) {
-      setData((prev) => [...prev, updatedInvoice]);
-      setTotal((prev) => prev + 1);
-    }
-  };
-
   const handleFilterChange = (search: string) => {
     setSearchTerm(search);
     setPage(1);
   };
 
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
+
+  if(isLoading) return (
+    <div>
+      <LoadingAnimation />
+    </div>
+  );
 
   return (
     <section className="space-y-10">
@@ -218,7 +209,7 @@ export default function InvoicesPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="flex gap-6 overflow-x-auto pb-3 md:grid md:grid-cols-4 md:pb-0">
         <TopCard
           icon={<ReactSVG src={icons.outstanding} />}
           title="Outstanding Invoices"
@@ -247,6 +238,9 @@ export default function InvoicesPage() {
           iconBgColor="bg-green-100"
           valueColor="text-foreground"
         />
+      </div>
+
+      <div className="grid grid-cols-4 gap-6">
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
           <InvoiceTableActions
             searchTerm={searchTerm}
@@ -261,36 +255,50 @@ export default function InvoicesPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
-            actions={true}
           />
         </div>
       </div>
 
       {/* View Details Modal */}
-      <DialogModal
+      <PdfDialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
-        title="View Details"
+        className=""
+        title={null}
       >
-        <PDFViewer className="h-[600px] w-full">
-          <MyDocument />
-        </PDFViewer>
+        {/* <BlobProvider document={<InvoiceTemplate />}>
+          {({ blob, url, loading, error }) => {
+            if (loading) return <div>Loading PDF...</div>;
+            if (error) return <div>Error: {error.message}</div>;
+            return (
+              <div>
+                {url && (
+                  <iframe
+                    src={url}
+                    title="Invoice Preview"
+                    width="100%"
+                    height="600px"
+                    style={{ border: "none" }}
+                  />
+                )}
+                <div className="mt-4">
+                  {blob && (
+                    <a
+                      href={url}
+                      download="invoice.pdf"
+                      className="text-blue-600 underline"
+                    >
+                      Download PDF
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          }}
+        </BlobProvider> */}
 
-        {/* <InvoiceDetails invoiceId={selectedInvoice?.id || ""} /> */}
-      </DialogModal>
-
-      {/* Edit Modal with InvoiceForm */}
-      <DialogModal
-        isOpen={isEditOpen}
-        onOpenChange={setIsEditOpen}
-        title={editInvoice.id ? "Edit Invoice" : "Add New Invoice"}
-      >
-        <InvoiceForm
-          invoice={editInvoice}
-          onClose={() => setIsEditOpen(false)}
-          onSave={handleSave}
-        />
-      </DialogModal>
+        <PreviewTemplate />
+      </PdfDialogModal>
 
       {/* Delete Alert Dialog */}
       <AlertDialogModal

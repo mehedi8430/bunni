@@ -20,7 +20,7 @@ export default function TopCard({ icon, title, value, iconBgColor, valueColor }:
                     {typeof icon === 'function' ? React.createElement(icon) : icon}
                 </div>
                 {/* Title */}
-                <h3 className="text-muted-foreground text-[16px] font-normal">{title}</h3>
+                <h3 className="text-muted-foreground text-[16px] font-normal whitespace-nowrap">{title}</h3>
             </div>
             {/* Value Section */}
             <p className={`text-2xl font-bold ${valueColor}`}>{value}</p>

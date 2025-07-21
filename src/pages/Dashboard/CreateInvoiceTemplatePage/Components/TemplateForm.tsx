@@ -1,203 +1,238 @@
+import { useDispatch } from "react-redux";
 import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 import { Textarea } from "@/components/ui/textarea";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
-import type { TInvoiceData } from "@/types";
 import type { TCustomer } from "@/types/customer.type";
-import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
 import ItemsSection from "./ItemsSection";
-
-const initialInvoiceData: TInvoiceData = {
-  title: "",
-  customer: "",
-  invoiceNumber: "",
-  orderNumber: "",
-  invoiceDate: getTodayDate(),
-  serviceDate: getTodayDateWithTime(),
-  dueDate: "05 Feb 2025",
-  footerTerms:
-    "Payment is due within 15 days from the date of invoice. Please make checks payable to Acme Inc. or use the online payment link provided in this email.",
-  items: [
-    {
-      id: "1",
-      description: "",
-      quantity: 10,
-      price: 10.0,
-      tax: 0,
-      amount: 100.0,
-      taxId: "1234",
-    },
-    {
-      id: "2",
-      description: "",
-      quantity: 100,
-      price: 0.0,
-      tax: 0,
-      amount: 0.0,
-      taxId: "5678",
-    },
-  ],
-  subtotal: 100.0,
-  discount: 0,
-  total: 100.0,
-};
+import {
+  setInvoice,
+  templateSelector,
+  updateField,
+} from "@/redux/slices/invoiceTemplateSlice";
+import { useLocation } from "react-router";
+import { useInvoiceApi } from "@/mock-api-hook/features/customers/useInvoiceApi";
+import { useAppSelector } from "@/redux/hooks";
+import type { TInvoice, TInvoiceData } from "@/types";
 
 export default function TemplateForm() {
-  const [invoiceData, setInvoiceData] =
-    useState<TInvoiceData>(initialInvoiceData);
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
-
   const { customers } = useCustomerApi();
+  const { state: invoiceId } = useLocation();
+  const { invoice } = useInvoiceApi(invoiceId);
+  console.log({ invoice });
 
-  const handleInputChange = (
-    field: keyof TInvoiceData,
-    value: string | number,
-  ) => {
-    setInvoiceData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const dispatch = useDispatch();
+  const {
+    title,
+    customerId,
+    invoiceNumber,
+    orderNumber,
+    invoiceDate,
+    serviceDate,
+    dueDate,
+    footerTerms,
+  } = useAppSelector(templateSelector);
+
+  // Populate form with invoice data when available
+  useEffect(() => {
+    if (invoice) {
+      dispatch(setInvoice(invoice as TInvoiceData & TInvoice));
+    }
+  }, [invoice, dispatch]);
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", {
+      title,
+      customerId,
+      invoiceNumber,
+      orderNumber,
+      invoiceDate,
+      serviceDate,
+      dueDate,
+      footerTerms,
+    });
   };
 
   return (
-    <div className="space-y-6 px-6 pt-6">
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="title" className="custom-label">
-            Invoice title
-          </Label>
-          <Input
-            id="title"
-            placeholder="Let your customer know what this invoice is for"
-            value={invoiceData.title}
-            onChange={(e) => handleInputChange("title", e.target.value)}
-            className="custom-focus"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="customer" className="custom-label">
-            Customer
-          </Label>
-          <SelectInput
-            options={customers.map((customer: TCustomer) => ({
-              value: customer.id,
-              label: customer.name,
-            }))}
-            placeholder="Select a customer"
-            value={invoiceData.customer}
-            onValueChange={(value) => handleInputChange("customer", value)}
-            triggerClassName="w-full"
-          />
-          <div className="flex justify-end">
-            <Button
-              variant="link"
-              className="text-sm font-normal"
-              onClick={() => setIsAddCustomerOpen(true)}
-            >
-              <Plus /> Add Customer
-            </Button>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="invoice-number" className="custom-label">
-            Invoice
-          </Label>
-          <Input
-            id="invoice-number"
-            value={invoiceData.invoiceNumber}
-            onChange={(e) => handleInputChange("invoiceNumber", e.target.value)}
-            className="custom-focus"
-            placeholder="Enter invoice number"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="order-number" className="custom-label">
-            Order Number
-          </Label>
-          <Input
-            id="order-number"
-            placeholder="Enter order number"
-            value={invoiceData.orderNumber}
-            onChange={(e) => handleInputChange("orderNumber", e.target.value)}
-            className="custom-focus"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
+    <div>
+      <form onSubmit={onSubmit} className="space-y-6 px-6 pt-6">
+        <div className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="invoice-date" className="custom-label">
-              Invoice Date
+            <Label htmlFor="title" className="custom-label">
+              Invoice title
             </Label>
             <Input
-              id="invoice-date"
-              value={invoiceData.invoiceDate}
-              onChange={(e) => handleInputChange("invoiceDate", e.target.value)}
+              id="title"
+              placeholder="Let your customer know what this invoice is for"
+              value={title}
+              onChange={(e) =>
+                dispatch(updateField({ field: "title", value: e.target.value }))
+              }
               className="custom-focus"
             />
           </div>
+
           <div className="space-y-2">
-            <Label htmlFor="service-date" className="custom-label">
-              Service Date
+            <Label htmlFor="customer" className="custom-label">
+              Customer
+            </Label>
+            <SelectInput
+              options={customers.map((customer: TCustomer) => ({
+                value: customer.id,
+                label: customer.name,
+              }))}
+              placeholder="Select a customer"
+              value={customerId}
+              onValueChange={(value) =>
+                dispatch(updateField({ field: "customerId", value }))
+              }
+              triggerClassName="w-full"
+            />
+            <div className="flex justify-end">
+              <Button
+                variant="link"
+                className="text-sm font-normal"
+                onClick={() => setIsAddCustomerOpen(true)}
+                type="button"
+              >
+                <Plus /> Add Customer
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="invoiceNumber" className="custom-label">
+              Invoice
             </Label>
             <Input
-              id="service-date"
-              value={invoiceData.serviceDate}
-              onChange={(e) => handleInputChange("serviceDate", e.target.value)}
+              id="invoiceNumber"
+              placeholder="Enter invoice number"
+              value={invoiceNumber}
+              onChange={(e) =>
+                dispatch(
+                  updateField({
+                    field: "invoiceNumber",
+                    value: e.target.value,
+                  }),
+                )
+              }
+              className="custom-focus"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="orderNumber" className="custom-label">
+              Order Number
+            </Label>
+            <Input
+              id="orderNumber"
+              placeholder="Enter order number"
+              value={orderNumber}
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "orderNumber", value: e.target.value }),
+                )
+              }
+              className="custom-focus"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="invoiceDate" className="custom-label">
+                Invoice Date
+              </Label>
+              <Input
+                id="invoiceDate"
+                value={invoiceDate}
+                onChange={(e) =>
+                  dispatch(
+                    updateField({
+                      field: "invoiceDate",
+                      value: e.target.value,
+                    }),
+                  )
+                }
+                className="custom-focus"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="serviceDate" className="custom-label">
+                Service Date
+              </Label>
+              <Input
+                id="serviceDate"
+                value={serviceDate}
+                onChange={(e) =>
+                  dispatch(
+                    updateField({
+                      field: "serviceDate",
+                      value: e.target.value,
+                    }),
+                  )
+                }
+                className="custom-focus"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="dueDate" className="custom-label">
+              Due Date
+            </Label>
+            <Input
+              id="dueDate"
+              value={dueDate}
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "dueDate", value: e.target.value }),
+                )
+              }
+              className="custom-focus"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="footerTerms" className="custom-label">
+              Footer & Terms
+            </Label>
+            <Textarea
+              id="footerTerms"
+              value={footerTerms}
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "footerTerms", value: e.target.value }),
+                )
+              }
+              rows={3}
               className="custom-focus"
             />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="due-date" className="custom-label">
-            Due Date
-          </Label>
-          <Input
-            id="due-date"
-            value={invoiceData.dueDate}
-            onChange={(e) => handleInputChange("dueDate", e.target.value)}
-            className="custom-focus"
+        {/* Items Section */}
+        <ItemsSection />
+
+        {/* Add Customer Modal */}
+        <DialogModal
+          isOpen={isAddCustomerOpen}
+          onOpenChange={setIsAddCustomerOpen}
+          title="Add New Customer"
+        >
+          <CustomerForm
+            onSave={() => console.log("Customer saved!")}
+            onClose={() => setIsAddCustomerOpen(false)}
           />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="footer-terms" className="custom-label">
-            Footer & Terms
-          </Label>
-          <Textarea
-            id="footer-terms"
-            value={invoiceData.footerTerms}
-            onChange={(e) => handleInputChange("footerTerms", e.target.value)}
-            rows={3}
-            className="custom-focus"
-          />
-        </div>
-      </div>
-
-      {/* Items Section */}
-      <ItemsSection invoiceData={invoiceData} setInvoiceData={setInvoiceData} />
-
-      {/* Add Customer Modal */}
-      <DialogModal
-        isOpen={isAddCustomerOpen}
-        onOpenChange={setIsAddCustomerOpen}
-        title="Add New Customer"
-      >
-        <CustomerForm
-          onSave={() => console.log("Customer saved!")}
-          onClose={() => setIsAddCustomerOpen(false)}
-        />
-      </DialogModal>
+        </DialogModal>
+      </form>
     </div>
   );
 }

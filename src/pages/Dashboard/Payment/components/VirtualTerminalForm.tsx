@@ -51,10 +51,9 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                             type="button"
                             variant="link"
                             size="sm"
-                            onClick={() => setIsAddCustomerOpen(true)}
                             className="text-primary px-2 py-1 w-full flex justify-end mb-0"
                         >
-                            + Add Customer
+                           <span onClick={() => setIsAddCustomerOpen(true)}>+ Add Customer</span>
                         </Button>
 
                         {/* invoice */}
@@ -222,7 +221,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                         <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
                             Cancel
                         </Button>
-                        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Process Payment</Button>
+                        <Button variant={"primary"} type="submit" className="px-4 md:px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Process Payment</Button>
                     </div>
                 </form>
             </Form>

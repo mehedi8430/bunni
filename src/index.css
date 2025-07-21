@@ -200,7 +200,7 @@ html {
 
 /* custom focus for input fiield */
 .custom-focus {
-  @apply text-muted-foreground p-5 text-[16px] focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0;
+  @apply text-muted-foreground placeholder:text-muted-foreground/70 p-5 text-[16px] focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0;
 }
 
 /* label class */
@@ -211,4 +211,41 @@ html {
 /* custom action button */
 .custom-action-button {
   @apply border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent;
+}
+
+/* Add to your global CSS file */
+.sidebar-menu-button svg,
+.sidebar-menu-button svg * {
+  fill: currentColor !important;
+}
+
+.sidebar-menu-button:hover svg,
+.sidebar-menu-button:hover svg * {
+  fill: white !important;
+}
+
+.sidebar-menu-button.active svg,
+.sidebar-menu-button.active svg * {
+  fill: white !important;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 35px;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(white);
+  background: 
+    var(--c) 0%   50%,
+    var(--c) 50%  50%,
+    var(--c) 100% 50%;
+  animation: l7 1s infinite linear alternate;
+}
+@keyframes l7 {
+  0%  {background-size: 20% 50% ,20% 50% ,20% 50% }
+  20% {background-size: 20% 20% ,20% 50% ,20% 50% }
+  40% {background-size: 20% 100%,20% 20% ,20% 50% }
+  60% {background-size: 20% 50% ,20% 100%,20% 20% }
+  80% {background-size: 20% 50% ,20% 50% ,20% 100%}
+  100%{background-size: 20% 50% ,20% 50% ,20% 50% }
 }
