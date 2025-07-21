@@ -8,6 +8,13 @@ import type { TDiscount } from "@/types";
 import { DialogModal } from "@/components/DialogModal";
 import DiscountTableActions from "./DiscountTableActions";
 import DiscountForm from "./DiscountForm";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
 
 export default function DiscountSettings() {
   const [pageDiscount, setPageDiscount] = useState(1);
@@ -74,42 +81,40 @@ export default function DiscountSettings() {
         <div className="truncate">{row.getValue("status")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Action",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const discount = row.original;
-        return (
-          <div className="space-x-2">
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                setEditDiscount(discount);
-                setIsEditDiscountOpen(true);
-              }}
-              className="cursor-pointer bg-white"
-            >
-              Edit
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                setDiscountToDelete(discount.id);
-                setIsDeleteDiscountOpen(true);
-              }}
-              className="cursor-pointer border-none bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white"
-            >
-              Delete
-            </Button>
-          </div>
-        );
-      },
-    },
   ];
+
+  const actions = (row: TDiscount) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditDiscount(row);
+              setIsEditDiscountOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setDiscountToDelete(row?.id);
+              setIsDeleteDiscountOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSaveDiscount = (updatedDiscount: TDiscount) => {
     setDataDiscount((prev) =>
@@ -146,6 +151,7 @@ export default function DiscountSettings() {
         total={totalDiscount}
         onPageChange={setPageDiscount}
         onLimitChange={setLimitDiscount}
+        actions={actions}
       />
       <DialogModal
         isOpen={isEditDiscountOpen}

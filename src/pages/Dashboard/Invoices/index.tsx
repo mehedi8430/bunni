@@ -156,25 +156,19 @@ export default function InvoicesPage() {
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("date")}</div>,
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const invoice = row.original;
-        return (
-          <InvoiceTableRowActions
-            invoice={invoice}
-            setSelectedInvoice={setSelectedInvoice}
-            setIsViewOpen={setIsViewOpen}
-            setInvoiceToDelete={setInvoiceToDelete}
-            setIsDeleteOpen={setIsDeleteOpen}
-          />
-        );
-      },
-    },
   ];
+
+  const actions = (row: TInvoice) => {
+    return (
+      <InvoiceTableRowActions
+        invoice={row}
+        setSelectedInvoice={setSelectedInvoice}
+        setIsViewOpen={setIsViewOpen}
+        setInvoiceToDelete={setInvoiceToDelete}
+        setIsDeleteOpen={setIsDeleteOpen}
+      />
+    );
+  };
 
   const handleFilterChange = (search: string) => {
     setSearchTerm(search);
@@ -183,11 +177,12 @@ export default function InvoicesPage() {
 
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
 
-  if(isLoading) return (
-    <div>
-      <LoadingAnimation />
-    </div>
-  );
+  if (isLoading)
+    return (
+      <div>
+        <LoadingAnimation />
+      </div>
+    );
 
   return (
     <section className="space-y-10">
@@ -255,6 +250,7 @@ export default function InvoicesPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
+            actions={actions}
           />
         </div>
       </div>

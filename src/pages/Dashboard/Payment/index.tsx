@@ -158,58 +158,49 @@ export default function PaymentPage() {
         <div className="truncate">{row.getValue("paymentMethod")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const payment = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="border-border border p-0"
-            >
-              <DropdownMenuItem
-                onClick={() => {
-                  setSelectedPayment(payment);
-                  setIsViewOpen(true);
-                }}
-                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
-              >
-                View
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditPayment(payment);
-                  setIsEditOpen(true);
-                }}
-                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setPaymentToDelete(payment.invoice);
-                  setIsDeleteOpen(true);
-                }}
-                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
-              >
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
-    },
   ];
+
+  const actions = (row: Payment) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setSelectedPayment(row);
+              setIsViewOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
+          >
+            View
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setEditPayment(row);
+              setIsEditOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setPaymentToDelete(row?.invoice);
+              setIsDeleteOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedPayment: Payment) => {
     setData((prev) =>
@@ -302,6 +293,7 @@ export default function PaymentPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
+            actions={actions}
           />
         </div>
       </div>

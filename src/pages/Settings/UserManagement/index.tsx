@@ -95,57 +95,51 @@ export default function UserManagementPage() {
         <div className="truncate">{row.getValue("lastLogin")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Action",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const user = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-0">
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditUser(user);
-                  setIsEditOpen(true);
-                }}
-                className="custom-action-button"
-              >
-                {/* <Edit className="mr-2 h-4 w-4" /> */}
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  console.log("Resend Invite");
-                }}
-                className="custom-action-button"
-              >
-                {/* <SendToBack className="mr-2 h-4 w-4" /> */}
-                Resend Invite
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setUserToDelete(user.id);
-                  setIsDeleteOpen(true);
-                }}
-                className="custom-action-button"
-              >
-                {/* <Trash className="mr-2 h-4 w-4" /> */}
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
-    },
   ];
+
+  const actions = (row: TUser) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditUser(row);
+              setIsEditOpen(true);
+            }}
+            className="custom-action-button"
+          >
+            {/* <Edit className="mr-2 h-4 w-4" /> */}
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              console.log("Resend Invite");
+            }}
+            className="custom-action-button"
+          >
+            {/* <SendToBack className="mr-2 h-4 w-4" /> */}
+            Resend Invite
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setUserToDelete(row?.id);
+              setIsDeleteOpen(true);
+            }}
+            className="custom-action-button"
+          >
+            {/* <Trash className="mr-2 h-4 w-4" /> */}
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedUser: TUser) => {
     // console.log("handleSave called with:", updatedUser);
@@ -189,6 +183,7 @@ export default function UserManagementPage() {
           total={total}
           onPageChange={setPage}
           onLimitChange={setLimit}
+          actions={actions}
         />
       </div>
 

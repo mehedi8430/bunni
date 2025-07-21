@@ -1,6 +1,6 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -10,6 +10,12 @@ import { productApi } from "@/mockApi/productApi";
 import ProductForm from "./components/ProductForm";
 import { ProductTableActions } from "./components/ProductTableActions";
 import type { TProduct } from "@/types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function ProductsPage() {
   const [page, setPage] = useState(1);
@@ -111,42 +117,40 @@ export default function ProductsPage() {
         <div className="truncate">{row.getValue("description")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const product = row.original;
-        return (
-          <div className="space-x-2">
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                setEditProduct(product);
-                setIsEditOpen(true);
-              }}
-              className="cursor-pointer bg-white"
-            >
-              Edit
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                setProductToDelete(product.id);
-                setIsDeleteOpen(true);
-              }}
-              className="cursor-pointer bg-black text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-black/80 hover:text-white"
-            >
-              Delete
-            </Button>
-          </div>
-        );
-      },
-    },
   ];
+
+  const actions = (row: TProduct) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditProduct(row);
+              setIsEditOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setProductToDelete(row?.id);
+              setIsDeleteOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedProduct: TProduct) => {
     setData((prev) =>
@@ -198,6 +202,7 @@ export default function ProductsPage() {
           total={total}
           onPageChange={setPage}
           onLimitChange={setLimit}
+          actions={actions}
         />
       </div>
 
