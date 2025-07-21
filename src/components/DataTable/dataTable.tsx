@@ -43,6 +43,7 @@ export interface DataTableProps<TData, TValue> {
   onPageChange: (page: number) => void;
   onLimitChange: (limit: number) => void;
   isPagination?: boolean;
+  actions?: (row: TData) => React.ReactNode;
 }
 
 function DataTableInner<TData, TValue>(
@@ -53,6 +54,7 @@ function DataTableInner<TData, TValue>(
     page,
     limit,
     total,
+    actions,
     onPageChange,
     isPagination = true,
     onLimitChange,
@@ -90,6 +92,11 @@ function DataTableInner<TData, TValue>(
             <Skeleton className="h-4 w-full sm:h-6" />
           </TableCell>
         ))}
+        {actions && (
+          <TableCell className="flex items-center justify-end p-2 text-right sm:p-4">
+            <Skeleton className="h-4 w-12 sm:h-6 sm:w-16" />
+          </TableCell>
+        )}
       </TableRow>
     ));
 
@@ -125,6 +132,11 @@ function DataTableInner<TData, TValue>(
                   </div>
                 </TableHead>
               ))}
+              {actions && (
+                <TableHead className="sticky right-0 z-50 w-[60px] bg-gray-400 px-2 py-2 text-center font-semibold text-black sm:px-8">
+                  <div className="truncate">Actions</div>
+                </TableHead>
+              )}
             </TableRow>
           ))}
         </TableHeader>
@@ -152,6 +164,14 @@ function DataTableInner<TData, TValue>(
                     </div>
                   </TableCell>
                 ))}
+
+                {actions && (
+                  <TableCell className="text-foreground sticky right-0 z-50 w-[60px] bg-gray-300 px-2 py-2 text-xs sm:px-8 sm:py-3 sm:text-sm">
+                    <div className="flex justify-center">
+                      {actions(row.original)}
+                    </div>
+                  </TableCell>
+                )}
               </TableRow>
             ))
           ) : (

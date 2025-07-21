@@ -140,59 +140,50 @@ export default function CustomerPage() {
         <div className="truncate">{row.getValue("achToken")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const customer = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="border-border border p-0"
-            >
-              <DropdownMenuItem
-                onClick={() => {
-                  setSelectedCustomer(customer);
-                  setIsViewOpen(true);
-                }}
-                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
-              >
-                {/* <Eye className="mr-2 h-4 w-4" /> */}
-                View
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditCustomer(customer);
-                  setIsEditOpen(true);
-                }}
-                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setCustomerToDelete(customer.id);
-                  setIsDeleteOpen(true);
-                }}
-                className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
-              >
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
-    },
   ];
+
+  const actions = (row: Customer) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setSelectedCustomer(row);
+              setIsViewOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
+          >
+            {/* <Eye className="mr-2 h-4 w-4" /> */}
+            View
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setEditCustomer(row);
+              setIsEditOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setCustomerToDelete(row?.id);
+              setIsDeleteOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedCustomer: Customer) => {
     setData((prev) =>
@@ -252,6 +243,7 @@ export default function CustomerPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
+            actions={actions}
           />
         </div>
       </div>
