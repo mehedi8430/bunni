@@ -18,9 +18,9 @@ export default function HowDoesItWorkCard({ icon, title, description, classNameF
         {icon}
       </div>
       {/* Title */}
-      <h3 className={`text-lg md:text-xl lg:text-2xl font-bold text-foreground01 mb-3 ${classNameForTitle}`}>{title}</h3>
+      <h3 className={`text-lg md:text-lg lg:text-xl font-bold text-foreground01 mb-3 ${classNameForTitle}`}>{title}</h3>
       {/* Description */}
-      <p className={`lg:text-lg ${classNameForDescription}`}>{description}</p>
+      <p className={`lg:text-base ${classNameForDescription}`}>{description}</p>
     </div>
   )
 }
