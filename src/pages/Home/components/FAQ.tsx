@@ -14,7 +14,7 @@ interface FAQItem {
 export default function FAQ() {
     const [openItem, setOpenItem] = useState<string | null>("item-1");
     return (
-        <section id="faq" className='container mx-auto px-4 py-16'>
+        <section id="faq" className='container mx-auto px-4 pt-8 pb-16'>
             <SectionTitle title="FAQ" subtitle="Everything You Need to Know Before Getting Started" className="mb-10" />
             <Accordion
                 type="single"
@@ -25,15 +25,15 @@ export default function FAQ() {
             >
                 {faqs.map(({ value, question, answer }) => (
                     <div key={value}>
-                        <AccordionItem value={value} className={`${openItem === value ? "bg-primary-2/4" : ""} border border-border py-5 px-8 rounded-md`}>
+                        <AccordionItem value={value} className={`${openItem === value ? "bg-primary-2/4" : ""} border border-border py-2 px-5 rounded-md`}>
                             <AccordionTrigger>
                                 <div className="flex md:items-center justify-between w-full gap-3">
-                                    <span className="text-lg md:text-2xl text-foreground01">{question}</span>
-                                    {openItem === value ? <CircleMinus className="size-8" /> : <CirclePlus className="size-8" />}
+                                    <span className="text-base md:text-xl text-foreground01">{question}</span>
+                                    {openItem === value ? <CircleMinus className="size-6" /> : <CirclePlus className="size-6" />}
                                 </div>
                             </AccordionTrigger>
-                            <AccordionContent className="  md:w-[85%]">
-                                <p className="md:text-xl text-description">{answer}</p>
+                            <AccordionContent className="md:w-[85%]">
+                                <p className="text-sm md:text-base text-description">{answer}</p>
                             </AccordionContent>
                         </AccordionItem>
                     </div>
