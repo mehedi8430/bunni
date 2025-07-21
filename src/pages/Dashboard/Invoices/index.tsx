@@ -29,6 +29,7 @@ export default function InvoicesPage() {
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   // Modal states
   const [, setSelectedInvoice] = useState<TInvoice | null>(null);
@@ -45,6 +46,7 @@ export default function InvoicesPage() {
           page,
           limit,
           search: searchTerm || undefined,
+          date: selectedDate || undefined,
         });
         setData(invoices.data);
         setTotal(invoices.total);
@@ -58,7 +60,7 @@ export default function InvoicesPage() {
     };
 
     fetchInvoices();
-  }, [page, limit, searchTerm]);
+  }, [page, limit, searchTerm, selectedDate]);
 
   const columns: ColumnDef<TInvoice>[] = [
     {
@@ -240,7 +242,9 @@ export default function InvoicesPage() {
           <InvoiceTableActions
             searchTerm={searchTerm}
             handleFilterChange={handleFilterChange}
+            setSelectedDate={setSelectedDate}
           />
+
           <DataTable
             data={data}
             columns={columns}

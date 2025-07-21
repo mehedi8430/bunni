@@ -8,14 +8,16 @@ import DateTimePicker from "@/components/DateTimePicker";
 interface InvoiceTableActionsProps {
   searchTerm: string;
   handleFilterChange: (search: string) => void;
+  setSelectedDate: (date: string | null) => void;
 }
 
 export function InvoiceTableActions({
   searchTerm,
   handleFilterChange,
+  setSelectedDate,
 }: InvoiceTableActionsProps) {
   return (
-    <div className="flex items-start xl:items-center justify-between p-4">
+    <div className="flex items-start justify-between p-4 xl:items-center">
       <div className="flex flex-wrap items-center gap-6">
         <SearchInput
           value={searchTerm}
@@ -25,9 +27,14 @@ export function InvoiceTableActions({
           className="w-full lg:w-[443px]"
         />
 
-        <div className="flex flex-wrap justify-center items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="flex items-center gap-3">
-            <DateTimePicker />
+            <DateTimePicker
+              onDateTimeChange={(dateTime) => {
+                setSelectedDate(dateTime ? dateTime.toString() : null);
+                console.log("Selected DateTime:", dateTime);
+              }}
+            />
 
             <Button
               variant="filter_button"
@@ -80,7 +87,7 @@ export function InvoiceTableActions({
         </div>
       </div>
 
-      <Button variant="filter_button" className="rounded-lg hidden lg:flex">
+      <Button variant="filter_button" className="hidden rounded-lg lg:flex">
         <ReactSVG
           src={assets.icons.export_icon}
           className="text-muted-foreground"
