@@ -13,16 +13,16 @@ export default function Banner() {
         />
       </div>
       <Navbar />
-      <div className="container mx-auto mt-3 md:mt-20">
+      <div className="container mx-auto mt-10 md:mt-20">
         <div className="text-center max-sm:px-5">
-          <h1 className="text-2xl font-bold md:text-3xl lg:text-5xl xl:text-7xl">
+          <h1 className="text-2xl font-bold md:text-2xl lg:text-4xl xl:text-5xl">
             Invoicing Meets Simplicity — With Smart Payments & Presentations
           </h1>
-          <p className="text-foreground/50 mt-4.5 md:px-10 md:text-xl lg:text-2xl xl:text-3xl">
+          <p className="text-foreground/50 mt-4.5 md:px-20 md:text-lg lg:text-xl xl:text-xl">
             Send invoices, accept payments, manage customers, and create
-            stunning business presentations — all in one powerful platform.
+            stunning business <br /> presentations — all in one powerful platform.
           </p>
-          <button className="bg-primary mx-auto mt-8 flex cursor-pointer items-center justify-center gap-2 rounded-md px-8 py-3 text-white md:px-16 md:py-4 md:text-xl lg:px-20 lg:py-5 xl:px-24 xl:py-7">
+          <button className="bg-primary mx-auto mt-8 flex cursor-pointer items-center justify-center gap-2 rounded-md px-8 py-2 text-white md:px-8 md:py-2 md:text-lg lg:px-10 lg:py-3 xl:px-16 xl:py-4">
             Get Started
             <Image
               src={icons.rightArrow}
@@ -39,7 +39,7 @@ export default function Banner() {
             alt="Dashboard Preview"
             width={1200}
             height={800}
-            className="mx-auto h-auto w-[90%] rounded-lg object-center shadow-lg"
+            className="mx-auto h-auto w-[90%] rounded-lg object-center"
             priority
           />
         </div>

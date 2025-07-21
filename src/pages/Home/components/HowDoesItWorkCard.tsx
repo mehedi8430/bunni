@@ -14,13 +14,13 @@ export default function HowDoesItWorkCard({ icon, title, description, classNameF
   return (
     <div className={`bg-white p-6 rounded-xl shadow-[0_0_10px_rgba(0,0,0,0.2)] flex flex-col mx-auto ${className}`}>
       {/* Icon Container */}
-      <div className={`mb-7 ${classNameForIcon}`}>
+      <div className={`mb-5 ${classNameForIcon}`}>
         {icon}
       </div>
       {/* Title */}
-      <h3 className={`text-xl md:text-2xl lg:text-3xl font-bold text-foreground01 mb-3 ${classNameForTitle}`}>{title}</h3>
+      <h3 className={`text-lg md:text-xl lg:text-2xl font-bold text-foreground01 mb-3 ${classNameForTitle}`}>{title}</h3>
       {/* Description */}
-      <p className={`lg:text-xl ${classNameForDescription}`}>{description}</p>
+      <p className={`lg:text-lg ${classNameForDescription}`}>{description}</p>
     </div>
   )
 }
