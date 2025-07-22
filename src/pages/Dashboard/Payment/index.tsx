@@ -231,7 +231,7 @@ export default function PaymentPage() {
             className="text-lg font-normal"
           >
             <Plus />
-            Recurring Billing
+            Schedule Payment
           </Button>
           <Button
             onClick={() => setIsVirtualTerminalOpen(true)}

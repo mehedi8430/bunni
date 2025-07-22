@@ -33,15 +33,6 @@ export default function Header() {
 
           <div className="flex items-center gap-6">
             <div className="flex items-center">
-              <SelectInput
-                options={[
-                  { value: "en", label: "En" },
-                  { value: "bn", label: "Bn" },
-                ]}
-                placeholder="En"
-                triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-5 [&>svg]:stroke-black [&>svg]:opacity-80 [&>svg]:ml-[-8px] data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg text-foreground text-lg"
-              />
-
               {/* Notification */}
               <Popover>
                 <PopoverTrigger asChild>

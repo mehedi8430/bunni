@@ -23,6 +23,7 @@ import PaymentPage from "@/pages/Dashboard/Payment";
 import ProductsPage from "@/pages/Dashboard/Products";
 import HomePage from "@/pages/Home";
 import InvoiceSettingsPage from "@/pages/Settings/InvoiceSettings";
+import LanguageSettings from "@/pages/Settings/LanguageSetting";
 import NotificationPage from "@/pages/Settings/Notification";
 import PaymentIntegrationPage from "@/pages/Settings/PaymentIntegration";
 import ProfileSettingsPage from "@/pages/Settings/ProfileSettings";
@@ -103,6 +104,10 @@ export const Router = createBrowserRouter([
       {
         path: "notifications",
         element: <NotificationPageForMobile />,
+      },
+      {
+        path: "settings/language",
+        element: <LanguageSettings />,
       },
     ],
   },

@@ -57,9 +57,9 @@ export default function DashboardPage() {
 
   return (
     <>
-    <Helmet>
-      <title>Bunni | Dashboard</title>
-    </Helmet>
+      <Helmet>
+        <title>Bunni | Dashboard</title>
+      </Helmet>
       <section className="space-y-6">
         <div className="space-y-2">
           <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
@@ -101,6 +101,24 @@ export default function DashboardPage() {
               <Plus />
               New Products
             </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant={"primary"}
+                size={"lg"}
+                className="text-lg font-normal"
+              >
+                <Plus />
+                Estimate
+              </Button>
+              <Button
+                variant={"primary"}
+                size={"lg"}
+                className="text-lg font-normal"
+              >
+                <Plus />
+                Payment
+              </Button>
+            </div>
           </div>
         </div>
 
