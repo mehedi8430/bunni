@@ -7,7 +7,7 @@ export default function TemplateCard({
   template: TInvoiceTemplate;
 }) {
   return (
-    <article className="bg-sidebar hover:border-border rounded-xl p-[16px] transition-all duration-200 hover:border">
+    <article className="bg-sidebar hover:border-border rounded-xl p-[16px] transition-all duration-200 hover:border shadow-md">
       <div className="space-y-4">
         {/* Template Preview */}
         <div className="flex h-full w-full justify-center rounded-xl">
@@ -15,7 +15,7 @@ export default function TemplateCard({
           <img
             src={template.image}
             alt="Template Image"
-            className="object-cover"
+            className=" h-52"
           />
         </div>
 
