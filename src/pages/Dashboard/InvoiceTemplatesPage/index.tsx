@@ -13,14 +13,16 @@ const templates: TInvoiceTemplate[] = [
     color: "blue",
     preview: "Default",
     image: assets.images.invoice_template,
+    link: "/dashboard/template/invoice-alpha",
   },
   {
     id: "2",
-    name: "Budget Report",
+    name: "preview-beta",
     type: "professional",
     color: "orange",
     preview: "Default",
     image: assets.images.budget_report_template,
+    link: "/dashboard/template/invoice-beta",
   },
   {
     id: "3",
@@ -29,6 +31,7 @@ const templates: TInvoiceTemplate[] = [
     color: "blue",
     preview: "Professional",
     image: assets.images.invoice_template,
+    link: "/dashboard/template/invoice-gamma",
   },
   {
     id: "4",
@@ -37,6 +40,7 @@ const templates: TInvoiceTemplate[] = [
     color: "orange",
     preview: "New Invoice",
     image: assets.images.budget_report_template,
+    link: "/dashboard/template/invoice-delta",
   },
 ];
 
@@ -54,7 +58,7 @@ export default function InvoiceTemplatesPage() {
           {templates.map((template) => (
             <Link
               key={template.id}
-              to={`/dashboard/template/invoice/${template.id}`}
+              to={template.link}
               onClick={() => {
                 dispatch(clearInvoice());
               }}
