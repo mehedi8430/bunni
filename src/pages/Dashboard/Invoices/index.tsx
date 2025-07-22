@@ -5,9 +5,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
-import { Plus } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-
+import { Plus, Filter } from "lucide-react";
+import { useEffect, useRef, useState, useMemo } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { icons } from "@/lib/imageProvider";
@@ -22,18 +27,70 @@ import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
 import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
+// Custom header component for status filtering
+const StatusFilterHeader = ({
+  statusFilter,
+  onStatusFilterChange,
+}: {
+  statusFilter: string;
+  onStatusFilterChange: (status: string) => void;
+}) => {
+  return (
+    <div className="flex items-center justify-center gap-2">
+      <span>Status</span>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+          className="cursor-pointer hover:bg-transparent focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
+        >
+          <Button variant="ghost" size="sm" className="h-6 px-2">
+            <Filter className="size-3.5" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("")}
+            className={`cursor-pointer ${statusFilter === "" ? "bg-accent" : ""}`}
+          >
+            All Status
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Paid")}
+            className={`cursor-pointer ${statusFilter === "Paid" ? "bg-accent" : ""}`}
+          >
+            Paid
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Unpaid")}
+            className={`cursor-pointer ${statusFilter === "Unpaid" ? "bg-accent" : ""}`}
+          >
+            Unpaid
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Save")}
+            className={`cursor-pointer ${statusFilter === "Save" ? "bg-accent" : ""}`}
+          >
+            Save
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
+
 export default function InvoicesPage() {
   const navigate = useNavigate();
   const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<TInvoice[]>([]);
+  const [allInvoices, setAllInvoices] = useState<TInvoice[]>([]); // Store all data for filtering
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>(""); // Status filter state
 
   // Modal states
   const [, setSelectedInvoice] = useState<TInvoice | null>(null);
@@ -52,11 +109,11 @@ export default function InvoicesPage() {
           search: searchTerm || undefined,
           date: selectedDate || undefined,
         });
-        setData(invoices.data);
+        setAllInvoices(invoices.data);
         setTotal(invoices.total);
       } catch (error) {
         console.error("Error fetching invoices:", error);
-        setData([]);
+        setAllInvoices([]);
         setTotal(0);
       } finally {
         setIsLoading(false);
@@ -65,6 +122,20 @@ export default function InvoicesPage() {
 
     fetchInvoices();
   }, [page, limit, searchTerm, selectedDate]);
+
+  // Client-side filtering using useMemo
+  const filteredInvoices = useMemo(() => {
+    if (!statusFilter) return allInvoices;
+
+    return allInvoices.filter(
+      (invoice) => invoice.status?.toLowerCase() === statusFilter.toLowerCase(),
+    );
+  }, [allInvoices, statusFilter]);
+
+  // Update data when filtered data changes
+  useEffect(() => {
+    setData(filteredInvoices);
+  }, [filteredInvoices]);
 
   const columns: ColumnDef<TInvoice>[] = [
     {
@@ -114,7 +185,12 @@ export default function InvoicesPage() {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: () => (
+        <StatusFilterHeader
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
+        />
+      ),
       size: 120,
       cell: ({ row }) => (
         <div
@@ -188,6 +264,13 @@ export default function InvoicesPage() {
     setPage(1);
   };
 
+  const clearAllFilters = () => {
+    setStatusFilter("");
+    setSearchTerm("");
+    setSelectedDate(null);
+    setPage(1);
+  };
+
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
 
   const tableHeaderColumns = [
@@ -253,6 +336,19 @@ export default function InvoicesPage() {
 
       <div className="grid grid-cols-4 gap-6">
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
+          {(statusFilter || searchTerm || selectedDate) && (
+            <div className="mb-4 px-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearAllFilters}
+                className="text-sm"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+
           {tableRef.current?.table && (
             <DataTableFilter
               searchTerm={searchTerm}
@@ -269,13 +365,23 @@ export default function InvoicesPage() {
             />
           )}
 
+          {statusFilter && (
+            <div className="mb-3 px-4">
+              <span className="text-muted-foreground text-sm">
+                Showing {filteredInvoices.length} of {allInvoices.length}{" "}
+                invoices
+                {statusFilter && ` filtered by: ${statusFilter}`}
+              </span>
+            </div>
+          )}
+
           <DataTable
             data={data}
             columns={columns}
             isLoading={isLoading}
             page={page}
             limit={limit}
-            total={total}
+            total={statusFilter ? filteredInvoices.length : total}
             onPageChange={setPage}
             onLimitChange={setLimit}
             actions={actions}
@@ -293,37 +399,6 @@ export default function InvoicesPage() {
         className=""
         title={null}
       >
-        {/* <BlobProvider document={<InvoiceTemplate />}>
-          {({ blob, url, loading, error }) => {
-            if (loading) return <div>Loading PDF...</div>;
-            if (error) return <div>Error: {error.message}</div>;
-            return (
-              <div>
-                {url && (
-                  <iframe
-                    src={url}
-                    title="Invoice Preview"
-                    width="100%"
-                    height="600px"
-                    style={{ border: "none" }}
-                  />
-                )}
-                <div className="mt-4">
-                  {blob && (
-                    <a
-                      href={url}
-                      download="invoice.pdf"
-                      className="text-blue-600 underline"
-                    >
-                      Download PDF
-                    </a>
-                  )}
-                </div>
-              </div>
-            );
-          }}
-        </BlobProvider> */}
-
         <PreviewTemplate />
       </PdfDialogModal>
 
@@ -336,6 +411,9 @@ export default function InvoicesPage() {
         onConfirm={async () => {
           if (invoiceToDelete) {
             console.log("Invoice To Be Deleted:", invoiceToDelete);
+            setAllInvoices((prev) =>
+              prev.filter((inv) => inv.id !== invoiceToDelete),
+            );
             setData((prev) => prev.filter((inv) => inv.id !== invoiceToDelete));
             setTotal((prev) => prev - 1);
             setIsDeleteOpen(false);
