@@ -311,10 +311,12 @@ export const paymentApi = {
     search,
     page = 1,
     limit = 10,
+    date,
   }: {
     search?: string;
     page?: number;
     limit?: number;
+    date?: string;
   } = {}): Promise<{ data: Payment[]; total: number }> => {
     let filteredPayments: Payment[] = [...mockPayments];
 
@@ -328,6 +330,19 @@ export const paymentApi = {
           pay.status.toLowerCase().includes(searchTerm) ||
           pay.paymentMethod.toLowerCase().includes(searchTerm),
       );
+    }
+
+    // Apply date filter
+    if (date) {
+      const selectedDate = new Date(date);
+      filteredPayments = filteredPayments.filter((inv) => {
+        const invoiceDate = new Date(inv.date);
+        return (
+          invoiceDate.getFullYear() === selectedDate.getFullYear() &&
+          invoiceDate.getMonth() === selectedDate.getMonth() &&
+          invoiceDate.getDate() === selectedDate.getDate()
+        ); // Match by year, month, and day
+      });
     }
 
     // Calculate pagination

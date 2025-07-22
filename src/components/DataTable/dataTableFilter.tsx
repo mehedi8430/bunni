@@ -12,7 +12,7 @@ interface ColumnDef {
   canHide?: boolean;
 }
 
-interface TableHeaderActionsProps<T> {
+interface DataTableFilterProps<T> {
   searchTerm: string;
   handleFilterChange: (search: string) => void;
   setSelectedDate?: (date: string | null) => void;
@@ -27,7 +27,7 @@ interface TableHeaderActionsProps<T> {
   columnVisibility?: VisibilityState;
 }
 
-export function TableHeaderActions<T>({
+export function DataTableFilter<T>({
   searchTerm,
   handleFilterChange,
   setSelectedDate,
@@ -40,7 +40,7 @@ export function TableHeaderActions<T>({
   onExportClick,
   searchInputClassName = "w-full lg:w-[443px]",
   columnVisibility,
-}: TableHeaderActionsProps<T>) {
+}: DataTableFilterProps<T>) {
   console.log({ columnVisibility });
   // Get filterable columns (exclude select and actions columns if present)
   const getFilterableColumns = () => {

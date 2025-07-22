@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { MoreHorizontal, Plus } from "lucide-react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +15,14 @@ import {
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { userApi } from "@/mockApi/userApi";
 import type { TUser } from "@/types";
-import UserTableActions from "./components/UserTableActions";
 import { DialogModal } from "@/components/DialogModal";
 import UserForm from "./components/UserForm";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function UserManagementPage() {
+  const tableRef = useRef<DataTableHandle<TUser> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<TUser[]>([]);
@@ -162,17 +168,45 @@ export default function UserManagementPage() {
     setPage(1);
   };
 
+  const tableHeaderColumns = [
+    { id: "memberName", displayName: "Member Name", canHide: false },
+    { id: "email", displayName: "Email" },
+    { id: "phone", displayName: "Phone" },
+    { id: "permissions", displayName: "Permissions" },
+    { id: "lastLogin", displayName: "Last Login" },
+  ];
+
   return (
     <section className="space-y-6 md:space-y-10">
       <h1 className="text-2xl font-semibold md:text-[32px]">User Management</h1>
 
       <div className="bg-sidebar rounded-2xl py-4">
-        <UserTableActions
-          searchTerm={searchTerm}
-          handleFilterChange={handleFilterChange}
-          setIsEditOpen={setIsEditOpen}
-          setEditProduct={setEditUser}
-        />
+        <div className="flex items-center justify-between">
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={false}
+              showExportButton={false}
+              columnVisibility={columnVisibility}
+            />
+          )}
+          <Button
+            variant="primary"
+            size="lg"
+            className="text-sm font-normal md:text-lg"
+            onClick={() => {
+              setIsEditOpen(true);
+              setEditUser({});
+            }}
+          >
+            <Plus />
+            Add Member
+          </Button>
+        </div>
 
         <DataTable
           data={data}
@@ -184,6 +218,9 @@ export default function UserManagementPage() {
           onPageChange={setPage}
           onLimitChange={setLimit}
           actions={actions}
+          ref={tableRef}
+          columnVisibility={columnVisibility}
+          setColumnVisibility={setColumnVisibility}
         />
       </div>
 

@@ -47,7 +47,7 @@ export interface DataTableProps<TData, TValue> {
   isPagination?: boolean;
   actions?: (row: TData) => React.ReactNode;
   columnVisibility?: VisibilityState;
-  setColumnVisibility: (updater: Updater<VisibilityState>) => void;
+  setColumnVisibility?: (updater: Updater<VisibilityState>) => void;
 }
 
 function DataTableInner<TData, TValue>(
@@ -81,7 +81,7 @@ function DataTableInner<TData, TValue>(
       },
     },
     onSortingChange: setSorting,
-    onColumnVisibilityChange: (updater) => setColumnVisibility(updater),
+    onColumnVisibilityChange: (updater) => setColumnVisibility?.(updater),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { MoreHorizontal, Plus, Filter } from "lucide-react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -12,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { PaymentTableActions } from "./components/PaymentTableActions";
 import { ReactSVG } from "react-svg";
 import assets from "@/lib/imageProvider";
 import { paymentApi, type Payment } from "@/mockApi/paymentApi";
@@ -22,14 +24,71 @@ import { cn } from "@/lib/utils";
 import { AddPaymentForm } from "./components/AddPaymentForm";
 import RecurringBillingForm from "./components/RecurringBillingForm";
 import VirtualTerminalForm from "./components/VirtualTerminalForm";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+
+// Custom header component for status filtering
+const StatusFilterHeader = ({
+  statusFilter,
+  onStatusFilterChange,
+}: {
+  statusFilter: string;
+  onStatusFilterChange: (status: string) => void;
+}) => {
+  return (
+    <div className="flex items-center justify-center gap-2">
+      <span>Status</span>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+          className="cursor-pointer hover:bg-transparent focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
+        >
+          <Button variant="ghost" size="sm" className="h-6 px-2">
+            <Filter className="size-3.5" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("")}
+            className={`cursor-pointer ${statusFilter === "" ? "bg-accent" : ""}`}
+          >
+            All Status
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Paid")}
+            className={`cursor-pointer ${statusFilter === "Paid" ? "bg-accent" : ""}`}
+          >
+            Paid
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Unpaid")}
+            className={`cursor-pointer ${statusFilter === "Unpaid" ? "bg-accent" : ""}`}
+          >
+            Unpaid
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Save")}
+            className={`cursor-pointer ${statusFilter === "Save" ? "bg-accent" : ""}`}
+          >
+            Save
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
 
 export default function PaymentPage() {
+  const tableRef = useRef<DataTableHandle<Payment> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<Payment[]>([]);
+  const [allPayments, setAllPayments] = useState<Payment[]>([]); // Store all data for filtering
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>(""); // Status filter state
 
   // Modal states
   const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
@@ -53,14 +112,15 @@ export default function PaymentPage() {
           page,
           limit,
           search: searchTerm || undefined,
+          date: selectedDate || undefined,
         });
         console.log({ payments });
 
-        setData(payments.data);
+        setAllPayments(payments.data);
         setTotal(payments.total);
       } catch (error) {
         console.error("Error fetching payments:", error);
-        setData([]);
+        setAllPayments([]);
         setTotal(0);
       } finally {
         setIsLoading(false);
@@ -68,7 +128,21 @@ export default function PaymentPage() {
     };
 
     fetchPayments();
-  }, [page, limit, searchTerm]);
+  }, [page, limit, searchTerm, selectedDate]);
+
+  // Client-side filtering using useMemo
+  const filteredPayments = useMemo(() => {
+    if (!statusFilter) return allPayments;
+
+    return allPayments.filter(
+      (payment) => payment.status?.toLowerCase() === statusFilter.toLowerCase(),
+    );
+  }, [allPayments, statusFilter]);
+
+  // Update data when filtered data changes
+  useEffect(() => {
+    setData(filteredPayments);
+  }, [filteredPayments]);
 
   const columns: ColumnDef<Payment>[] = [
     {
@@ -130,7 +204,12 @@ export default function PaymentPage() {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: () => (
+        <StatusFilterHeader
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
+        />
+      ),
       size: 120,
       cell: ({ row }) => (
         <div
@@ -203,13 +282,13 @@ export default function PaymentPage() {
   };
 
   const handleSave = (updatedPayment: Payment) => {
-    setData((prev) =>
+    setAllPayments((prev) =>
       prev.map((pay) =>
         pay.invoice === updatedPayment.invoice ? updatedPayment : pay,
       ),
     );
     if (!updatedPayment.invoice) {
-      setData((prev) => [...prev, updatedPayment]);
+      setAllPayments((prev) => [...prev, updatedPayment]);
       setTotal((prev) => prev + 1);
     }
   };
@@ -218,6 +297,22 @@ export default function PaymentPage() {
     setSearchTerm(search);
     setPage(1);
   };
+
+  const clearAllFilters = () => {
+    setStatusFilter("");
+    setSearchTerm("");
+    setSelectedDate(null);
+    setPage(1);
+  };
+
+  const tableHeaderColumns = [
+    { id: "invoice", displayName: "Invoice", canHide: false },
+    { id: "customerName", displayName: "Customer Name" },
+    { id: "date", displayName: "Date" },
+    { id: "amount", displayName: "Amount" },
+    { id: "status", displayName: "Status" },
+    { id: "paymentMethod", displayName: "Payment Method" },
+  ];
 
   return (
     <section className="space-y-10">
@@ -280,20 +375,58 @@ export default function PaymentPage() {
         </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <PaymentTableActions
-            searchTerm={searchTerm}
-            handleFilterChange={handleFilterChange}
-          />
+          {(statusFilter || searchTerm || selectedDate) && (
+            <div className="mb-4 px-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearAllFilters}
+                className="text-sm"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              setSelectedDate={setSelectedDate}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={true}
+              showExportButton={true}
+              exportButtonText="Export"
+              onExportClick={() => console.log("Export clicked")}
+              columnVisibility={columnVisibility}
+            />
+          )}
+
+          {statusFilter && (
+            <div className="mb-3 px-4">
+              <span className="text-muted-foreground text-sm">
+                Showing {filteredPayments.length} of {allPayments.length}{" "}
+                payments
+                {statusFilter && ` filtered by: ${statusFilter}`}
+              </span>
+            </div>
+          )}
+
           <DataTable
             data={data}
             columns={columns}
             isLoading={isLoading}
             page={page}
             limit={limit}
-            total={total}
+            total={statusFilter ? filteredPayments.length : total}
             onPageChange={setPage}
             onLimitChange={setLimit}
             actions={actions}
+            ref={tableRef}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
           />
         </div>
       </div>
@@ -372,7 +505,9 @@ export default function PaymentPage() {
         onConfirm={async () => {
           if (paymentToDelete) {
             console.log("Payment To Be Deleted:", paymentToDelete);
-            // Prepare for future API call if implemented
+            setAllPayments((prev) =>
+              prev.filter((pay) => pay.invoice !== paymentToDelete),
+            );
             setData((prev) =>
               prev.filter((pay) => pay.invoice !== paymentToDelete),
             );
