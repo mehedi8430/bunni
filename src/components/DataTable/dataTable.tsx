@@ -8,6 +8,8 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   type Table as TableType,
+  type VisibilityState,
+  type Updater,
 } from "@tanstack/react-table";
 
 import {
@@ -44,6 +46,8 @@ export interface DataTableProps<TData, TValue> {
   onLimitChange: (limit: number) => void;
   isPagination?: boolean;
   actions?: (row: TData) => React.ReactNode;
+  columnVisibility?: VisibilityState;
+  setColumnVisibility: (updater: Updater<VisibilityState>) => void;
 }
 
 function DataTableInner<TData, TValue>(
@@ -58,6 +62,8 @@ function DataTableInner<TData, TValue>(
     onPageChange,
     isPagination = true,
     onLimitChange,
+    columnVisibility,
+    setColumnVisibility,
   }: DataTableProps<TData, TValue>,
   ref: ForwardedRef<DataTableHandle<TData>>,
 ) {
@@ -68,12 +74,14 @@ function DataTableInner<TData, TValue>(
     columns,
     state: {
       sorting,
+      columnVisibility,
       pagination: {
         pageIndex: page - 1,
         pageSize: limit,
       },
     },
     onSortingChange: setSorting,
+    onColumnVisibilityChange: (updater) => setColumnVisibility(updater),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

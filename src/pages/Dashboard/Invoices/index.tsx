@@ -1,9 +1,12 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { PdfDialogModal } from "@/components/shared/PdfModal";
@@ -15,13 +18,14 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router";
 import { ReactSVG } from "react-svg";
 import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemplate";
-import { InvoiceTableActions } from "./components/InvoiceTableActions";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
-import LoadingAnimation from "@/components/shared/LoadingAnimation";
+import { TableHeaderActions } from "@/components/DataTable/TableHeaderActions";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
+  const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -95,6 +99,7 @@ export default function InvoicesPage() {
       cell: ({ row }) => (
         <div className="truncate text-start">{row.getValue("id")}</div>
       ),
+      enableHiding: true,
     },
     {
       accessorKey: "customerName",
@@ -105,6 +110,7 @@ export default function InvoicesPage() {
           {row.getValue("customerName")}
         </div>
       ),
+      enableHiding: true,
     },
     {
       accessorKey: "status",
@@ -127,6 +133,7 @@ export default function InvoicesPage() {
           {row.getValue("status")}
         </div>
       ),
+      enableHiding: true,
     },
     {
       accessorKey: "orderNumber",
@@ -135,6 +142,7 @@ export default function InvoicesPage() {
       cell: ({ row }) => (
         <div className="truncate text-start">{row.getValue("orderNumber")}</div>
       ),
+      enableHiding: true,
     },
     {
       accessorKey: "amount",
@@ -143,6 +151,7 @@ export default function InvoicesPage() {
       cell: ({ row }) => (
         <div className="truncate">${row.getValue("amount")}</div>
       ),
+      enableHiding: true,
     },
     {
       accessorKey: "tenderType",
@@ -151,12 +160,14 @@ export default function InvoicesPage() {
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("tenderType")}</div>
       ),
+      enableHiding: true,
     },
     {
       accessorKey: "date",
       header: "Date",
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("date")}</div>,
+      enableHiding: true,
     },
   ];
 
@@ -179,12 +190,15 @@ export default function InvoicesPage() {
 
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
 
-  if (isLoading)
-    return (
-      <div>
-        <LoadingAnimation />
-      </div>
-    );
+  const tableHeaderColumns = [
+    { id: "id", displayName: "Invoice" },
+    { id: "customerName", displayName: "Customer Name" },
+    { id: "status", displayName: "Status" },
+    { id: "orderNumber", displayName: "Order Number", canHide: false },
+    { id: "amount", displayName: "Amount" },
+    { id: "tenderType", displayName: "Tender Type" },
+    { id: "date", displayName: "Date" },
+  ];
 
   return (
     <section className="space-y-10">
@@ -239,11 +253,21 @@ export default function InvoicesPage() {
 
       <div className="grid grid-cols-4 gap-6">
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
-          <InvoiceTableActions
-            searchTerm={searchTerm}
-            handleFilterChange={handleFilterChange}
-            setSelectedDate={setSelectedDate}
-          />
+          {tableRef.current?.table && (
+            <TableHeaderActions
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              setSelectedDate={setSelectedDate}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={true}
+              showExportButton={true}
+              exportButtonText="Export"
+              onExportClick={() => console.log("Export clicked")}
+              columnVisibility={columnVisibility}
+            />
+          )}
 
           <DataTable
             data={data}
@@ -255,6 +279,9 @@ export default function InvoicesPage() {
             onPageChange={setPage}
             onLimitChange={setLimit}
             actions={actions}
+            ref={tableRef}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
           />
         </div>
       </div>
