@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -15,11 +18,15 @@ import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { CustomerForm } from "./components/CustomerForm";
 import CustomerDetails from "./components/CustomerDetails";
-import { CustomerTableActions } from "./components/CustomerTableActions";
 import TopPayingCustomerChart from "./components/TopPayingCustomerChart";
 import HighestUnpaidBalanceChart from "./components/HighestUnpaidBalanceChart";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import type { TCustomer } from "@/types/customer.type";
 
 export default function CustomerPage() {
+  const tableRef = useRef<DataTableHandle<TCustomer> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<Customer[]>([]);
@@ -202,6 +209,17 @@ export default function CustomerPage() {
     setPage(1);
   };
 
+  const tableHeaderColumns = [
+    { id: "name", displayName: "Customer Name", canHide: false },
+    { id: "truncated_tokens", displayName: "Truncated Token" },
+    { id: "email", displayName: "Email" },
+    { id: "phone", displayName: "Phone" },
+    { id: "company", displayName: "Company" },
+    { id: "achToken", displayName: "ACH Token" },
+  ];
+
+  console.log("table ref:", tableRef.current?.table);
+
   return (
     <section className="space-y-10">
       <div className="flex items-center justify-between">
@@ -229,10 +247,24 @@ export default function CustomerPage() {
         </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <CustomerTableActions
+          {/* <CustomerTableActions
             searchTerm={searchTerm}
             handleFilterChange={handleFilterChange}
-          />
+          /> */}
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={true}
+              showExportButton={true}
+              exportButtonText="Export"
+              onExportClick={() => console.log("Export clicked")}
+              columnVisibility={columnVisibility}
+            />
+          )}
 
           <DataTable
             data={data}
@@ -244,6 +276,9 @@ export default function CustomerPage() {
             onPageChange={setPage}
             onLimitChange={setLimit}
             actions={actions}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
+            ref={tableRef}
           />
         </div>
       </div>

@@ -20,7 +20,7 @@ import { ReactSVG } from "react-svg";
 import PreviewTemplate from "../CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import InvoiceTableRowActions from "./components/InvoiceTableRowActions";
 import TopCard from "./components/TopCard";
-import { TableHeaderActions } from "@/components/DataTable/TableHeaderActions";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -254,14 +254,14 @@ export default function InvoicesPage() {
       <div className="grid grid-cols-4 gap-6">
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
           {tableRef.current?.table && (
-            <TableHeaderActions
+            <DataTableFilter
               searchTerm={searchTerm}
               handleFilterChange={handleFilterChange}
               setSelectedDate={setSelectedDate}
               table={tableRef.current.table}
               columns={tableHeaderColumns}
               searchPlaceholder="Search by name, email, or company"
-              showDatePicker={true}
+              showDatePicker={false}
               showExportButton={true}
               exportButtonText="Export"
               onExportClick={() => console.log("Export clicked")}
