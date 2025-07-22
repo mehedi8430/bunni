@@ -1,4 +1,4 @@
-import { CirclePlus } from "lucide-react";
+import { ListFilter } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Popover,
@@ -81,7 +81,7 @@ export default function DateTimePicker({
               console.log("Add customer");
             }}
           >
-            <CirclePlus />
+            <ListFilter />
             Date and time
           </Button>
         </PopoverTrigger>
