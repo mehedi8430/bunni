@@ -137,7 +137,7 @@ export default function PreviewGamma({
                         <th className="w-1/12 px-4 pb-3 text-left text-xs font-bold">
                             Qty.
                         </th>
-                        <th className="w-1/12 pl-4 pb-3 text-left text-xs font-bold">
+                        <th className="w-1/12 pl-4 pb-3 text-left text-xs font-bold text-nowrap">
                             Line total
                         </th>
                     </tr>
@@ -148,7 +148,6 @@ export default function PreviewGamma({
                     {items.map((item, index) => (
                         <tr
                             key={index}
-                            // className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
                         >
                             <td className="w-6/12 py-3 text-xs">{item.description}</td>
                             <td className="w-1/12 px-4 py-2 text-xs">
