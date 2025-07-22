@@ -1,14 +1,16 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { productApi } from "@/mockApi/productApi";
 import ProductForm from "./components/ProductForm";
-import { ProductTableActions } from "./components/ProductTableActions";
 import type { TProduct } from "@/types";
 import {
   DropdownMenu,
@@ -16,8 +18,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function ProductsPage() {
+  const tableRef = useRef<DataTableHandle<TProduct> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<TProduct[]>([]);
@@ -169,6 +175,14 @@ export default function ProductsPage() {
     setPage(1);
   };
 
+  const tableHeaderColumns = [
+    { id: "name", displayName: "Name", canHide: false },
+    { id: "type", displayName: "Type" },
+    { id: "unit", displayName: "Unit" },
+    { id: "price", displayName: "Price" },
+    { id: "description", displayName: "Desciption" },
+  ];
+
   return (
     <section className="space-y-10">
       <div className="flex items-start justify-between">
@@ -188,10 +202,20 @@ export default function ProductsPage() {
       </div>
 
       <div className="bg-sidebar rounded-2xl py-4">
-        <ProductTableActions
-          searchTerm={searchTerm}
-          handleFilterChange={handleFilterChange}
-        />
+        {tableRef.current?.table && (
+          <DataTableFilter
+            searchTerm={searchTerm}
+            handleFilterChange={handleFilterChange}
+            table={tableRef.current.table}
+            columns={tableHeaderColumns}
+            searchPlaceholder="Search by name, email, or company"
+            showDatePicker={false}
+            showExportButton={true}
+            exportButtonText="Export"
+            onExportClick={() => console.log("Export clicked")}
+            columnVisibility={columnVisibility}
+          />
+        )}
 
         <DataTable
           data={data}
@@ -203,6 +227,9 @@ export default function ProductsPage() {
           onPageChange={setPage}
           onLimitChange={setLimit}
           actions={actions}
+          ref={tableRef}
+          columnVisibility={columnVisibility}
+          setColumnVisibility={setColumnVisibility}
         />
       </div>
 

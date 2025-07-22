@@ -26,6 +26,7 @@ export default function InvoicesPage() {
   const navigate = useNavigate();
   const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -33,7 +34,6 @@ export default function InvoicesPage() {
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   // Modal states
   const [, setSelectedInvoice] = useState<TInvoice | null>(null);
@@ -261,7 +261,7 @@ export default function InvoicesPage() {
               table={tableRef.current.table}
               columns={tableHeaderColumns}
               searchPlaceholder="Search by name, email, or company"
-              showDatePicker={false}
+              showDatePicker={true}
               showExportButton={true}
               exportButtonText="Export"
               onExportClick={() => console.log("Export clicked")}

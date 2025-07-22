@@ -258,7 +258,7 @@ export default function CustomerPage() {
               table={tableRef.current.table}
               columns={tableHeaderColumns}
               searchPlaceholder="Search by name, email, or company"
-              showDatePicker={true}
+              showDatePicker={false}
               showExportButton={true}
               exportButtonText="Export"
               onExportClick={() => console.log("Export clicked")}

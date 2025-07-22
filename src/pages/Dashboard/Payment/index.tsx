@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -12,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { PaymentTableActions } from "./components/PaymentTableActions";
 import { ReactSVG } from "react-svg";
 import assets from "@/lib/imageProvider";
 import { paymentApi, type Payment } from "@/mockApi/paymentApi";
@@ -22,8 +24,13 @@ import { cn } from "@/lib/utils";
 import { AddPaymentForm } from "./components/AddPaymentForm";
 import RecurringBillingForm from "./components/RecurringBillingForm";
 import VirtualTerminalForm from "./components/VirtualTerminalForm";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function PaymentPage() {
+  const tableRef = useRef<DataTableHandle<Payment> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<Payment[]>([]);
@@ -53,6 +60,7 @@ export default function PaymentPage() {
           page,
           limit,
           search: searchTerm || undefined,
+          date: selectedDate || undefined,
         });
         console.log({ payments });
 
@@ -68,7 +76,7 @@ export default function PaymentPage() {
     };
 
     fetchPayments();
-  }, [page, limit, searchTerm]);
+  }, [page, limit, searchTerm, selectedDate]);
 
   const columns: ColumnDef<Payment>[] = [
     {
@@ -219,6 +227,15 @@ export default function PaymentPage() {
     setPage(1);
   };
 
+  const tableHeaderColumns = [
+    { id: "invoice", displayName: "Invoice", canHide: false },
+    { id: "customerName", displayName: "Customer Name" },
+    { id: "date", displayName: "Date" },
+    { id: "amount", displayName: "Amount" },
+    { id: "status", displayName: "Status" },
+    { id: "paymentMethod", displayName: "Payment Method" },
+  ];
+
   return (
     <section className="space-y-10">
       <div className="flex flex-col items-center justify-between space-y-5 lg:flex-row">
@@ -280,10 +297,22 @@ export default function PaymentPage() {
         </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <PaymentTableActions
-            searchTerm={searchTerm}
-            handleFilterChange={handleFilterChange}
-          />
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              setSelectedDate={setSelectedDate}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={true}
+              showExportButton={true}
+              exportButtonText="Export"
+              onExportClick={() => console.log("Export clicked")}
+              columnVisibility={columnVisibility}
+            />
+          )}
+
           <DataTable
             data={data}
             columns={columns}
@@ -294,6 +323,9 @@ export default function PaymentPage() {
             onPageChange={setPage}
             onLimitChange={setLimit}
             actions={actions}
+            ref={tableRef}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
           />
         </div>
       </div>
