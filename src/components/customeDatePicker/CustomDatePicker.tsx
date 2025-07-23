@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 // ✅ Utility: format as "05 Feb, 2025"
 function formatShortDate(date?: Date): string {
@@ -39,6 +40,7 @@ export interface CustomDatePickerProps {
   defaultDate?: string | Date;
   label?: string;
   onDateChange?: (date: Date | undefined) => void;
+  labelClassName?: string;
 }
 
 // ✅ Component
@@ -46,6 +48,7 @@ export const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   defaultDate,
   label = "Select Date",
   onDateChange,
+  labelClassName,
 }) => {
   const parsedDefault = parseDate(defaultDate);
 
@@ -63,7 +66,10 @@ export const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
 
   return (
     <div className="flex flex-col gap-3">
-      <Label htmlFor="date-input" className="text-lg font-normal">
+      <Label
+        htmlFor="date-input"
+        className={cn("text-lg font-normal", labelClassName)}
+      >
         {label}
       </Label>
       <div className="relative flex gap-2">
