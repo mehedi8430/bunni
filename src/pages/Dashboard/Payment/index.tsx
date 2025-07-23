@@ -316,14 +316,13 @@ export default function PaymentPage() {
 
   return (
     <section className="space-y-10">
-      <div className="flex flex-col items-center justify-between space-y-5 lg:flex-row">
-        <h1 className="text-2xl font-semibold md:text-[32px]">Payment</h1>
+      <div className="flex flex-col items-center justify-between space-y-1 lg:flex-row">
+        <h1 className="text-2xl font-semibold md:text-[26px]">Payment</h1>
         <div className="flex flex-wrap items-center justify-center gap-6">
           <Button
             onClick={() => setIsRecurringBillingOpen(true)}
             variant="primary"
-            size="lg"
-            className="text-lg font-normal"
+            className="text-base font-normal"
           >
             <Plus />
             Schedule Payment
@@ -331,8 +330,7 @@ export default function PaymentPage() {
           <Button
             onClick={() => setIsVirtualTerminalOpen(true)}
             variant="primary"
-            size="lg"
-            className="text-lg font-normal"
+            className="text-base font-normal"
           >
             <Plus />
             Virtual Terminal
@@ -340,8 +338,7 @@ export default function PaymentPage() {
           <Button
             onClick={() => setIsAddPaymentOpen(true)}
             variant="primary"
-            size="lg"
-            className="text-lg font-normal"
+            className="text-base font-normal"
           >
             <Plus />
             pay by link
@@ -350,7 +347,7 @@ export default function PaymentPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <div className="card_container col-span-2 space-y-5 xl:col-span-1">
+        <div className="card_container col-span-2 space-y-3 xl:col-span-1">
           <div className="flex items-center gap-2">
             <div className="bg-primary/20 flex items-center justify-center rounded-full p-2">
               <ReactSVG src={assets.icons.doller_up} />
@@ -359,10 +356,10 @@ export default function PaymentPage() {
               Total payment
             </p>
           </div>
-          <p className="text-2xl font-bold">$ 2,567</p>
+          <p className="text-xl font-bold ml-11">$ 2,567</p>
         </div>
 
-        <div className="card_container col-span-2 space-y-5 xl:col-span-1">
+        <div className="card_container col-span-2 space-y-3 xl:col-span-1">
           <div className="flex items-center gap-2">
             <div className="flex items-center justify-center rounded-full bg-[#FFF8DF] p-2">
               <ReactSVG src={assets.icons.pending} />
@@ -371,7 +368,7 @@ export default function PaymentPage() {
               Pending payments
             </p>
           </div>
-          <p className="text-2xl font-bold">$ 4,212</p>
+          <p className="text-xl font-bold ml-11">$ 4,212</p>
         </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">

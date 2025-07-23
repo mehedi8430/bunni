@@ -94,7 +94,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
                       }))}
                       placeholder="Select a customer"
                       onValueChange={field.onChange}
-                      triggerClassName="w-full py-5"
+                      triggerClassName="w-full py-3"
                     />
                   </FormControl>
                   <FormMessage />
@@ -155,23 +155,23 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
                       <TabsList className="border-border grid w-full grid-cols-3 border">
                         <TabsTrigger
                           value="email"
-                          className="text-muted-foreground text-sm focus:text-white md:text-base"
+                          className="text-muted-foreground text-sm focus:text-white md:text-sm"
                         >
-                          <Mail className="size-4 md:size-6" />
+                          <Mail className="size-4 md:size-5" />
                           Email
                         </TabsTrigger>
                         <TabsTrigger
                           value="sms"
-                          className="text-muted-foreground text-sm focus-within:text-white md:text-base"
+                          className="text-muted-foreground text-sm focus-within:text-white md:text-sm"
                         >
-                          <MessageSquareMore className="size-4 md:size-6" />
+                          <MessageSquareMore className="size-4 md:size-5" />
                           SMS
                         </TabsTrigger>
                         <TabsTrigger
                           value="link"
-                          className="text-muted-foreground text-sm focus-within:text-white md:text-base"
+                          className="text-muted-foreground text-sm focus-within:text-white md:text-sm"
                         >
-                          <Link2 className="size-4 -rotate-45 md:size-6" />
+                          <Link2 className="size-4 -rotate-45 md:size-5" />
                           Copy link
                         </TabsTrigger>
                       </TabsList>
@@ -263,14 +263,14 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-10 py-5 text-lg font-normal"
+              className="px-10 py-5 text-base font-normal"
             >
               Cancel
             </Button>
             <Button
               variant={"primary"}
               type="submit"
-              className="border-button-border border px-10 py-5 text-lg font-normal shadow-2xl"
+              className="border-button-border border px-10 py-5 text-base font-normal shadow-2xl"
             >
               Save
             </Button>

@@ -84,7 +84,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="firstName"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-lg font-normal">First Name</FormLabel>
+                  <FormLabel className="text-base font-normal">First Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Write here"
@@ -101,7 +101,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="lastName"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-lg font-normal">Last Name</FormLabel>
+                  <FormLabel className="text-base font-normal">Last Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Write here"
@@ -120,7 +120,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="email"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-lg font-normal">Email</FormLabel>
+                  <FormLabel className="text-base font-normal">Email</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="e.g., john@example.com"
@@ -137,7 +137,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="phone"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-lg font-normal">Phone Number</FormLabel>
+                  <FormLabel className="text-base font-normal">Phone Number</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="e.g., +123-456-7890"
@@ -155,7 +155,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             name="company"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel className="text-lg font-normal">Company</FormLabel>
+                <FormLabel className="text-base font-normal">Company</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g., ABC Corp"
@@ -172,7 +172,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             name="address"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel className="text-lg font-normal">Address</FormLabel>
+                <FormLabel className="text-base font-normal">Address</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g., 123 Main St, NY"
@@ -189,7 +189,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             name="truncated_tokens"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel className="text-lg font-normal">Credit Card Token</FormLabel>
+                <FormLabel className="text-base font-normal">Credit Card Token</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="1234567890XYZ"
@@ -206,7 +206,7 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             name="achToken"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel className="text-lg font-normal">ACH Token</FormLabel>
+                <FormLabel className="text-base font-normal">ACH Token</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="•••• 723532345 "
@@ -221,10 +221,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
         </div>
         <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
         <div className="flex items-center justify-center md:justify-end gap-3 p-5">
-          <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+          <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
             Cancel
           </Button>
-          <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
+          <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Save</Button>
         </div>
       </form>
     </Form>

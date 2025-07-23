@@ -200,7 +200,7 @@ html {
 
 /* custom focus for input fiield */
 .custom-focus {
-  @apply text-muted-foreground placeholder:text-muted-foreground/70 p-5 text-[16px] focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0;
+  @apply text-muted-foreground placeholder:text-muted-foreground/70 p-3 text-sm focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0;
 }
 
 /* label class */
