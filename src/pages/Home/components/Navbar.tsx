@@ -1,4 +1,5 @@
 import Image from "@/components/shared/Image";
+import Translator from "@/components/shared/Translator";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { icons } from "@/lib/imageProvider";
 import { useState } from "react";
@@ -12,10 +13,10 @@ export default function Navbar() {
     const location = useLocation();
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Features', path: '#features' },
-        { name: 'How does it work', path: '#how-it-works' },
-        { name: 'Contact', path: '#contact' },
+        { name: <Translator text="home" />, path: '/', key: 'home' },
+        { name: <Translator text="features" />, path: '#features', key: 'features' },
+        { name: <Translator text="how_does_it_work" />, path: '#how-it-works', key: 'how-it-works' },
+        { name: <Translator text="contact" />, path: '#contact', key: 'contact' },
     ];
 
     // Function to handle smooth scrolling to sections
@@ -105,7 +106,7 @@ export default function Navbar() {
                             {/* Nav links */}
                             <div className="flex flex-col items-start">
                                 {navLinks.map((link) => (
-                                    <div key={link.name} className="w-full">
+                                    <div key={link.key} className="w-full">
                                         <a
                                             href={link.path}
                                             onClick={(e) => handleMobileNavClick(e, link.path)}
@@ -123,14 +124,14 @@ export default function Navbar() {
                                     <SheetClose asChild>
                                         <Link to={"/auth"}>
                                             <button className="w-full px-3 py-1.5 border border-primary text-foreground rounded-md">
-                                                Log In
+                                                <Translator text="log-in" />
                                             </button>
                                         </Link>
                                     </SheetClose>
                                     <SheetClose asChild>
                                         <Link to={"/auth/register"}>
                                             <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
-                                                Registration
+                                                <Translator text="sign-up" />
                                             </button>
                                         </Link>
                                     </SheetClose>
@@ -144,7 +145,7 @@ export default function Navbar() {
                 <div className="hidden lg:flex space-x-8">
                     {navLinks.map((link) => (
                         <a
-                            key={link.name} // Unique key for each mapped item
+                            key={link.key} // Use string key instead of React element
                             href={link.path}  // The path the link navigates to
                             onClick={(e) => handleDesktopNavClick(e, link.path)}
                             // isActive is a function that receives an object with isActive property
@@ -162,12 +163,12 @@ export default function Navbar() {
                 <div className="hidden lg:flex items-center space-x-5">
                     <Link to={"/auth"}>
                         <button className="px-5 py-1.5 border border-primary text-foreground rounded-md text-base cursor-pointer">
-                            Log In
+                            <Translator text="log-in" />
                         </button>
                     </Link>
                     <Link to={"/auth/register"}>
                         <button className="px-5 py-1.5 bg-primary text-white rounded-md text-base cursor-pointer">
-                            Registration
+                            <Translator text="sign-up" />
                         </button>
                     </Link>
                 </div>
