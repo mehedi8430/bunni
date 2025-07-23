@@ -1,4 +1,5 @@
 import Image from "@/components/shared/Image";
+import Translator from "@/components/shared/Translator";
 import { icons, images } from "@/lib/imageProvider";
 
 export default function BusinessFeatures() {
@@ -10,21 +11,21 @@ export default function BusinessFeatures() {
                 </div>
                 <div className="md:w-1/2 ">
                     <div className="">
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 md:mb-7">Powerful Features for Your Business</h1>
-                        <p className="text-description md:text-lg lg:text-xl">Make payments easy and get a clear view of your finances. Just link your bank account and card to Milestone!</p>
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4 md:mb-7"><Translator text="features_heading" /></h1>
+                        <p className="text-description md:text-lg lg:text-xl"><Translator text="features_description" /></p>
                     </div>
                     <div className="mt-3 md:mt-5 space-y-2 md:space-y-3 lg:space-y-6">
                         <div className="flex items-center gap-1.5">
                             <Image src={icons.check} alt="Check Icon" className="w-5 h-5 md:w-6 md:h-6" />
-                            <span className="md:text-base lg:text-lg">No hidden fees.</span>
+                            <span className="md:text-base lg:text-lg"><Translator text="features_bullet_1" /></span>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <Image src={icons.check} alt="Check Icon" className="w-5 h-5 md:w-6 md:h-6" />
-                            <span className="md:text-lg lg:text-xl">100% security. Guaranteed.</span>
+                            <span className="md:text-lg lg:text-xl"><Translator text="features_bullet_2" /></span>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <Image src={icons.check} alt="Check Icon" className="w-5 h-5 md:w-6 md:h-6" />
-                            <span className="md:text-lg lg:text-xl">No training or maintenance needed.</span>
+                            <span className="md:text-lg lg:text-xl"><Translator text="features_bullet_3" /></span>
                         </div>
                     </div>
                 </div>
