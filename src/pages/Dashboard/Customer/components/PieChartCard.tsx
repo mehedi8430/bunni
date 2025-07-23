@@ -118,7 +118,7 @@ export default function PieChartCard({
   return (
     <div className="w-full">
       {/* Header section with title and date picker */}
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-2 flex flex-col md:flex-row items-center justify-between space-y-2">
         <h2 className="text-foreground text-lg font-semibold">{title}</h2>
         <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
           <PopoverTrigger asChild>
@@ -148,7 +148,6 @@ export default function PieChartCard({
                 }
                 setIsCalendarOpen(false); // Close the calendar when a date is selected
               }}
-              initialFocus
             />
           </PopoverContent>
         </Popover>
@@ -157,7 +156,7 @@ export default function PieChartCard({
       {/* Chart and customer list section */}
       <div className="flex flex-col items-center gap-8 md:flex-row">
         {/* Pie Chart section */}
-        <div className="relative flex h-64 w-full md:w-1/3">
+        <div className="relative flex h-52 w-full md:w-1/3">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -182,10 +181,10 @@ export default function PieChartCard({
           </ResponsiveContainer>
           {/* Total amount display in the center of the pie chart */}
           <div className="absolute top-1/2 left-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full text-center shadow-[0_0_20px_5px_rgba(0,0,0,0.2)]">
-            <div className="text-foreground01 text-lg font-semibold">
+            <div className="text-foreground01 text-base font-semibold">
               {formatCurrency(totalAmount / 1000000)}M
             </div>
-            <div className="text-foreground01/50 text-lg font-semibold">
+            <div className="text-foreground01/50 text-sm font-semibold">
               Total
             </div>
           </div>
@@ -193,7 +192,7 @@ export default function PieChartCard({
 
         {/* Customer list section */}
         <div className="w-full md:w-2/3">
-          <ul className="space-y-6">
+          <ul className="space-y-3">
             {filteredCustomers.length > 0 ? (
               filteredCustomers.map((customer: Customer, index: number) => (
                 <li
@@ -206,11 +205,11 @@ export default function PieChartCard({
                       className="mr-3 inline-block h-3 w-3 rounded-full"
                       style={{ backgroundColor: COLORS[index % COLORS.length] }}
                     ></span>
-                    <span className="text-foreground01/50">
+                    <span className="text-foreground01/50 text-base">
                       {customer.name}
                     </span>
                   </div>
-                  <span className="text-foreground01">
+                  <span className="text-foreground01 text-lg">
                     {formatCurrency(customer.amount)}
                   </span>
                 </li>
