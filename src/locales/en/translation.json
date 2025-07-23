@@ -118,5 +118,23 @@
       "title": "Add Products",
       "description": "To create invoice you need to add products."
     }
+  },
+    "bar_chart": {
+    "title": "Total Revenue",
+    "amount": "$8,527,224",
+    "growth": "+3.12%",
+    "growth_label": "VS This Month"
+  },
+    "pro_plan_card": {
+    "plan_name": "Pro Plan",
+    "price": "$4.99",
+    "billing_cycle": "/month",
+    "tagline": "Invoice Smarter. Grow Faster.",
+    "features": {
+      "unlimited_invoice": "Unlimited Invoice",
+      "management_setting": "Management Setting",
+      "add_admin": "Add Admin In Company Profile"
+    },
+    "upgrade_button": "Upgrade plan"
   }
 }

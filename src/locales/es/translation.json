@@ -118,5 +118,23 @@
       "title": "Agregar Productos",
       "description": "Para crear una factura necesitas agregar productos."
     }
+  },
+  "bar_chart": {
+    "title": "Ingresos Totales",
+    "amount": "$8,527,224",
+    "growth": "+3.12%",
+    "growth_label": "VS Este Mes"
+  },
+    "pro_plan_card": {
+    "plan_name": "Plan Pro",
+    "price": "$4.99",
+    "billing_cycle": "/mes",
+    "tagline": "Factura más inteligente. Crece más rápido.",
+    "features": {
+      "unlimited_invoice": "Facturas ilimitadas",
+      "management_setting": "Configuración de gestión",
+      "add_admin": "Agregar administrador en el perfil de la empresa"
+    },
+    "upgrade_button": "Actualizar plan"
   }
 }
