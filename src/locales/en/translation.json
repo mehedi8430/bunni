@@ -32,5 +32,19 @@
   "key_benefit_2_title": "Recurring Billing",
   "key_benefit_2_description": "Set up auto-invoices with flexible schedules for subscriptions or repeat clients.",
   "key_benefit_3_title": "Smart Reporting Filters",
-  "key_benefit_3_description": "Track status, payment type, and invoice history with real-time filters."
+  "key_benefit_3_description": "Track status, payment type, and invoice history with real-time filters.",
+  "faq_title": "FAQ",
+  "faq_subtitle": "Everything You Need to Know Before Getting Started",
+  "faq_q1": "Q. Can I integrate this with my online store or app?",
+  "faq_a1": "Yes. We offer ready-made plugins for platforms like Shopify and WooCommerce, as well as API and SDK options for mobile apps or custom e-commerce systems.",
+  "faq_q2": "Q. What payment methods do you support?",
+  "faq_a2": "We support a wide range of payment methods including credit/debit cards (Visa, Mastercard, American Express), PayPal, Apple Pay, Google Pay, and various local payment options.",
+  "faq_q3": "Q. Is there a setup fee or monthly charge?",
+  "faq_a3": "No, there are no setup fees or monthly charges. You only pay a small transaction fee per successful payment.",
+  "faq_q4": "Q. How long does the onboarding process take?",
+  "faq_a4": "The onboarding process typically takes 1-3 business days, depending on the completeness of your documentation. We aim to get you up and running as quickly as possible.",
+  "faq_q5": "Q. How quickly will I receive the funds?",
+  "faq_a5": "Funds are typically settled within 2-3 business days after the transaction. Payout schedules can be customized based on your business needs.",
+  "faq_q6": "Q. Is the platform secure and compliant?",
+  "faq_a6": "Absolutely. Our platform is PCI DSS Level 1 compliant and uses advanced encryption and fraud detection tools to ensure the highest level of security for all transactions."
 }

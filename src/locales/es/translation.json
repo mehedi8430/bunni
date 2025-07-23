@@ -32,5 +32,19 @@
   "key_benefit_2_title": "Facturación recurrente",
   "key_benefit_2_description": "Configura facturas automáticas con horarios flexibles para suscripciones o clientes habituales.",
   "key_benefit_3_title": "Filtros inteligentes de informes",
-  "key_benefit_3_description": "Haz seguimiento del estado, tipo de pago e historial de facturas con filtros en tiempo real."
+  "key_benefit_3_description": "Haz seguimiento del estado, tipo de pago e historial de facturas con filtros en tiempo real.",
+  "faq_title": "Preguntas Frecuentes",
+  "faq_subtitle": "Todo lo que necesitas saber antes de comenzar",
+  "faq_q1": "P. ¿Puedo integrar esto con mi tienda en línea o aplicación?",
+  "faq_a1": "Sí. Ofrecemos complementos listos para plataformas como Shopify y WooCommerce, así como opciones de API y SDK para aplicaciones móviles o sistemas personalizados de comercio electrónico.",
+  "faq_q2": "P. ¿Qué métodos de pago aceptan?",
+  "faq_a2": "Aceptamos una amplia gama de métodos de pago, incluyendo tarjetas de crédito/débito (Visa, Mastercard, American Express), PayPal, Apple Pay, Google Pay y diversas opciones de pago locales.",
+  "faq_q3": "P. ¿Hay una tarifa de configuración o cargo mensual?",
+  "faq_a3": "No, no hay tarifas de configuración ni cargos mensuales. Solo pagas una pequeña comisión por cada pago exitoso.",
+  "faq_q4": "P. ¿Cuánto tiempo toma el proceso de incorporación?",
+  "faq_a4": "El proceso de incorporación generalmente toma de 1 a 3 días hábiles, dependiendo de la documentación proporcionada. Nuestro objetivo es que comiences lo antes posible.",
+  "faq_q5": "P. ¿Cuánto tiempo tarda en llegar el dinero?",
+  "faq_a5": "Los fondos normalmente se liquidan entre 2 y 3 días hábiles después de la transacción. Los cronogramas de pago se pueden personalizar según las necesidades de tu negocio.",
+  "faq_q6": "P. ¿La plataforma es segura y cumple con las normativas?",
+  "faq_a6": "Absolutamente. Nuestra plataforma cumple con PCI DSS Nivel 1 y utiliza cifrado avanzado y herramientas de detección de fraudes para garantizar el mayor nivel de seguridad en todas las transacciones."
 }
