@@ -13,7 +13,7 @@ export default function FeatureItem({ text, isIncluded }: FeatureItemProps) {
     ) : (
       <img src={icons.crossIcon} alt="Cross Icon" />
     )}
-    <span className="text-foreground/40 text-base font-normal">{text}</span>
+    <span className="text-foreground/40 text-sm font-normal">{text}</span>
   </div>
   )
 }

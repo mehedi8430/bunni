@@ -4,18 +4,18 @@ import PricingPlanCard from "./components/PricingPlanCard";
 export default function SubscriptionPage() {
   return <section className="space-y-6 md:space-y-10">
     <div>
-      <h1 className="text-2xl font-semibold md:text-[32px] mb-3">
+      <h1 className="text-2xl font-semibold md:text-[26px] mb-3">
         Subscriptions Plans
       </h1>
-      <p className="text-xl font-normal text-foreground/40">Manage your subscription plan</p>
+      <p className="text-lg font-normal text-foreground/40">Manage your subscription plan</p>
     </div>
     {/* current plan */}
     <CurrentPlan />
     <div>
-      <h1 className="text-2xl font-semibold md:text-[32px] mb-3">
+      <h1 className="text-2xl font-semibold md:text-[26px] mb-3">
         Choose Your Plan
       </h1>
-      <p className="text-xl font-normal text-foreground/40">Manage your subscription plan</p>
+      <p className="text-lg font-normal text-foreground/40">Manage your subscription plan</p>
     </div>
     {/* Feature List */}
     <div className="flex flex-col md:flex-row items-center w-full max-w-4xl gap-6">
