@@ -231,14 +231,13 @@ export default function DiscountSettings() {
 
   return (
     <div className="bg-sidebar rounded-2xl py-4">
-      <div className="mb-4 flex items-center justify-between px-4">
-        <h2 className="text-2xl font-semibold">Discount Settings</h2>
+      <div className="mb-1 flex items-center justify-between px-4">
+        <h2 className="text-xl font-semibold">Discount Settings</h2>
         {(statusFilter || searchTermDiscount) && (
           <Button
             variant="outline"
-            size="sm"
             onClick={clearAllFilters}
-            className="text-sm"
+            className="text-sm "
           >
             Clear Filters
           </Button>
