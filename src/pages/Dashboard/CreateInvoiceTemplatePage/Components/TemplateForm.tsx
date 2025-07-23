@@ -20,6 +20,7 @@ import { useLocation } from "react-router";
 import { useInvoiceApi } from "@/mock-api-hook/features/customers/useInvoiceApi";
 import { useAppSelector } from "@/redux/hooks";
 import type { TInvoice, TInvoiceData } from "@/types";
+import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
 
 export default function TemplateForm() {
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
@@ -147,56 +148,50 @@ export default function TemplateForm() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="invoiceDate" className="custom-label">
-                Invoice Date
-              </Label>
-              <Input
-                id="invoiceDate"
-                value={invoiceDate}
-                onChange={(e) =>
+              <CustomDatePicker
+                defaultDate={invoiceDate}
+                label="Invoice Date"
+                labelClassName="custom-label -mb-2"
+                onDateChange={(date) =>
                   dispatch(
                     updateField({
                       field: "invoiceDate",
-                      value: e.target.value,
+                      value: date ? date.toDateString() : "",
                     }),
                   )
                 }
-                className="custom-focus"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="serviceDate" className="custom-label">
-                Service Date
-              </Label>
-              <Input
-                id="serviceDate"
-                value={serviceDate}
-                onChange={(e) =>
+              <CustomDatePicker
+                defaultDate={serviceDate}
+                label="Service Date"
+                labelClassName="custom-label -mb-2"
+                onDateChange={(date) =>
                   dispatch(
                     updateField({
                       field: "serviceDate",
-                      value: e.target.value,
+                      value: date ? date.toDateString() : "",
                     }),
                   )
                 }
-                className="custom-focus"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="dueDate" className="custom-label">
-              Due Date
-            </Label>
-            <Input
-              id="dueDate"
-              value={dueDate}
-              onChange={(e) =>
+            <CustomDatePicker
+              defaultDate={dueDate}
+              label="Due Date"
+              labelClassName="custom-label -mb-2"
+              onDateChange={(date) =>
                 dispatch(
-                  updateField({ field: "dueDate", value: e.target.value }),
+                  updateField({
+                    field: "dueDate",
+                    value: date ? date.toDateString() : "",
+                  }),
                 )
               }
-              className="custom-focus"
             />
           </div>
 

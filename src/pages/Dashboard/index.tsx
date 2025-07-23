@@ -101,6 +101,9 @@ export default function DashboardPage() {
               variant={"primary"}
               size={"lg"}
               className="text-base font-normal"
+              onClick={() =>
+                navigate("/dashboard/invoices/templates?type=estimate")
+              }
             >
               <Plus />
               Estimate
@@ -109,6 +112,7 @@ export default function DashboardPage() {
               variant={"primary"}
               size={"lg"}
               className="text-base font-normal"
+              onClick={() => navigate("/dashboard/payment")}
             >
               <Plus />
               Payment
