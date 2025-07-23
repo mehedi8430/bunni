@@ -9,14 +9,14 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { cn } from "@/lib/utils";
-import { invoiceApi } from "@/mockApi/invoiceApi";
 import type { TInvoice } from "@/types";
 import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 import InvoiceTableRowActions from "./InvoiceTableRowActions";
 import PreviewTemplate from "../../CreateInvoiceTemplatePage/Components/PreviewTemplate";
+import { estimatesApi } from "@/mockApi/estimatesApi";
 import StatusFilterHeader from "@/components/DataTable/StatusFilterHeader";
 
-export default function InvoicesTable() {
+export default function EstimatesTable() {
   const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -26,7 +26,6 @@ export default function InvoicesTable() {
   const [data, setData] = useState<TInvoice[]>([]);
   const [allInvoices, setAllInvoices] = useState<TInvoice[]>([]);
   const [total, setTotal] = useState(0);
-
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [invoiceToDelete, setInvoiceToDelete] = useState<string | null>(null);
@@ -36,12 +35,12 @@ export default function InvoicesTable() {
   const [isViewOpen, setIsViewOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  // Fetch invoices when page, limit, or filters change
+  // Fetch estimates when page, limit, or filters change
   useEffect(() => {
-    const fetchInvoices = async () => {
+    const fetchEstimates = async () => {
       setIsLoading(true);
       try {
-        const invoices = await invoiceApi.getInvoices({
+        const invoices = await estimatesApi.getEstimates({
           page,
           limit,
           search: searchTerm || undefined,
@@ -50,7 +49,7 @@ export default function InvoicesTable() {
         setAllInvoices(invoices.data);
         setTotal(invoices.total);
       } catch (error) {
-        console.error("Error fetching invoices:", error);
+        console.error("Error fetching estimates:", error);
         setAllInvoices([]);
         setTotal(0);
       } finally {
@@ -58,11 +57,11 @@ export default function InvoicesTable() {
       }
     };
 
-    fetchInvoices();
+    fetchEstimates();
   }, [page, limit, searchTerm, selectedDate]);
 
   // Client-side filtering using useMemo
-  const filteredInvoices = useMemo(() => {
+  const filteredEstimates = useMemo(() => {
     if (!statusFilter) return allInvoices;
 
     return allInvoices.filter(
@@ -72,8 +71,8 @@ export default function InvoicesTable() {
 
   // Update data when filtered data changes
   useEffect(() => {
-    setData(filteredInvoices);
-  }, [filteredInvoices]);
+    setData(filteredEstimates);
+  }, [filteredEstimates]);
 
   const columns: ColumnDef<TInvoice>[] = [
     {
@@ -103,7 +102,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "id",
-      header: () => <div className="text-start">Invoice</div>,
+      header: () => <div className="text-start">Estimate</div>,
       size: 180,
       cell: ({ row }) => (
         <div className="truncate text-start">{row.getValue("id")}</div>
@@ -127,7 +126,7 @@ export default function InvoicesTable() {
         <StatusFilterHeader
           statusFilter={statusFilter}
           onStatusFilterChange={setStatusFilter}
-          statusOptions={["Paid", "Unpaid", "Save"]}
+          statusOptions={["Approved", "Rejected", "Pending"]}
         />
       ),
       size: 120,
@@ -137,11 +136,11 @@ export default function InvoicesTable() {
             "truncate rounded-[6px] px-[29px] py-1 text-sm font-normal",
             {
               "border border-[#0CAF60]/40 bg-[#0CAF60]/10 text-[#0CAF60]":
-                row.getValue("status") === "Paid",
+                row.getValue("status") === "Approved",
               "border border-[#E03137]/40 bg-[#E03137]/10 text-[#E03137]":
-                row.getValue("status") === "Unpaid",
+                row.getValue("status") === "Rejected",
               "border border-[#0A4269]/40 bg-[#0A4269]/20 text-[#0A4269]":
-                row.getValue("status") === "Save",
+                row.getValue("status") === "Pending",
             },
           )}
         >
@@ -211,7 +210,7 @@ export default function InvoicesTable() {
   };
 
   const tableHeaderColumns = [
-    { id: "id", displayName: "Invoice" },
+    { id: "id", displayName: "Estimate" },
     { id: "customerName", displayName: "Customer Name" },
     { id: "status", displayName: "Status" },
     { id: "orderNumber", displayName: "Order Number", canHide: false },
@@ -254,7 +253,7 @@ export default function InvoicesTable() {
       {statusFilter && (
         <div className="mb-3 px-4">
           <span className="text-muted-foreground text-sm">
-            Showing {filteredInvoices.length} of {allInvoices.length} invoices
+            Showing {filteredEstimates.length} of {allInvoices.length} estimates
             {statusFilter && ` filtered by: ${statusFilter}`}
           </span>
         </div>
@@ -266,7 +265,7 @@ export default function InvoicesTable() {
         isLoading={isLoading}
         page={page}
         limit={limit}
-        total={statusFilter ? filteredInvoices.length : total}
+        total={statusFilter ? filteredEstimates.length : total}
         onPageChange={setPage}
         onLimitChange={setLimit}
         actions={actions}
@@ -290,10 +289,10 @@ export default function InvoicesTable() {
         isOpen={isDeleteOpen}
         onOpenChange={setIsDeleteOpen}
         title="Confirm Delete"
-        description="Are you sure you want to delete this invoice? This action cannot be undone."
+        description="Are you sure you want to delete this estimate? This action cannot be undone."
         onConfirm={async () => {
           if (invoiceToDelete) {
-            console.log("Invoice To Be Deleted:", invoiceToDelete);
+            console.log("Estimate To Be Deleted:", invoiceToDelete);
             setAllInvoices((prev) =>
               prev.filter((inv) => inv.id !== invoiceToDelete),
             );

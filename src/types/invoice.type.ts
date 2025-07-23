@@ -1,7 +1,7 @@
 export type TInvoice = {
   id: string;
   customerName: string;
-  status: "Paid" | "Unpaid" | "Save";
+  status: string;
   orderNumber: string;
   amount: string | number;
   tenderType: "Credit Card" | "Bank Transfer";

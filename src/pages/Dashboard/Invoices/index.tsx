@@ -7,6 +7,7 @@ import TopCard from "./components/TopCard";
 import InvoicesTable from "./components/InvoicesTable";
 import { Plus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import EstimatesTable from "./components/EstimatesTable";
 
 export default function InvoicesPage() {
   const navigate = useNavigate();
@@ -96,7 +97,9 @@ export default function InvoicesPage() {
             <TabsContent value="invoices">
               <InvoicesTable />
             </TabsContent>
-            <TabsContent value="estimates">estimate table here</TabsContent>
+            <TabsContent value="estimates">
+              <EstimatesTable />
+            </TabsContent>
           </Tabs>
         </div>
       </div>
