@@ -15,6 +15,7 @@ import { baseApi } from "./api";
 import authReducer from "./slices/authSlice";
 import dialogReducer from "./slices/dialogSlice";
 import invoiceTemplateReducer from "./slices/invoiceTemplateSlice";
+import languageReducer from "./slices/languageSlice";
 
 const persistConfig = {
   key: "userInfo",
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   dialog: dialogReducer,
   invoiceTemplate: invoiceTemplateReducer,
+  language: languageReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 
