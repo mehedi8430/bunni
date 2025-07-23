@@ -74,7 +74,7 @@
   "dashboard_edit_customer_title": "Edit Customer",
   "dashboard_add_product_title": "Add New Product",
   "dashboard_edit_product_title": "Edit Product",
-    "balance_analytics_title": "Balance Analytics",
+  "balance_analytics_title": "Balance Analytics",
   "balance_analytics_chart_label": "Total Balance",
   "balance_analytics_months": {
     "January": "January",
@@ -103,5 +103,20 @@
     "October": "Oct",
     "November": "Nov",
     "December": "Dec"
+  },
+  "things_to_do_title": "Things To Do",
+  "things_to_do_tasks": {
+    "profile": {
+      "title": "Finish Company Profile",
+      "description": "To do anything first completed your company profile."
+    },
+    "invoice_template": {
+      "title": "Create Invoice Template",
+      "description": "To send invoice you need to create invoice and choose the template."
+    },
+    "products": {
+      "title": "Add Products",
+      "description": "To create invoice you need to add products."
+    }
   }
 }

@@ -103,5 +103,20 @@
     "October": "Oct",
     "November": "Nov",
     "December": "Dic"
+  },
+  "things_to_do_title": "Cosas por Hacer",
+  "things_to_do_tasks": {
+    "profile": {
+      "title": "Completar Perfil de la Empresa",
+      "description": "Para hacer cualquier cosa, primero completa tu perfil de empresa."
+    },
+    "invoice_template": {
+      "title": "Crear Plantilla de Factura",
+      "description": "Para enviar una factura, necesitas crearla y elegir una plantilla."
+    },
+    "products": {
+      "title": "Agregar Productos",
+      "description": "Para crear una factura necesitas agregar productos."
+    }
   }
 }
