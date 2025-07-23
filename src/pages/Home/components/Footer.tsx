@@ -1,32 +1,30 @@
 import { icons } from "@/lib/imageProvider";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 // Define interfaces for better type checking
-interface NavLink {
-    name: string;
-    url: string;
-}
-
 interface SocialMediaLink {
     name: string;
     url: string;
 }
 
 export default function Footer() {
+    const { t } = useTranslation();
 
     // Navigation links data
-    const quickLinks: NavLink[] = [
-        { name: 'Home', url: '/' },
-        { name: 'Features', url: '#features' },
-        { name: 'FAQs', url: '#faq' },
-        { name: 'How Does It Works', url: '#how-it-works' },
+    const quickLinks: { name: string; path: string; key: string }[] = [
+        { name: t("home"), path: '/', key: 'home' },
+        { name: t("features"), path: '#features', key: 'features' },
+        { name: t("faqs"), path: '#faq', key: 'faq' },
+        { name: t("how_does_it_work"), path: '#how-it-works', key: 'how-it-works' },
     ];
+    
 
     // Social media links data
     const socialMediaLinks: SocialMediaLink[] = [
-        { name: 'Facebook', url: '#' },
-        { name: 'Instagram', url: '#' },
-        { name: 'LinkedIn', url: '#' },
+        { name: t("facebook"), url: '#' },
+        { name: t("instagram"), url: '#' },
+        { name: t("linkedin"), url: '#' },
     ];
 
     return (
@@ -47,17 +45,17 @@ export default function Footer() {
                                 </Link>
                             </div>
                             <p className="text-sm lg:text-lg font-normal leading-snug text-white">
-                                We provide secure, smart, and easy-to-use Invoicing and payment solutions that help businesses get paid faster, manage clients effortlessly, and create impactful presentations. Whether you're a freelancer or a growing enterprise, our platform empowers you to streamline operations and scale with confidence.
+                                {t("footer_description")}
                             </p>
                         </div>
                         <div className="flex flex-wrap justify-between space-y-4">
                             {/* Quick Links Section */}
                             <div>
-                                <h3 className="text-lg md:text-xl text-white mb-5">Quick Links</h3>
+                                <h3 className="text-lg md:text-xl text-white mb-5">{t("footer_quick_links")}</h3>
                                 <ul className="space-y-2">
                                     {quickLinks.map((link) => (
-                                        <li key={link.name}>
-                                            <a href={link.url} className="text-sm md:text-base text-description">
+                                        <li key={link.key}>
+                                            <a href={link.path} className="text-sm md:text-base text-description">
                                                 {link.name}
                                             </a>
                                         </li>
@@ -67,7 +65,7 @@ export default function Footer() {
 
                             {/* Social Media & Hot Link Section */}
                             <div>
-                                <h3 className="text-lg md:text-xl text-white mb-5">Social Media</h3>
+                                <h3 className="text-lg md:text-xl text-white mb-5">{t("footer_social_media")}</h3>
                                 <ul className="space-y-2 mb-6">
                                     {socialMediaLinks.map((link) => (
                                         <li key={link.name}>
@@ -80,16 +78,16 @@ export default function Footer() {
                             </div>
                             {/* Hot links */}
                             <div>
-                                <h3 className="text-lg md:text-xl text-white mb-5">Hot Link</h3>
+                                <h3 className="text-lg md:text-xl text-white mb-5">{t("footer_hot_link")}</h3>
                                 <ul className="space-y-2">
                                     <li>
                                         <p className="text-sm md:text-base text-description">
-                                            Phone: +(1)(465) 035-1237
+                                            {t("footer_phone")}
                                         </p>
                                     </li>
                                     <li>
                                         <p className="text-sm md:text-base text-description">
-                                            Email: amnelson0121@gmail.com
+                                            {t("footer_email")}
                                         </p>
                                     </li>
                                 </ul>
@@ -98,21 +96,21 @@ export default function Footer() {
                     </div>
                     {/* Contact Us Form Section */}
                     <div id="contact" className="w-full md:w-2/5">
-                        <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-white mb-6">Contact Us</h3>
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-white mb-6">{t("footer_contact_us")}</h3>
                         <div className="bg-footer-form-background pt-10 pb-7 px-7 rounded-md">
                             <form className="space-y-4">
                                 <input
                                     type="text"
-                                    placeholder="First Name"
+                                    placeholder={t("footer_input_first_name")}
                                     className="w-full pt-3.5 pb-4 pl-4 bg-footer-input-background border border-description rounded-md focus:outline-none focus:ring focus:ring-ring text-white placeholder-description"
                                 />
                                 <input
                                     type="email"
-                                    placeholder="Email Address"
+                                    placeholder={t("footer_input_email")}
                                     className="w-full pt-3.5 pb-4 pl-4 bg-footer-input-background border border-description rounded-md focus:outline-none focus:ring focus:ring-ring text-white placeholder-description"
                                 />
                                 <textarea
-                                    placeholder="Message"
+                                    placeholder={t("footer_input_message")}
                                     rows={3}
                                     className="w-full pt-3.5 pb-4 pl-4 bg-footer-input-background border border-description rounded-md focus:outline-none focus:ring focus:ring-ring text-white placeholder-description resize-y"
                                 ></textarea>
@@ -120,7 +118,7 @@ export default function Footer() {
                                     type="submit"
                                     className="w-full py-3 px-6 bg-white text-gray-900 rounded-md text-lg"
                                 >
-                                    Submit
+                                    {t("footer_submit")}
                                 </button>
                             </form>
                         </div>
@@ -128,8 +126,8 @@ export default function Footer() {
                 </div>
                 {/* Footer Bottom Section */}
                 <div className="mt-12 pt-8 border-t border-footer-form-background text-center md:flex md:justify-between md:items-center text-white">
-                    <p>Copyright &copy; construck all right reserved.</p>
-                    <p className="mt-2 md:mt-0">16037 Road Demra, Dhaka, Bangladesh</p>
+                    <p>{t("footer_copyright")}</p>
+                    <p className="mt-2 md:mt-0">{t("footer_address")}</p>
                 </div>
             </div>
         </footer>
