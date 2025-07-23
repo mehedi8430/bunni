@@ -14,6 +14,9 @@ import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
 import CreateInvoiceTemplatePage from "@/pages/Dashboard/CreateInvoiceTemplatePage";
+import PreviewBeta from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewBeta";
+import PreviewDelta from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewDelta";
+import PreviewGamma from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewGamma";
 import PreviewTemplate from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import CustomerPage from "@/pages/Dashboard/Customer";
 import InvoicesPage from "@/pages/Dashboard/Invoices";
@@ -23,6 +26,7 @@ import PaymentPage from "@/pages/Dashboard/Payment";
 import ProductsPage from "@/pages/Dashboard/Products";
 import HomePage from "@/pages/Home";
 import InvoiceSettingsPage from "@/pages/Settings/InvoiceSettings";
+import LanguageSettings from "@/pages/Settings/LanguageSetting";
 import NotificationPage from "@/pages/Settings/Notification";
 import PaymentIntegrationPage from "@/pages/Settings/PaymentIntegration";
 import ProfileSettingsPage from "@/pages/Settings/ProfileSettings";
@@ -59,8 +63,20 @@ export const Router = createBrowserRouter([
         children: [
           // This is the default route for the template preview
           {
-            path: "invoice/:id",
+            path: "invoice-alpha",
             element: <PreviewTemplate />,
+          },
+          {
+            path: "invoice-beta",
+            element: <PreviewBeta />,
+          },
+          {
+            path: "invoice-gamma",
+            element: <PreviewGamma />,
+          },
+          {
+            path: "invoice-delta",
+            element: <PreviewDelta />,
           },
         ],
       },
@@ -103,6 +119,10 @@ export const Router = createBrowserRouter([
       {
         path: "notifications",
         element: <NotificationPageForMobile />,
+      },
+      {
+        path: "settings/language",
+        element: <LanguageSettings />,
       },
     ],
   },

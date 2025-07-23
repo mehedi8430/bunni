@@ -62,6 +62,11 @@ import budget_report_template from "../assets/images/budget_report_template.svg"
 import invoice_template from "../assets/images/invoice_template.svg";
 
 import templateLogo from "../assets/template/assets/logo.png"; // Assuming you have a template logo
+import language from '../assets/icons/language.svg';
+import invoice_alpha from "../assets/images/invoice-alpha.png";
+import invoice_beta from "../assets/images/invoice-beta.png";
+import invoice_gamma from "../assets/images/invoice-gamma.png";
+import invoice_delta from "../assets/images/invoice-delta.png";
 
 // Type definitions for better type safety
 export interface IconAssets {
@@ -167,6 +172,7 @@ export const icons: IconAssets = {
   starIcon,
   stripeIcon,
   addIcon,
+  language,
 
   // Add more icons here as needed
   // Example: user, settings, dashboard, etc.
@@ -185,6 +191,10 @@ export const images: ImageAssets = {
   budget_report_template: budget_report_template,
   templateLogo: templateLogo, // Template logo for invoice templates
   // Add more images here as needed
+  invoice_alpha: invoice_alpha,
+  invoice_beta: invoice_beta,
+  invoice_gamma: invoice_gamma,
+  invoice_delta: invoice_delta,
 };
 
 // Asset categories for better organization

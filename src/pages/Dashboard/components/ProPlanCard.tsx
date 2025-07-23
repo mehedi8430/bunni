@@ -7,13 +7,13 @@ import { Link } from "react-router";
 export default function ProPlanCard() {
   return (
     <div className="space-y-4">
-      <div className="flex justify-end gap-3 text-primary text-lg font-normal">
-        Pro Plan <ReactSVG src={icons.threeStar} className="size-6" />
+      <div className="flex justify-end gap-3 text-primary text-sm font-normal">
+        Pro Plan <ReactSVG src={icons.threeStar} className="size-4" />
       </div>
 
       <div>
-        <span className="text-5xl font-semibold text-black">$4.99</span>
-        <span className="text-lg font-normal text-foreground/80">/month</span>
+        <span className="text-2xl font-semibold text-black">$4.99</span>
+        <span className="text-sm font-normal text-foreground/80">/month</span>
       </div>
 
       <p className="text-[16px] font-normal text-foreground/70">
@@ -36,7 +36,7 @@ export default function ProPlanCard() {
       <Link to={"/dashboard/settings/subscription"}>
         <Button
           variant={"primary"}
-          className="w-full cursor-pointer mt-1 text-lg font-normal"
+          className="w-full cursor-pointer mt-1 text-base font-normal"
           size={"lg"}
         >
           Upgrade plan

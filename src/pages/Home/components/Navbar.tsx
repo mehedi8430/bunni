@@ -22,7 +22,7 @@ export default function Navbar() {
     const handleSmoothScroll = (targetId: string) => {
         const element = document.getElementById(targetId);
         if (element) {
-            const navbarHeight = 100; // Adjust based on your navbar height
+            const navbarHeight = 100;
             const elementPosition = element.offsetTop - navbarHeight;
             
             window.scrollTo({
@@ -60,12 +60,12 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="py-6 sticky top-0 bg-white z-50 shadow-sm">
+        <nav className="py-4 sticky top-0 bg-white z-50 shadow-sm">
             <div className="container mx-auto flex items-center justify-between max-md:px-5">
                 {/* Logo Section */}
                 <div className="flex items-center h-10">
                     <Link to="/">
-                        <Image src={icons.navLogo} alt="Bunni Logo" className="h-20 w-20 rounded-md" />
+                        <Image src={icons.navLogo} alt="Bunni Logo" className="h-16 w-16 rounded-md" />
                     </Link>
                 </div>
 
@@ -149,7 +149,7 @@ export default function Navbar() {
                             onClick={(e) => handleDesktopNavClick(e, link.path)}
                             // isActive is a function that receives an object with isActive property
                             className={
-                                ` text-xl cursor-pointer ${location.hash === link.path || location.pathname === link.path ? 'text-foreground' : 'text-description'
+                                `cursor-pointer ${location.hash === link.path || location.pathname === link.path ? 'text-foreground' : 'text-description'
                                 }`
                             }
                         >
@@ -161,12 +161,12 @@ export default function Navbar() {
                 {/* Auth Buttons (Desktop) */}
                 <div className="hidden lg:flex items-center space-x-5">
                     <Link to={"/auth"}>
-                        <button className="px-8 py-3.5 border border-primary text-foreground rounded-md text-xl cursor-pointer">
+                        <button className="px-5 py-1.5 border border-primary text-foreground rounded-md text-base cursor-pointer">
                             Log In
                         </button>
                     </Link>
                     <Link to={"/auth/register"}>
-                        <button className="px-8 py-3.5 bg-primary text-white rounded-md text-xl cursor-pointer">
+                        <button className="px-5 py-1.5 bg-primary text-white rounded-md text-base cursor-pointer">
                             Registration
                         </button>
                     </Link>

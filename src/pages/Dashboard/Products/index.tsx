@@ -1,17 +1,29 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { MoreHorizontal, Plus } from "lucide-react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { productApi } from "@/mockApi/productApi";
 import ProductForm from "./components/ProductForm";
-import { ProductTableActions } from "./components/ProductTableActions";
 import type { TProduct } from "@/types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function ProductsPage() {
+  const tableRef = useRef<DataTableHandle<TProduct> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<TProduct[]>([]);
@@ -111,42 +123,40 @@ export default function ProductsPage() {
         <div className="truncate">{row.getValue("description")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const product = row.original;
-        return (
-          <div className="space-x-2">
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                setEditProduct(product);
-                setIsEditOpen(true);
-              }}
-              className="cursor-pointer bg-white"
-            >
-              Edit
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                setProductToDelete(product.id);
-                setIsDeleteOpen(true);
-              }}
-              className="cursor-pointer bg-black text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-black/80 hover:text-white"
-            >
-              Delete
-            </Button>
-          </div>
-        );
-      },
-    },
   ];
+
+  const actions = (row: TProduct) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditProduct(row);
+              setIsEditOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setProductToDelete(row?.id);
+              setIsDeleteOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedProduct: TProduct) => {
     setData((prev) =>
@@ -164,6 +174,14 @@ export default function ProductsPage() {
     setSearchTerm(search);
     setPage(1);
   };
+
+  const tableHeaderColumns = [
+    { id: "name", displayName: "Name", canHide: false },
+    { id: "type", displayName: "Type" },
+    { id: "unit", displayName: "Unit" },
+    { id: "price", displayName: "Price" },
+    { id: "description", displayName: "Desciption" },
+  ];
 
   return (
     <section className="space-y-10">
@@ -184,10 +202,20 @@ export default function ProductsPage() {
       </div>
 
       <div className="bg-sidebar rounded-2xl py-4">
-        <ProductTableActions
-          searchTerm={searchTerm}
-          handleFilterChange={handleFilterChange}
-        />
+        {tableRef.current?.table && (
+          <DataTableFilter
+            searchTerm={searchTerm}
+            handleFilterChange={handleFilterChange}
+            table={tableRef.current.table}
+            columns={tableHeaderColumns}
+            searchPlaceholder="Search by name, email, or company"
+            showDatePicker={false}
+            showExportButton={true}
+            exportButtonText="Export"
+            onExportClick={() => console.log("Export clicked")}
+            columnVisibility={columnVisibility}
+          />
+        )}
 
         <DataTable
           data={data}
@@ -198,6 +226,10 @@ export default function ProductsPage() {
           total={total}
           onPageChange={setPage}
           onLimitChange={setLimit}
+          actions={actions}
+          ref={tableRef}
+          columnVisibility={columnVisibility}
+          setColumnVisibility={setColumnVisibility}
         />
       </div>
 

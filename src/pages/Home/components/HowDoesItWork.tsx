@@ -12,7 +12,7 @@ export default function HowDoesItWork() {
                 {/* First Card Instance */}
                 <HowDoesItWorkCard
                     icon={
-                        <img src={icons.user} alt="User Icon" className="w-10 h-10" />
+                        <img src={icons.user} alt="User Icon" className="w-8 h-8" />
                     }
                     title="Sign up with gmail or email"
                     description="Create your free account in seconds using your Gmail or any email address. No paperwork, no hassle."
@@ -22,7 +22,7 @@ export default function HowDoesItWork() {
                 {/* Second Card Instance */}
                 <HowDoesItWorkCard
                     icon={
-                        <img src={icons.document} alt="Document Icon" className="w-10 h-10" />
+                        <img src={icons.document} alt="Document Icon" className="w-8 h-8" />
                     }
                     title="Operations with Automation"
                     description="Enhance your operational efficiency with our AI-driven automated workflows."
@@ -32,7 +32,7 @@ export default function HowDoesItWork() {
                 {/* Third Card Instance */}
                 <HowDoesItWorkCard
                     icon={
-                        <img src={icons.getPaid} alt="Get Paid Icon" className="w-10 h-10" />
+                        <img src={icons.getPaid} alt="Get Paid Icon" className="w-8 h-8" />
                     }
                     title="Get Paid"
                     description="Enhance your operational efficiency with our AI-driven automated workflows."

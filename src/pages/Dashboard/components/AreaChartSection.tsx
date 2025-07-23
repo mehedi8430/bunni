@@ -1,14 +1,13 @@
-import SelectInput, { type SelectOption } from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { ArrowUpRight } from "lucide-react";
 
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-const monthOptions: SelectOption[] = [
-  { value: "monthly", label: "Monthly" },
-  // { value: "yearly", label: "yearly" },
-];
+// const monthOptions: SelectOption[] = [
+//   { value: "monthly", label: "Monthly" },
+//   // { value: "yearly", label: "yearly" },
+// ];
 
 const chartData = [
   { month: "January", desktop: 96 },
@@ -32,23 +31,23 @@ export default function AreaChartSection() {
   return (
     <div className="space-y-2">
       <h4 className="text-lg font-semibold">Title</h4>
-      <h2 className="text-[32px] font-bold text-black">$8,527,224</h2>
+      <h2 className="text-xl font-bold text-black">$8,527,224</h2>
       <div className="flex items-center gap-4">
         <Button
           disabled
-          className="bg-red-200 text-red-600 text-sm font-semibold gap-[1px]"
+          className="bg-red-200 text-red-600 text-xs font-semibold gap-[1px]"
         >
           <ArrowUpRight /> +3.12%
         </Button>
-        <p className="text-[16px] font-normal">VS This Month</p>
+        <p className="text-sm font-normal">VS This Month</p>
       </div>
 
       <div className="mt-4 space-y-2">
-        <SelectInput
+        {/* <SelectInput
           options={monthOptions}
           placeholder="Select a month"
           triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
-        />
+        /> */}
 
         <ChartContainer config={chartConfig}>
           <AreaChart
