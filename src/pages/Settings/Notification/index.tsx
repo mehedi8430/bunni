@@ -9,10 +9,10 @@ export default function NotificationPage() {
   return (
     <section className="space-y-6 md:space-y-10">
       <div>
-        <h1 className="text-2xl font-semibold md:text-[32px] mb-3">
+        <h1 className="text-2xl font-semibold md:text-[26px] mb-3">
           Notification
         </h1>
-        <p className="text-xl font-normal text-foreground/40">This information will be displayed publicity so be careful what you share</p>
+        <p className="text-lg font-normal text-foreground/40">This information will be displayed publicity so be careful what you share</p>
       </div>
       <div className="bg-white px-6 py-10 rounded-md">
         <div className="flex items-center justify-between border border-foreground/10 rounded-md px-6 py-4.5">
