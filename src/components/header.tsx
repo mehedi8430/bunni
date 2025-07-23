@@ -13,7 +13,7 @@ export default function Header() {
     <header className="bg-sidebar border-border fixed top-0 z-50 w-full border-b">
       <div className="flex items-center max-md:justify-center">
         <div className="flex w-[328px] items-center justify-center">
-          <div className="flex h-[78px] w-[109px] items-center justify-center overflow-hidden">
+          <div className="flex h-[60px] w-[109px] items-center justify-center overflow-hidden">
             <Link to="/dashboard">
               <ReactSVG src={icons.navLogo} />
             </Link>
@@ -33,15 +33,6 @@ export default function Header() {
 
           <div className="flex items-center gap-6">
             <div className="flex items-center">
-              <SelectInput
-                options={[
-                  { value: "en", label: "En" },
-                  { value: "bn", label: "Bn" },
-                ]}
-                placeholder="En"
-                triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:size-5 [&>svg]:stroke-black [&>svg]:opacity-80 [&>svg]:ml-[-8px] data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg text-foreground text-lg"
-              />
-
               {/* Notification */}
               <Popover>
                 <PopoverTrigger asChild>

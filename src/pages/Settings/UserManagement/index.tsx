@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import {  MoreHorizontal,} from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { MoreHorizontal, Plus } from "lucide-react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +15,14 @@ import {
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { userApi } from "@/mockApi/userApi";
 import type { TUser } from "@/types";
-import UserTableActions from "./components/UserTableActions";
 import { DialogModal } from "@/components/DialogModal";
 import UserForm from "./components/UserForm";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function UserManagementPage() {
+  const tableRef = useRef<DataTableHandle<TUser> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<TUser[]>([]);
@@ -95,62 +101,56 @@ export default function UserManagementPage() {
         <div className="truncate">{row.getValue("lastLogin")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Action",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const user = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-0">
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditUser(user);
-                  setIsEditOpen(true);
-                }}
-                className="custom-action-button"
-              >
-                {/* <Edit className="mr-2 h-4 w-4" /> */}
-                 Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  console.log("Resend Invite");
-                }}
-                className="custom-action-button"
-              >
-                {/* <SendToBack className="mr-2 h-4 w-4" /> */}
-                 Resend Invite
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setUserToDelete(user.id);
-                  setIsDeleteOpen(true);
-                }}
-                className="custom-action-button"
-              >
-                {/* <Trash className="mr-2 h-4 w-4" /> */}
-                 Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
-    },
   ];
+
+  const actions = (row: TUser) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditUser(row);
+              setIsEditOpen(true);
+            }}
+            className="custom-action-button"
+          >
+            {/* <Edit className="mr-2 h-4 w-4" /> */}
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              console.log("Resend Invite");
+            }}
+            className="custom-action-button"
+          >
+            {/* <SendToBack className="mr-2 h-4 w-4" /> */}
+            Resend Invite
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setUserToDelete(row?.id);
+              setIsDeleteOpen(true);
+            }}
+            className="custom-action-button"
+          >
+            {/* <Trash className="mr-2 h-4 w-4" /> */}
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedUser: TUser) => {
     // console.log("handleSave called with:", updatedUser);
     // console.log("editUser.id:", editUser.id);
-    
+
     // If editUser.id exists, we're editing an existing user
     if (editUser.id) {
       setData((prev) =>
@@ -168,17 +168,45 @@ export default function UserManagementPage() {
     setPage(1);
   };
 
+  const tableHeaderColumns = [
+    { id: "memberName", displayName: "Member Name", canHide: false },
+    { id: "email", displayName: "Email" },
+    { id: "phone", displayName: "Phone" },
+    { id: "permissions", displayName: "Permissions" },
+    { id: "lastLogin", displayName: "Last Login" },
+  ];
+
   return (
     <section className="space-y-6 md:space-y-10">
       <h1 className="text-2xl font-semibold md:text-[32px]">User Management</h1>
 
       <div className="bg-sidebar rounded-2xl py-4">
-        <UserTableActions
-          searchTerm={searchTerm}
-          handleFilterChange={handleFilterChange}
-          setIsEditOpen={setIsEditOpen}
-          setEditProduct={setEditUser}
-        />
+        <div className="flex items-center justify-between">
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={false}
+              showExportButton={false}
+              columnVisibility={columnVisibility}
+            />
+          )}
+          <Button
+            variant="primary"
+            size="lg"
+            className="text-sm font-normal md:text-lg"
+            onClick={() => {
+              setIsEditOpen(true);
+              setEditUser({});
+            }}
+          >
+            <Plus />
+            Add Member
+          </Button>
+        </div>
 
         <DataTable
           data={data}
@@ -189,7 +217,10 @@ export default function UserManagementPage() {
           total={total}
           onPageChange={setPage}
           onLimitChange={setLimit}
-          actions={true}
+          actions={actions}
+          ref={tableRef}
+          columnVisibility={columnVisibility}
+          setColumnVisibility={setColumnVisibility}
         />
       </div>
 
@@ -198,7 +229,7 @@ export default function UserManagementPage() {
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
         title={editUser.id ? "Edit Member" : "Add New Member"}
-        className="!w-4xl" 
+        className="!w-4xl"
       >
         <UserForm
           user={editUser}

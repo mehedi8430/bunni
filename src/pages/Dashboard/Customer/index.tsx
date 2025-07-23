@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus, } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { MoreHorizontal, Plus } from "lucide-react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -15,11 +18,15 @@ import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { CustomerForm } from "./components/CustomerForm";
 import CustomerDetails from "./components/CustomerDetails";
-import { CustomerTableActions } from "./components/CustomerTableActions";
 import TopPayingCustomerChart from "./components/TopPayingCustomerChart";
 import HighestUnpaidBalanceChart from "./components/HighestUnpaidBalanceChart";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import type { TCustomer } from "@/types/customer.type";
 
 export default function CustomerPage() {
+  const tableRef = useRef<DataTableHandle<TCustomer> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<Customer[]>([]);
@@ -140,56 +147,50 @@ export default function CustomerPage() {
         <div className="truncate">{row.getValue("achToken")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const customer = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-0 border border-border">
-              <DropdownMenuItem
-                onClick={() => {
-                  setSelectedCustomer(customer);
-                  setIsViewOpen(true);
-                }}
-                className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
-              >
-                {/* <Eye className="mr-2 h-4 w-4" /> */}
-                View
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditCustomer(customer);
-                  setIsEditOpen(true);
-                }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setCustomerToDelete(customer.id);
-                  setIsDeleteOpen(true);
-                }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
-              >
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
-    },
   ];
+
+  const actions = (row: Customer) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setSelectedCustomer(row);
+              setIsViewOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
+          >
+            {/* <Eye className="mr-2 h-4 w-4" /> */}
+            View
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setEditCustomer(row);
+              setIsEditOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setCustomerToDelete(row?.id);
+              setIsDeleteOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSave = (updatedCustomer: Customer) => {
     setData((prev) =>
@@ -207,6 +208,17 @@ export default function CustomerPage() {
     setSearchTerm(search);
     setPage(1);
   };
+
+  const tableHeaderColumns = [
+    { id: "name", displayName: "Customer Name", canHide: false },
+    { id: "truncated_tokens", displayName: "Truncated Token" },
+    { id: "email", displayName: "Email" },
+    { id: "phone", displayName: "Phone" },
+    { id: "company", displayName: "Company" },
+    { id: "achToken", displayName: "ACH Token" },
+  ];
+
+  console.log("table ref:", tableRef.current?.table);
 
   return (
     <section className="space-y-10">
@@ -235,10 +247,24 @@ export default function CustomerPage() {
         </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <CustomerTableActions
+          {/* <CustomerTableActions
             searchTerm={searchTerm}
             handleFilterChange={handleFilterChange}
-          />
+          /> */}
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={false}
+              showExportButton={true}
+              exportButtonText="Export"
+              onExportClick={() => console.log("Export clicked")}
+              columnVisibility={columnVisibility}
+            />
+          )}
 
           <DataTable
             data={data}
@@ -249,7 +275,10 @@ export default function CustomerPage() {
             total={total}
             onPageChange={setPage}
             onLimitChange={setLimit}
-            actions={true}
+            actions={actions}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
+            ref={tableRef}
           />
         </div>
       </div>
@@ -260,7 +289,10 @@ export default function CustomerPage() {
         onOpenChange={setIsViewOpen}
         title="View Details"
       >
-        <CustomerDetails onClose={() => setIsViewOpen(false)} customerId={selectedCustomer?.id || ""} />
+        <CustomerDetails
+          onClose={() => setIsViewOpen(false)}
+          customerId={selectedCustomer?.id || ""}
+        />
       </DialogModal>
 
       {/* Edit Modal with CustomerForm */}

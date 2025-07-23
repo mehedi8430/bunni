@@ -15,7 +15,7 @@ import ProductForm from "./Products/components/ProductForm";
 import type { TProduct } from "@/types";
 
 export default function DashboardPage() {
-  const formatted = format(new Date(), 'EEEE, MMMM d, yyyy');
+  const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
   const navigate = useNavigate();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editCustomer, setEditCustomer] = useState<Partial<Customer>>({});
@@ -57,8 +57,8 @@ export default function DashboardPage() {
   return (
     <section className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
-        <p className="text-muted-foreground text-[20px] font-normal">
+        <h1 className="text-[26px] font-semibold">Good afternoon, Alex</h1>
+        <p className="text-muted-foreground text-base font-normal">
           Today is {formatted}
         </p>
 
@@ -66,7 +66,7 @@ export default function DashboardPage() {
           <Button
             variant={"primary"}
             size={"lg"}
-            className="text-lg font-normal"
+            className="text-base font-normal"
             onClick={() => navigate("/dashboard/invoices/templates")}
           >
             <Plus />
@@ -75,7 +75,7 @@ export default function DashboardPage() {
           <Button
             variant={"primary"}
             size={"lg"}
-            className="text-lg font-normal"
+            className="text-base font-normal"
             onClick={() => {
               setEditCustomer({});
               setIsEditOpen(true);
@@ -87,7 +87,7 @@ export default function DashboardPage() {
           <Button
             variant={"primary"}
             size={"lg"}
-            className="text-lg font-normal"
+            className="text-base font-normal"
             onClick={() => {
               setIsProductEditOpen(true);
               setEditProduct({});
@@ -96,6 +96,24 @@ export default function DashboardPage() {
             <Plus />
             New Products
           </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant={"primary"}
+              size={"lg"}
+              className="text-base font-normal"
+            >
+              <Plus />
+              Estimate
+            </Button>
+            <Button
+              variant={"primary"}
+              size={"lg"}
+              className="text-base font-normal"
+            >
+              <Plus />
+              Payment
+            </Button>
+          </div>
         </div>
       </div>
 

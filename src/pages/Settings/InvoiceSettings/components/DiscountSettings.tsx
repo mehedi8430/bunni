@@ -1,21 +1,75 @@
 import { DataTable } from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
 import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { invoiceApi } from "@/mockApi/invoiceApi";
 import type { TDiscount } from "@/types";
 import { DialogModal } from "@/components/DialogModal";
 import DiscountTableActions from "./DiscountTableActions";
 import DiscountForm from "./DiscountForm";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal, Filter } from "lucide-react";
+
+// Custom header component for status filtering
+const StatusFilterHeader = ({
+  statusFilter,
+  onStatusFilterChange,
+}: {
+  statusFilter: string;
+  onStatusFilterChange: (status: string) => void;
+}) => {
+  return (
+    <div className="flex items-center justify-center gap-2">
+      <span>Status</span>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+          className="cursor-pointer hover:bg-transparent focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
+        >
+          <Button variant="ghost" size="sm" className="h-6 px-2">
+            <Filter className="size-3.5" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("")}
+            className={`cursor-pointer ${statusFilter === "" ? "bg-accent" : ""}`}
+          >
+            All Status
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("active")}
+            className={`cursor-pointer ${statusFilter === "active" ? "bg-accent" : ""}`}
+          >
+            Active
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("inactive")}
+            className={`cursor-pointer ${statusFilter === "inactive" ? "bg-accent" : ""}`}
+          >
+            Inactive
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
 
 export default function DiscountSettings() {
   const [pageDiscount, setPageDiscount] = useState(1);
   const [limitDiscount, setLimitDiscount] = useState(10);
   const [dataDiscount, setDataDiscount] = useState<TDiscount[]>([]);
+  const [allDiscounts, setAllDiscounts] = useState<TDiscount[]>([]); // Store all data for filtering
   const [totalDiscount, setTotalDiscount] = useState(0);
   const [isLoadingDiscount, setIsLoadingDiscount] = useState(false);
   const [searchTermDiscount, setSearchTermDiscount] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>(""); // Status filter state
   const [isEditDiscountOpen, setIsEditDiscountOpen] = useState(false);
   const [editDiscount, setEditDiscount] = useState<Partial<TDiscount>>({});
   const [isDeleteDiscountOpen, setIsDeleteDiscountOpen] = useState(false);
@@ -25,16 +79,17 @@ export default function DiscountSettings() {
     const fetchDiscounts = async () => {
       setIsLoadingDiscount(true);
       try {
+        // Fetch all data without status filtering from API
         const discounts = await invoiceApi.getDiscounts({
           page: pageDiscount,
           limit: limitDiscount,
           search: searchTermDiscount || undefined,
         });
-        setDataDiscount(discounts.data);
+        setAllDiscounts(discounts.data);
         setTotalDiscount(discounts.total);
       } catch (error) {
         console.error("Error fetching discounts:", error);
-        setDataDiscount([]);
+        setAllDiscounts([]);
         setTotalDiscount(0);
       } finally {
         setIsLoadingDiscount(false);
@@ -42,6 +97,21 @@ export default function DiscountSettings() {
     };
     fetchDiscounts();
   }, [pageDiscount, limitDiscount, searchTermDiscount]);
+
+  // Client-side filtering using useMemo
+  const filteredDiscounts = useMemo(() => {
+    if (!statusFilter) return allDiscounts;
+
+    return allDiscounts.filter(
+      (discount) =>
+        discount.status?.toLowerCase() === statusFilter.toLowerCase(),
+    );
+  }, [allDiscounts, statusFilter]);
+
+  // Update dataDiscount when filtered data changes
+  useEffect(() => {
+    setDataDiscount(filteredDiscounts);
+  }, [filteredDiscounts]);
 
   const discountColumns: ColumnDef<TDiscount>[] = [
     {
@@ -68,57 +138,75 @@ export default function DiscountSettings() {
     },
     {
       accessorKey: "status",
-      header: "Status",
-      size: 100,
-      cell: ({ row }) => (
-        <div className="truncate">{row.getValue("status")}</div>
+      header: () => (
+        <StatusFilterHeader
+          statusFilter={statusFilter}
+          onStatusFilterChange={handleStatusFilterChange}
+        />
       ),
-    },
-    {
-      id: "actions",
-      header: "Action",
       size: 100,
-      enableHiding: false,
       cell: ({ row }) => {
-        const discount = row.original;
+        const status = row.getValue("status") as string;
         return (
-           <div className="space-x-2">
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                  setEditDiscount(discount);
-                  setIsEditDiscountOpen(true);
-                }}
-              className="cursor-pointer bg-white"
+          <div className="truncate">
+            <span
+              className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
+                status?.toLowerCase() === "active"
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}
             >
-              Edit
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                  setDiscountToDelete(discount.id);
-                  setIsDeleteDiscountOpen(true);
-                }}
-              className="cursor-pointer bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white border-none"
-            >
-              Delete
-            </Button>
+              {status}
+            </span>
           </div>
         );
       },
     },
   ];
 
+  const actions = (row: TDiscount) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditDiscount(row);
+              setIsEditDiscountOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setDiscountToDelete(row?.id);
+              setIsDeleteDiscountOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
+
   const handleSaveDiscount = (updatedDiscount: TDiscount) => {
-    setDataDiscount((prev) =>
+    // Update both allDiscounts and dataDiscount
+    setAllDiscounts((prev) =>
       prev.map((disc) =>
         disc.id === updatedDiscount.id ? updatedDiscount : disc,
       ),
     );
+
     if (!updatedDiscount.id) {
-      setDataDiscount((prev) => [...prev, updatedDiscount]);
+      setAllDiscounts((prev) => [...prev, updatedDiscount]);
       setTotalDiscount((prev) => prev + 1);
     }
   };
@@ -128,26 +216,64 @@ export default function DiscountSettings() {
     setPageDiscount(1);
   };
 
+  // Status filter handler
+  const handleStatusFilterChange = (status: string) => {
+    setStatusFilter(status);
+    setPageDiscount(1); // Reset pagination when filter changes
+  };
+
+  // Clear all filters function (optional)
+  const clearAllFilters = () => {
+    setStatusFilter("");
+    setSearchTermDiscount("");
+    setPageDiscount(1);
+  };
+
   return (
     <div className="bg-sidebar rounded-2xl py-4">
-      <h2 className="mb-4 px-4 text-2xl font-semibold">Discount Settings</h2>
+      <div className="mb-4 flex items-center justify-between px-4">
+        <h2 className="text-2xl font-semibold">Discount Settings</h2>
+        {(statusFilter || searchTermDiscount) && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={clearAllFilters}
+            className="text-sm"
+          >
+            Clear Filters
+          </Button>
+        )}
+      </div>
+
       <DiscountTableActions
         searchTerm={searchTermDiscount}
         handleFilterChange={handleFilterChangeDiscount}
         setIsEditOpen={setIsEditDiscountOpen}
         setEditDiscount={setEditDiscount}
       />
+
+      {statusFilter && (
+        <div className="mb-3 px-4">
+          <span className="text-muted-foreground text-sm">
+            Showing {filteredDiscounts.length} of {allDiscounts.length}{" "}
+            discounts
+            {statusFilter && ` filtered by: ${statusFilter}`}
+          </span>
+        </div>
+      )}
+
       <DataTable
         data={dataDiscount}
         columns={discountColumns}
         isLoading={isLoadingDiscount}
         page={pageDiscount}
         limit={limitDiscount}
-        total={totalDiscount}
+        total={statusFilter ? filteredDiscounts.length : totalDiscount}
         onPageChange={setPageDiscount}
         onLimitChange={setLimitDiscount}
-        actions={true}
+        actions={actions}
       />
+
       <DialogModal
         isOpen={isEditDiscountOpen}
         onOpenChange={setIsEditDiscountOpen}
@@ -159,6 +285,7 @@ export default function DiscountSettings() {
           onClose={() => setIsEditDiscountOpen(false)}
         />
       </DialogModal>
+
       <AlertDialogModal
         isOpen={isDeleteDiscountOpen}
         onOpenChange={setIsDeleteDiscountOpen}
@@ -167,6 +294,10 @@ export default function DiscountSettings() {
         onConfirm={async () => {
           if (discountToDelete) {
             console.log("Discount To Be Deleted:", discountToDelete);
+            // Update both data sources
+            setAllDiscounts((prev) =>
+              prev.filter((disc) => disc.id !== discountToDelete),
+            );
             setDataDiscount((prev) =>
               prev.filter((disc) => disc.id !== discountToDelete),
             );

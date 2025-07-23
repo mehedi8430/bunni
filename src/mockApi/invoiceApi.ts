@@ -439,10 +439,12 @@ export const invoiceApi = {
     search,
     page = 1,
     limit = 10,
+    date,
   }: {
     search?: string;
     page?: number;
     limit?: number;
+    date?: string;
   } = {}): Promise<{ data: TInvoice[]; total: number }> => {
     let filteredInvoices: TInvoice[] = [...mockInvoices];
 
@@ -457,6 +459,19 @@ export const invoiceApi = {
           inv.tenderType.toLowerCase().includes(searchTerm) ||
           inv.orderNumber.toLowerCase().includes(searchTerm),
       );
+    }
+
+    // Apply date filter
+    if (date) {
+      const selectedDate = new Date(date);
+      filteredInvoices = filteredInvoices.filter((inv) => {
+        const invoiceDate = new Date(inv.date);
+        return (
+          invoiceDate.getFullYear() === selectedDate.getFullYear() &&
+          invoiceDate.getMonth() === selectedDate.getMonth() &&
+          invoiceDate.getDate() === selectedDate.getDate()
+        ); // Match by year, month, and day
+      });
     }
 
     // Calculate pagination

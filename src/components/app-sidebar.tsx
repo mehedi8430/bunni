@@ -66,6 +66,11 @@ const data = {
           url: "/dashboard/settings/payment",
           icon: icons.payment_integration,
         },
+        {
+          title: "Language",
+          url: "/dashboard/settings/language",
+          icon: icons.language,
+        },
       ],
     },
   ],

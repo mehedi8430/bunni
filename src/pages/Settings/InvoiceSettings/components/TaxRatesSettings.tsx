@@ -8,6 +8,13 @@ import type { TTaxRate } from "@/types";
 import TaxRateTableActions from "./TaxRateTableActions";
 import { DialogModal } from "@/components/DialogModal";
 import TaxRateForm from "./TaxRateForm";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
 
 export default function TaxRatesSettings() {
   const [pageTaxRate, setPageTaxRate] = useState(1);
@@ -74,42 +81,40 @@ export default function TaxRatesSettings() {
         <div className="truncate">{row.getValue("lastLogin")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Action",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const taxRate = row.original;
-        return (
-          <div className="space-x-2">
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                  setEditTaxRate(taxRate);
-                  setIsEditTaxRateOpen(true);
-                }}
-              className="cursor-pointer bg-white"
-            >
-              Edit
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              onClick={() => {
-                  setTaxRateToDelete(taxRate.id);
-                  setIsDeleteTaxRateOpen(true);
-                }}
-              className="cursor-pointer bg-red-400 text-white shadow-xs transition-colors duration-200 ease-in-out hover:bg-red-400/80 hover:text-white border-none"
-            >
-              Delete
-            </Button>
-          </div>
-        );
-      },
-    },
   ];
+
+  const actions = (row: TTaxRate) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setEditTaxRate(row);
+              setIsEditTaxRateOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setTaxRateToDelete(row?.id);
+              setIsDeleteTaxRateOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
   const handleSaveTaxRate = (updatedTaxRate: TTaxRate) => {
     setDataTaxRate((prev) =>
@@ -144,13 +149,17 @@ export default function TaxRatesSettings() {
         total={totalTaxRate}
         onPageChange={setPageTaxRate}
         onLimitChange={setLimitTaxRate}
-        actions={true}
+        actions={actions}
       />
       {/* Dialog for editing tax rate */}
       <DialogModal
         isOpen={isEditTaxRateOpen}
         onOpenChange={setIsEditTaxRateOpen}
-        title={editTaxRate.id ? "Edit Tax Rates Settings" : "Create Tax Rates Settings"}
+        title={
+          editTaxRate.id
+            ? "Edit Tax Rates Settings"
+            : "Create Tax Rates Settings"
+        }
       >
         <TaxRateForm
           taxRate={editTaxRate}
@@ -158,7 +167,7 @@ export default function TaxRatesSettings() {
           onClose={() => setIsEditTaxRateOpen(false)}
         />
       </DialogModal>
-      
+
       {/* Delete Alert Dialog */}
       <AlertDialogModal
         isOpen={isDeleteTaxRateOpen}

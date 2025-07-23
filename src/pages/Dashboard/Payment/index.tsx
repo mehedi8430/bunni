@@ -1,8 +1,11 @@
-import { DataTable } from "@/components/DataTable/dataTable";
+import {
+  DataTable,
+  type DataTableHandle,
+} from "@/components/DataTable/dataTable";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus, } from "lucide-react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { MoreHorizontal, Plus, Filter } from "lucide-react";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -12,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DialogModal } from "@/components/DialogModal";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { PaymentTableActions } from "./components/PaymentTableActions";
 import { ReactSVG } from "react-svg";
 import assets from "@/lib/imageProvider";
 import { paymentApi, type Payment } from "@/mockApi/paymentApi";
@@ -22,14 +24,71 @@ import { cn } from "@/lib/utils";
 import { AddPaymentForm } from "./components/AddPaymentForm";
 import RecurringBillingForm from "./components/RecurringBillingForm";
 import VirtualTerminalForm from "./components/VirtualTerminalForm";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+
+// Custom header component for status filtering
+const StatusFilterHeader = ({
+  statusFilter,
+  onStatusFilterChange,
+}: {
+  statusFilter: string;
+  onStatusFilterChange: (status: string) => void;
+}) => {
+  return (
+    <div className="flex items-center justify-center gap-2">
+      <span>Status</span>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+          className="cursor-pointer hover:bg-transparent focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0"
+        >
+          <Button variant="ghost" size="sm" className="h-6 px-2">
+            <Filter className="size-3.5" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("")}
+            className={`cursor-pointer ${statusFilter === "" ? "bg-accent" : ""}`}
+          >
+            All Status
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Paid")}
+            className={`cursor-pointer ${statusFilter === "Paid" ? "bg-accent" : ""}`}
+          >
+            Paid
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Unpaid")}
+            className={`cursor-pointer ${statusFilter === "Unpaid" ? "bg-accent" : ""}`}
+          >
+            Unpaid
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onStatusFilterChange("Save")}
+            className={`cursor-pointer ${statusFilter === "Save" ? "bg-accent" : ""}`}
+          >
+            Save
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
 
 export default function PaymentPage() {
+  const tableRef = useRef<DataTableHandle<Payment> | null>(null);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [data, setData] = useState<Payment[]>([]);
+  const [allPayments, setAllPayments] = useState<Payment[]>([]); // Store all data for filtering
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>(""); // Status filter state
 
   // Modal states
   const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
@@ -39,9 +98,10 @@ export default function PaymentPage() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [paymentToDelete, setPaymentToDelete] = useState<string | null>(null);
   const [isAddPaymentOpen, setIsAddPaymentOpen] = useState<boolean>(false);
-  const [isRecurringBillingOpen, setIsRecurringBillingOpen] = useState<boolean>(false);
-  const [isVirtualTerminalOpen, setIsVirtualTerminalOpen] = useState<boolean>(false);
-
+  const [isRecurringBillingOpen, setIsRecurringBillingOpen] =
+    useState<boolean>(false);
+  const [isVirtualTerminalOpen, setIsVirtualTerminalOpen] =
+    useState<boolean>(false);
 
   // Fetch payments when page, limit, or filters change
   useEffect(() => {
@@ -52,14 +112,15 @@ export default function PaymentPage() {
           page,
           limit,
           search: searchTerm || undefined,
+          date: selectedDate || undefined,
         });
         console.log({ payments });
 
-        setData(payments.data);
+        setAllPayments(payments.data);
         setTotal(payments.total);
       } catch (error) {
         console.error("Error fetching payments:", error);
-        setData([]);
+        setAllPayments([]);
         setTotal(0);
       } finally {
         setIsLoading(false);
@@ -67,8 +128,21 @@ export default function PaymentPage() {
     };
 
     fetchPayments();
-  }, [page, limit, searchTerm]);
+  }, [page, limit, searchTerm, selectedDate]);
 
+  // Client-side filtering using useMemo
+  const filteredPayments = useMemo(() => {
+    if (!statusFilter) return allPayments;
+
+    return allPayments.filter(
+      (payment) => payment.status?.toLowerCase() === statusFilter.toLowerCase(),
+    );
+  }, [allPayments, statusFilter]);
+
+  // Update data when filtered data changes
+  useEffect(() => {
+    setData(filteredPayments);
+  }, [filteredPayments]);
 
   const columns: ColumnDef<Payment>[] = [
     {
@@ -130,7 +204,12 @@ export default function PaymentPage() {
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: () => (
+        <StatusFilterHeader
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
+        />
+      ),
       size: 120,
       cell: ({ row }) => (
         <div
@@ -158,64 +237,58 @@ export default function PaymentPage() {
         <div className="truncate">{row.getValue("paymentMethod")}</div>
       ),
     },
-    {
-      id: "actions",
-      header: "Actions",
-      size: 100,
-      enableHiding: false,
-      cell: ({ row }) => {
-        const payment = row.original;
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-0 border border-border">
-              <DropdownMenuItem
-                onClick={() => {
-                  setSelectedPayment(payment);
-                  setIsViewOpen(true);
-                }}
-                className="cursor-pointer text-base border-b border-border rounded-none py-3 flex justify-center items-center"
-              >
-                View
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setEditPayment(payment);
-                  setIsEditOpen(true);
-                }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setPaymentToDelete(payment.invoice);
-                  setIsDeleteOpen(true);
-                }}
-                className="border-b border-border rounded-none bg-gradient-to-b from-[#f3f8f7] to-transparent hover:bg-transparent cursor-pointer text-base py-3 flex justify-center items-center"
-              >
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
-    },
   ];
 
+  const actions = (row: Payment) => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-border border p-0">
+          <DropdownMenuItem
+            onClick={() => {
+              setSelectedPayment(row);
+              setIsViewOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
+          >
+            View
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setEditPayment(row);
+              setIsEditOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setPaymentToDelete(row?.invoice);
+              setIsDeleteOpen(true);
+            }}
+            className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
+
   const handleSave = (updatedPayment: Payment) => {
-    setData((prev) =>
+    setAllPayments((prev) =>
       prev.map((pay) =>
         pay.invoice === updatedPayment.invoice ? updatedPayment : pay,
       ),
     );
     if (!updatedPayment.invoice) {
-      setData((prev) => [...prev, updatedPayment]);
+      setAllPayments((prev) => [...prev, updatedPayment]);
       setTotal((prev) => prev + 1);
     }
   };
@@ -225,20 +298,51 @@ export default function PaymentPage() {
     setPage(1);
   };
 
+  const clearAllFilters = () => {
+    setStatusFilter("");
+    setSearchTerm("");
+    setSelectedDate(null);
+    setPage(1);
+  };
+
+  const tableHeaderColumns = [
+    { id: "invoice", displayName: "Invoice", canHide: false },
+    { id: "customerName", displayName: "Customer Name" },
+    { id: "date", displayName: "Date" },
+    { id: "amount", displayName: "Amount" },
+    { id: "status", displayName: "Status" },
+    { id: "paymentMethod", displayName: "Payment Method" },
+  ];
+
   return (
     <section className="space-y-10">
-      <div className="flex flex-col lg:flex-row items-center justify-between space-y-5">
+      <div className="flex flex-col items-center justify-between space-y-5 lg:flex-row">
         <h1 className="text-2xl font-semibold md:text-[32px]">Payment</h1>
         <div className="flex flex-wrap items-center justify-center gap-6">
-          <Button onClick={() => setIsRecurringBillingOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
+          <Button
+            onClick={() => setIsRecurringBillingOpen(true)}
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal"
+          >
             <Plus />
-            Recurring Billing
+            Schedule Payment
           </Button>
-          <Button onClick={() => setIsVirtualTerminalOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
+          <Button
+            onClick={() => setIsVirtualTerminalOpen(true)}
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal"
+          >
             <Plus />
             Virtual Terminal
           </Button>
-          <Button onClick={() => setIsAddPaymentOpen(true)} variant="primary" size="lg" className="text-lg font-normal">
+          <Button
+            onClick={() => setIsAddPaymentOpen(true)}
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal"
+          >
             <Plus />
             pay by link
           </Button>
@@ -271,20 +375,58 @@ export default function PaymentPage() {
         </div>
 
         <div className="bg-sidebar col-span-2 rounded-2xl py-4">
-          <PaymentTableActions
-            searchTerm={searchTerm}
-            handleFilterChange={handleFilterChange}
-          />
+          {(statusFilter || searchTerm || selectedDate) && (
+            <div className="mb-4 px-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearAllFilters}
+                className="text-sm"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+
+          {tableRef.current?.table && (
+            <DataTableFilter
+              searchTerm={searchTerm}
+              handleFilterChange={handleFilterChange}
+              setSelectedDate={setSelectedDate}
+              table={tableRef.current.table}
+              columns={tableHeaderColumns}
+              searchPlaceholder="Search by name, email, or company"
+              showDatePicker={true}
+              showExportButton={true}
+              exportButtonText="Export"
+              onExportClick={() => console.log("Export clicked")}
+              columnVisibility={columnVisibility}
+            />
+          )}
+
+          {statusFilter && (
+            <div className="mb-3 px-4">
+              <span className="text-muted-foreground text-sm">
+                Showing {filteredPayments.length} of {allPayments.length}{" "}
+                payments
+                {statusFilter && ` filtered by: ${statusFilter}`}
+              </span>
+            </div>
+          )}
+
           <DataTable
             data={data}
             columns={columns}
             isLoading={isLoading}
             page={page}
             limit={limit}
-            total={total}
+            total={statusFilter ? filteredPayments.length : total}
             onPageChange={setPage}
             onLimitChange={setLimit}
-            actions={true}
+            actions={actions}
+            ref={tableRef}
+            columnVisibility={columnVisibility}
+            setColumnVisibility={setColumnVisibility}
           />
         </div>
       </div>
@@ -301,7 +443,7 @@ export default function PaymentPage() {
           onSend={(data) => console.log("Virtual Terminal Data:", data)}
         />
       </DialogModal>
-      
+
       {/* Add Recurring Billing Form modal */}
       <DialogModal
         title="Set Up Recurring Billing"
@@ -363,7 +505,9 @@ export default function PaymentPage() {
         onConfirm={async () => {
           if (paymentToDelete) {
             console.log("Payment To Be Deleted:", paymentToDelete);
-            // Prepare for future API call if implemented
+            setAllPayments((prev) =>
+              prev.filter((pay) => pay.invoice !== paymentToDelete),
+            );
             setData((prev) =>
               prev.filter((pay) => pay.invoice !== paymentToDelete),
             );

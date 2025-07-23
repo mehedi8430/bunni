@@ -46,6 +46,7 @@ export type TInvoiceTemplate = {
   color: "blue" | "orange" | "green" | "purple";
   preview: string;
   image: string;
+  link: string;
 };
 
 export type TInvoiceData = {

@@ -8,6 +8,8 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   type Table as TableType,
+  type VisibilityState,
+  type Updater,
 } from "@tanstack/react-table";
 
 import {
@@ -42,8 +44,10 @@ export interface DataTableProps<TData, TValue> {
   total: number;
   onPageChange: (page: number) => void;
   onLimitChange: (limit: number) => void;
-  actions?: boolean;
   isPagination?: boolean;
+  actions?: (row: TData) => React.ReactNode;
+  columnVisibility?: VisibilityState;
+  setColumnVisibility?: (updater: Updater<VisibilityState>) => void;
 }
 
 function DataTableInner<TData, TValue>(
@@ -54,10 +58,12 @@ function DataTableInner<TData, TValue>(
     page,
     limit,
     total,
-    onPageChange,
     actions,
+    onPageChange,
     isPagination = true,
     onLimitChange,
+    columnVisibility,
+    setColumnVisibility,
   }: DataTableProps<TData, TValue>,
   ref: ForwardedRef<DataTableHandle<TData>>,
 ) {
@@ -68,12 +74,14 @@ function DataTableInner<TData, TValue>(
     columns,
     state: {
       sorting,
+      columnVisibility,
       pagination: {
         pageIndex: page - 1,
         pageSize: limit,
       },
     },
     onSortingChange: setSorting,
+    onColumnVisibilityChange: (updater) => setColumnVisibility?.(updater),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -132,6 +140,11 @@ function DataTableInner<TData, TValue>(
                   </div>
                 </TableHead>
               ))}
+              {actions && (
+                <TableHead className="sticky right-0 z-50 w-[60px] bg-gray-400 px-2 py-2 text-center font-semibold text-black sm:px-8">
+                  <div className="truncate">Actions</div>
+                </TableHead>
+              )}
             </TableRow>
           ))}
         </TableHeader>
@@ -159,6 +172,14 @@ function DataTableInner<TData, TValue>(
                     </div>
                   </TableCell>
                 ))}
+
+                {actions && (
+                  <TableCell className="text-foreground sticky right-0 z-50 w-[60px] bg-gray-300 px-2 py-2 text-xs sm:px-8 sm:py-3 sm:text-sm">
+                    <div className="flex justify-center">
+                      {actions(row.original)}
+                    </div>
+                  </TableCell>
+                )}
               </TableRow>
             ))
           ) : (
