@@ -10,5 +10,12 @@
   "sign-up": "Sign Up",
   "banner_title": "Invoicing Meets Simplicity — With Smart Payments & Presentations",
   "banner_description": "Send invoices, accept payments, manage customers, and create stunning business presentations — all in one powerful platform.",
-  "get_started": "Get Started"
+  "get_started": "Get Started",
+  "how_does_it_work_subtitle": "From sign-up to getting paid—every step is built for speed, clarity, and control",
+  "signup_step_title": "Sign up with gmail or email",
+  "signup_step_description": "Create your free account is seconds using your Gmail or any email address. No paperwork, no hassle.",
+  "operations_step_title": "Operations with Automation",
+  "operations_step_description": "Enhance your operational efficiency with our AI-driven automated workflows.",
+  "get_paid_step_title": "Get Paid",
+  "get_paid_step_description":"Enhance your operational efficiency with our AI-driven automated workflows."
 }

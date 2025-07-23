@@ -10,5 +10,12 @@
   "sign-up": "Registrarse",
   "banner_title": "La facturación se une a la simplicidad — con pagos y presentaciones inteligentes",
   "banner_description": "Envía facturas, acepta pagos, gestiona clientes y crea impresionantes presentaciones empresariales — todo en una sola plataforma potente.",
-  "get_started": "Comenzar"
+  "get_started": "Comenzar",
+  "how_does_it_work_subtitle": "Desde el registro hasta recibir pagos, cada paso está diseñado para velocidad, claridad y control",
+  "signup_step_title": "Regístrate con Gmail o correo electrónico",
+  "signup_step_description": "Crea tu cuenta gratuita en segundos usando tu Gmail o cualquier dirección de correo electrónico. Sin papeleo, sin complicaciones.",
+  "operations_step_title": "Operaciones con Automatización",
+  "operations_step_description": "Mejora tu eficiencia operativa con nuestros flujos de trabajo automatizados impulsados por IA.",
+  "get_paid_step_title": "Recibe Pagos",
+  "get_paid_step_description": "Mejora tu eficiencia operativa con nuestros flujos de trabajo automatizados impulsados por IA."
 }
