@@ -193,6 +193,7 @@ export default function EstimatesTable() {
         setIsViewOpen={setIsViewOpen}
         setInvoiceToDelete={setInvoiceToDelete}
         setIsDeleteOpen={setIsDeleteOpen}
+        type="estimate"
       />
     );
   };
