@@ -23,7 +23,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
                 name="firstName"
                 render={({ field }) => (
                   <FormItem className="w-full md:w-1/2">
-                    <FormLabel className="text-lg font-normal">First Name</FormLabel>
+                    <FormLabel className="text-base font-normal">First Name</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter first name"
@@ -41,7 +41,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
                 name="lastName"
                 render={({ field }) => (
                   <FormItem className="w-full md:w-1/2">
-                    <FormLabel className="text-lg font-normal">Last Name</FormLabel>
+                    <FormLabel className="text-base font-normal">Last Name</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter last name"
@@ -62,7 +62,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="w-full md:w-1/2">
-                    <FormLabel className="text-lg font-normal">Email</FormLabel>
+                    <FormLabel className="text-base font-normal">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter email"
@@ -80,7 +80,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
                 name="phone"
                 render={({ field }) => (
                   <FormItem className="w-full md:w-1/2">
-                    <FormLabel className="text-lg font-normal">Phone Number</FormLabel>
+                    <FormLabel className="text-base font-normal">Phone Number</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter phone number"
@@ -101,7 +101,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
                 name="location"
                 render={({ field }) => (
                   <FormItem className="w-full md:w-1/2">
-                    <FormLabel className="text-lg font-normal">Location</FormLabel>
+                    <FormLabel className="text-base font-normal">Location</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter location"
@@ -119,7 +119,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
                 name="commission"
                 render={({ field }) => (
                   <FormItem className="w-full md:w-1/2">
-                    <FormLabel className="text-lg font-normal">Commission</FormLabel>
+                    <FormLabel className="text-base font-normal">Commission</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -141,7 +141,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
               name="permissions"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel className="text-lg font-normal">Permissions</FormLabel>
+                  <FormLabel className="text-base font-normal">Permissions</FormLabel>
                   <FormControl>
                     <SelectInput
                       options={[
@@ -163,7 +163,7 @@ export default function UserForm({ user, onClose, onSave }: UserFormProps) {
           <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
           {/* Buttons */}
           <div className="flex items-center justify-center md:justify-end gap-3 mb-5">
-            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Send Invite</Button>
+            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Send Invite</Button>
           </div>
         </form>
       </Form >
