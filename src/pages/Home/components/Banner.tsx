@@ -1,4 +1,5 @@
 import Image from "@/components/shared/Image";
+import Translator from "@/components/shared/Translator";
 import { icons, images } from "@/lib/imageProvider";
 
 export default function Banner() {
@@ -14,14 +15,13 @@ export default function Banner() {
       <div className="container mx-auto mt-10 md:mt-20">
         <div className="text-center max-sm:px-5">
           <h1 className="text-2xl font-bold md:text-2xl lg:text-4xl xl:text-5xl">
-            Invoicing Meets Simplicity — With Smart Payments & Presentations
+            <Translator text="banner_title" />
           </h1>
           <p className="text-foreground/50 mt-4.5 md:px-20 md:text-lg lg:text-xl xl:text-xl">
-            Send invoices, accept payments, manage customers, and create
-            stunning business <br /> presentations — all in one powerful platform.
+            <Translator text="banner_description" />
           </p>
           <button className="bg-primary mx-auto mt-8 flex cursor-pointer items-center justify-center gap-2 rounded-md px-8 py-2 text-white md:px-8 md:py-2 md:text-lg lg:px-10 lg:py-3 xl:px-16 xl:py-4">
-            Get Started
+            <Translator text="get_started" />
             <Image
               src={icons.rightArrow}
               alt="Right Arrow"
