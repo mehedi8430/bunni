@@ -19,6 +19,7 @@ type InvoiceTableRowActionsProps = {
   setIsViewOpen: (isOpen: boolean) => void;
   setInvoiceToDelete: (invoiceId: string) => void;
   setIsDeleteOpen: (isOpen: boolean) => void;
+  type?: string;
 };
 
 export default function InvoiceTableRowActions({
@@ -27,12 +28,10 @@ export default function InvoiceTableRowActions({
   setIsViewOpen,
   setInvoiceToDelete,
   setIsDeleteOpen,
+  type,
 }: InvoiceTableRowActionsProps) {
   const navigate = useNavigate();
-
   const invoiceData = useAppSelector(templateSelector);
-
-  console.log(invoiceData, invoice);
 
   // Transform the data to match InvoiceTemplate requirements
   const transformedInvoiceData = {
@@ -62,6 +61,19 @@ export default function InvoiceTableRowActions({
     totalTax: invoiceData?.totalTax || 0,
     total: invoiceData?.total || Number(invoice.amount),
   };
+
+  const templateNameMapping = {
+    "1": "invoice-alpha",
+    "2": "invoice-beta",
+    "3": "invoice-gamma",
+    "4": "invoice-delta",
+  };
+
+  type TemplateId = keyof typeof templateNameMapping;
+
+  const getTemplateNameById =
+    invoice?.templateId &&
+    templateNameMapping[invoice.templateId as TemplateId];
 
   return (
     <DropdownMenu>
@@ -135,9 +147,18 @@ export default function InvoiceTableRowActions({
 
         <DropdownMenuItem
           onClick={() => {
-            navigate(`/dashboard/template/invoice/${invoice.templateId}`, {
-              state: invoice.id,
-            });
+            if (type) {
+              navigate(
+                `/dashboard/template/${getTemplateNameById}?type=${type}`,
+                {
+                  state: invoice.id,
+                },
+              );
+            } else {
+              navigate(`/dashboard/template/${getTemplateNameById}`, {
+                state: invoice.id,
+              });
+            }
           }}
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
