@@ -292,15 +292,28 @@ export default function InvoicesPage() {
             Today is {formatted}
           </p>
         </div>
-        <Button
-          variant="primary"
-          size="lg"
-          className="text-lg font-normal max-sm:mx-auto"
-          onClick={() => navigate("/dashboard/invoices/templates")}
-        >
-          <Plus />
-          Create Invoices
-        </Button>
+        <div className="space-y-4 space-x-4">
+          <Button
+            variant="primary"
+            size="lg"
+            className="text-lg font-normal max-sm:mx-auto"
+            onClick={() => navigate("/dashboard/invoices/templates")}
+          >
+            <Plus />
+            Create Invoices
+          </Button>
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-base font-normal"
+            onClick={() =>
+              navigate("/dashboard/invoices/templates?type=estimate")
+            }
+          >
+            <Plus />
+            Create Estimate
+          </Button>
+        </div>
       </div>
 
       <div className="flex gap-6 overflow-x-auto pb-3 md:grid md:grid-cols-4 md:pb-0">

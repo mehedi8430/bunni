@@ -1,5 +1,5 @@
 import TemplateCard from "./components/TemplateCard";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import type { TInvoiceTemplate } from "@/types";
 import assets from "@/lib/imageProvider";
 import { useAppDispatch } from "@/redux/hooks";
@@ -45,6 +45,8 @@ const templates: TInvoiceTemplate[] = [
 ];
 
 export default function InvoiceTemplatesPage() {
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
   const dispatch = useAppDispatch();
 
   return (
@@ -58,7 +60,7 @@ export default function InvoiceTemplatesPage() {
           {templates.map((template) => (
             <Link
               key={template.id}
-              to={template.link}
+              to={type ? `${template.link}?type=${type}` : template.link}
               onClick={() => {
                 dispatch(clearInvoice());
               }}
