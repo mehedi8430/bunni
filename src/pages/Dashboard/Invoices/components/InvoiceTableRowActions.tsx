@@ -34,6 +34,34 @@ export default function InvoiceTableRowActions({
 
   console.log(invoiceData, invoice);
 
+  // Transform the data to match InvoiceTemplate requirements
+  const transformedInvoiceData = {
+    color: invoiceData?.color || "#000000",
+    footerTerms: invoiceData?.footerTerms || "",
+    invoiceNumber: invoiceData?.invoiceNumber || invoice.orderNumber,
+    invoiceDate: invoiceData?.invoiceDate || invoice.date,
+    billTo: {
+      name: invoice.customerName || "Customer Name",
+      address: "Customer Address", // This should come from customer data
+      phone: "Customer Phone", // This should come from customer data
+    },
+    paymentDetails: {
+      accountType: "Business Account", // This should come from settings
+      accountNumber: "****1234", // This should come from settings
+      paymentMethod: invoice.tenderType || "Credit Card",
+      bankName: "Bank Name", // This should come from settings
+    },
+    items: invoiceData?.items?.map(item => ({
+      description: item.description,
+      price: item.price,
+      quantity: item.quantity,
+      amount: item.amount || (item.price * item.quantity),
+    })) || [],
+    subtotal: invoiceData?.subtotal || 0,
+    totalTax: invoiceData?.totalTax || 0,
+    total: invoiceData?.total || Number(invoice.amount),
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,8 +74,8 @@ export default function InvoiceTableRowActions({
       <DropdownMenuContent align="end" className="border-border border p-0">
         <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base">
           <PDFDownloadLink
-            document={<InvoiceTemplate invoice={invoiceData} />}
-            fileName={`invoice-${invoiceData.invoiceNumber}.pdf`}
+            document={<InvoiceTemplate invoice={transformedInvoiceData} />}
+            fileName={`invoice-${transformedInvoiceData.invoiceNumber}.pdf`}
           >
             Download
           </PDFDownloadLink>
