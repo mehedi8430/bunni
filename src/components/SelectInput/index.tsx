@@ -55,7 +55,7 @@ export default function SelectInput({
       {...props}
     >
       <SelectTrigger
-        className={cn("text-muted-foreground text-[16px]", triggerClassName)}
+        className={cn("text-muted-foreground text-sm", triggerClassName)}
       >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

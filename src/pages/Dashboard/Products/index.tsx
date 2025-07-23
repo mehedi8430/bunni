@@ -186,11 +186,10 @@ export default function ProductsPage() {
   return (
     <section className="space-y-10">
       <div className="flex items-start justify-between">
-        <h1 className="text-2xl font-semibold md:text-[32px]">Products</h1>
+        <h1 className="text-2xl font-semibold md:text-[26px]">Products</h1>
         <Button
           variant="primary"
-          size="lg"
-          className="text-lg font-normal"
+          className="text-base font-normal"
           onClick={() => {
             setIsEditOpen(true);
             setEditProduct({});
