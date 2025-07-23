@@ -19,23 +19,37 @@ type ProfileFormValues = z.infer<typeof useFormSchema>;
 
 interface UseProfileFormProps {
     onSuccess?: () => void;
+    profileData?: {
+        personalInfo: {
+            name: string;
+            email: string;
+            phone: string;
+        };
+        businessInfo: {
+            logo: string;
+            name: string;
+            address: string;
+            contact: string;
+            website: string;
+        };
+    };
 }
 
-export default function UseProfileForm({ onSuccess }: UseProfileFormProps = {}) {
+export default function UseProfileForm({ onSuccess, profileData }: UseProfileFormProps = {}) {
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(useFormSchema),
         defaultValues: {
             id: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            phone: '',
-            businessName: '',
-            businessAddress: '',
-            businessLogo: '',
-            businessContact: '',
-            websiteUrl: '',
+            firstName: profileData?.personalInfo.name.split(" ")[0] || '',
+            lastName: profileData?.personalInfo.name.split(" ")[1] || '',
+            email: profileData?.personalInfo.email || '',
+            phone: profileData?.personalInfo.phone || '',
+            businessName: profileData?.businessInfo.name || '',
+            businessAddress: profileData?.businessInfo.address || '',
+            businessLogo:'',
+            businessContact: profileData?.businessInfo.contact || '',
+            websiteUrl: profileData?.businessInfo.website || '',
         }
     })
 
