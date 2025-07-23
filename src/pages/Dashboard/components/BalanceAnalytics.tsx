@@ -8,6 +8,7 @@ import {
   ChartTooltip,
 } from "@/components/ui/chart";
 import { calculateTicks } from "../utils/calculateTicks";
+import { useTranslation } from "react-i18next";
 
 // const monthOptions: SelectOption[] = [
 //   { value: "monthly", label: "Monthly" },
@@ -35,6 +36,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function BalanceAnalytics() {
+  const { t } = useTranslation();
   // const [selected, setSelected] = useState<string>("monthly");
 
   // const handleMonthChange = (value: string) => {
@@ -65,7 +67,7 @@ export default function BalanceAnalytics() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold">Balance Analytics</h1>
+        <h1 className="text-lg font-semibold">{t("balance_analytics_title")}</h1>
         {/* <SelectInput
           options={monthOptions}
           placeholder="Select a month"
@@ -96,7 +98,8 @@ export default function BalanceAnalytics() {
             tickLine={false}
             axisLine={false}
             tickMargin={10}
-            tickFormatter={(value) => value.slice(0, 3)}
+            // tickFormatter={(value) => value.slice(0, 3)}
+            tickFormatter={(value) => t(`balance_analytics_months_short.${value}`)}
           />
           <YAxis
             ticks={dynamicTicks}
@@ -116,7 +119,7 @@ export default function BalanceAnalytics() {
                 return (
                   <div className="rounded-md border-0 bg-slate-800 px-3 py-2 text-white shadow-lg">
                     <div className="mb-1 text-xs text-slate-300">
-                      Total Balance
+                      {t("balance_analytics_chart_label")}
                     </div>
                     <div className="text-sm font-semibold">
                       ${payload[0].value?.toLocaleString() || 0}

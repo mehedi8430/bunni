@@ -13,8 +13,10 @@ import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "./Customer/components/CustomerForm";
 import ProductForm from "./Products/components/ProductForm";
 import type { TProduct } from "@/types";
+import { useTranslation } from "react-i18next";
 
 export default function DashboardPage() {
+  const { t } = useTranslation();
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
   const navigate = useNavigate();
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -57,9 +59,9 @@ export default function DashboardPage() {
   return (
     <section className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-[26px] font-semibold">Good afternoon, Alex</h1>
+        <h1 className="text-[26px] font-semibold">{t("dashboard_greeting")}</h1>
         <p className="text-muted-foreground text-base font-normal">
-          Today is {formatted}
+          {t("dashboard_today_is", { date: formatted })}
         </p>
 
         <div className="mt-6 flex flex-col items-center gap-2 md:flex-row">
@@ -70,7 +72,7 @@ export default function DashboardPage() {
             onClick={() => navigate("/dashboard/invoices/templates")}
           >
             <Plus />
-            Create Invoices
+            {t("dashboard_create_invoice")}
           </Button>
           <Button
             variant={"primary"}
@@ -82,7 +84,7 @@ export default function DashboardPage() {
             }}
           >
             <Plus />
-            New Customer
+            {t("dashboard_new_customer")}
           </Button>
           <Button
             variant={"primary"}
@@ -94,7 +96,7 @@ export default function DashboardPage() {
             }}
           >
             <Plus />
-            New Products
+            {t("dashboard_new_product")}
           </Button>
           <div className="flex items-center gap-2">
             <Button
@@ -106,7 +108,7 @@ export default function DashboardPage() {
               }
             >
               <Plus />
-              Estimate
+              {t("dashboard_create_estimate")}
             </Button>
             <Button
               variant={"primary"}
@@ -115,7 +117,7 @@ export default function DashboardPage() {
               onClick={() => navigate("/dashboard/payment")}
             >
               <Plus />
-              Payment
+              {t("dashboard_payment")}
             </Button>
           </div>
         </div>
