@@ -13,10 +13,9 @@ import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "./Customer/components/CustomerForm";
 import ProductForm from "./Products/components/ProductForm";
 import type { TProduct } from "@/types";
-import { Helmet } from "react-helmet-async";
 
 export default function DashboardPage() {
-  const formatted = format(new Date(), 'EEEE, MMMM d, yyyy');
+  const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
   const navigate = useNavigate();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editCustomer, setEditCustomer] = useState<Partial<Customer>>({});
@@ -56,117 +55,112 @@ export default function DashboardPage() {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Bunni | Dashboard</title>
-      </Helmet>
-      <section className="space-y-6">
-        <div className="space-y-2">
-          <h1 className="text-[26px] font-semibold">Good afternoon, Alex</h1>
-          <p className="text-muted-foreground text-base font-normal">
-            Today is {formatted}
-          </p>
+    <section className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-[26px] font-semibold">Good afternoon, Alex</h1>
+        <p className="text-muted-foreground text-base font-normal">
+          Today is {formatted}
+        </p>
 
-          <div className="mt-6 flex flex-col items-center gap-2 md:flex-row">
+        <div className="mt-6 flex flex-col items-center gap-2 md:flex-row">
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-base font-normal"
+            onClick={() => navigate("/dashboard/invoices/templates")}
+          >
+            <Plus />
+            Create Invoices
+          </Button>
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-base font-normal"
+            onClick={() => {
+              setEditCustomer({});
+              setIsEditOpen(true);
+            }}
+          >
+            <Plus />
+            New Customer
+          </Button>
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="text-base font-normal"
+            onClick={() => {
+              setIsProductEditOpen(true);
+              setEditProduct({});
+            }}
+          >
+            <Plus />
+            New Products
+          </Button>
+          <div className="flex items-center gap-2">
             <Button
               variant={"primary"}
               size={"lg"}
               className="text-base font-normal"
-              onClick={() => navigate("/dashboard/invoices/templates")}
             >
               <Plus />
-              Create Invoices
+              Estimate
             </Button>
             <Button
               variant={"primary"}
               size={"lg"}
               className="text-base font-normal"
-              onClick={() => {
-                setEditCustomer({});
-                setIsEditOpen(true);
-              }}
             >
               <Plus />
-              New Customer
+              Payment
             </Button>
-            <Button
-              variant={"primary"}
-              size={"lg"}
-              className="text-base font-normal"
-              onClick={() => {
-                setIsProductEditOpen(true);
-                setEditProduct({});
-              }}
-            >
-              <Plus />
-              New Products
-            </Button>
-            <div className="flex items-center gap-2">
-              <Button
-                variant={"primary"}
-                size={"lg"}
-                className="text-base font-normal"
-              >
-                <Plus />
-                Estimate
-              </Button>
-              <Button
-                variant={"primary"}
-                size={"lg"}
-                className="text-base font-normal"
-              >
-                <Plus />
-                Payment
-              </Button>
-            </div>
           </div>
         </div>
+      </div>
 
-        <div className="grid grid-cols-3 gap-6">
-          <div className="card_container col-span-3 xl:col-span-2">
-            <BalanceAnalytics />
-          </div>
-          <div className="card_container col-span-3 xl:col-span-1">
-            <ThingsToDo />
-          </div>
-          <div className="card_container col-span-3 xl:col-span-1">
-            <BarChartSection />
-          </div>
-          <div className="card_container col-span-3 xl:col-span-1">
-            <AreaChartSection />
-          </div>
-          <div className="card_container col-span-3 xl:col-span-1">
-            <ProPlanCard />
-          </div>
+      <div className="grid grid-cols-3 gap-6">
+        <div className="card_container col-span-3 xl:col-span-2">
+          <BalanceAnalytics />
         </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <ThingsToDo />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <BarChartSection />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <AreaChartSection />
+        </div>
+        <div className="card_container col-span-3 xl:col-span-1">
+          <ProPlanCard />
+        </div>
+      </div>
 
-        {/* Edit Modal with CustomerForm */}
-        <DialogModal
-          isOpen={isEditOpen}
-          onOpenChange={setIsEditOpen}
-          title={editCustomer.id ? "Edit Customer" : "Add New Customer"}
-          className="!max-w-4xl"
-        >
-          <CustomerForm
-            customer={editCustomer}
-            onClose={() => setIsEditOpen(false)}
-            onSave={handleSave}
-          />
-        </DialogModal>
+      {/* Edit Modal with CustomerForm */}
+      <DialogModal
+        isOpen={isEditOpen}
+        onOpenChange={setIsEditOpen}
+        title={editCustomer.id ? "Edit Customer" : "Add New Customer"}
+        className="!max-w-4xl"
+      >
+        <CustomerForm
+          customer={editCustomer}
+          onClose={() => setIsEditOpen(false)}
+          onSave={handleSave}
+        />
+      </DialogModal>
 
-        {/* Edit Modal with ProductForm */}
-        <DialogModal
-          isOpen={isProductEditOpen}
-          onOpenChange={setIsProductEditOpen}
-          title={editProduct.id ? "Edit Product" : "Add New Product"}
-        >
-          <ProductForm
-            product={editProduct}
-            onClose={() => setIsProductEditOpen(false)}
-            onSave={handleProductSave}
-          />
-        </DialogModal>
-      </section>
-    </>
+      {/* Edit Modal with ProductForm */}
+      <DialogModal
+        isOpen={isProductEditOpen}
+        onOpenChange={setIsProductEditOpen}
+        title={editProduct.id ? "Edit Product" : "Add New Product"}
+      >
+        <ProductForm
+          product={editProduct}
+          onClose={() => setIsProductEditOpen(false)}
+          onSave={handleProductSave}
+        />
+      </DialogModal>
+    </section>
   );
 }
