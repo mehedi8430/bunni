@@ -1,12 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import { RouterProvider } from "react-router";
-import { Router } from "./routes/router.tsx";
-import { Toaster } from "sonner";
 import { Provider } from "react-redux";
-import { persistor, store } from "./redux/store.ts";
+import { RouterProvider } from "react-router";
 import { PersistGate } from "redux-persist/integration/react";
+import { Toaster } from "sonner";
+import "./index.css";
+import { persistor, store } from "./redux/store.ts";
+import { Router } from "./routes/router.tsx";
+import "./utils/i18next"; // import before App
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

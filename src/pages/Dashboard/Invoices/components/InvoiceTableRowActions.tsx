@@ -51,12 +51,13 @@ export default function InvoiceTableRowActions({
       paymentMethod: invoice.tenderType || "Credit Card",
       bankName: "Bank Name", // This should come from settings
     },
-    items: invoiceData?.items?.map(item => ({
-      description: item.description,
-      price: item.price,
-      quantity: item.quantity,
-      amount: item.amount || (item.price * item.quantity),
-    })) || [],
+    items:
+      invoiceData?.items?.map((item) => ({
+        description: item.description,
+        price: item.price,
+        quantity: item.quantity,
+        amount: item.amount || item.price * item.quantity,
+      })) || [],
     subtotal: invoiceData?.subtotal || 0,
     totalTax: invoiceData?.totalTax || 0,
     total: invoiceData?.total || Number(invoice.amount),
