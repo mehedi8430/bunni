@@ -35,8 +35,7 @@ export default function TaxRateTableActions({
 
       <Button
         variant="primary"
-        size="lg"
-        className="text-sm font-normal md:text-lg"
+        className="text-sm font-normal md:text-base"
         onClick={() => {
           setIsEditOpen(true);
           setEditProduct({});

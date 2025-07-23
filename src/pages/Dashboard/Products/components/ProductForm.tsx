@@ -32,7 +32,7 @@ export default function ProductForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-normal">Product Name</FormLabel>
+                <FormLabel className="text-base font-normal">Product Name</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter product name"
@@ -53,7 +53,7 @@ export default function ProductForm({
               name="price"
               render={({ field }) => (
                 <FormItem className="w-1/2">
-                  <FormLabel className="text-lg font-normal">Price</FormLabel>
+                  <FormLabel className="text-base font-normal">Price</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -75,7 +75,7 @@ export default function ProductForm({
               name="type"
               render={({ field }) => (
                 <FormItem className="w-1/2">
-                  <FormLabel className="text-lg font-normal">Type</FormLabel>
+                  <FormLabel className="text-base font-normal">Type</FormLabel>
                   <FormControl>
                     <SelectInput
                       options={[
@@ -100,7 +100,7 @@ export default function ProductForm({
             name="unit"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-normal">Unit</FormLabel>
+                <FormLabel className="text-base font-normal">Unit</FormLabel>
                 <FormControl>
                   <SelectInput
                     options={[
@@ -123,7 +123,7 @@ export default function ProductForm({
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-normal">Description</FormLabel>
+                <FormLabel className="text-base font-normal">Description</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Enter product description"
@@ -139,10 +139,10 @@ export default function ProductForm({
           <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
           {/* Buttons */}
           <div className="flex items-center justify-center md:justify-end gap-3">
-            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
               Cancel
             </Button>
-            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
+            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Save</Button>
           </div>
         </form>
       </Form>

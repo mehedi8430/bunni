@@ -6,16 +6,30 @@ import { ImageUpload } from "@/components/ui/image-upload";
 
 interface ProfileSettingFormProps {
     onSuccess?: () => void;
+    profileData?: {
+        personalInfo: {
+            name: string;
+            email: string;
+            phone: string;
+        };
+        businessInfo: {
+            logo: string;
+            name: string;
+            address: string;
+            contact: string;
+            website: string;
+        };
+    };
 }
 
-export default function ProfileSettingForm({ onSuccess }: ProfileSettingFormProps) {
+export default function ProfileSettingForm({ onSuccess, profileData }: ProfileSettingFormProps) {
 
-    const { form, onSubmit } = UseProfileForm({ onSuccess });
+    const { form, onSubmit } = UseProfileForm({ onSuccess, profileData });
 
     return (
         <>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white px-5 py-8 rounded-md">
                     <div className="flex flex-col md:flex-row gap-16 md:items-center">
                         <div className="w-full md:w-1/2 space-y-6">
                             <h4 className="text-2xl font-semibold mb-5">Personal Info</h4>

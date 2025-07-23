@@ -4,7 +4,7 @@ import TaxRatesSettings from "./components/TaxRatesSettings";
 export default function InvoiceSettingsPage() {
   return (
     <section className="space-y-6 md:space-y-10">
-      <h1 className="text-2xl font-semibold md:text-[32px]">
+      <h1 className="text-2xl font-semibold md:text-[26px]">
         Invoice Settings
       </h1>
       <DiscountSettings />

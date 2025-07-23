@@ -178,10 +178,10 @@ export default function UserManagementPage() {
 
   return (
     <section className="space-y-6 md:space-y-10">
-      <h1 className="text-2xl font-semibold md:text-[32px]">User Management</h1>
+      <h1 className="text-2xl font-semibold md:text-[26px]">User Management</h1>
 
       <div className="bg-sidebar rounded-2xl py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pr-3">
           {tableRef.current?.table && (
             <DataTableFilter
               searchTerm={searchTerm}
@@ -196,8 +196,7 @@ export default function UserManagementPage() {
           )}
           <Button
             variant="primary"
-            size="lg"
-            className="text-sm font-normal md:text-lg"
+            className="text-sm font-normal md:text-base"
             onClick={() => {
               setIsEditOpen(true);
               setEditUser({});

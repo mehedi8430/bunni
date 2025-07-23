@@ -81,7 +81,7 @@ export default function TaxRateForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-normal">Name</FormLabel>
+                <FormLabel className="text-base font-normal">Name</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Let your customer kno what this Invoice is for"
@@ -101,7 +101,7 @@ export default function TaxRateForm({
             name="rate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-normal">Rate</FormLabel>
+                <FormLabel className="text-base font-normal">Rate</FormLabel>
                 <FormControl>
                   <SelectInput
                     options={[
@@ -126,7 +126,7 @@ export default function TaxRateForm({
             name="amount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-normal">Amount</FormLabel>
+                <FormLabel className="text-base font-normal">Amount</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -149,7 +149,7 @@ export default function TaxRateForm({
             name="status"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="text-lg font-normal">Status</FormLabel>
+                <FormLabel className="text-base font-normal">Status</FormLabel>
                 <FormControl>
                   <SelectInput
                     options={[
@@ -170,10 +170,10 @@ export default function TaxRateForm({
           <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
           {/* Buttons */}
           <div className="flex items-center justify-center md:justify-end gap-3">
-            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
               Cancel
             </Button>
-            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Next</Button>
+            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Next</Button>
           </div>
         </form>
       </Form>

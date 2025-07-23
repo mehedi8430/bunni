@@ -1,28 +1,64 @@
 import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/redux/hooks";
-import { setColor } from "@/redux/slices/invoiceTemplateSlice";
-import { Outlet, useSearchParams } from "react-router";
-import TemplateForm from "./Components/TemplateForm";
+import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  setColor,
+  templateSelector,
+} from "@/redux/slices/invoiceTemplateSlice";
+import { PDFViewer } from "@react-pdf/renderer";
+import InvoiceTemplate from "../components/pdf-template/InvoiceTemplate";
 
 export default function CreateInvoiceTemplatePage() {
   const dispatch = useAppDispatch();
-  const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
+
+  const {
+    color,
+    customerId,
+    invoiceNumber,
+    invoiceDate,
+    items,
+    subtotal,
+    totalTax,
+    total,
+    footerTerms,
+  } = useAppSelector(templateSelector) || {};
+  const { customer } = useCustomerApi(customerId);
+
+  console.log(customerId);
 
   return (
     <section className="flex flex-col items-start gap-6 md:flex-row">
       <div className="bg-sidebar rounded-lg py-5">
-        <h2 className="px-6 text-2xl font-semibold">
-          Create New {type === "estimate" ? "Estimate" : "Invoice"}
-        </h2>
+        {/* <h2 className="px-6 text-2xl font-semibold">Create New Invoice</h2> */}
         <div className="border-border mt-5 border-t" />
         {/* Form Section */}
-        <TemplateForm />
+        {/* <TemplateForm /> */}
       </div>
 
       <div className="flex-1 space-y-0 md:space-y-6">
         {/* Preview Section */}
-        <Outlet />
+        {/* <Outlet /> */}
+
+        <PDFViewer width="100%" height={800} className="flex-1">
+          <InvoiceTemplate
+            color={color}
+            invoiceDate={invoiceDate}
+            invoiceNumber={invoiceNumber}
+            customer={
+              customer || {
+                name: "Customer Name",
+                address: "Customer Address",
+                phone: "Customer Phone",
+              }
+            }
+            items={items}
+            subtotal={subtotal}
+            totalTax={totalTax}
+            total={total}
+            footerTerms={footerTerms}
+          />
+        </PDFViewer>
+
         <div className="flex flex-wrap justify-between gap-2">
           {colors.map((color) => (
             <Button

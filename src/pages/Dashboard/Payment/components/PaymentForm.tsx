@@ -132,11 +132,11 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
       </div>
       <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
       {/* Buttons */}
-      <div className="flex items-center justify-center md:justify-end gap-3 p-5">
-        <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+      <div className="flex items-center justify-center md:justify-end gap-3 p-2">
+        <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
           Cancel
         </Button>
-        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
+        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Save</Button>
       </div>
     </form>
   );

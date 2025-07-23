@@ -26,15 +26,15 @@ export default function PricingPlanCard({
     return (
         <div className="bg-white rounded-xl px-6 py-8 w-full max-w-[340px] flex flex-col justify-between border border-foreground">
             <div>
-                <div className={`inline-flex items-center px-3 py-2 rounded-md text-lg font-normal gap-2 text-white ${isPro ? 'bg-primary' : 'bg-ring'}`}>
+                <div className={`inline-flex items-center px-3 py-2 rounded-md text-base font-normal gap-2 text-white ${isPro ? 'bg-primary' : 'bg-ring'}`}>
                     <span>{planName}</span>
                     {/* Placeholder for a small icon next to the plan name */}
                     <img src={icons.starIcon} alt="Star Icon" />
                 </div>
-                <div className="mt-4 text-4xl font-bold foreground">
-                    {price}<span className="text-xl font-normal">{period}</span>
+                <div className="mt-4 text-2xl font-bold foreground">
+                    {price}<span className="text-lg font-normal">{period}</span>
                 </div>
-                <p className="mt-4 text-foreground/40 text-base font-normal">{description}</p>
+                <p className="mt-4 text-foreground/40 text-sm font-normal">{description}</p>
                 <div className="my-8">
                     {features.map((feature, index) => (
                         <FeatureItem key={index} text={feature.text} isIncluded={feature.isIncluded} />
@@ -43,7 +43,7 @@ export default function PricingPlanCard({
             </div>
             <div>
                 <button
-                    className={`w-full py-3.5 px-6 rounded-lg font-normal text-lg bg-primary text-white cursor-pointer ${isCurrentPlan}`}
+                    className={`w-full py-2 px-6 rounded-lg font-normal text-base bg-primary text-white cursor-pointer ${isCurrentPlan}`}
                 >
                     {buttonText}
                 </button>

@@ -133,7 +133,7 @@ export default function TaxRatesSettings() {
 
   return (
     <div className="bg-sidebar rounded-2xl py-4">
-      <h2 className="mb-4 px-4 text-2xl font-semibold">Tax Rates Settings</h2>
+      <h2 className="mb-1 px-4 text-xl font-semibold">Tax Rates Settings</h2>
       <TaxRateTableActions
         searchTerm={searchTermTaxRate}
         handleFilterChange={handleFilterChangeTaxRate}
