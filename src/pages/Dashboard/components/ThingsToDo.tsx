@@ -26,7 +26,7 @@ const tasks = [
 export default function ThingsToDo() {
   return (
     <div className="space-y-4">
-      <h2 className="text-[32px] font-semibold">Things To Do</h2>
+      <h2 className="text-xl font-semibold">Things To Do</h2>
       {tasks.map((task, idx) => (
         <div
           key={idx}
@@ -38,10 +38,10 @@ export default function ThingsToDo() {
             <ReactSVG src={task.icon} className="size-8" />
           </div>
           <div>
-            <p className="font-normal text-[20px] text-foreground/90">
+            <p className="font-normal text-lg text-foreground/90">
               {task.title}
             </p>
-            <p className="text-lg font-normal text-foreground/70">
+            <p className="text-base font-normal text-foreground/70">
               {task.description}
             </p>
           </div>

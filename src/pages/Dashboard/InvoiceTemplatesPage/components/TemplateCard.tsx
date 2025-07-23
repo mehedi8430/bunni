@@ -11,7 +11,6 @@ export default function TemplateCard({
       <div className="space-y-4">
         {/* Template Preview */}
         <div className="flex h-full w-full justify-center rounded-xl">
-          {/* <ReactSVG src={template.image} /> */}
           <img
             src={template.image}
             alt="Template Image"

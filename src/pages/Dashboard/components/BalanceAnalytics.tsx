@@ -1,5 +1,5 @@
-import SelectInput, { type SelectOption } from "@/components/SelectInput";
-import { useMemo, useState } from "react";
+// import SelectInput, { type SelectOption } from "@/components/SelectInput";
+import { useMemo, } from "react";
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/chart";
 import { calculateTicks } from "../utils/calculateTicks";
 
-const monthOptions: SelectOption[] = [
-  { value: "monthly", label: "Monthly" },
-  // { value: "yearly", label: "yearly" },
-];
+// const monthOptions: SelectOption[] = [
+//   { value: "monthly", label: "Monthly" },
+//   // { value: "yearly", label: "yearly" },
+// ];
 
 const chartData = [
   { month: "January", desktop: 120 },
@@ -35,12 +35,12 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function BalanceAnalytics() {
-  const [selected, setSelected] = useState<string>("monthly");
+  // const [selected, setSelected] = useState<string>("monthly");
 
-  const handleMonthChange = (value: string) => {
-    console.log("Selected month:", value);
-    setSelected(value);
-  };
+  // const handleMonthChange = (value: string) => {
+  //   console.log("Selected month:", value);
+  //   setSelected(value);
+  // };
 
   // Calculate dynamic values from data
   const { dynamicTicks, minValue, maxValue } = useMemo(() => {
@@ -66,13 +66,13 @@ export default function BalanceAnalytics() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold">Balance Analytics</h1>
-        <SelectInput
+        {/* <SelectInput
           options={monthOptions}
           placeholder="Select a month"
           value={selected}
           onValueChange={handleMonthChange}
           triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
-        />
+        /> */}
       </div>
 
       {/* Balance Abalytics Area Chart */}
