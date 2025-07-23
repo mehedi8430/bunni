@@ -24,5 +24,13 @@
   "features_bullet_2": "100% de seguridad. Garantizado.",
   "features_bullet_3": "No se necesita capacitación ni mantenimiento.",
    "streamline_heading": "Optimiza las facturas. Descubre herramientas de gestión.",
-  "streamline_description": "Experimenta soluciones de facturación y pagos sin complicaciones para las necesidades de tu negocio. Administra facturas, gestiona pagos en múltiples monedas y haz seguimiento de clientes, todo en un solo lugar. Registrarse es fácil, y crear facturas o procesar pagos solo toma unos clics. Disfruta gestionando múltiples negocios con nuestras herramientas intuitivas que optimizan tu flujo de trabajo."
+  "streamline_description": "Experimenta soluciones de facturación y pagos sin complicaciones para las necesidades de tu negocio. Administra facturas, gestiona pagos en múltiples monedas y haz seguimiento de clientes, todo en un solo lugar. Registrarse es fácil, y crear facturas o procesar pagos solo toma unos clics. Disfruta gestionando múltiples negocios con nuestras herramientas intuitivas que optimizan tu flujo de trabajo.",
+  "key_benefits_title": "Sección de beneficios clave",
+  "key_benefits_subtitle": "Deja de perder tiempo con papeleo. Crea y envía facturas o presupuestos profesionales en solo unos clics con plantillas personalizables.",
+  "key_benefit_1_title": "Crea y envía facturas rápidamente",
+  "key_benefit_1_description": "Genera facturas o presupuestos profesionales en segundos — envía por correo electrónico, mensaje de texto o enlace.",
+  "key_benefit_2_title": "Facturación recurrente",
+  "key_benefit_2_description": "Configura facturas automáticas con horarios flexibles para suscripciones o clientes habituales.",
+  "key_benefit_3_title": "Filtros inteligentes de informes",
+  "key_benefit_3_description": "Haz seguimiento del estado, tipo de pago e historial de facturas con filtros en tiempo real."
 }

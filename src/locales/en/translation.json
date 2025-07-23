@@ -24,5 +24,13 @@
   "features_bullet_2": "100% security. Guaranteed.",
   "features_bullet_3": "No training or maintenance needed.",
    "streamline_heading": "Streamline invoices. Discover tools for management.",
-  "streamline_description": "Experience seamless invoicing and payment solutions for your business needs. Manage invoices, handle payments in multiple currencies, and track customers—all in one place. Signing up is easy, and creating invoices and processing payments takes just a few clicks. Enjoy managing multiple businesses with our intuitive tools to streamline your workflow."
+  "streamline_description": "Experience seamless invoicing and payment solutions for your business needs. Manage invoices, handle payments in multiple currencies, and track customers—all in one place. Signing up is easy, and creating invoices and processing payments takes just a few clicks. Enjoy managing multiple businesses with our intuitive tools to streamline your workflow.",
+  "key_benefits_title": "Key Benefits Section",
+  "key_benefits_subtitle": "Stop wasting time on paperwork. Create and send professional invoices or estimates in just a few clicks with customizable templates.",
+  "key_benefit_1_title": "Create & Send Invoices Fast",
+  "key_benefit_1_description": "Generate professional invoices or estimates in seconds — send via email, text, or link.",
+  "key_benefit_2_title": "Recurring Billing",
+  "key_benefit_2_description": "Set up auto-invoices with flexible schedules for subscriptions or repeat clients.",
+  "key_benefit_3_title": "Smart Reporting Filters",
+  "key_benefit_3_description": "Track status, payment type, and invoice history with real-time filters."
 }
