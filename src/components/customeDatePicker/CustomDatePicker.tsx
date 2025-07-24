@@ -65,10 +65,10 @@ export const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-1.5">
       <Label
         htmlFor="date-input"
-        className={cn("text-lg font-normal", labelClassName)}
+        className={cn("text-base font-normal", labelClassName)}
       >
         {label}
       </Label>

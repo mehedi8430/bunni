@@ -7,7 +7,6 @@ import { z } from "zod";
 // Zod schema
 export const virtualTerminalFormSchema = z.object({
   customer: z.string().min(2, { message: "Customer is required" }),
-  invoice: z.string().min(1, { message: "Invoice is required" }),
   amount: z
     .number({ invalid_type_error: "Enter a valid amount" })
     .positive({ message: "Amount must be positive" }),
@@ -16,12 +15,7 @@ export const virtualTerminalFormSchema = z.object({
     message: "Expiry must be in MM/YY or YYYY format",
   }),
   cardCVC: z.string().min(1, { message: "Card CVC is required" }),
-  cardHolderName: z
-    .string()
-    .min(2, { message: "Card holder name is required" }),
-  discountOrTax: z.enum(["discount", "tax"], {
-    errorMap: () => ({ message: "Please select a valid discount or tax." }),
-  }),
+  paymentMethod: z.string().min(1, { message: "Payment method is required" }),
 });
 
 type VirtualTerminalFormValues = z.infer<typeof virtualTerminalFormSchema>;
@@ -40,6 +34,7 @@ export default function useVirtualTerminal() {
     defaultValues: {
       customer: customers[0]?.id ?? "",
       amount: 0,
+      paymentMethod: "",
     },
   });
 
