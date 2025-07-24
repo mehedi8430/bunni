@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
@@ -28,9 +29,10 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function AreaChartSection() {
+  const { t } = useTranslation();
   return (
     <div className="space-y-2">
-      <h4 className="text-lg font-semibold">Title</h4>
+      <h4 className="text-lg font-semibold">{t("bar_chart.title")}</h4>
       <h2 className="text-xl font-bold text-black">$8,527,224</h2>
       <div className="flex items-center gap-4">
         <Button
@@ -39,7 +41,7 @@ export default function AreaChartSection() {
         >
           <ArrowUpRight /> +3.12%
         </Button>
-        <p className="text-sm font-normal">VS This Month</p>
+        <p className="text-sm font-normal">{t("bar_chart.growth_label")}</p>
       </div>
 
       <div className="mt-4 space-y-2">

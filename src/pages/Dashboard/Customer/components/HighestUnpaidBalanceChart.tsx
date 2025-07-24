@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import PieChartCard from "./PieChartCard";
 
 
@@ -31,9 +32,10 @@ const myCustomerData: Customer[] = [
 ];
 
 export default function HighestUnpaidBalanceChart() {
+  const { t } = useTranslation();
   return (
     <div>
-      <PieChartCard customerData={myCustomerData} title="Customers With Highest Unpaid Balances" />
+      <PieChartCard customerData={myCustomerData} title={t("highest_unpaid_balances_title")} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import PieChartCard from "./PieChartCard";
 
 
@@ -31,7 +32,9 @@ const myCustomerData: Customer[] = [
 ];
 
 export default function TopPayingCustomerChart() {
+  const { t } = useTranslation();
+
   return <section>
-    <PieChartCard customerData={myCustomerData} title="Top Paying Customers" />
+    <PieChartCard customerData={myCustomerData} title={t("top_paying_customers_title")} />
   </section>;
 }

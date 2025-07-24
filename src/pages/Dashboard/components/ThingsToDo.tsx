@@ -1,32 +1,31 @@
 import { icons } from "@/lib/imageProvider";
+import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+
 
 const tasks = [
   {
     icon: icons.taskIcon1,
-    title: "Finish Company Profile",
-    description: "To do anything first completed your company profile.",
+    key: "profile",
     color: "bg-[#E5FAFF]",
   },
   {
     icon: icons.taskIcon2,
-    title: "Create Invoice Template",
-    description:
-      "To sent invoice you need to create invoice and choose the template.",
+    key: "invoice_template",
     color: "bg-[#DAFFF2]",
   },
   {
     icon: icons.taskIcon3,
-    title: "Add Products",
-    description: "To create invoice you need to add products.",
+    key: "products",
     color: "bg-[#E6EAFF]",
   },
 ];
 
 export default function ThingsToDo() {
+  const { t } = useTranslation();
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Things To Do</h2>
+      <h2 className="text-xl font-semibold">{t("things_to_do_title")}</h2>
       {tasks.map((task, idx) => (
         <div
           key={idx}
@@ -39,10 +38,10 @@ export default function ThingsToDo() {
           </div>
           <div>
             <p className="font-normal text-lg text-foreground/90">
-              {task.title}
+              {t(`things_to_do_tasks.${task.key}.title`)}
             </p>
             <p className="text-base font-normal text-foreground/70">
-              {task.description}
+              {t(`things_to_do_tasks.${task.key}.description`)}
             </p>
           </div>
         </div>

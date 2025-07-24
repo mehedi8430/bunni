@@ -17,13 +17,13 @@
   "operations_step_title": "Operations with Automation",
   "operations_step_description": "Enhance your operational efficiency with our AI-driven automated workflows.",
   "get_paid_step_title": "Get Paid",
-  "get_paid_step_description":"Enhance your operational efficiency with our AI-driven automated workflows.",
+  "get_paid_step_description": "Enhance your operational efficiency with our AI-driven automated workflows.",
   "features_heading": "Powerful Features for Your Business",
   "features_description": "Make payments easy and get a clear view of your finances. Just link your bank account and card to Milestone!",
   "features_bullet_1": "No hidden fees.",
   "features_bullet_2": "100% security. Guaranteed.",
   "features_bullet_3": "No training or maintenance needed.",
-   "streamline_heading": "Streamline invoices. Discover tools for management.",
+  "streamline_heading": "Streamline invoices. Discover tools for management.",
   "streamline_description": "Experience seamless invoicing and payment solutions for your business needs. Manage invoices, handle payments in multiple currencies, and track customers—all in one place. Signing up is easy, and creating invoices and processing payments takes just a few clicks. Enjoy managing multiple businesses with our intuitive tools to streamline your workflow.",
   "key_benefits_title": "Key Benefits Section",
   "key_benefits_subtitle": "Stop wasting time on paperwork. Create and send professional invoices or estimates in just a few clicks with customizable templates.",
@@ -50,7 +50,7 @@
   "facebook": "Facebook",
   "instagram": "Instagram",
   "linkedin": "LinkedIn",
-    "footer_description": "We provide secure, smart, and easy-to-use Invoicing and payment solutions that help businesses get paid faster, manage clients effortlessly, and create impactful presentations. Whether you're a freelancer or a growing enterprise, our platform empowers you to streamline operations and scale with confidence.",
+  "footer_description": "We provide secure, smart, and easy-to-use Invoicing and payment solutions that help businesses get paid faster, manage clients effortlessly, and create impactful presentations. Whether you're a freelancer or a growing enterprise, our platform empowers you to streamline operations and scale with confidence.",
   "footer_quick_links": "Quick Links",
   "footer_social_media": "Social Media",
   "footer_hot_link": "Hot Link",
@@ -62,5 +62,95 @@
   "footer_phone": "Phone: +(1)(465) 035-1237",
   "footer_email": "Email: amnelson0121@gmail.com",
   "footer_address": "16037 Road Demra, Dhaka, Bangladesh",
-  "footer_copyright": "Copyright © construck all right reserved."
+  "footer_copyright": "Copyright © construck all right reserved.",
+  "dashboard_greeting": "Good afternoon, Alex",
+  "dashboard_today_is": "Today is {{date}}",
+  "dashboard_create_invoice": "Create Invoices",
+  "dashboard_new_customer": "New Customer",
+  "dashboard_new_product": "New Products",
+  "dashboard_create_estimate": "Estimate",
+  "dashboard_payment": "Payment",
+  "dashboard_add_customer_title": "Add New Customer",
+  "dashboard_edit_customer_title": "Edit Customer",
+  "dashboard_add_product_title": "Add New Product",
+  "dashboard_edit_product_title": "Edit Product",
+  "balance_analytics_title": "Balance Analytics",
+  "balance_analytics_chart_label": "Total Balance",
+  "balance_analytics_months": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+  "balance_analytics_months_short": {
+    "January": "Jan",
+    "February": "Feb",
+    "March": "Mar",
+    "April": "Apr",
+    "May": "May",
+    "June": "Jun",
+    "July": "Jul",
+    "August": "Aug",
+    "September": "Sep",
+    "October": "Oct",
+    "November": "Nov",
+    "December": "Dec"
+  },
+  "things_to_do_title": "Things To Do",
+  "things_to_do_tasks": {
+    "profile": {
+      "title": "Finish Company Profile",
+      "description": "To do anything first completed your company profile."
+    },
+    "invoice_template": {
+      "title": "Create Invoice Template",
+      "description": "To send invoice you need to create invoice and choose the template."
+    },
+    "products": {
+      "title": "Add Products",
+      "description": "To create invoice you need to add products."
+    }
+  },
+  "bar_chart": {
+    "title": "Total Revenue",
+    "amount": "$8,527,224",
+    "growth": "+3.12%",
+    "growth_label": "VS This Month"
+  },
+  "pro_plan_card": {
+    "plan_name": "Pro Plan",
+    "price": "$4.99",
+    "billing_cycle": "/month",
+    "tagline": "Invoice Smarter. Grow Faster.",
+    "features": {
+      "unlimited_invoice": "Unlimited Invoice",
+      "management_setting": "Management Setting",
+      "add_admin": "Add Admin In Company Profile"
+    },
+    "upgrade_button": "Upgrade plan"
+  },
+  "title": "Customers",
+  "search_placeholder": "Search by name, email, or company...",
+  "add_customer": "Add",
+  "edit_customer": "Edit",
+  "view_customer": "View",
+  "delete_customer": "Delete",
+  "delete_confirmation": "Are you sure you want to delete this customer?",
+  "confirm": "Confirm",
+  "highest_unpaid_balances_title": "Customers With Highest Unpaid Balances",
+  "top_paying_customers_title": "Top Paying Customers",
+  "payment": "Payment",
+  "schedule_payment": "Schedule Payment",
+  "virtual_terminal": "Virtual Terminal",
+  "pay_by_link": "Pay by Link",
+  "total_payment": "Total Payment",
+ "pending_payments": "Pending Payments"
 }

@@ -18,12 +18,12 @@
   "operations_step_description": "Mejora tu eficiencia operativa con nuestros flujos de trabajo automatizados impulsados por IA.",
   "get_paid_step_title": "Recibe Pagos",
   "get_paid_step_description": "Mejora tu eficiencia operativa con nuestros flujos de trabajo automatizados impulsados por IA.",
-   "features_heading": "Funciones potentes para tu negocio",
+  "features_heading": "Funciones potentes para tu negocio",
   "features_description": "Facilita los pagos y obtén una visión clara de tus finanzas. ¡Solo conecta tu cuenta bancaria y tarjeta a Milestone!",
   "features_bullet_1": "Sin tarifas ocultas.",
   "features_bullet_2": "100% de seguridad. Garantizado.",
   "features_bullet_3": "No se necesita capacitación ni mantenimiento.",
-   "streamline_heading": "Optimiza las facturas. Descubre herramientas de gestión.",
+  "streamline_heading": "Optimiza las facturas. Descubre herramientas de gestión.",
   "streamline_description": "Experimenta soluciones de facturación y pagos sin complicaciones para las necesidades de tu negocio. Administra facturas, gestiona pagos en múltiples monedas y haz seguimiento de clientes, todo en un solo lugar. Registrarse es fácil, y crear facturas o procesar pagos solo toma unos clics. Disfruta gestionando múltiples negocios con nuestras herramientas intuitivas que optimizan tu flujo de trabajo.",
   "key_benefits_title": "Sección de beneficios clave",
   "key_benefits_subtitle": "Deja de perder tiempo con papeleo. Crea y envía facturas o presupuestos profesionales en solo unos clics con plantillas personalizables.",
@@ -50,7 +50,7 @@
   "facebook": "Facebook",
   "instagram": "Instagram",
   "linkedin": "LinkedIn",
-    "footer_description": "Ofrecemos soluciones de facturación y pago seguras, inteligentes y fáciles de usar que ayudan a las empresas a recibir pagos más rápido, gestionar clientes sin esfuerzo y crear presentaciones impactantes. Ya sea que seas un trabajador independiente o una empresa en crecimiento, nuestra plataforma te permite optimizar operaciones y escalar con confianza.",
+  "footer_description": "Ofrecemos soluciones de facturación y pago seguras, inteligentes y fáciles de usar que ayudan a las empresas a recibir pagos más rápido, gestionar clientes sin esfuerzo y crear presentaciones impactantes. Ya sea que seas un trabajador independiente o una empresa en crecimiento, nuestra plataforma te permite optimizar operaciones y escalar con confianza.",
   "footer_quick_links": "Enlaces Rápidos",
   "footer_social_media": "Redes Sociales",
   "footer_hot_link": "Enlace Directo",
@@ -62,5 +62,96 @@
   "footer_phone": "Teléfono: +(1)(465) 035-1237",
   "footer_email": "Correo: amnelson0121@gmail.com",
   "footer_address": "16037 Road Demra, Dhaka, Bangladesh",
-  "footer_copyright": "Derechos de autor © construck. Todos los derechos reservados."
+  "footer_copyright": "Derechos de autor © construck. Todos los derechos reservados.",
+  "dashboard_greeting": "Buenas tardes, Alex",
+  "dashboard_today_is": "Hoy es {{date}}",
+  "dashboard_create_invoice": "Crear Facturas",
+  "dashboard_new_customer": "Nuevo Cliente",
+  "dashboard_new_product": "Nuevos Productos",
+  "dashboard_create_estimate": "Presupuesto",
+  "dashboard_payment": "Pago",
+  "dashboard_add_customer_title": "Agregar Nuevo Cliente",
+  "dashboard_edit_customer_title": "Editar Cliente",
+  "dashboard_add_product_title": "Agregar Nuevo Producto",
+  "dashboard_edit_product_title": "Editar Producto",
+  "balance_analytics_title": "Análisis de Balance",
+  "balance_analytics_chart_label": "Balance Total",
+  "balance_analytics_months": {
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August": "Agosto",
+    "September": "Septiembre",
+    "October": "Octubre",
+    "November": "Noviembre",
+    "December": "Diciembre"
+  },
+  "balance_analytics_months_short": {
+    "January": "Ene",
+    "February": "Feb",
+    "March": "Mar",
+    "April": "Abr",
+    "May": "May",
+    "June": "Jun",
+    "July": "Jul",
+    "August": "Ago",
+    "September": "Sep",
+    "October": "Oct",
+    "November": "Nov",
+    "December": "Dic"
+  },
+  "things_to_do_title": "Cosas por Hacer",
+  "things_to_do_tasks": {
+    "profile": {
+      "title": "Completar Perfil de la Empresa",
+      "description": "Para hacer cualquier cosa, primero completa tu perfil de empresa."
+    },
+    "invoice_template": {
+      "title": "Crear Plantilla de Factura",
+      "description": "Para enviar una factura, necesitas crearla y elegir una plantilla."
+    },
+    "products": {
+      "title": "Agregar Productos",
+      "description": "Para crear una factura necesitas agregar productos."
+    }
+  },
+  "bar_chart": {
+    "title": "Ingresos Totales",
+    "amount": "$8,527,224",
+    "growth": "+3.12%",
+    "growth_label": "VS Este Mes"
+  },
+  "pro_plan_card": {
+    "plan_name": "Plan Pro",
+    "price": "$4.99",
+    "billing_cycle": "/mes",
+    "tagline": "Factura más inteligente. Crece más rápido.",
+    "features": {
+      "unlimited_invoice": "Facturas ilimitadas",
+      "management_setting": "Configuración de gestión",
+      "add_admin": "Agregar administrador en el perfil de la empresa"
+    },
+    "upgrade_button": "Actualizar plan"
+  },
+  "title": "Clientes",
+  "search_placeholder": "Buscar por nombre, correo electrónico o empresa...",
+  "add_customer": "Agregar",
+  "edit_customer": "Editar",
+  "view_customer": "Ver",
+  "delete_customer": "Eliminar",
+  "delete_confirmation": "¿Estás seguro de que deseas eliminar este cliente?",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "highest_unpaid_balances_title": "Clientes con los saldos pendientes más altos",
+  "top_paying_customers_title": "Clientes que más pagan",
+  "payment": "Pago",
+   "schedule_payment": "Programar pago",
+    "virtual_terminal": "Terminal virtual",
+    "pay_by_link": "Pagar por enlace",
+    "total_payment": "Pago total",
+    "pending_payments": "Pagos Pendientes"
 }
