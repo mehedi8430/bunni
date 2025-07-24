@@ -64,10 +64,9 @@ export default function DashboardPage() {
           {t("dashboard_today_is", { date: formatted })}
         </p>
 
-        <div className="mt-6 flex flex-col items-center gap-2 md:flex-row">
+        <div className="mt-6 flex flex-wrap items-center gap-2 md:flex-row">
           <Button
             variant={"primary"}
-            size={"lg"}
             className="text-base font-normal"
             onClick={() => navigate("/dashboard/invoices/templates")}
           >
@@ -76,7 +75,6 @@ export default function DashboardPage() {
           </Button>
           <Button
             variant={"primary"}
-            size={"lg"}
             className="text-base font-normal"
             onClick={() => {
               setEditCustomer({});
@@ -88,7 +86,6 @@ export default function DashboardPage() {
           </Button>
           <Button
             variant={"primary"}
-            size={"lg"}
             className="text-base font-normal"
             onClick={() => {
               setIsProductEditOpen(true);
@@ -101,7 +98,6 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             <Button
               variant={"primary"}
-              size={"lg"}
               className="text-base font-normal"
               onClick={() =>
                 navigate("/dashboard/invoices/templates?type=estimate")
@@ -112,7 +108,6 @@ export default function DashboardPage() {
             </Button>
             <Button
               variant={"primary"}
-              size={"lg"}
               className="text-base font-normal"
               onClick={() => navigate("/dashboard/payment")}
             >
