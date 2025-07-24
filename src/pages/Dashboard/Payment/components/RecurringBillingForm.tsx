@@ -13,6 +13,7 @@ import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicke
 export default function RecurringBillingForm({ onClose }: RecurringBillingFormProps) {
     const { form, onSubmit, customers } = useRecurringBilling();
     const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState("");
 
     const intervalOptions = [
         { value: "Monthly", label: "Monthly" },
@@ -161,7 +162,10 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                                 value: option.value,
                                                 label: option.label,
                                             }))}
-                                            onValueChange={field.onChange}
+                                            onValueChange={(value) => {
+                                                field.onChange(value);
+                                                setPaymentMethod(value);
+                                            }}
                                             triggerClassName="w-full py-3"
                                             value={field.value}
                                         />
@@ -170,6 +174,79 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                 </FormItem>
                             )}
                         />
+
+                        {paymentMethod === "Credit Card" && (
+                            <div>
+                                {/* card number */}
+                                <FormField
+                                    control={form.control}
+                                    name="cardNumber"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-base font-normal">Card Number</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="text"
+                                                    placeholder="1234 5678 9012 3456"
+                                                    {...field}
+                                                    onChange={(e) =>
+                                                        field.onChange(e.target.value)
+                                                    }
+                                                    className="custom-focus"
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <div className="flex items-center gap-4 mt-3">
+                                    {/* expiry date */}
+                                    <FormField
+                                        control={form.control}
+                                        name="cardExpiry"
+                                        render={({ field }) => (
+                                            <FormItem className="w-1/2">
+                                                <FormLabel className="text-base font-normal">Card Expiry</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="MM/YY or MM/YYYY"
+                                                        {...field}
+                                                        onChange={(e) =>
+                                                            field.onChange(e.target.value)
+                                                        }
+                                                        className="custom-focus"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    {/* card CVC */}
+                                    <FormField
+                                        control={form.control}
+                                        name="cardCVC"
+                                        render={({ field }) => (
+                                            <FormItem className="w-1/2">
+                                                <FormLabel className="text-base font-normal">Card CVC</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="CVC"
+                                                        {...field}
+                                                        onChange={(e) =>
+                                                            field.onChange(e.target.value)
+                                                        }
+                                                        className="custom-focus"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
