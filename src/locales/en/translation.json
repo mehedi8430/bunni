@@ -65,7 +65,7 @@
   "footer_copyright": "Copyright © construck all right reserved.",
   "dashboard_greeting": "Good afternoon, Alex",
   "dashboard_today_is": "Today is {{date}}",
-  "dashboard_create_invoice": "Create Invoices",
+  "dashboard_create_invoice": "Invoices",
   "dashboard_new_customer": "New Customer",
   "dashboard_new_product": "New Products",
   "dashboard_create_estimate": "Estimate",
@@ -152,5 +152,10 @@
   "virtual_terminal": "Virtual Terminal",
   "pay_by_link": "Pay by Link",
   "total_payment": "Total Payment",
- "pending_payments": "Pending Payments"
+ "pending_payments": "Pending Payments",
+ "invoice_estimate": "Estimate",
+ "outstanding_invoices": "Outstanding Invoices",
+ "recent_payments": "Recent Payments",
+ "total_customers": "Total Customers",
+ "revenue_this_month": "Revenue this month"
 }

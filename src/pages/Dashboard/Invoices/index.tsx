@@ -8,8 +8,10 @@ import InvoicesTable from "./components/InvoicesTable";
 import { Plus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EstimatesTable from "./components/EstimatesTable";
+import { useTranslation } from "react-i18next";
 
 export default function InvoicesPage() {
+   const { t } = useTranslation();
   const navigate = useNavigate();
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
 
@@ -17,31 +19,29 @@ export default function InvoicesPage() {
     <section className="space-y-10">
       <div className="flex flex-col items-start justify-between space-y-4 md:flex-row">
         <div className="space-y-2">
-          <h1 className="text-[32px] font-semibold">Good afternoon, Alex</h1>
-          <p className="text-muted-foreground text-[20px] font-normal">
-            Today is {formatted}
+          <h1 className="text-[26px] font-semibold">{t("dashboard_greeting")}</h1>
+          <p className="text-muted-foreground text-lg font-normal">
+           {t("dashboard_today_is", { date: formatted })}
           </p>
         </div>
         <div className="space-y-4 space-x-4">
           <Button
             variant="primary"
-            size="lg"
-            className="text-lg font-normal max-sm:mx-auto"
+            className="text-base font-normal max-sm:mx-auto"
             onClick={() => navigate("/dashboard/invoices/templates")}
           >
             <Plus />
-            Create Invoices
+            {t("dashboard_create_invoice")}
           </Button>
           <Button
             variant={"primary"}
-            size={"lg"}
             className="text-base font-normal"
             onClick={() =>
               navigate("/dashboard/invoices/templates?type=estimate")
             }
           >
             <Plus />
-            Create Estimate
+            {t("invoice_estimate")}
           </Button>
         </div>
       </div>
@@ -49,28 +49,28 @@ export default function InvoicesPage() {
       <div className="flex gap-6 overflow-x-auto pb-3 md:grid md:grid-cols-4 md:pb-0">
         <TopCard
           icon={<ReactSVG src={icons.outstanding} />}
-          title="Outstanding Invoices"
+          title={t("outstanding_invoices")}
           value="$1,637"
           iconBgColor="bg-red-100"
           valueColor="text-red-400"
         />
         <TopCard
           icon={<ReactSVG src={icons.dolar} />}
-          title="Recent Payments"
+          title={t("recent_payments")}
           value="$3,847"
           iconBgColor="bg-purple-100"
           valueColor="text-foreground"
         />
         <TopCard
           icon={<ReactSVG src={icons.groupuser} />}
-          title="Total Customer"
+          title={t("total_customers")}
           value="$2,567"
           iconBgColor="bg-yellow-50"
           valueColor="text-foreground"
         />
         <TopCard
           icon={<ReactSVG src={icons.revinue} />}
-          title="Revenue this month"
+          title={t("revenue_this_month")}
           value="$4,212"
           iconBgColor="bg-green-100"
           valueColor="text-foreground"
@@ -85,13 +85,13 @@ export default function InvoicesPage() {
                 value="invoices"
                 className="text-muted-foreground text-sm focus:text-white md:text-base"
               >
-                Invoices
+                {t("dashboard_create_invoice")}
               </TabsTrigger>
               <TabsTrigger
                 value="estimates"
                 className="text-muted-foreground text-sm focus:text-white md:text-base"
               >
-                Estimates
+                {t("invoice_estimate")}
               </TabsTrigger>
             </TabsList>
             <TabsContent value="invoices">

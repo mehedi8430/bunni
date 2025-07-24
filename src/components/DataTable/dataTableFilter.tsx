@@ -98,7 +98,7 @@ export function DataTableFilter<T>({
                   ) : (
                     <CirclePlus className="h-4 w-4" />
                   )}
-                  {column.displayName}
+                  <span className="truncate max-w-10">{column.displayName}</span>
                 </Button>
               );
             })}

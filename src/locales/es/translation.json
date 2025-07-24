@@ -65,7 +65,7 @@
   "footer_copyright": "Derechos de autor © construck. Todos los derechos reservados.",
   "dashboard_greeting": "Buenas tardes, Alex",
   "dashboard_today_is": "Hoy es {{date}}",
-  "dashboard_create_invoice": "Crear Facturas",
+  "dashboard_create_invoice": "Facturas",
   "dashboard_new_customer": "Nuevo Cliente",
   "dashboard_new_product": "Nuevos Productos",
   "dashboard_create_estimate": "Presupuesto",
@@ -149,9 +149,14 @@
   "highest_unpaid_balances_title": "Clientes con los saldos pendientes más altos",
   "top_paying_customers_title": "Clientes que más pagan",
   "payment": "Pago",
-   "schedule_payment": "Programar pago",
-    "virtual_terminal": "Terminal virtual",
-    "pay_by_link": "Pagar por enlace",
-    "total_payment": "Pago total",
-    "pending_payments": "Pagos Pendientes"
+  "schedule_payment": "Programar pago",
+  "virtual_terminal": "Terminal virtual",
+  "pay_by_link": "Pagar por enlace",
+  "total_payment": "Pago total",
+  "pending_payments": "Pagos Pendientes",
+  "invoice_estimate": "Presupuesto",
+  "outstanding_invoices": "Facturas Pendientes",
+  "recent_payments": "Pagos Recientes",
+  "total_customers": "Total de Clientes",
+  "revenue_this_month": "Ingresos este mes"
 }
