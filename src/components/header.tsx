@@ -21,14 +21,14 @@ export default function Header() {
         </div>
 
         {/* Desktop View */}
-        <div className="flex w-full items-center justify-between pr-14 pl-24 max-md:hidden">
-          <div className="flex items-center">
-            <Headset className="size-4" />
-            <SelectInput
+        <div className="flex gap-4 w-full items-center justify-end pr-14 pl-24 max-md:hidden">
+          <div className="flex items-center cursor-pointer">
+            <Headset strokeWidth={2} className="size-5" />
+            {/* <SelectInput
               options={[]}
               placeholder="Support"
               triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:border [&>svg]:border-border [&>svg]:rounded-full [&>svg]:opacity-80 [&>svg]:size-5 [&>svg]:stroke-black data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg"
-            />
+            /> */}
           </div>
 
           <div className="flex items-center gap-6">
