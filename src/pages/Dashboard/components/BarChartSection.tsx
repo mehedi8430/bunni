@@ -5,43 +5,34 @@ import { useTranslation } from "react-i18next";
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-// const monthOptions: SelectOption[] = [
-//   { value: "monthly", label: "Monthly" },
-//   // { value: "yearly", label: "yearly" },
-// ];
-
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "January", totalSales: 18600 },
+  { month: "February", totalSales: 30500 },
+  { month: "March", totalSales: 23700 },
+  { month: "April", totalSales: 7300 },
+  { month: "May", totalSales: 20900 },
+  { month: "June", totalSales: 21400 },
 ];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  totalSales: {
+    label: "Total Sales",
     color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
 
 export default function BarChartSection() {
   const { t } = useTranslation();
-  // const [selected, setSelected] = useState<string>("monthly");
 
-  // const handleMonthChange = (value: string) => {
-  //   console.log("Selected month:", value);
-  //   setSelected(value);
-  // };
+  const totalAmount = chartData
+    .reduce((sum, item) => sum + item.totalSales, 0)
+    .toLocaleString();
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h4 className="text-lg font-semibold">{t("bar_chart.title")}</h4>
-        <h2 className="text-lg font-bold text-black">
-          {t("bar_chart.amount")}
-        </h2>
+        <h2 className="text-lg font-bold text-black">${totalAmount}</h2>
       </div>
       <div className="flex items-center gap-4">
         <Button
@@ -50,18 +41,10 @@ export default function BarChartSection() {
         >
           <ArrowUpRight /> +3.12%
         </Button>
-        <p className="text-sm font-normal">{t("bar_chart.growth_label")}</p>
+        <p className="text-sm font-normal">Total sales since last month</p>
       </div>
 
       <div className="mt-4 space-y-2">
-        {/* <SelectInput
-          options={monthOptions}
-          placeholder="Select a month"
-          value={selected}
-          onValueChange={handleMonthChange}
-          triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
-        /> */}
-
         <ChartContainer config={chartConfig} className="h-[200px] w-full">
           <BarChart
             accessibilityLayer
@@ -86,7 +69,11 @@ export default function BarChartSection() {
               axisLine={false}
               tickFormatter={(value) => `$${value}`}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={0} />
+            <Bar
+              dataKey="totalSales"
+              fill="var(--color-totalSales)"
+              radius={0}
+            />
           </BarChart>
         </ChartContainer>
       </div>
