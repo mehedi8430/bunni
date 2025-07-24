@@ -25,6 +25,7 @@ import { AddPaymentForm } from "./components/AddPaymentForm";
 import RecurringBillingForm from "./components/RecurringBillingForm";
 import VirtualTerminalForm from "./components/VirtualTerminalForm";
 import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import { useTranslation } from "react-i18next";
 
 // Custom header component for status filtering
 const StatusFilterHeader = ({
@@ -78,6 +79,7 @@ const StatusFilterHeader = ({
 };
 
 export default function PaymentPage() {
+  const { t } = useTranslation();
   const tableRef = useRef<DataTableHandle<Payment> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -317,7 +319,7 @@ export default function PaymentPage() {
   return (
     <section className="space-y-10">
       <div className="flex flex-col items-center justify-between space-y-1 lg:flex-row">
-        <h1 className="text-2xl font-semibold md:text-[26px]">Payment</h1>
+        <h1 className="text-2xl font-semibold md:text-[26px]">{t("payment")}</h1>
         <div className="flex flex-wrap items-center justify-center gap-6">
           <Button
             onClick={() => setIsRecurringBillingOpen(true)}
@@ -325,7 +327,7 @@ export default function PaymentPage() {
             className="text-base font-normal"
           >
             <Plus />
-            Schedule Payment
+            {t("schedule_payment")}
           </Button>
           <Button
             onClick={() => setIsVirtualTerminalOpen(true)}
@@ -333,7 +335,7 @@ export default function PaymentPage() {
             className="text-base font-normal"
           >
             <Plus />
-            Virtual Terminal
+            {t("virtual_terminal")}
           </Button>
           <Button
             onClick={() => setIsAddPaymentOpen(true)}
@@ -341,7 +343,7 @@ export default function PaymentPage() {
             className="text-base font-normal"
           >
             <Plus />
-            pay by link
+            {t("pay_by_link")}
           </Button>
         </div>
       </div>
@@ -353,7 +355,7 @@ export default function PaymentPage() {
               <ReactSVG src={assets.icons.doller_up} />
             </div>
             <p className="text-muted-foreground text-[16px] font-normal">
-              Total payment
+              {t("total_payment")}
             </p>
           </div>
           <p className="text-xl font-bold ml-11">$ 2,567</p>
@@ -365,7 +367,7 @@ export default function PaymentPage() {
               <ReactSVG src={assets.icons.pending} />
             </div>
             <p className="text-muted-foreground text-[16px] font-normal">
-              Pending payments
+              {t("pending_payments")}
             </p>
           </div>
           <p className="text-xl font-bold ml-11">$ 4,212</p>

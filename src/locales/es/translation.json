@@ -147,5 +147,11 @@
   "cancel": "Cancelar",
   "confirm": "Confirmar",
   "highest_unpaid_balances_title": "Clientes con los saldos pendientes más altos",
-  "top_paying_customers_title": "Clientes que más pagan"
+  "top_paying_customers_title": "Clientes que más pagan",
+  "payment": "Pago",
+   "schedule_payment": "Programar pago",
+    "virtual_terminal": "Terminal virtual",
+    "pay_by_link": "Pagar por enlace",
+    "total_payment": "Pago total",
+    "pending_payments": "Pagos Pendientes"
 }
