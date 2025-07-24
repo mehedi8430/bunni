@@ -125,7 +125,7 @@
     "growth": "+3.12%",
     "growth_label": "VS Este Mes"
   },
-    "pro_plan_card": {
+  "pro_plan_card": {
     "plan_name": "Plan Pro",
     "price": "$4.99",
     "billing_cycle": "/mes",
@@ -136,5 +136,16 @@
       "add_admin": "Agregar administrador en el perfil de la empresa"
     },
     "upgrade_button": "Actualizar plan"
-  }
+  },
+  "title": "Clientes",
+  "search_placeholder": "Buscar por nombre, correo electrónico o empresa...",
+  "add_customer": "Agregar",
+  "edit_customer": "Editar",
+  "view_customer": "Ver",
+  "delete_customer": "Eliminar",
+  "delete_confirmation": "¿Estás seguro de que deseas eliminar este cliente?",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "highest_unpaid_balances_title": "Clientes con los saldos pendientes más altos",
+  "top_paying_customers_title": "Clientes que más pagan"
 }

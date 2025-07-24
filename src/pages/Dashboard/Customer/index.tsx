@@ -22,8 +22,10 @@ import TopPayingCustomerChart from "./components/TopPayingCustomerChart";
 import HighestUnpaidBalanceChart from "./components/HighestUnpaidBalanceChart";
 import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 import type { TCustomer } from "@/types/customer.type";
+import { useTranslation } from "react-i18next";
 
 export default function CustomerPage() {
+  const { t } = useTranslation();
   const tableRef = useRef<DataTableHandle<TCustomer> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -167,7 +169,7 @@ export default function CustomerPage() {
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
           >
             {/* <Eye className="mr-2 h-4 w-4" /> */}
-            View
+            {t("view_customer")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -176,7 +178,7 @@ export default function CustomerPage() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Edit
+            {t("edit_customer")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -185,7 +187,7 @@ export default function CustomerPage() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Delete
+            {t("delete_customer")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -223,7 +225,7 @@ export default function CustomerPage() {
   return (
     <section className="space-y-10">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold md:text-[26px]">Customers</h1>
+        <h1 className="text-2xl font-semibold md:text-[26px]">{t("title")}</h1>
         <Button
           variant="primary"
           className="text-base font-normal"
@@ -233,7 +235,7 @@ export default function CustomerPage() {
           }}
         >
           <Plus />
-          New Customer
+          {t("dashboard_new_customer")}
         </Button>
       </div>
 

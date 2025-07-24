@@ -119,13 +119,13 @@
       "description": "To create invoice you need to add products."
     }
   },
-    "bar_chart": {
+  "bar_chart": {
     "title": "Total Revenue",
     "amount": "$8,527,224",
     "growth": "+3.12%",
     "growth_label": "VS This Month"
   },
-    "pro_plan_card": {
+  "pro_plan_card": {
     "plan_name": "Pro Plan",
     "price": "$4.99",
     "billing_cycle": "/month",
@@ -136,5 +136,15 @@
       "add_admin": "Add Admin In Company Profile"
     },
     "upgrade_button": "Upgrade plan"
-  }
+  },
+  "title": "Customers",
+  "search_placeholder": "Search by name, email, or company...",
+  "add_customer": "Add",
+  "edit_customer": "Edit",
+  "view_customer": "View",
+  "delete_customer": "Delete",
+  "delete_confirmation": "Are you sure you want to delete this customer?",
+  "confirm": "Confirm",
+  "highest_unpaid_balances_title": "Customers With Highest Unpaid Balances",
+  "top_paying_customers_title": "Top Paying Customers"
 }
