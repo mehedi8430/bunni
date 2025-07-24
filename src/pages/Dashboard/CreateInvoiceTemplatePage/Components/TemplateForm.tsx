@@ -3,7 +3,6 @@ import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import type { TCustomer } from "@/types/customer.type";
@@ -21,13 +20,13 @@ import { useInvoiceApi } from "@/mock-api-hook/features/customers/useInvoiceApi"
 import { useAppSelector } from "@/redux/hooks";
 import type { TInvoice, TInvoiceData } from "@/types";
 import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
+import { CollapsibleField } from "./CollapsibleField";
 
 export default function TemplateForm() {
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
   const { customers } = useCustomerApi();
   const { state: invoiceId } = useLocation();
   const { invoice } = useInvoiceApi(invoiceId);
-  console.log({ invoice });
 
   const dispatch = useDispatch();
   const {
@@ -66,10 +65,8 @@ export default function TemplateForm() {
     <div>
       <form onSubmit={onSubmit} className="space-y-6 px-6 pt-6">
         <div className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="title" className="custom-label">
-              Invoice title
-            </Label>
+          {/* Invoice Title */}
+          <CollapsibleField label="Invoice title">
             <Input
               id="title"
               placeholder="Let your customer know what this invoice is for"
@@ -79,40 +76,38 @@ export default function TemplateForm() {
               }
               className="custom-focus"
             />
-          </div>
+          </CollapsibleField>
 
-          <div className="space-y-2">
-            <Label htmlFor="customer" className="custom-label">
-              Customer
-            </Label>
-            <SelectInput
-              options={customers.map((customer: TCustomer) => ({
-                value: customer.id,
-                label: customer.name,
-              }))}
-              placeholder="Select a customer"
-              value={customerId}
-              onValueChange={(value) =>
-                dispatch(updateField({ field: "customerId", value }))
-              }
-              triggerClassName="w-full"
-            />
-            <div className="flex justify-end">
-              <Button
-                variant="link"
-                className="text-sm font-normal"
-                onClick={() => setIsAddCustomerOpen(true)}
-                type="button"
-              >
-                <Plus /> Add Customer
-              </Button>
+          {/* Customer Selection */}
+          <CollapsibleField label="Customer">
+            <div className="space-y-2">
+              <SelectInput
+                options={customers.map((customer: TCustomer) => ({
+                  value: customer.id,
+                  label: customer.name,
+                }))}
+                placeholder="Select a customer"
+                value={customerId}
+                onValueChange={(value) =>
+                  dispatch(updateField({ field: "customerId", value }))
+                }
+                triggerClassName="w-full"
+              />
+              <div className="flex justify-end">
+                <Button
+                  variant="link"
+                  className="text-sm font-normal"
+                  onClick={() => setIsAddCustomerOpen(true)}
+                  type="button"
+                >
+                  <Plus className="mr-1 h-4 w-4" /> Add Customer
+                </Button>
+              </div>
             </div>
-          </div>
+          </CollapsibleField>
 
-          <div className="space-y-2">
-            <Label htmlFor="invoiceNumber" className="custom-label">
-              Invoice
-            </Label>
+          {/* Invoice Number */}
+          <CollapsibleField label="Invoice Number">
             <Input
               id="invoiceNumber"
               placeholder="Enter invoice number"
@@ -127,12 +122,10 @@ export default function TemplateForm() {
               }
               className="custom-focus"
             />
-          </div>
+          </CollapsibleField>
 
-          <div className="space-y-2">
-            <Label htmlFor="orderNumber" className="custom-label">
-              Order Number
-            </Label>
+          {/* Order Number */}
+          <CollapsibleField label="Order Number">
             <Input
               id="orderNumber"
               placeholder="Enter order number"
@@ -144,63 +137,60 @@ export default function TemplateForm() {
               }
               className="custom-focus"
             />
-          </div>
+          </CollapsibleField>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          {/* Date Fields */}
+          <CollapsibleField label="Dates">
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <CustomDatePicker
+                  defaultDate={invoiceDate}
+                  label="Invoice Date"
+                  labelClassName="custom-label -mb-2"
+                  onDateChange={(date) =>
+                    dispatch(
+                      updateField({
+                        field: "invoiceDate",
+                        value: date ? date.toDateString() : "",
+                      }),
+                    )
+                  }
+                />
+                <CustomDatePicker
+                  defaultDate={serviceDate}
+                  label="Service Date"
+                  labelClassName="custom-label -mb-2"
+                  onDateChange={(date) =>
+                    dispatch(
+                      updateField({
+                        field: "serviceDate",
+                        value: date ? date.toDateString() : "",
+                      }),
+                    )
+                  }
+                />
+              </div>
               <CustomDatePicker
-                defaultDate={invoiceDate}
-                label="Invoice Date"
+                defaultDate={dueDate}
+                label="Due Date"
                 labelClassName="custom-label -mb-2"
                 onDateChange={(date) =>
                   dispatch(
                     updateField({
-                      field: "invoiceDate",
+                      field: "dueDate",
                       value: date ? date.toDateString() : "",
                     }),
                   )
                 }
               />
             </div>
-            <div className="space-y-2">
-              <CustomDatePicker
-                defaultDate={serviceDate}
-                label="Service Date"
-                labelClassName="custom-label -mb-2"
-                onDateChange={(date) =>
-                  dispatch(
-                    updateField({
-                      field: "serviceDate",
-                      value: date ? date.toDateString() : "",
-                    }),
-                  )
-                }
-              />
-            </div>
-          </div>
+          </CollapsibleField>
 
-          <div className="space-y-2">
-            <CustomDatePicker
-              defaultDate={dueDate}
-              label="Due Date"
-              labelClassName="custom-label -mb-2"
-              onDateChange={(date) =>
-                dispatch(
-                  updateField({
-                    field: "dueDate",
-                    value: date ? date.toDateString() : "",
-                  }),
-                )
-              }
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="footerTerms" className="custom-label">
-              Footer & Terms
-            </Label>
+          {/* Footer & Terms */}
+          <CollapsibleField label="Footer & Terms">
             <Textarea
               id="footerTerms"
+              placeholder="Enter footer text and terms & conditions"
               value={footerTerms}
               onChange={(e) =>
                 dispatch(
@@ -210,7 +200,7 @@ export default function TemplateForm() {
               rows={3}
               className="custom-focus"
             />
-          </div>
+          </CollapsibleField>
         </div>
 
         {/* Items Section */}

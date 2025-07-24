@@ -1,15 +1,15 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { setColor } from "@/redux/slices/invoiceTemplateSlice";
-import { Outlet, useLocation, useSearchParams } from "react-router";
+import { Link, Outlet, useLocation, useSearchParams } from "react-router";
 import TemplateForm from "./Components/TemplateForm";
+import { templates } from "./templates";
+import TemplateCard from "../InvoiceTemplatesPage/components/TemplateCard";
 
 export default function CreateInvoiceTemplatePage() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
-  const pathName = location.pathname;
-  console.log({ pathName });
 
   return (
     <section className="flex flex-col items-start gap-6 md:flex-row">
@@ -26,6 +26,8 @@ export default function CreateInvoiceTemplatePage() {
       <div className="flex-1 space-y-0 md:space-y-6">
         {/* Preview Section */}
         <Outlet />
+
+        {/* Colors Section */}
         <div className="flex flex-wrap justify-between gap-2">
           {colors.map((color) => (
             <div key={color.hex} className="flex flex-col items-center gap-2">
@@ -34,14 +36,6 @@ export default function CreateInvoiceTemplatePage() {
                   type="color"
                   value={color.hex}
                   onChange={(e) => dispatch(setColor(e.target.value))}
-                  // onChange={(e) =>
-                  //   dispatch(
-                  //     setColor({
-                  //       color: e.target.value,
-                  //       templateName: ,
-                  //     }),
-                  //   )
-                  // }
                   className="h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0"
                   style={{ transform: "scale(1.5)" }}
                   title={`Pick a color (current: ${color.colorName})`}
@@ -49,6 +43,21 @@ export default function CreateInvoiceTemplatePage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Templates Section */}
+        <div className="mt-6">
+          <h3 className="mb-4 text-xl font-semibold">Available Templates</h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {templates.map((template) => (
+              <Link
+                key={template.id}
+                to={type ? `${template.link}?type=${type}` : template.link}
+              >
+                <TemplateCard template={template} />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>
