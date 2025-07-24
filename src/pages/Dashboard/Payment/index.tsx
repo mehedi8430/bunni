@@ -174,10 +174,10 @@ export default function PaymentPage() {
     },
     {
       accessorKey: "invoice",
-      header: () => <div className="text-start">Invoice</div>,
+      header: () => <div className="text-start">Transaction Number</div>,
       size: 150,
       cell: ({ row }) => (
-        <div className="truncate text-start">{row.getValue("invoice")}</div>
+        <div className="truncate text-start cursor-pointer">{row.getValue("invoice")}</div>
       ),
     },
     {

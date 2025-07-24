@@ -61,8 +61,8 @@ export function DataTableFilter<T>({
 
   return (
     <div className="flex items-start justify-between p-4 xl:items-center">
-      <div className="flex flex-wrap items-center gap-6">
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <SearchInput
             value={searchTerm}
             onChange={handleFilterChange}
