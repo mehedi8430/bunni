@@ -245,7 +245,7 @@ export default function PaymentPage() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="ghost" className="h-8 w-8 p-0 hover:bg-transparent focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 cursor-pointer">
             <span className="sr-only">Open menu</span>
             <MoreHorizontal />
           </Button>
@@ -445,7 +445,7 @@ export default function PaymentPage() {
 
       {/* Add Recurring Billing Form modal */}
       <DialogModal
-        title="Set Up Recurring Billing"
+        title="Payment Schedule"
         isOpen={isRecurringBillingOpen}
         onOpenChange={setIsRecurringBillingOpen}
         className="w-xl"

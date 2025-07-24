@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
+import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
 
 
 export default function RecurringBillingForm({ onClose }: RecurringBillingFormProps) {
@@ -15,17 +16,14 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
 
     const intervalOptions = [
         { value: "Monthly", label: "Monthly" },
-        { value: "Quarterly", label: "Quarterly" },
-        { value: "Annually", label: "Annually" },
         { value: "Weekly", label: "Weekly" },
         { value: "Daily", label: "Daily" },
     ];
 
     const paymentMethodOptions = [
-        { value: "Card", label: "Card" },
-        { value: "Bank Transfer", label: "Bank Transfer" },
-        { value: "PayPal", label: "PayPal" },
-        { value: "Other", label: "Other" },
+        { value: "Credit Card", label: "Credit Card" },
+        { value: "ACH", label: "ACH" },
+        { value: "Cash", label: "Cash" },
     ];
 
     return (
@@ -33,14 +31,14 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} >
 
-                    <div className="space-y-5 px-4">
+                    <div className="space-y-3 px-4">
                         {/* Customer select */}
                         <FormField
                             control={form.control}
                             name="customer"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-lg font-normal">Customer</FormLabel>
+                                    <FormLabel className="text-base font-normal">Customer</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={customers.map((customer) => ({
@@ -49,7 +47,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                             }))}
                                             placeholder="Select a customer"
                                             onValueChange={field.onChange}
-                                            triggerClassName="w-full py-5"
+                                            triggerClassName="w-full py-3"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -68,13 +66,50 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             </span>
                         </Button>
 
-                        {/* Payment Amount */}
+
+                        {/* start and end date */}
+                        <div className="flex items-center gap-4">
+                            <FormField
+                                control={form.control}
+                                name="startDate"
+                                render={({ field }) => (
+                                    <FormItem className="flex-1">
+                                        <FormControl>
+                                            <CustomDatePicker
+                                                label="Start Date"
+                                                onDateChange={(date) =>
+                                                    field.onChange(date)
+                                                }
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="endDate"
+                                render={({ field }) => (
+                                    <FormItem className="flex-1">
+                                        <FormControl>
+                                            <CustomDatePicker
+                                                label="End Date"
+                                                onDateChange={(date) =>
+                                                    field.onChange(date)
+                                                }
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
                         <FormField
                             control={form.control}
                             name="amount"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-lg font-normal">Payment Amount</FormLabel>
+                                    <FormLabel className="text-base font-normal">Payment Amount</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
@@ -96,7 +131,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             name="interval"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-lg font-normal">Interval</FormLabel>
+                                    <FormLabel className="text-base font-normal">Interval</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={intervalOptions.map((option) => ({
@@ -105,7 +140,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                             }))}
                                             value={field.value}
                                             onValueChange={field.onChange}
-                                            triggerClassName="w-full py-5"
+                                            triggerClassName="w-full py-3"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -119,7 +154,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             name="paymentMethod"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-lg font-normal">Payment Method</FormLabel>
+                                    <FormLabel className="text-base font-normal">Payment Method</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={paymentMethodOptions.map((option) => ({
@@ -127,7 +162,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                                 label: option.label,
                                             }))}
                                             onValueChange={field.onChange}
-                                            triggerClassName="w-full py-5"
+                                            triggerClassName="w-full py-3"
                                             value={field.value}
                                         />
                                     </FormControl>
@@ -140,10 +175,10 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                     <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
                     {/* Buttons */}
                     <div className="flex items-center justify-center md:justify-end gap-3 p-5">
-                        <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-lg font-normal">
+                        <Button type="button" variant="outline" onClick={onClose} className="px-8 py-4 text-base font-normal">
                             Cancel
                         </Button>
-                        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-lg font-normal border border-button-border">Save</Button>
+                        <Button variant={"primary"} type="submit" className="px-8 py-4 shadow-2xl text-base font-normal border border-button-border">Save</Button>
                     </div>
                 </form>
             </Form>

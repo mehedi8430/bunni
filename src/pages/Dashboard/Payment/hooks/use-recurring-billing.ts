@@ -9,12 +9,14 @@ export const recurringBillingFormSchema = z.object({
   amount: z
     .number({ invalid_type_error: "Enter a valid amount" })
     .positive({ message: "Amount must be positive" }),
-  interval: z.enum(["Monthly", "Quarterly", "Annually", "Weekly", "Daily"], {
+  interval: z.enum(["Monthly", "Weekly", "Daily"], {
     errorMap: () => ({ message: "Please select a valid interval." }),
   }),
-  paymentMethod: z.enum(["Card", "Bank Transfer", "PayPal", "Other"], {
+  paymentMethod: z.enum(["Credit Card", "ACH", "Cash"], {
     errorMap: () => ({ message: "Please select a valid payment method." }),
   }),
+  startDate: z.string().min(1, { message: "Start date is required" }),
+  endDate: z.string().min(1, { message: "End date is required" }),
 });
 
 type RecurringBillingFormValues = z.infer<typeof recurringBillingFormSchema>;
@@ -33,7 +35,8 @@ export default function useRecurringBilling() {
       customer: customers[0]?.id ?? "",
       amount: 0,
       interval: "Monthly",
-      paymentMethod: "Card",
+      paymentMethod: "Credit Card",
+      startDate: new Date().toISOString().split("T")[0],
     },
   });
 
