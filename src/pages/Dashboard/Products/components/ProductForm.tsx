@@ -103,9 +103,10 @@ export default function ProductForm({
                 <FormLabel className="text-base font-normal">Unit</FormLabel>
                 <FormControl>
                   <SelectInput
+                  placeholder="Select unit"
                     options={[
-                      { value: "per hour", label: "Per Hour" },
-                      { value: "per month", label: "Per Month" },
+                      { value: "per unit", label: "Per Unit" },
+                      { value: "per item", label: "Per Item" },
                     ]}
                     value={field.value}
                     onValueChange={field.onChange}

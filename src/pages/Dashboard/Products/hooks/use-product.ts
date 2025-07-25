@@ -8,7 +8,7 @@ export const productFormSchema = z.object({
     id: z.string().optional(),
     name: z.string().min(1, { message: "Name is required" }),
     type: z.enum(["Product", "Service"]),
-    unit: z.enum(["per hour", "per month"], {
+    unit: z.enum(["per unit", "per item"], {
         errorMap: () => ({ message: "Please select a valid unit." }),
     }),
     price: z
@@ -44,7 +44,9 @@ export default function useProduct({
             id: product?.id || "",
             name: product?.name || "",
             type: product?.type || "Product",
-            unit: product?.unit === "per hour" || product?.unit === "per month" ? product.unit : "per hour",
+            unit: product?.unit === "per unit" || product?.unit === "per item"
+                ? (product?.unit as "per unit" | "per item")
+                : undefined,
             price: product?.price ?? 0,
             description: product?.description || "",
         },

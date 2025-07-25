@@ -106,7 +106,11 @@ export default function CustomerPage() {
       header: () => <div className="text-start">Customer Name</div>,
       size: 220,
       cell: ({ row }) => (
-        <div className="truncate text-start">{row.getValue("name")}</div>
+        <div onClick={() => {
+          setSelectedCustomer(row.original)
+          setIsViewOpen(true)
+        }}
+          className="truncate text-start cursor-pointer">{row.getValue("name")}</div>
       ),
     },
     {
@@ -155,7 +159,7 @@ export default function CustomerPage() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="ghost" className="h-8 w-8 p-0 hover:bg-transparent cursor-pointer">
             <span className="sr-only">Open menu</span>
             <MoreHorizontal />
           </Button>
