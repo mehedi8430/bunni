@@ -78,7 +78,10 @@ export default function InvoiceTableRowActions({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-8 w-8 p-0">
+        <Button
+          variant="ghost"
+          className="h-8 w-8 cursor-pointer p-0 hover:bg-transparent"
+        >
           <span className="sr-only">Open menu</span>
           <MoreHorizontal />
         </Button>
