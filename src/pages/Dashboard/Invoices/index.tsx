@@ -11,7 +11,7 @@ import EstimatesTable from "./components/EstimatesTable";
 import { useTranslation } from "react-i18next";
 
 export default function InvoicesPage() {
-   const { t } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const formatted = format(new Date(), "EEEE, MMMM d, yyyy");
 
@@ -19,9 +19,11 @@ export default function InvoicesPage() {
     <section className="space-y-10">
       <div className="flex flex-col items-start justify-between space-y-4 md:flex-row">
         <div className="space-y-2">
-          <h1 className="text-[26px] font-semibold">{t("dashboard_greeting")}</h1>
+          <h1 className="text-[26px] font-semibold">
+            {t("dashboard_greeting")}
+          </h1>
           <p className="text-muted-foreground text-lg font-normal">
-           {t("dashboard_today_is", { date: formatted })}
+            {t("dashboard_today_is", { date: formatted })}
           </p>
         </div>
         <div className="space-y-4 space-x-4">
@@ -80,16 +82,16 @@ export default function InvoicesPage() {
       <div className="grid grid-cols-4 gap-6">
         <div className="bg-sidebar col-span-4 rounded-2xl py-4">
           <Tabs defaultValue="invoices">
-            <TabsList className="border-border ml-6 w-[320px] border md:w-[400px]">
+            <TabsList className="ml-4 h-8 w-[320px] p-0 md:w-[400px]">
               <TabsTrigger
                 value="invoices"
-                className="text-muted-foreground text-sm focus:text-white md:text-base"
+                className="data-[state=active]:bg-primary text-sm data-[state=active]:text-white"
               >
                 {t("dashboard_create_invoice")}
               </TabsTrigger>
               <TabsTrigger
                 value="estimates"
-                className="text-muted-foreground text-sm focus:text-white md:text-base"
+                className="data-[state=active]:bg-primary text-sm data-[state=active]:text-white"
               >
                 {t("invoice_estimate")}
               </TabsTrigger>

@@ -106,7 +106,12 @@ export default function InvoicesTable() {
       header: () => <div className="text-start">Invoice</div>,
       size: 180,
       cell: ({ row }) => (
-        <div className="truncate text-start">{row.getValue("id")}</div>
+        <div
+          className="cursor-pointer truncate text-start"
+          onClick={() => setIsViewOpen(true)}
+        >
+          {row.getValue("id")}
+        </div>
       ),
       enableHiding: true,
     },
