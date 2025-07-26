@@ -17,7 +17,7 @@ export default function InvoiceTemplatesPage() {
         <h3 className="text-[20px] font-semibold">Use Template</h3>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {templates.map((template) => (
+          {templates.slice(0, 1).map((template) => (
             <Link
               key={template.id}
               to={type ? `${template.link}?type=${type}` : template.link}
