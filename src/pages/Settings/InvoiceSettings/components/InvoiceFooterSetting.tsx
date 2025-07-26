@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  invoiceFootersSelector, removeInvoiceFooter,} from "@/redux/slices/invoiceFooterSlice";
+import { invoiceFootersSelector, removeInvoiceFooter, } from "@/redux/slices/invoiceFooterSlice";
 import InvoiceFooterForm from "./InvoiceFooterForm";
 import type { TInvoiceFooter } from "@/types";
 
@@ -36,26 +36,30 @@ export default function InvoiceFooterSetting() {
       <div className="space-y-4">
         {invoiceFooters.map((footer) => (
           <div key={footer.id} className="p-4 border rounded-lg">
-            <p className="text-base">{footer.footerContent}</p>
-            <Button
-              variant="ghost"
-              onClick={() => {
-                setEditInvoiceFooter(footer);
-                setIsEditInvoiceFooterOpen(true);
-              }}
-              className="mt-2 text-sm font-normal md:text-base"
-            >
-              Edit
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={() => {
-                dispatch(removeInvoiceFooter(footer.id));
-              }}
-              className="mt-2 text-sm font-normal md:text-base"
-            >
-              delete
-            </Button>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+              <p className="text-base">{footer.footerContent}</p>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    setEditInvoiceFooter(footer);
+                    setIsEditInvoiceFooterOpen(true);
+                  }}
+                  className="mt-2 text-sm font-normal md:text-base"
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    dispatch(removeInvoiceFooter(footer.id));
+                  }}
+                  className="mt-2 text-sm font-normal md:text-base"
+                >
+                  delete
+                </Button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
