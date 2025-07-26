@@ -19,7 +19,7 @@ interface ProfileInfoProps {
 export default function ProfileInfo({profileData}: ProfileInfoProps) {
     return (
         <section className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="w-full space-y-6 bg-white px-5 py-8 rounded-md">
                     <h4 className="text-2xl font-semibold mb-5">Personal Info</h4>
                     <div className="flex items-center gap-8">

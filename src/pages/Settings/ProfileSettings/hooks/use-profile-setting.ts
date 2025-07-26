@@ -13,6 +13,7 @@ export const useFormSchema = z.object({
     businessLogo: z.string().optional(),
     businessContact: z.string().min(1, { message: "Business contact is required" }),
     websiteUrl: z.string().url({ message: "Invalid URL" }).optional(),
+    brandColor: z.string().min(1, { message: "Brand color is required" }),
 })
 
 type ProfileFormValues = z.infer<typeof useFormSchema>;
@@ -31,6 +32,7 @@ interface UseProfileFormProps {
             address: string;
             contact: string;
             website: string;
+            brandColor: string;
         };
     };
 }
@@ -50,6 +52,7 @@ export default function UseProfileForm({ onSuccess, profileData }: UseProfileFor
             businessLogo:'',
             businessContact: profileData?.businessInfo.contact || '',
             websiteUrl: profileData?.businessInfo.website || '',
+            brandColor: profileData?.businessInfo.brandColor || '',
         }
     })
 

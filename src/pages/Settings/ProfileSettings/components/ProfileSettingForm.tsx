@@ -18,6 +18,7 @@ interface ProfileSettingFormProps {
             address: string;
             contact: string;
             website: string;
+            brandColor: string;
         };
     };
 }
@@ -130,7 +131,7 @@ export default function ProfileSettingForm({ onSuccess, profileData }: ProfileSe
                                     </FormItem>
                                 )}
                             />
-                            
+
                             {/* Business Name */}
                             <FormField
                                 control={form.control}
@@ -205,8 +206,30 @@ export default function ProfileSettingForm({ onSuccess, profileData }: ProfileSe
                                 )}
                             />
 
-                            
+                            <div className="flex items-center gap-2 justify-between mt-8">
+                                <p className="text-lg font-normal">Choose your brand color</p>
+                                <FormField
+                                    control={form.control}
+                                    name="brandColor"
+                                    render={({ field }) => (
+                                        <FormItem className="h-10 w-16 overflow-hidden">
+                                            <FormControl>
+                                                <Input
+                                                    type="color"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    className="h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 rounded-full"
+                                                    style={{ transform: "scale(1.5)" }}
+                                                    title={`Pick a brand color`}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
                         </div>
+
                     </div>
                     {/* Buttons */}
                     <div className="gap-3 flex justify-center md:justify-end mt-10">

@@ -1,18 +1,16 @@
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ProfileSettingForm from "./components/ProfileSettingForm";
 import { useState } from "react";
-import SuccessChange from "./components/SuccessChange";
 import { Button } from "@/components/ui/button";
 import ProfileInfo from "./components/ProfileInfo";
 
 export default function ProfileSettingsPage() {
 
-  const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
+  // const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
 
-  const handleFormSuccess = () => {
-    setIsSuccessOpen(true);
-  };
+  // const handleFormSuccess = () => {
+  //   setIsSuccessOpen(true);
+  // };
 
   const profileData = {
     personalInfo: {
@@ -26,6 +24,7 @@ export default function ProfileSettingsPage() {
       address: "456 Innovation Drive, New York, NY 10001",
       contact: "+1 (555) 987-6543",
       website: "www.thompsonconsulting.co",
+      brandColor: "#37988a",
     },
   };
 
@@ -35,14 +34,14 @@ export default function ProfileSettingsPage() {
         <h1 className="text-2xl font-semibold md:text-[32px]">Profile Settings</h1>
         <Button onClick={() => setEditProfile(true)} className="text-base font-normal border border-button-border">Edit Profile</Button>
       </div>
-      {editProfile ? <ProfileSettingForm onSuccess={handleFormSuccess} profileData={profileData} /> : <ProfileInfo profileData={profileData} />}
+      {editProfile ? <ProfileSettingForm profileData={profileData} /> : <ProfileInfo profileData={profileData} />}
 
       {/* Success Modal */}
-      <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
+      {/* <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
         <DialogContent className="p-0 bg-transparent border-none shadow-none [&>button]:hidden">
           <SuccessChange onClose={() => setIsSuccessOpen(false)} />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </section>
   );
 }

@@ -10,7 +10,7 @@ import NotificationContent from "./notification-content";
 
 export default function Header() {
   return (
-    <header className="bg-sidebar border-border fixed top-0 z-50 w-full border-b">
+    <header className="bg-sidebar border-border fixed top-0 z-999 w-full border-b">
       <div className="flex items-center max-md:justify-center">
         <div className="flex w-[328px] items-center justify-center">
           <div className="flex h-[60px] w-[109px] items-center justify-center overflow-hidden">
