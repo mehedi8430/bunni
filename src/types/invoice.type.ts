@@ -18,6 +18,11 @@ export type TDiscount = {
   type: "Percentage" | "Fixed Amount" | "Free Shipping";
 };
 
+export type TInvoiceFooter = {
+  id: string;
+  footerContent: string;
+};
+
 export type TTaxRate = {
   id: string;
   name: string;

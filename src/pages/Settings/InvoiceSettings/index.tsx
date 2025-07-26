@@ -1,4 +1,5 @@
 import DiscountSettings from "./components/DiscountSettings";
+import InvoiceFooterSetting from "./components/InvoiceFooterSetting";
 import TaxRatesSettings from "./components/TaxRatesSettings";
 
 export default function InvoiceSettingsPage() {
@@ -9,6 +10,7 @@ export default function InvoiceSettingsPage() {
       </h1>
       <DiscountSettings />
       <TaxRatesSettings />
+      <InvoiceFooterSetting />
     </section>
   );
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { TDiscount, TInvoice, TInvoiceData, TTaxRate } from "@/types";
+import type { TDiscount, TInvoice, TInvoiceData, TInvoiceFooter, TTaxRate } from "@/types";
 import { simulateApiResponse } from ".";
 
 export const mockDiscounts: TDiscount[] = [
@@ -73,6 +73,21 @@ export const mockTaxRates: TTaxRate[] = [
     lastLogin: "Jun 28, 2025, 2:03 PM",
     rate: "Percentage",
     status: "Active",
+  },
+];
+
+export const mockInvoiceFooter: TInvoiceFooter[] = [
+  {
+    id: "FOOTER-0001",
+    footerContent: "Thank you for your business!",
+  },
+  {
+    id: "FOOTER-0002",
+    footerContent: "Payment is due within 30 days.",
+  },
+  {
+    id: "FOOTER-0003",
+    footerContent: "For any inquiries, contact us at support@example.com",
   },
 ];
 
