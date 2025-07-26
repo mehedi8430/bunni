@@ -36,7 +36,7 @@ export default function InvoiceFooterSetting() {
       <div className="space-y-4">
         {invoiceFooters.map((footer) => (
           <div key={footer.id} className="p-4 border rounded-lg">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <p className="text-base">{footer.footerContent}</p>
               <div className="flex items-center gap-2">
                 <Button
