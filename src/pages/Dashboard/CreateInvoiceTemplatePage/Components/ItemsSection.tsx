@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { mockTaxRates } from "@/mockApi/invoiceApi";
+import { mockTaxRates, mockDiscounts } from "@/mockApi/invoiceApi";
 import {
   addItem,
   removeItem,
@@ -151,7 +151,7 @@ export default function ItemsSection() {
                   </TableCell>
 
                   {/* Price */}
-                  <TableCell className="border-border border-r-2 py-2">
+                  <TableCell className="border-border border-r-2 !px-[2px] py-2">
                     <Input
                       type="number"
                       value={item.price}
@@ -170,19 +170,17 @@ export default function ItemsSection() {
                   {/* Discount */}
                   <TableCell className="border-border border-r-2 py-2">
                     <div className="flex items-center justify-center">
-                      <Input
-                        type="number"
-                        value={item.discount || ""}
-                        onChange={(e) => {
-                          const value = parseFloat(e.target.value) || 0;
-                          if (value >= 0 && value <= 100) {
-                            handleItemChange(index, "discount", value);
-                          }
-                        }}
-                        className="custom-focus [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                        min="0"
-                        max="100"
-                        placeholder="0"
+                      <SelectInput
+                        options={mockDiscounts.map((discount) => ({
+                          label: discount.name,
+                          value: discount.id,
+                        }))}
+                        onValueChange={(value) =>
+                          handleItemChange(index, "discount", value)
+                        }
+                        triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 text-sm"
+                        placeholder="Discount"
+                        value={item.discount?.toString() ?? ""}
                       />
                     </div>
                   </TableCell>
@@ -198,14 +196,14 @@ export default function ItemsSection() {
                         handleItemChange(index, "taxId", value)
                       }
                       triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 text-sm"
-                      placeholder="Select a Tax"
+                      placeholder="Tax"
                       value={item.taxId}
                     />
                   </TableCell>
 
                   {/* Amount */}
                   <TableCell className="border-border border-r-2 py-2 text-right">
-                    <span>${item.amount.toFixed(2)}</span>
+                    <span>${item?.amount.toFixed(2)}</span>
                   </TableCell>
 
                   {/* Delete Button */}

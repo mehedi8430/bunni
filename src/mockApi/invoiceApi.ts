@@ -2,7 +2,7 @@
 import type { TDiscount, TInvoice, TInvoiceData, TTaxRate } from "@/types";
 import { simulateApiResponse } from ".";
 
-const mockDiscounts: TDiscount[] = [
+export const mockDiscounts: TDiscount[] = [
   {
     id: "DISC-0001",
     name: "Seasonal Sale",
