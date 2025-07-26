@@ -14,7 +14,7 @@ export default function CreateInvoiceTemplatePage() {
   return (
     <section className="flex flex-col items-start gap-6 md:flex-row">
       <div className="bg-sidebar rounded-lg py-5">
-        <h2 className="px-6 text-2xl font-semibold">
+        <h2 className="px-6 text-xl font-semibold">
           {location.state ? "Edit" : "New"}{" "}
           {type === "estimate" ? "Estimate" : "Invoice"}
         </h2>
@@ -48,7 +48,7 @@ export default function CreateInvoiceTemplatePage() {
         {/* Templates Section */}
         <div className="mt-6">
           <h3 className="mb-4 text-xl font-semibold">Available Templates</h3>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
             {templates.map((template) => (
               <Link
                 key={template.id}

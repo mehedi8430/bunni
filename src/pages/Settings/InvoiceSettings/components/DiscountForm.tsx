@@ -2,11 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { TDiscount } from "@/types";
 import useDiscount from "../hooks/use-discount";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import SelectInput from "@/components/SelectInput";
 
 interface DiscountFormProps {
-  discount: Partial<TDiscount>;
+  discount?: Partial<TDiscount>;
   onSave: (discount: TDiscount) => void;
   onClose: () => void;
 }
@@ -16,7 +23,6 @@ export default function DiscountForm({
   onSave,
   onClose,
 }: DiscountFormProps) {
-
   const { form, onSubmit } = useDiscount({
     discount,
     onSave,
@@ -27,7 +33,6 @@ export default function DiscountForm({
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4">
-
           {/* Product Name */}
           <FormField
             control={form.control}
@@ -46,7 +51,6 @@ export default function DiscountForm({
               </FormItem>
             )}
           />
-
 
           {/* Type */}
           <FormField
@@ -73,60 +77,70 @@ export default function DiscountForm({
             )}
           />
 
-            {/* Price */}
-            <FormField
-              control={form.control}
-              name="amount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base font-normal">Amount</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      step="0.01"
-                      placeholder="e.g. 10 for 10% or 50 for $50"
-                      {...field}
-                      onChange={(e) => field.onChange(parseFloat(e.target.value))}
-                      className="custom-focus"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          {/* Price */}
+          <FormField
+            control={form.control}
+            name="amount"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-normal">Amount</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    step="0.01"
+                    placeholder="e.g. 10 for 10% or 50 for $50"
+                    {...field}
+                    onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                    className="custom-focus"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
+          {/* Status */}
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel className="text-base font-normal">Status</FormLabel>
+                <FormControl>
+                  <SelectInput
+                    options={[
+                      { value: "Active", label: "Active" },
+                      { value: "Inactive", label: "Inactive" },
+                    ]}
+                    placeholder="Select type"
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    triggerClassName="custom-focus w-full"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* Status */}
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="text-base font-normal">Status</FormLabel>
-                  <FormControl>
-                    <SelectInput
-                      options={[
-                        { value: "Active", label: "Active" },
-                        { value: "Inactive", label: "Inactive" },
-                      ]}
-                      placeholder="Select type"
-                      value={field.value}
-                      onValueChange={field.onChange}
-                      triggerClassName="custom-focus w-full"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-          <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
+          <hr className="mt-7 shadow-[0_-4px_6px_rgba(0,0,0,0.2)]" />
           {/* Buttons */}
-          <div className="flex items-center justify-center md:justify-end gap-3">
-            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
+          <div className="flex items-center justify-center gap-3 md:justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="px-10 py-5 text-base font-normal"
+            >
               Cancel
             </Button>
-            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Next</Button>
+            <Button
+              variant={"primary"}
+              type="submit"
+              className="border-button-border border px-10 py-5 text-base font-normal shadow-2xl"
+            >
+              Next
+            </Button>
           </div>
         </form>
       </Form>

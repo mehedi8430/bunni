@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { TTaxRate } from "@/types";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import SelectInput from "@/components/SelectInput";
 import useTax from "../hooks/use-tax";
 
 interface TaxRateFormProps {
-  taxRate: Partial<TTaxRate>;
+  taxRate?: Partial<TTaxRate>;
   onSave: (taxRate: TTaxRate) => void;
   onClose: () => void;
 }
@@ -16,12 +23,11 @@ export default function TaxRateForm({
   onSave,
   onClose,
 }: TaxRateFormProps) {
-
-    const { form, onSubmit } = useTax({
-      taxRate,
-      onSave,
-      onClose,
-    });
+  const { form, onSubmit } = useTax({
+    taxRate,
+    onSave,
+    onClose,
+  });
 
   // const [formData, setFormData] = useState<Partial<TTaxRate>>({
   //   id: taxRate.id || "",
@@ -74,7 +80,6 @@ export default function TaxRateForm({
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4">
-
           {/* Product Name */}
           <FormField
             control={form.control}
@@ -93,7 +98,6 @@ export default function TaxRateForm({
               </FormItem>
             )}
           />
-
 
           {/* Type */}
           <FormField
@@ -142,7 +146,6 @@ export default function TaxRateForm({
             )}
           />
 
-
           {/* Status */}
           <FormField
             control={form.control}
@@ -167,13 +170,24 @@ export default function TaxRateForm({
             )}
           />
 
-          <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
+          <hr className="mt-7 shadow-[0_-4px_6px_rgba(0,0,0,0.2)]" />
           {/* Buttons */}
-          <div className="flex items-center justify-center md:justify-end gap-3">
-            <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
+          <div className="flex items-center justify-center gap-3 md:justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="px-10 py-5 text-base font-normal"
+            >
               Cancel
             </Button>
-            <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Next</Button>
+            <Button
+              variant={"primary"}
+              type="submit"
+              className="border-button-border border px-10 py-5 text-base font-normal shadow-2xl"
+            >
+              Next
+            </Button>
           </div>
         </form>
       </Form>

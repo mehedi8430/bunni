@@ -1,4 +1,4 @@
-import { mockTaxRates } from "@/mockApi/invoiceApi";
+import { mockDiscounts, mockTaxRates } from "@/mockApi/invoiceApi";
 import type { TInvoiceData, TInvoiceItem, TProduct } from "@/types";
 import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
@@ -23,6 +23,7 @@ const initialState: TInvoiceData = {
       amount: 0,
       taxId: mockTaxRates[0]?.id || "",
       discount: 0,
+      discountId: mockDiscounts[0]?.id || "",
     },
   ],
   subtotal: 0.0,
@@ -59,6 +60,7 @@ const invoiceTemplateSlice = createSlice({
         taxId: mockTaxRates[0]?.id || "",
         amount: 0,
         discount: 0,
+        discountId: mockDiscounts[0]?.id || "",
       });
 
       calculateTotals(state);
@@ -106,10 +108,54 @@ const invoiceTemplateSlice = createSlice({
 const calculateAmount = (state: TInvoiceData, index: number) => {
   const item = state.items[index];
   const baseAmount = item.quantity * item.price;
-  const discountAmount = baseAmount * (item.discount / 100);
+  const discountAmount = getDiscountAmount(item, baseAmount);
   const discountedAmount = baseAmount - discountAmount;
 
-  // Calculate tax
+  const taxAmount = getTaxAmount(item, discountedAmount);
+  state.items[index].tax = taxAmount;
+  state.items[index].amount = discountedAmount + taxAmount;
+  calculateTotals(state);
+};
+
+// Helper function to calculate subtotal and total
+const calculateTotals = (state: TInvoiceData) => {
+  const subtotal = state.items.reduce((sum, item) => sum + item.amount, 0);
+  const totalTax = state.items.reduce((sum, item) => sum + item.tax, 0);
+
+  const totalDiscount = state.items.reduce(
+    (sum, item) =>
+      sum +
+      item.price * item.quantity * (getDiscountAmount(item, subtotal) / 100),
+    0,
+  );
+
+  state.totalTax = totalTax;
+  state.subtotal = subtotal;
+  state.discount = totalDiscount;
+  state.total = subtotal - totalDiscount + totalTax;
+};
+
+function getDiscountAmount(item: TInvoiceItem, baseAmount: number) {
+  const selectedDiscount = mockDiscounts.find(
+    (discount) => discount.id === item.discountId,
+  );
+  let discountAmount = 0;
+
+  if (selectedDiscount) {
+    if (selectedDiscount.type === "Percentage") {
+      const percentage =
+        parseFloat(selectedDiscount.amount.toString().replace("%", "")) || 0;
+      discountAmount = (baseAmount * percentage) / 100;
+    } else if (selectedDiscount.type === "Fixed Amount") {
+      discountAmount =
+        parseFloat(selectedDiscount.amount.toString().replace("$", "")) || 0;
+    }
+  }
+
+  return discountAmount;
+}
+
+function getTaxAmount(item: TInvoiceItem, discountedAmount: number) {
   const selectedTax = mockTaxRates.find((tax) => tax.id === item.taxId);
   let taxAmount = 0;
 
@@ -124,25 +170,8 @@ const calculateAmount = (state: TInvoiceData, index: number) => {
     }
   }
 
-  state.items[index].tax = taxAmount;
-  state.items[index].amount = discountedAmount + taxAmount;
-  calculateTotals(state);
-};
-
-// Helper function to calculate subtotal and total
-const calculateTotals = (state: TInvoiceData) => {
-  const subtotal = state.items.reduce((sum, item) => sum + item.amount, 0);
-  const totalTax = state.items.reduce((sum, item) => sum + item.tax, 0);
-  const totalDiscount = state.items.reduce(
-    (sum, item) => sum + item.price * item.quantity * (item.discount / 100),
-    0,
-  );
-
-  state.totalTax = totalTax;
-  state.subtotal = subtotal;
-  state.discount = totalDiscount;
-  state.total = subtotal - totalDiscount + totalTax;
-};
+  return taxAmount;
+}
 
 export const {
   setInvoice,

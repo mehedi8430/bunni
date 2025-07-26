@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { CirclePlus, CircleMinus } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import SearchInput from "@/components/SearchInput";
-import { ReactSVG } from "react-svg";
-import assets from "@/lib/imageProvider";
+// import { ReactSVG } from "react-svg";
+// import assets from "@/lib/imageProvider";
 import DateTimePicker from "@/components/DateTimePicker";
 import type { Table, VisibilityState } from "@tanstack/react-table";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 interface ColumnDef {
   id: string;
@@ -35,9 +43,9 @@ export function DataTableFilter<T>({
   columns,
   searchPlaceholder = "Search...",
   showDatePicker = true,
-  showExportButton = true,
-  exportButtonText = "Export",
-  onExportClick,
+  // showExportButton = true,
+  // exportButtonText = "Export",
+  // onExportClick,
   searchInputClassName = "w-full lg:w-[443px]",
   columnVisibility,
 }: DataTableFilterProps<T>) {
@@ -60,9 +68,9 @@ export function DataTableFilter<T>({
   const filterableColumns = getFilterableColumns();
 
   return (
-    <div className="flex items-start justify-between p-4 xl:items-center">
-      <div className="flex flex-wrap gap-6">
-        <div className="flex flex-wrap items-center justify-center gap-3">
+    <div className="p-4">
+      <div className="flex flex-col items-center justify-between gap-4 xl:flex-row">
+        <div className="flex items-center justify-center gap-3">
           <SearchInput
             value={searchTerm}
             onChange={handleFilterChange}
@@ -80,47 +88,52 @@ export function DataTableFilter<T>({
           )}
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Dynamic Column Filter Buttons */}
-            {filterableColumns.map((column) => {
-              const isVisible = columnVisibility?.[column.id] ?? true;
-
-              return (
-                <Button
-                  key={column.id}
-                  variant="filter_button"
-                  onClick={() => toggleColumnVisibility(column.id)}
-                  className="flex items-center gap-2 truncate"
-                >
-                  {isVisible ? (
-                    <CircleMinus className="h-4 w-4" />
-                  ) : (
-                    <CirclePlus className="h-4 w-4" />
-                  )}
-                  <span className="truncate max-w-10">{column.displayName}</span>
-                </Button>
-              );
-            })}
-
-            {showExportButton && (
+        {/* Column filter dropdown */}
+        <div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <Button
                 variant="filter_button"
-                className="rounded-lg lg:hidden"
-                onClick={onExportClick}
+                className="flex items-center gap-2"
               >
-                <ReactSVG
-                  src={assets.icons.export_icon}
-                  className="text-muted-foreground"
-                />
-                {exportButtonText}
+                <ChevronDown className="h-4 w-4" />
+                Column Filter
               </Button>
-            )}
-          </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {filterableColumns.map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  checked={columnVisibility?.[column.id] ?? true}
+                  onCheckedChange={() => toggleColumnVisibility(column.id)}
+                >
+                  {column.displayName}
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
-      {showExportButton && (
+      <div className="">
+        {/* {showExportButton && (
+            <Button
+              variant="filter_button"
+              className="rounded-lg lg:hidden"
+              onClick={onExportClick}
+            >
+              <ReactSVG
+                src={assets.icons.export_icon}
+                className="text-muted-foreground"
+              />
+              {exportButtonText}
+            </Button>
+          )} */}
+      </div>
+
+      {/* {showExportButton && (
         <Button
           variant="filter_button"
           className="hidden rounded-lg lg:flex lg:self-end"
@@ -132,7 +145,7 @@ export function DataTableFilter<T>({
           />
           {exportButtonText}
         </Button>
-      )}
+      )} */}
     </div>
   );
 }
