@@ -21,6 +21,7 @@ import { useAppSelector } from "@/redux/hooks";
 import type { TInvoice, TInvoiceData } from "@/types";
 import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
 import { CollapsibleField } from "./CollapsibleField";
+import { mockInvoiceFooter } from "@/mockApi/invoiceApi";
 
 export default function TemplateForm() {
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
@@ -38,6 +39,7 @@ export default function TemplateForm() {
     dueDate,
     footerTerms,
   } = useAppSelector(templateSelector);
+  console.log({ footerTerms });
 
   // Populate form with invoice data when available
   useEffect(() => {
@@ -172,18 +174,40 @@ export default function TemplateForm() {
 
         {/* Footer & Terms */}
         <CollapsibleField label="Footer & Terms">
-          <Textarea
-            id="footerTerms"
-            placeholder="Enter footer text and terms & conditions"
-            value={footerTerms}
-            onChange={(e) =>
+          <SelectInput
+            options={mockInvoiceFooter.map((item) => {
+              return {
+                value: item.id,
+                label: item.footerContent,
+              };
+            })}
+            placeholder="Select a footer and terms"
+            onValueChange={(value) => {
+              const selectedFooter = mockInvoiceFooter.find(
+                (item) => item.id === value,
+              );
               dispatch(
-                updateField({ field: "footerTerms", value: e.target.value }),
-              )
-            }
-            rows={3}
-            className="custom-focus"
+                updateField({
+                  field: "footerTerms",
+                  value: selectedFooter?.footerContent || "",
+                }),
+              );
+            }}
+            triggerClassName="w-full"
           />
+          {footerTerms && (
+            <Textarea
+              id="footerTerms"
+              onChange={(e) =>
+                dispatch(
+                  updateField({ field: "footerTerms", value: e.target.value }),
+                )
+              }
+              value={footerTerms}
+              rows={3}
+              className="custom-focus"
+            />
+          )}
         </CollapsibleField>
       </div>
 

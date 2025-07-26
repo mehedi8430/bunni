@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { TDiscount, TInvoice, TInvoiceData, TInvoiceFooter, TTaxRate } from "@/types";
+import type {
+  TDiscount,
+  TInvoice,
+  TInvoiceData,
+  TInvoiceFooter,
+  TTaxRate,
+} from "@/types";
 import { simulateApiResponse } from ".";
 
 export const mockDiscounts: TDiscount[] = [
@@ -119,6 +125,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 500,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
       {
         id: "item-2",
@@ -129,6 +136,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 135,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 635,
@@ -164,6 +172,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 600,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
       {
         id: "item-4",
@@ -174,6 +183,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 35,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0003",
       },
     ],
     subtotal: 635,
@@ -209,6 +219,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 400,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0004",
       },
       {
         id: "item-6",
@@ -219,6 +230,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 235,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
     ],
     subtotal: 635,
@@ -254,6 +266,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 500,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0003",
       },
       {
         id: "item-8",
@@ -264,6 +277,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 135,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 635,
@@ -299,6 +313,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 635,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
     ],
     subtotal: 635,
@@ -334,6 +349,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 300,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
       {
         id: "item-11",
@@ -344,6 +360,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 335,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
     ],
     subtotal: 635,
@@ -379,6 +396,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 300,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
       {
         id: "item-13",
@@ -389,6 +407,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 335,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 635,
@@ -424,6 +443,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 500,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
       {
         id: "item-15",
@@ -434,6 +454,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
         amount: 329,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 829,

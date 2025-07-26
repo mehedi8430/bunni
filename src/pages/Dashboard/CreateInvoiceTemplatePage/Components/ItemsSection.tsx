@@ -134,7 +134,7 @@ export default function ItemsSection() {
                   </TableCell>
 
                   {/* Quantity */}
-                  <TableCell className="border-border border-r-2 py-2">
+                  <TableCell className="border-border border-r-2 !px-[2px] py-2">
                     <Input
                       type="number"
                       value={item.quantity}
@@ -168,7 +168,7 @@ export default function ItemsSection() {
                   </TableCell>
 
                   {/* Discount */}
-                  <TableCell className="border-border border-r-2 py-2">
+                  <TableCell className="border-border border-r-2 !px-[2px] py-2">
                     <div className="flex items-center justify-center">
                       <SelectInput
                         options={mockDiscounts.map((discount) => ({
@@ -176,17 +176,17 @@ export default function ItemsSection() {
                           value: discount.id,
                         }))}
                         onValueChange={(value) =>
-                          handleItemChange(index, "discount", value)
+                          handleItemChange(index, "discountId", value)
                         }
                         triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 text-sm"
                         placeholder="Discount"
-                        value={item.discount?.toString() ?? ""}
+                        value={item.discountId}
                       />
                     </div>
                   </TableCell>
 
                   {/* Tax */}
-                  <TableCell className="border-border border-r-2 py-2">
+                  <TableCell className="border-border border-r-2 !px-[2px] py-2">
                     <SelectInput
                       options={mockTaxRates.map((tax) => ({
                         label: tax.name,
