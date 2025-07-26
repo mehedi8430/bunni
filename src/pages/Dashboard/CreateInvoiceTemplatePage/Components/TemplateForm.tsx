@@ -39,7 +39,6 @@ export default function TemplateForm() {
     dueDate,
     footerTerms,
   } = useAppSelector(templateSelector);
-  console.log({ footerTerms });
 
   // Populate form with invoice data when available
   useEffect(() => {
@@ -104,21 +103,6 @@ export default function TemplateForm() {
                   field: "invoiceNumber",
                   value: e.target.value,
                 }),
-              )
-            }
-            className="custom-focus"
-          />
-        </CollapsibleField>
-
-        {/* Order Number */}
-        <CollapsibleField label="Order Number">
-          <Input
-            id="orderNumber"
-            placeholder="Enter order number"
-            value={orderNumber}
-            onChange={(e) =>
-              dispatch(
-                updateField({ field: "orderNumber", value: e.target.value }),
               )
             }
             className="custom-focus"

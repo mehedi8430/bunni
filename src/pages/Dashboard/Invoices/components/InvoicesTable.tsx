@@ -156,15 +156,6 @@ export default function InvoicesTable() {
       enableHiding: true,
     },
     {
-      accessorKey: "orderNumber",
-      header: () => <div className="text-start">Order Number</div>,
-      size: 120,
-      cell: ({ row }) => (
-        <div className="truncate text-start">{row.getValue("orderNumber")}</div>
-      ),
-      enableHiding: true,
-    },
-    {
       accessorKey: "amount",
       header: "Amount",
       size: 120,
@@ -184,9 +175,36 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "date",
-      header: "Date",
+      header: "Created Date",
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("date")}</div>,
+      enableHiding: true,
+    },
+    {
+      accessorKey: "dueDate",
+      header: "Due Date",
+      size: 150,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("dueDate")}</div>
+      ),
+      enableHiding: true,
+    },
+    {
+      accessorKey: "createdBy",
+      header: "Created By",
+      size: 150,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("createdBy")}</div>
+      ),
+      enableHiding: true,
+    },
+    {
+      accessorKey: "sentVia",
+      header: "Sent Via",
+      size: 150,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("sentVia")}</div>
+      ),
       enableHiding: true,
     },
   ];
@@ -219,10 +237,12 @@ export default function InvoicesTable() {
     { id: "id", displayName: "Invoice" },
     { id: "customerName", displayName: "Customer Name" },
     { id: "status", displayName: "Status" },
-    { id: "orderNumber", displayName: "Order Number", canHide: false },
     { id: "amount", displayName: "Amount" },
     { id: "tenderType", displayName: "Tender Type" },
-    { id: "date", displayName: "Date" },
+    { id: "date", displayName: "Created Date" },
+    { id: "dueDate", displayName: "Due Date" },
+    { id: "createdBy", displayName: "Created By" },
+    { id: "sentVia", displayName: "Sent Via" },
   ];
 
   return (

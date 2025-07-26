@@ -6,7 +6,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 const initialState: TInvoiceData = {
   title: "",
   customerId: "",
-  invoiceNumber: "",
+  invoiceNumber: `INV-${crypto.randomUUID()}`,
   orderNumber: "",
   invoiceDate: getTodayDate(),
   serviceDate: getTodayDateWithTime(),
