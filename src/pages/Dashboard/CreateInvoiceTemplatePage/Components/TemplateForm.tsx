@@ -30,7 +30,6 @@ export default function TemplateForm() {
 
   const dispatch = useDispatch();
   const {
-    title,
     customerId,
     invoiceNumber,
     orderNumber,
@@ -50,7 +49,6 @@ export default function TemplateForm() {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", {
-      title,
       customerId,
       invoiceNumber,
       orderNumber,
@@ -64,19 +62,6 @@ export default function TemplateForm() {
   return (
     <form onSubmit={onSubmit} className="w-full space-y-6 px-6 pt-6">
       <div className="space-y-6">
-        {/* Invoice Title */}
-        <CollapsibleField label="Invoice title">
-          <Input
-            id="title"
-            placeholder="Let your customer know what this invoice is for"
-            value={title}
-            onChange={(e) =>
-              dispatch(updateField({ field: "title", value: e.target.value }))
-            }
-            className="custom-focus"
-          />
-        </CollapsibleField>
-
         {/* Customer Selection */}
         <CollapsibleField label="Customer">
           <div className="space-y-2">
