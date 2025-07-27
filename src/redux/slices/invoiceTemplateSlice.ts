@@ -6,7 +6,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 const initialState: TInvoiceData = {
   title: "",
   customerId: "",
-  invoiceNumber: "",
+  invoiceNumber: `INV-${crypto.randomUUID()}`,
   orderNumber: "",
   invoiceDate: getTodayDate(),
   serviceDate: getTodayDateWithTime(),
@@ -31,6 +31,8 @@ const initialState: TInvoiceData = {
   totalTax: 0.0,
   total: 0.0,
   color: "#38988A", // Default color
+  createdBy: "", // Add a sensible default or fetch from user context if needed
+  sentVia: "", // Add a sensible default or set as needed
 };
 
 const invoiceTemplateSlice = createSlice({

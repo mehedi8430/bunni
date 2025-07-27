@@ -4,7 +4,7 @@ export type TInvoice = {
   status: string;
   orderNumber: string;
   amount: string | number;
-  tenderType: "Credit Card" | "Bank Transfer";
+  tenderType: "Credit Card" | "ACH" | "Cash";
   date: string;
   templateId?: string;
 };
@@ -70,4 +70,6 @@ export type TInvoiceData = {
   total: number;
   color: string;
   totalTax: number;
+  createdBy: string;
+  sentVia: string;
 };

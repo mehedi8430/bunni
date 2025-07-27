@@ -10,7 +10,7 @@ import NotificationContent from "./notification-content";
 
 export default function Header() {
   return (
-    <header className="bg-sidebar border-border fixed top-0 z-999 w-full border-b">
+    <header className="bg-sidebar border-border fixed top-0 z-9999 w-full border-b">
       <div className="flex items-center max-md:justify-center">
         <div className="flex w-[328px] items-center justify-center">
           <div className="flex h-[60px] w-[109px] items-center justify-center overflow-hidden">
@@ -21,8 +21,8 @@ export default function Header() {
         </div>
 
         {/* Desktop View */}
-        <div className="flex gap-4 w-full items-center justify-end pr-14 pl-24 max-md:hidden">
-          <div className="flex items-center cursor-pointer">
+        <div className="flex w-full items-center justify-end gap-4 pr-14 pl-24 max-md:hidden">
+          <div className="flex cursor-pointer items-center">
             <Headset strokeWidth={2} className="size-5" />
             {/* <SelectInput
               options={[]}
@@ -57,12 +57,20 @@ export default function Header() {
               </Avatar>
               <Popover>
                 <PopoverTrigger asChild className="cursor-pointer">
-                  <div className="flex items-center gap-1.5">Acme Inc.
-                    <ChevronDown strokeWidth={1.5} className="border border-border rounded-full p-0.5" /></div>
+                  <div className="flex items-center gap-1.5">
+                    Acme Inc.
+                    <ChevronDown
+                      strokeWidth={1.5}
+                      className="border-border rounded-full border p-0.5"
+                    />
+                  </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-48 p-4">
                   <div className="space-y-2">
-                    <Link to={`/dashboard/settings/profile`} className="flex items-center gap-2.5">
+                    <Link
+                      to={`/dashboard/settings/profile`}
+                      className="flex items-center gap-2.5"
+                    >
                       <User strokeWidth={1.5} />
                       <span className="text-lg font-normal">My Profile</span>
                     </Link>
@@ -121,8 +129,8 @@ export default function Header() {
                   </div>
 
                   {/* Profile Section */}
-                  <div className=" p-2">
-                    <div className="flex items-center gap-2 mb-5">
+                  <div className="p-2">
+                    <div className="mb-5 flex items-center gap-2">
                       <Avatar className="h-8 w-8">
                         <AvatarImage
                           src="https://github.com/shadcn.png"
@@ -136,11 +144,16 @@ export default function Header() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-3">
-                      <Link to={"/dashboard/settings/profile"} className="flex items-center gap-1">
-                          <User strokeWidth={1.5} />
-                          My profile
+                      <Link
+                        to={"/dashboard/settings/profile"}
+                        className="flex items-center gap-1"
+                      >
+                        <User strokeWidth={1.5} />
+                        My profile
                       </Link>
-                      <button className="flex items-center gap-1 text-red-500"><LogOut strokeWidth={1.25} /> Logout</button>
+                      <button className="flex items-center gap-1 text-red-500">
+                        <LogOut strokeWidth={1.25} /> Logout
+                      </button>
                     </div>
                   </div>
                 </div>

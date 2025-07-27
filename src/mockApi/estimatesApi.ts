@@ -6,7 +6,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-1",
     customerName: "David Johnson",
-    status: "Pending", // Changed status
+    status: "Draft",
     orderNumber: "#72648252",
     amount: 635,
     tenderType: "Credit Card",
@@ -30,6 +30,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 500,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
       {
         id: "item-2",
@@ -40,6 +41,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 135,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 635,
@@ -47,11 +49,13 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#4CAF50",
+    createdBy: "John Doe",
+    sentVia: "Email",
   },
   {
     id: "EST-000001-2",
     customerName: "Sarah Thompson",
-    status: "Approved", // Changed status
+    status: "Sent", // Changed status
     orderNumber: "#A12B4D67",
     amount: 635,
     tenderType: "Credit Card",
@@ -75,6 +79,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 600,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0003",
       },
       {
         id: "item-4",
@@ -85,6 +90,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 35,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0004",
       },
     ],
     subtotal: 635,
@@ -92,14 +98,16 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#FF9800",
+    createdBy: "John Doe",
+    sentVia: "Email",
   },
   {
     id: "EST-000001-3",
     customerName: "Michael Brown",
-    status: "Rejected", // Changed status
+    status: "Cancelled", // Changed status
     orderNumber: "#E5F67834",
     amount: 635,
-    tenderType: "Bank Transfer",
+    tenderType: "ACH",
     date: "05 Feb, 2025",
     templateId: "3",
 
@@ -120,6 +128,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 400,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0004",
       },
       {
         id: "item-6",
@@ -130,6 +139,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 235,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 635,
@@ -137,11 +147,13 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#2196F3",
+    createdBy: "Alex Doe",
+    sentVia: "SMS",
   },
   {
     id: "EST-000001-4",
     customerName: "Emily White",
-    status: "Pending", // Changed status
+    status: "Overdue", // Changed status
     orderNumber: "#B4C9201",
     amount: 635,
     tenderType: "Credit Card",
@@ -165,6 +177,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 500,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0003",
       },
       {
         id: "item-8",
@@ -175,6 +188,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 135,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0004",
       },
     ],
     subtotal: 635,
@@ -182,11 +196,13 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#9C27B0",
+    createdBy: "Jane Doe",
+    sentVia: "SMS",
   },
   {
     id: "EST-000001-5",
     customerName: "Jessica Green",
-    status: "Approved", // Changed status
+    status: "Cancelled", // Changed status
     orderNumber: "#FBE6A237",
     amount: 635,
     tenderType: "Credit Card",
@@ -210,6 +226,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 635,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
     ],
     subtotal: 635,
@@ -217,14 +234,16 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#E91E63",
+    createdBy: "John Doe",
+    sentVia: "SMS",
   },
   {
     id: "EST-000001-6",
     customerName: "Daniel Anderson",
-    status: "Pending", // Changed status
+    status: "Draft", // Changed status
     orderNumber: "#E52F8B90",
     amount: 635,
-    tenderType: "Bank Transfer",
+    tenderType: "Cash",
     date: "05 Feb, 2025",
     templateId: "2",
 
@@ -245,6 +264,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 300,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
       {
         id: "item-11",
@@ -255,6 +275,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 335,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0003",
       },
     ],
     subtotal: 635,
@@ -262,11 +283,13 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#3F51B5",
+    createdBy: "John Doe",
+    sentVia: "Email",
   },
   {
     id: "EST-000001-7",
     customerName: "Laura King",
-    status: "Rejected", // Changed status
+    status: "Overdue", // Changed status
     orderNumber: "#C5F5B88",
     amount: 635,
     tenderType: "Credit Card",
@@ -290,6 +313,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 300,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0004",
       },
       {
         id: "item-13",
@@ -300,6 +324,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 335,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
     ],
     subtotal: 635,
@@ -307,14 +332,16 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 635,
     color: "#009688",
+    createdBy: "John Doe",
+    sentVia: "Email",
   },
   {
     id: "EST-000001-8",
     customerName: "James Martinez",
-    status: "Approved", // Changed status
+    status: "Sent", // Changed status
     orderNumber: "#9A5D3E74",
     amount: 829,
-    tenderType: "Bank Transfer",
+    tenderType: "ACH",
     date: "08 Feb, 2025",
     templateId: "4",
 
@@ -335,6 +362,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 500,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0001",
       },
       {
         id: "item-15",
@@ -345,6 +373,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
         amount: 329,
         taxId: "tax-0",
         discount: 0,
+        discountId: "DISC-0002",
       },
     ],
     subtotal: 829,
@@ -352,6 +381,8 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     totalTax: 0,
     total: 829,
     color: "#795548",
+    createdBy: "John Doe",
+    sentVia: "Email",
   },
 ];
 

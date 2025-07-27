@@ -132,35 +132,28 @@ export default function InvoicesTable() {
         <StatusFilterHeader
           statusFilter={statusFilter}
           onStatusFilterChange={setStatusFilter}
-          statusOptions={["Paid", "Unpaid", "Save"]}
+          statusOptions={["Paid", "Processing", "Sent", "Refunded"]}
         />
       ),
       size: 120,
       cell: ({ row }) => (
         <div
           className={cn(
-            "truncate rounded-[6px] px-[29px] py-1 text-sm font-normal",
+            "truncate rounded-[6px] px-[20px] py-[2px] text-sm font-normal",
             {
               "border border-[#0CAF60]/40 bg-[#0CAF60]/10 text-[#0CAF60]":
                 row.getValue("status") === "Paid",
               "border border-[#E03137]/40 bg-[#E03137]/10 text-[#E03137]":
-                row.getValue("status") === "Unpaid",
+                row.getValue("status") === "Processing",
               "border border-[#0A4269]/40 bg-[#0A4269]/20 text-[#0A4269]":
-                row.getValue("status") === "Save",
+                row.getValue("status") === "Sent",
+              "border border-[#a03589]/40 bg-[#a03589]/20 text-[#a03589]":
+                row.getValue("status") === "Refunded",
             },
           )}
         >
           {row.getValue("status")}
         </div>
-      ),
-      enableHiding: true,
-    },
-    {
-      accessorKey: "orderNumber",
-      header: () => <div className="text-start">Order Number</div>,
-      size: 120,
-      cell: ({ row }) => (
-        <div className="truncate text-start">{row.getValue("orderNumber")}</div>
       ),
       enableHiding: true,
     },
@@ -184,9 +177,36 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "date",
-      header: "Date",
+      header: "Created Date",
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("date")}</div>,
+      enableHiding: true,
+    },
+    {
+      accessorKey: "dueDate",
+      header: "Due Date",
+      size: 150,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("dueDate")}</div>
+      ),
+      enableHiding: true,
+    },
+    {
+      accessorKey: "createdBy",
+      header: "Created By",
+      size: 150,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("createdBy")}</div>
+      ),
+      enableHiding: true,
+    },
+    {
+      accessorKey: "sentVia",
+      header: "Sent Via",
+      size: 150,
+      cell: ({ row }) => (
+        <div className="truncate">{row.getValue("sentVia")}</div>
+      ),
       enableHiding: true,
     },
   ];
@@ -219,10 +239,12 @@ export default function InvoicesTable() {
     { id: "id", displayName: "Invoice" },
     { id: "customerName", displayName: "Customer Name" },
     { id: "status", displayName: "Status" },
-    { id: "orderNumber", displayName: "Order Number", canHide: false },
     { id: "amount", displayName: "Amount" },
     { id: "tenderType", displayName: "Tender Type" },
-    { id: "date", displayName: "Date" },
+    { id: "date", displayName: "Created Date" },
+    { id: "dueDate", displayName: "Due Date" },
+    { id: "createdBy", displayName: "Created By" },
+    { id: "sentVia", displayName: "Sent Via" },
   ];
 
   return (
