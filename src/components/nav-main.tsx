@@ -19,6 +19,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 export function NavMain({
@@ -36,6 +37,8 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const location = useLocation();
   const { isMobile, setOpenMobile } = useSidebar();
@@ -101,7 +104,7 @@ export function NavMain({
                       }}
                     >
                       {item.icon && <ReactSVG src={item.icon} />}
-                      <span>{item.title}</span>
+                      <span>{t(item.title)}</span>
                       {item.items?.length && (
                         <CircleChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                       )}
@@ -127,7 +130,7 @@ export function NavMain({
                               onClick={() => handleNavigate(subItem.url)}
                             >
                               {subItem.icon && <ReactSVG src={subItem.icon} />}
-                              <span>{subItem.title}</span>
+                              <span>{t(subItem.title)}</span>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

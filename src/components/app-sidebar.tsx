@@ -1,5 +1,5 @@
-import * as React from "react";
 import { icons } from "@/lib/imageProvider";
+import * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
