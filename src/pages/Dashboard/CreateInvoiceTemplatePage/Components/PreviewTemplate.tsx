@@ -58,7 +58,7 @@ export default function PreviewTemplate({
 
   return (
     <div
-      className="max-w-xl min-w-xl overflow-hidden rounded-lg bg-white shadow-lg"
+      className="overflow-hidden rounded-lg bg-white shadow-lg"
       style={{ color: color || "#38988A" }}
     >
       {/* Header */}

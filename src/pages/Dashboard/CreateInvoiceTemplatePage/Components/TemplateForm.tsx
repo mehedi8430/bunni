@@ -61,7 +61,7 @@ export default function TemplateForm() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="w-full space-y-6 px-6 pt-6">
+    <form onSubmit={onSubmit} className="space-y-6 px-6 pt-6">
       <div className="space-y-6">
         {/* Customer Selection */}
         <CollapsibleField label="Customer">
