@@ -12,6 +12,8 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from "react-router";
 import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
+import DownloadBeta from "../../components/pdf-template/DownloadBeta";
+import DownloadGamma from "../../components/pdf-template/DownloadGamma";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
@@ -90,7 +92,11 @@ export default function InvoiceTableRowActions({
       <DropdownMenuContent align="end" className="border-border border p-0">
         <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base">
           <PDFDownloadLink
-            document={<InvoiceTemplate invoice={transformedInvoiceData} />}
+            document={
+              // <InvoiceTemplate invoice={transformedInvoiceData} />
+              // <DownloadBeta invoice={transformedInvoiceData} />
+              <DownloadGamma invoice={transformedInvoiceData} />
+            }
             fileName={`invoice-${transformedInvoiceData.invoiceNumber}.pdf`}
           >
             Download

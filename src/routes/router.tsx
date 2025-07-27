@@ -13,6 +13,7 @@ import AuthLayout from "@/layout/AuthLayout";
 import BusinessInformationLayout from "@/layout/BusinessInformationLayout";
 import DashboardLayout from "@/layout/DashboardLayout";
 import DashboardPage from "@/pages/Dashboard";
+import ForView from "@/pages/Dashboard/components/ForView";
 import CreateInvoiceTemplatePage from "@/pages/Dashboard/CreateInvoiceTemplatePage";
 import PreviewBeta from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewBeta";
 import PreviewDelta from "@/pages/Dashboard/CreateInvoiceTemplatePage/Components/PreviewDelta";
@@ -186,4 +187,8 @@ export const Router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/view",
+    element: <ForView />
+  }
 ]);
