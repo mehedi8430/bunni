@@ -24,7 +24,7 @@ i18n
       },
     },
     fallbackLng: "en",
-    ns: ["sidebar", "table", "actions"],
+    ns: ["sidebar"],
     defaultNS: "sidebar",
     interpolation: { escapeValue: false },
     detection: {
