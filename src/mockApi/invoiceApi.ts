@@ -150,7 +150,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
   {
     id: "INV-000001-2",
     customerName: "Sarah Thompson",
-    status: "Unpaid",
+    status: "Processing",
     orderNumber: "#A12B4D67",
     amount: 635,
     tenderType: "Credit Card",
@@ -248,7 +248,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
   {
     id: "INV-000001-4",
     customerName: "Emily White",
-    status: "Save",
+    status: "Sent",
     orderNumber: "#B4C9201",
     amount: 635,
     tenderType: "Credit Card",
@@ -335,7 +335,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
   {
     id: "INV-000001-6",
     customerName: "Daniel Anderson",
-    status: "Save",
+    status: "Refunded",
     orderNumber: "#E52F8B90",
     amount: 635,
     tenderType: "Cash",
@@ -384,7 +384,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
   {
     id: "INV-000001-7",
     customerName: "Laura King",
-    status: "Unpaid",
+    status: "Processing",
     orderNumber: "#C5F5B88",
     amount: 635,
     tenderType: "Credit Card",
@@ -433,7 +433,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
   {
     id: "INV-000001-8",
     customerName: "James Martinez",
-    status: "Paid",
+    status: "Sent",
     orderNumber: "#9A5D3E74",
     amount: 829,
     tenderType: "ACH",
