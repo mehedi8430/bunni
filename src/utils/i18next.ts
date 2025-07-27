@@ -6,11 +6,13 @@ import { initReactI18next } from "react-i18next";
 // import actionsEn from "../locales/en/actions.json";
 import landingEn from "../locales/en/landing-page.json";
 import sidebarEn from "../locales/en/sidebar.json";
+import tableEn from "../locales/en/table.json";
 // import tableEn from "../locales/en/table.json";
 
 // import actionsEs from "../locales/es/actions.json";
 import landingEs from "../locales/es/landing-page.json";
 import sidebarEs from "../locales/es/sidebar.json";
+import tableEs from "../locales/es/table.json";
 // import tableEs from "../locales/es/table.json";
 
 i18n
@@ -21,14 +23,16 @@ i18n
       en: {
         sidebar: sidebarEn,
         landing: landingEn,
+        table: tableEn,
       },
       es: {
         sidebar: sidebarEs,
         landing: landingEs,
+        table: tableEs,
       },
     },
     fallbackLng: "en",
-    ns: ["sidebar", "landing"],
+    ns: ["landing"],
     defaultNS: "landing",
     interpolation: { escapeValue: false },
     detection: {

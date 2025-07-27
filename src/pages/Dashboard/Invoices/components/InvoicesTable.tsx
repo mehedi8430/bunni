@@ -18,7 +18,7 @@ import PreviewTemplate from "../../CreateInvoiceTemplatePage/Components/PreviewT
 import InvoiceTableRowActions from "./InvoiceTableRowActions";
 
 export default function InvoicesTable() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("table");
 
   const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -239,15 +239,15 @@ export default function InvoicesTable() {
   };
 
   const tableHeaderColumns = [
-    { id: "id", displayName: "Invoice" },
-    { id: "customerName", displayName: "Customer Name" },
-    { id: "status", displayName: "Status" },
-    { id: "amount", displayName: "Amount" },
-    { id: "tenderType", displayName: "Tender Type" },
-    { id: "date", displayName: "Created Date" },
-    { id: "dueDate", displayName: "Due Date" },
-    { id: "createdBy", displayName: "Created By" },
-    { id: "sentVia", displayName: "Sent Via" },
+    { id: "id", displayName: t("Invoice") },
+    { id: "customerName", displayName: t("Customer Name") },
+    { id: "status", displayName: t("Status") },
+    { id: "amount", displayName: t("Amount") },
+    { id: "tenderType", displayName: t("Tender Type") },
+    { id: "date", displayName: t("Created Date") },
+    { id: "dueDate", displayName: t("Due Date") },
+    { id: "createdBy", displayName: t("Created By") },
+    { id: "sentVia", displayName: t("Sent Via") },
   ];
 
   return (
@@ -272,10 +272,10 @@ export default function InvoicesTable() {
           setSelectedDate={setSelectedDate}
           table={tableRef.current.table}
           columns={tableHeaderColumns}
-          searchPlaceholder="Search by name, email, or company"
+          searchPlaceholder={t("search-placeholder")}
           showDatePicker={true}
           showExportButton={true}
-          exportButtonText="Export"
+          exportButtonText={t("Export")}
           onExportClick={() => console.log("Export clicked")}
           columnVisibility={columnVisibility}
         />
@@ -319,8 +319,8 @@ export default function InvoicesTable() {
       <AlertDialogModal
         isOpen={isDeleteOpen}
         onOpenChange={setIsDeleteOpen}
-        title="Confirm Delete"
-        description="Are you sure you want to delete this invoice? This action cannot be undone."
+        title={t("Confirm Delete")}
+        description={t("Delete Confirmation")}
         onConfirm={async () => {
           if (invoiceToDelete) {
             console.log("Invoice To Be Deleted:", invoiceToDelete);

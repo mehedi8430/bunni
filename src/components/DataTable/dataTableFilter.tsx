@@ -1,10 +1,11 @@
+import SearchInput from "@/components/SearchInput";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import SearchInput from "@/components/SearchInput";
 // import { ReactSVG } from "react-svg";
 // import assets from "@/lib/imageProvider";
 import DateTimePicker from "@/components/DateTimePicker";
 import type { Table, VisibilityState } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -49,6 +50,8 @@ export function DataTableFilter<T>({
   searchInputClassName = "w-full lg:w-[443px]",
   columnVisibility,
 }: DataTableFilterProps<T>) {
+  const { t } = useTranslation("table");
+
   console.log({ columnVisibility });
   // Get filterable columns (exclude select and actions columns if present)
   const getFilterableColumns = () => {
@@ -97,11 +100,11 @@ export function DataTableFilter<T>({
                 className="flex items-center gap-2"
               >
                 <ChevronDown className="h-4 w-4" />
-                Column Filter
+                {t("Column Filter")}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("Toggle Columns")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {filterableColumns.map((column) => (
                 <DropdownMenuCheckboxItem
