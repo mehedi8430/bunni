@@ -22,6 +22,7 @@ import type { TInvoice, TInvoiceData } from "@/types";
 import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
 import { CollapsibleField } from "./CollapsibleField";
 import { mockInvoiceFooter } from "@/mockApi/invoiceApi";
+import { toast } from "sonner";
 
 export default function TemplateForm() {
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
@@ -64,6 +65,8 @@ export default function TemplateForm() {
     dispatch(
       updateField({ field: "templateName", value: templatesNameArray[3] }),
     );
+
+    toast.success("Invoice template saved successfully!");
   };
 
   return (

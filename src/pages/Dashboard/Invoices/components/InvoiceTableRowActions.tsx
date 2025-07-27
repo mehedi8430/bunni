@@ -12,6 +12,9 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from "react-router";
 import DownloadGamma from "../../components/pdf-template/DownloadGamma";
+import DownloadDelta from "../../components/pdf-template/DownloadDelta";
+import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
+import DownloadBeta from "../../components/pdf-template/DownloadBeta";
 
 type InvoiceTableRowActionsProps = {
   invoice: TInvoice;
@@ -32,7 +35,6 @@ export default function InvoiceTableRowActions({
 }: InvoiceTableRowActionsProps) {
   const navigate = useNavigate();
   const invoiceData = useAppSelector(templateSelector);
-  console.log("invoiceData", invoiceData);
 
   // Transform the data to match InvoiceTemplate requirements
   const transformedInvoiceData = {
@@ -76,6 +78,21 @@ export default function InvoiceTableRowActions({
     invoice?.templateId &&
     templateNameMapping[invoice.templateId as TemplateId];
 
+    const template = (templateName: string) => {
+      switch (templateName) {
+        case "invoice-alpha":
+          return <InvoiceTemplate invoice={transformedInvoiceData} />;
+        case "invoice-beta":
+          return <DownloadBeta invoice={transformedInvoiceData} />;
+        case "invoice-gamma":
+          return <DownloadGamma invoice={transformedInvoiceData} />;
+        case "invoice-delta":
+          return <DownloadDelta invoice={transformedInvoiceData} />;
+        default:
+          return <InvoiceTemplate invoice={transformedInvoiceData} />;
+      }
+    };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -92,9 +109,7 @@ export default function InvoiceTableRowActions({
         <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base">
           <PDFDownloadLink
             document={
-              // <InvoiceTemplate invoice={transformedInvoiceData} />
-              // <DownloadBeta invoice={transformedInvoiceData} />
-              <DownloadGamma invoice={transformedInvoiceData} />
+            template(invoice?.templateName ?? "invoice-alpha")
             }
             fileName={`invoice-${transformedInvoiceData.invoiceNumber}.pdf`}
           >

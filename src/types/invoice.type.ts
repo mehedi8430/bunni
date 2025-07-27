@@ -7,6 +7,7 @@ export type TInvoice = {
   tenderType: "Credit Card" | "ACH" | "Cash";
   date: string;
   templateId?: string;
+  templateName?: string; // Optional, used for invoice templates
 };
 
 export type TDiscount = {
@@ -56,6 +57,7 @@ export type TInvoiceTemplate = {
 };
 
 export type TInvoiceData = {
+  title: string;
   templateName: string;
   customerId: string;
   invoiceNumber: string;
