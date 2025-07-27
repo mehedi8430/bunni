@@ -51,8 +51,6 @@ const styles = StyleSheet.create({
     },
     table: {
         width: "100%",
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
         borderColor: "#E5E7EB",
         marginBottom: 16,
     },
@@ -78,7 +76,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "#F3F4F6",
-        padding: 10,
+        padding: "5px 10px",
         borderRadius: 20,
         marginTop: 16,
     },
@@ -112,7 +110,7 @@ export default function DownloadBeta({ invoice }: InvoiceTemplateProps) {
 
     return (
         <Document style={styles.document}>
-            <Page size="A4" style={styles.page}>
+            <Page size="A4" style={{...styles.page, color: color}}>
                 {/* Invoice Header Row */}
                 <View style={[styles.pillRow]}>
                     <Text style={{ fontSize: 10, fontWeight: "bold" }}>
@@ -144,7 +142,7 @@ export default function DownloadBeta({ invoice }: InvoiceTemplateProps) {
 
                 {/* Items Table */}
                 <View style={styles.table}>
-                    <View style={[styles.tableRow, styles.tableHeader]}>
+                    <View style={{ ...styles.tableRow, ...styles.tableHeader, backgroundColor: color }}>
                         <Text style={[styles.tableCell, { flex: 3 }]}>Service</Text>
                         <Text style={[styles.tableCell, { flex: 1 }]}>Qty.</Text>
                         <Text style={[styles.tableCell, { flex: 1 }]}>Rate</Text>
@@ -155,7 +153,7 @@ export default function DownloadBeta({ invoice }: InvoiceTemplateProps) {
                             key={idx}
                             style={{
                                 ...styles.tableRow,
-                                // backgroundColor: idx % 2 === 0 ? "#fff" : "#F3F4F6",
+                                backgroundColor: idx % 2 === 0 ? "#fff" : "#F3F4F6",
                             }}
                         >
                             <Text style={[styles.tableCell, { flex: 3 }]}>
@@ -183,7 +181,7 @@ export default function DownloadBeta({ invoice }: InvoiceTemplateProps) {
                 </View>
 
                 {/* Terms and Payment Details */}
-                <View style={styles.sectionRow}>
+                <View style={{...styles.sectionRow, marginTop: "auto"}}>
                     <View style={styles.sectionBlock}>
                         <Text style={{ ...styles.label, color }}>Thank you for the business!</Text>
                         <Text style={styles.text}>{footerTerms}</Text>
@@ -197,11 +195,12 @@ export default function DownloadBeta({ invoice }: InvoiceTemplateProps) {
                 </View>
 
                 {/* Footer Row */}
-                <View style={{ marginTop: "auto" }}>
+                <View >
                     <View style={styles.footerRow}>
                         <Image src={images.templateLogo} style={styles.logo} />
                         <View style={{ flexDirection: "row", gap: 8 }}>
                             <Text style={{ fontSize: 10, fontWeight: "bold" }}>+01234345</Text>
+                            <View style={{ borderLeftWidth: 1, borderLeftColor: "#575A5C" }}></View>
                             <Text style={{ fontSize: 10, fontWeight: "bold" }}>support@example.com</Text>
                         </View>
                     </View>

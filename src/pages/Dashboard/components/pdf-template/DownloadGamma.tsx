@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: 20,
+        marginBottom: 5,
     },
     logo: {
         width: 100,
@@ -33,11 +33,10 @@ const styles = StyleSheet.create({
     },
     section: {
         flexDirection: "row",
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+        borderTopWidth: 0.5,
+        borderBottomWidth: 0.5,
         borderColor: "#ccc",
         marginBottom: 20,
-        paddingVertical: 10,
     },
     sectionBlock: {
         flex: 1,
@@ -49,19 +48,16 @@ const styles = StyleSheet.create({
     },
     table: {
         width: "100%",
-        borderWidth: 1,
-        borderColor: "#ccc",
         marginBottom: 20,
     },
     tableHeader: {
         flexDirection: "row",
-        backgroundColor: "#f0f0f0",
+        borderBottomWidth: 0.5,
+        borderColor: "#ccc",
         padding: 8,
     },
     tableRow: {
         flexDirection: "row",
-        borderBottomWidth: 1,
-        borderColor: "#eee",
         padding: 8,
     },
     tableCell: {
@@ -72,13 +68,26 @@ const styles = StyleSheet.create({
         textAlign: "right",
     },
     footer: {
-        borderTopWidth: 1,
+        borderTopWidth: 0.5,
         borderColor: "#ccc",
         paddingTop: 10,
         fontSize: 10,
         flexDirection: "row",
         justifyContent: "space-between",
     },
+    padding: {
+        paddingVertical: 10,
+    },
+    space: {
+        whiteSpace: "nowrap"
+    },
+    tableSum: {
+        flexDirection: "row", 
+        justifyContent: "flex-end", 
+        gap: 10, 
+        paddingRight: 5, 
+        paddingTop: 10
+    }
 });
 
 export default function DownloadGamma({ invoice }: InvoiceTemplateProps) {
@@ -99,7 +108,7 @@ export default function DownloadGamma({ invoice }: InvoiceTemplateProps) {
 
     const billFrom = {
         name: "Jane Smith",
-        address: "456 Elm St\nCity, State, Zip",
+        address: "456 Elm St City, State, Zip",
         phone: "555-5678",
     };
 
@@ -115,19 +124,19 @@ export default function DownloadGamma({ invoice }: InvoiceTemplateProps) {
                 </View>
 
                 <View style={styles.section}>
-                    <View style={styles.sectionBlock}>
+                    <View style={{...styles.sectionBlock, ...styles.padding}}>
                         <Text style={styles.label}>Issued</Text>
                         <Text>{invoiceDate}</Text>
-                        <Text style={styles.label}>Due</Text>
+                        <Text style={{...styles.label, marginTop: 10}}>Due</Text>
                         <Text>{dueDate}</Text>
                     </View>
-                    <View style={styles.sectionBlock}>
+                    <View style={{...styles.sectionBlock, ...styles.padding, borderLeftWidth: 0.5, borderLeftColor: "#ccc", borderRightWidth: 0.5, borderRightColor: "#ccc"}}>
                         <Text style={styles.label}>Bill To</Text>
                         <Text>{billTo.name}</Text>
                         <Text>{billTo.phone}</Text>
-                        <Text>{billTo.address}</Text>
+                        <Text style={styles.space}>{billTo.address}</Text>
                     </View>
-                    <View style={styles.sectionBlock}>
+                    <View style={{...styles.sectionBlock, ...styles.padding}}>
                         <Text style={styles.label}>From</Text>
                         <Text>{billFrom.name}</Text>
                         <Text>{billFrom.phone}</Text>
@@ -137,30 +146,33 @@ export default function DownloadGamma({ invoice }: InvoiceTemplateProps) {
 
                 <View style={styles.table}>
                     <View style={styles.tableHeader}>
-                        <Text style={styles.tableCell}>Service</Text>
-                        <Text style={styles.tableCellRight}>Price</Text>
-                        <Text style={styles.tableCellRight}>Qty.</Text>
-                        <Text style={styles.tableCellRight}>Line total</Text>
+                        <Text style={{...styles.tableCell, fontWeight: "bold"}}>Service</Text>
+                        <Text style={{...styles.tableCellRight, fontWeight: "bold"}}>Price</Text>
+                        <Text style={{...styles.tableCellRight, fontWeight: "bold"}}>Qty.</Text>
+                        <Text style={{...styles.tableCellRight, fontWeight: "bold"}}>Line total</Text>
                     </View>
                     {items.map((item, idx) => (
-                        <View key={idx} style={styles.tableRow}>
+                        <View key={idx} style={{...styles.tableRow}}>
                             <Text style={styles.tableCell}>{item.description}</Text>
                             <Text style={styles.tableCellRight}>${item.price.toFixed(2)}</Text>
                             <Text style={styles.tableCellRight}>{item.quantity}</Text>
                             <Text style={styles.tableCellRight}>${item.amount.toFixed(2)}</Text>
                         </View>
                     ))}
-                    <View style={styles.tableRow}>
-                        <Text style={styles.tableCell}>Subtotal</Text>
-                        <Text style={styles.tableCellRight}>${subtotal.toFixed(2)}</Text>
+                    <View style={{...styles.tableSum, borderTopWidth: 0.5, 
+        borderTopColor: "#ccc",}}>
+                        <Text style={{ fontWeight: "bold" }} >Subtotal:</Text>
+                        <Text >${subtotal.toFixed(2)}</Text>
                     </View>
-                    <View style={styles.tableRow}>
-                        <Text style={styles.tableCell}>Tax</Text>
-                        <Text style={styles.tableCellRight}>${totalTax.toFixed(2)}</Text>
+                    <View style={{...styles.tableSum, paddingBottom: 5, gap: 16}}>
+                        <Text style={{ fontWeight: "bold" }}>Tax:</Text>
+                        <Text>${totalTax.toFixed(2)}</Text>
                     </View>
-                    <View style={styles.tableRow}>
-                        <Text style={{ ...styles.tableCell, fontWeight: "bold" }}>Total</Text>
-                        <Text style={{ ...styles.tableCellRight, fontWeight: "bold" }}>
+                    <View style={{...styles.tableSum, borderTopWidth: 0.5, 
+        borderTopColor: "#ccc", borderBottomWidth: 0.5, 
+        borderBottomColor: "#ccc", width: "120px", alignSelf: "flex-end", paddingTop: 5, paddingBottom: 5}}>
+                        <Text style={{ fontWeight: "bold" }}>Total:</Text>
+                        <Text style={{ fontWeight: "bold" }}>
                             ${total.toFixed(2)}
                         </Text>
                     </View>
@@ -170,9 +182,9 @@ export default function DownloadGamma({ invoice }: InvoiceTemplateProps) {
                     <Text style={{ fontSize: 12, fontWeight: "bold", color, marginBottom: 4 }}>
                         Thank you for the business!
                     </Text>
-                    <Text>{footerTerms}</Text>
+                    <Text style={{paddingBottom: 10}}>{footerTerms}</Text>
 
-                    <View style={styles.footer}>
+                    <View style={{...styles.footer, fontWeight: "bold", fontSize: 12}}>
                         <Text>+01234345</Text>
                         <Text>support@example.com</Text>
                     </View>

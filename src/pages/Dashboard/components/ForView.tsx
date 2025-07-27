@@ -5,6 +5,8 @@ import {
 PDFViewer
 } from "@react-pdf/renderer";
 import DownloadGamma from './pdf-template/DownloadGamma';
+import InvoiceTemplate from './pdf-template/InvoiceTemplate';
+import DownloadDelta from './pdf-template/DownloadDelta';
 
 export default function ForView() {
 
@@ -42,8 +44,10 @@ export default function ForView() {
   return (
     <div>
         <PDFViewer width={1280} height={720}>
-          <DownloadBeta invoice={transformedInvoiceData} />
+          {/* <DownloadBeta invoice={transformedInvoiceData} /> */}
           {/* <DownloadGamma invoice={transformedInvoiceData} /> */}
+          {/* <InvoiceTemplate invoice={transformedInvoiceData} /> */}
+          <DownloadDelta invoice={transformedInvoiceData} />
         </PDFViewer>
     </div>
   )

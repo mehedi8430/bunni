@@ -2,18 +2,34 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-import en from "../locales/en/translation.json";
-import es from "../locales/es/translation.json";
+// Import multiple namespaces
+// import actionsEn from "../locales/en/actions.json";
+import landingEn from "../locales/en/landing-page.json";
+import sidebarEn from "../locales/en/sidebar.json";
+// import tableEn from "../locales/en/table.json";
+
+// import actionsEs from "../locales/es/actions.json";
+import landingEs from "../locales/es/landing-page.json";
+import sidebarEs from "../locales/es/sidebar.json";
+// import tableEs from "../locales/es/table.json";
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: {
-      en: { translation: en },
-      es: { translation: es },
+      en: {
+        sidebar: sidebarEn,
+        landing: landingEn,
+      },
+      es: {
+        sidebar: sidebarEs,
+        landing: landingEs,
+      },
     },
     fallbackLng: "en",
+    ns: ["sidebar", "landing"],
+    defaultNS: "landing",
     interpolation: { escapeValue: false },
     detection: {
       order: ["localStorage", "navigator"],

@@ -1,22 +1,25 @@
+import { AlertDialogModal } from "@/components/AlertDialogModal";
 import {
   DataTable,
   type DataTableHandle,
 } from "@/components/DataTable/dataTable";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import StatusFilterHeader from "@/components/DataTable/StatusFilterHeader";
+import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
-import { useEffect, useRef, useState, useMemo } from "react";
-import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { cn } from "@/lib/utils";
 import { invoiceApi } from "@/mockApi/invoiceApi";
 import type { TInvoice } from "@/types";
-import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
-import InvoiceTableRowActions from "./InvoiceTableRowActions";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import PreviewTemplate from "../../CreateInvoiceTemplatePage/Components/PreviewTemplate";
-import StatusFilterHeader from "@/components/DataTable/StatusFilterHeader";
+import InvoiceTableRowActions from "./InvoiceTableRowActions";
 
 export default function InvoicesTable() {
+  const { t } = useTranslation();
+
   const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -103,7 +106,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "id",
-      header: () => <div className="text-start">Invoice</div>,
+      header: () => <div className="text-start">{t("Invoice")}</div>,
       size: 180,
       cell: ({ row }) => (
         <div
@@ -117,7 +120,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "customerName",
-      header: () => <div className="text-start">Customer Name</div>,
+      header: () => <div className="text-start">{t("Customer Name")}</div>,
       size: 220,
       cell: ({ row }) => (
         <div className="truncate text-start">
@@ -159,7 +162,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: () => t("Amount"),
       size: 120,
       cell: ({ row }) => (
         <div className="truncate">${row.getValue("amount")}</div>
@@ -168,7 +171,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "tenderType",
-      header: "Tender Type",
+      header: () => t("Tender Type"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("tenderType")}</div>
@@ -177,14 +180,14 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "date",
-      header: "Created Date",
+      header: () => t("Created Date"),
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("date")}</div>,
       enableHiding: true,
     },
     {
       accessorKey: "dueDate",
-      header: "Due Date",
+      header: () => t("Due Date"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("dueDate")}</div>
@@ -193,7 +196,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "createdBy",
-      header: "Created By",
+      header: () => t("Created By"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("createdBy")}</div>
@@ -202,7 +205,7 @@ export default function InvoicesTable() {
     },
     {
       accessorKey: "sentVia",
-      header: "Sent Via",
+      header: () => t("Sent Via"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("sentVia")}</div>
