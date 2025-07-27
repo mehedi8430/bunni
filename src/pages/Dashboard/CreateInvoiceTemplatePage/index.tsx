@@ -8,18 +8,28 @@ import TemplateForm from "./Components/TemplateForm";
 import { templates } from "./templates";
 import TemplateCard from "../InvoiceTemplatesPage/components/TemplateCard";
 import { cn } from "@/lib/utils";
+import { useSidebar } from "@/components/ui/sidebar";
 
 export default function CreateInvoiceTemplatePage() {
   const dispatch = useAppDispatch();
   const { color } = useAppSelector(templateSelector);
+  const { state } = useSidebar();
+
+  const isCollapsed = state === "collapsed";
+  const isExpanded = state === "expanded";
 
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
 
   return (
-    <section className="flex flex-col items-start gap-6 md:flex-row">
-      <div className="bg-sidebar rounded-lg py-5">
+    <section
+      className={cn("flex flex-col items-start gap-6 md:flex-row 2xl:w-full", {
+        "md:w-[calc(100vw-120px)]": isCollapsed,
+        "md:w-[calc(100vw-350px)]": isExpanded,
+      })}
+    >
+      <div className="bg-sidebar rounded-lg py-5 md:w-[40%] 2xl:w-1/2">
         <h2 className="px-6 text-xl font-semibold">
           {location.state ? "Edit" : "New"}{" "}
           {type === "estimate" ? "Estimate" : "Invoice"}
@@ -29,13 +39,16 @@ export default function CreateInvoiceTemplatePage() {
         <TemplateForm />
       </div>
 
-      <div className="flex-1 space-y-0 md:space-y-6">
+      <div className="flex-1 space-y-0 md:w-[60%] md:space-y-6 2xl:w-1/2">
         {/* Preview Section */}
         <Outlet />
 
         {/* Colors Section */}
         <div className="flex flex-wrap justify-between gap-2">
-          <div className="flex w-full flex-col items-center gap-2">
+          <div className="flex w-full flex-col gap-2">
+            <h4 className="flex items-center justify-between">
+              Color Picker <span>HEX: {color}</span>
+            </h4>
             <div className="relative h-10 w-full overflow-hidden">
               <input
                 title="Select your favorite color"
