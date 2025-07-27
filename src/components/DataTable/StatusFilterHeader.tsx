@@ -6,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Filter } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type StatusFilterHeaderProps = {
   statusFilter: string;
@@ -18,9 +19,11 @@ const StatusFilterHeader = ({
   onStatusFilterChange,
   statusOptions,
 }: StatusFilterHeaderProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex items-center justify-center gap-2">
-      <span>Status</span>
+      <span>{t("Status")}</span>
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
@@ -35,7 +38,7 @@ const StatusFilterHeader = ({
             onClick={() => onStatusFilterChange("")}
             className={`cursor-pointer ${statusFilter === "" ? "bg-accent" : ""}`}
           >
-            All Status
+            {t("All Status")}
           </DropdownMenuItem>
           {statusOptions.map((status) => (
             <DropdownMenuItem
@@ -43,7 +46,7 @@ const StatusFilterHeader = ({
               onClick={() => onStatusFilterChange(status)}
               className={`cursor-pointer ${statusFilter === status ? "bg-accent" : ""}`}
             >
-              {status}
+              {t(status)}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

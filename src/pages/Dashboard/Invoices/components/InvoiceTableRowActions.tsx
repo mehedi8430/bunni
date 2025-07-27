@@ -11,8 +11,6 @@ import type { TInvoice } from "@/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from "react-router";
-import InvoiceTemplate from "../../components/pdf-template/InvoiceTemplate";
-import DownloadBeta from "../../components/pdf-template/DownloadBeta";
 import DownloadGamma from "../../components/pdf-template/DownloadGamma";
 
 type InvoiceTableRowActionsProps = {
