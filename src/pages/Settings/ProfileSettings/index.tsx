@@ -2,6 +2,7 @@ import ProfileSettingForm from "./components/ProfileSettingForm";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProfileInfo from "./components/ProfileInfo";
+import type { TProfileData } from "@/types";
 
 export default function ProfileSettingsPage() {
   // const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
@@ -11,7 +12,7 @@ export default function ProfileSettingsPage() {
   //   setIsSuccessOpen(true);
   // };
 
-  const profileData = {
+  const profileData: TProfileData = {
     personalInfo: {
       name: "Sarah Thompson",
       email: "sarah.thompson@example.com",
