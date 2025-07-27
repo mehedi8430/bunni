@@ -35,6 +35,7 @@ export default function InvoiceTableRowActions({
   type,
 }: InvoiceTableRowActionsProps) {
   const { t } = useTranslation("table");
+  console.log("invoice", invoice);
 
   const navigate = useNavigate();
   const invoiceData = useAppSelector(templateSelector);
@@ -141,7 +142,7 @@ export default function InvoiceTableRowActions({
           {t("Preview")}
         </DropdownMenuItem>
 
-        <DropdownMenuItem
+        {invoice.status === "Processing" && <DropdownMenuItem
           onClick={() => {
             console.log("Void Invoice");
           }}
@@ -149,9 +150,9 @@ export default function InvoiceTableRowActions({
         >
           {/* <Ban className="h-4 w-4" />  */}
           {t("Void")}
-        </DropdownMenuItem>
+        </DropdownMenuItem>}
 
-        <DropdownMenuItem
+        {invoice.status === "Paid" && <DropdownMenuItem
           onClick={() => {
             console.log("Refund Invoice");
           }}
@@ -159,7 +160,7 @@ export default function InvoiceTableRowActions({
         >
           {/* <BanknoteArrowDown className="h-4 w-4" />  */}
           {t("Refund")}
-        </DropdownMenuItem>
+        </DropdownMenuItem>}
 
         <DropdownMenuItem
           onClick={() => {
