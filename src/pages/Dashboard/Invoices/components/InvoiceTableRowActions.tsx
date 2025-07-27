@@ -34,6 +34,7 @@ export default function InvoiceTableRowActions({
 }: InvoiceTableRowActionsProps) {
   const navigate = useNavigate();
   const invoiceData = useAppSelector(templateSelector);
+  console.log("invoiceData", invoiceData);
 
   // Transform the data to match InvoiceTemplate requirements
   const transformedInvoiceData = {
