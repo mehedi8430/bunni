@@ -42,8 +42,8 @@ export default function ForView() {
   return (
     <div>
         <PDFViewer width={1280} height={720}>
-          <DownloadBeta invoice={transformedInvoiceData} />
-          {/* <DownloadGamma invoice={transformedInvoiceData} /> */}
+          {/* <DownloadBeta invoice={transformedInvoiceData} /> */}
+          <DownloadGamma invoice={transformedInvoiceData} />
         </PDFViewer>
     </div>
   )
