@@ -14,7 +14,7 @@ export type TUser = {
 };
 
 export type TAddress = {
-  isDefault: string;
+  isDefault: boolean;
   address: string;
 };
 
