@@ -158,5 +158,18 @@
   "outstanding_invoices": "Facturas Pendientes",
   "recent_payments": "Pagos Recientes",
   "total_customers": "Total de Clientes",
-  "revenue_this_month": "Ingresos este mes"
+  "revenue_this_month": "Ingresos este mes",
+  "Dashboard": "Tablero",
+  "Invoices": "Facturas",
+  "Customer": "Cliente",
+  "Payment": "Pago",
+  "Products": "Productos",
+  "Settings": "Configuraciones",
+  "Profile Settings": "Configuración de Perfil",
+  "Invoice Settings": "Configuración de Factura",
+  "User Management": "Gestión de Usuarios",
+  "Subscription": "Suscripción",
+  "Notification": "Notificación",
+  "Payment Integration": "Integración de Pagos",
+  "Language": "Idioma"
 }

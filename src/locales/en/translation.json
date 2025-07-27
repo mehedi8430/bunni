@@ -157,5 +157,18 @@
   "outstanding_invoices": "Outstanding Invoices",
   "recent_payments": "Recent Payments",
   "total_customers": "Total Customers",
-  "revenue_this_month": "Revenue this month"
+  "revenue_this_month": "Revenue this month",
+  "Dashboard": "Dashboard",
+  "Invoices": "Invoices",
+  "Customer": "Customer",
+  "Payment": "Payment",
+  "Products": "Products",
+  "Settings": "Settings",
+  "Profile Settings": "Profile Settings",
+  "Invoice Settings": "Invoice Settings",
+  "User Management": "User Management",
+  "Subscription": "Subscription",
+  "Notification": "Notification",
+  "Payment Integration": "Payment Integration",
+  "Language": "Language"
 }
