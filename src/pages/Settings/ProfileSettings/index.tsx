@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import ProfileInfo from "./components/ProfileInfo";
 
 export default function ProfileSettingsPage() {
-
   // const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
 
@@ -21,7 +20,16 @@ export default function ProfileSettingsPage() {
     businessInfo: {
       logo: "https://img.daisyui.com/images/profile/demo/batman@192.webp",
       name: "Thompson Consulting Group",
-      address: "456 Innovation Drive, New York, NY 10001",
+      addresses: [
+        {
+          address: "456 Innovation Drive, New York, NY 10001",
+          isDefault: true,
+        },
+        {
+          address: "789 Innovation Drive, New York, NY 10001",
+          isDefault: false,
+        },
+      ],
       contact: "+1 (555) 987-6543",
       website: "www.thompsonconsulting.co",
       brandColor: "#37988a",
@@ -30,11 +38,22 @@ export default function ProfileSettingsPage() {
 
   return (
     <section className="space-y-6 md:space-y-10">
-      <div className="flex justify-between items-center gap-3">
-        <h1 className="text-2xl font-semibold md:text-[32px]">Profile Settings</h1>
-        <Button onClick={() => setEditProfile(true)} className="text-base font-normal border border-button-border">Edit Profile</Button>
+      <div className="flex items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold md:text-[32px]">
+          Profile Settings
+        </h1>
+        <Button
+          onClick={() => setEditProfile(true)}
+          className="border-button-border border text-base font-normal"
+        >
+          Edit Profile
+        </Button>
       </div>
-      {editProfile ? <ProfileSettingForm profileData={profileData} /> : <ProfileInfo profileData={profileData} />}
+      {editProfile ? (
+        <ProfileSettingForm profileData={profileData} />
+      ) : (
+        <ProfileInfo profileData={profileData} />
+      )}
 
       {/* Success Modal */}
       {/* <Dialog open={isSuccessOpen} onOpenChange={setIsSuccessOpen}>
