@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   page: {
-    padding: 32,
+    // padding: 32,
     backgroundColor: "#fff",
   },
   header: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "#E5E7EB",
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 32,
     borderRadius: 4,
     marginBottom: 24,
   },
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     marginBottom: 2,
-    color: "#38988A",
   },
   value: {
     fontSize: 10,
@@ -81,14 +80,10 @@ const styles = StyleSheet.create({
   table: {
     width: "100%",
     marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 4,
     overflow: "hidden",
   },
   tableHeader: {
     flexDirection: "row",
-    backgroundColor: "#38988A",
     color: "#fff",
     fontWeight: "bold",
     fontSize: 12,
@@ -103,12 +98,10 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
+    justifyContent: "flex-end",
     fontSize: 11,
     paddingVertical: 6,
     paddingHorizontal: 4,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    borderBottomStyle: "solid",
   },
   tableCell: {
     flex: 1,
@@ -116,7 +109,6 @@ const styles = StyleSheet.create({
   },
   tableCellRight: {
     flex: 1,
-    textAlign: "right",
     paddingHorizontal: 4,
   },
   tableFooterRow: {
@@ -124,16 +116,15 @@ const styles = StyleSheet.create({
     fontSize: 11,
     paddingVertical: 6,
     paddingHorizontal: 4,
-    backgroundColor: "#F3F4F6",
   },
   tableFooterCell: {
-    flex: 4,
+    // flex: 4,
     textAlign: "right",
     fontWeight: "bold",
     paddingHorizontal: 4,
   },
   tableFooterValue: {
-    flex: 1,
+    // flex: 1,
     textAlign: "right",
     fontWeight: "bold",
     paddingHorizontal: 4,
@@ -143,7 +134,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingVertical: 8,
     paddingHorizontal: 4,
-    backgroundColor: "#38988A",
     color: "#fff",
   },
   totalLabel: {
@@ -163,23 +153,19 @@ const styles = StyleSheet.create({
   thankYou: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#38988A",
     marginTop: 32,
     marginBottom: 8,
   },
   footerNote: {
     fontSize: 10,
     marginBottom: 16,
-    color: "#444",
   },
   footer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#38988A",
     color: "#fff",
     paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 4,
+    paddingHorizontal: 32,
     fontSize: 11,
     fontWeight: "bold",
   },
@@ -230,13 +216,13 @@ export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
 
   const billFrom = {
     name: "Jane Smith",
-    address: "456 Elm St\nCity, State, Zip",
+    address: "456 Elm St City, State, Zip",
     phone: "555-5678",
   };
 
   return (
     <Document style={styles.document}>
-      <Page size="A4" style={styles.page}>
+      <Page size="A4" style={{ ...styles.page, color: color }}>
         {/* Header */}
         <View style={styles.header}>
           <Image style={styles.logo} src={images.templateLogo} />
@@ -252,22 +238,22 @@ export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
         </View>
 
         {/* Parties & Payment */}
-        <View style={styles.section}>
+        <View style={{ ...styles.section, paddingHorizontal: 32 }}>
           <View style={styles.sectionBlock}>
             <Text style={styles.label}>Bill To</Text>
-            <Text style={styles.value}>{billTo.name}</Text>
+            <Text style={{ ...styles.value, fontWeight: "bold" }}>{billTo.name}</Text>
             <Text style={styles.value}>{billTo.address}</Text>
             <Text style={styles.value}>{billTo.phone}</Text>
           </View>
           <View style={styles.sectionBlock}>
             <Text style={styles.label}>Bill From</Text>
-            <Text style={styles.value}>{billFrom.name}</Text>
+            <Text style={{ ...styles.value, fontWeight: "bold" }}>{billFrom.name}</Text>
             <Text style={styles.value}>{billFrom.address}</Text>
             <Text style={styles.value}>{billFrom.phone}</Text>
           </View>
           <View style={styles.sectionBlockRight}>
             <Text style={styles.label}>Payment</Text>
-            <Text style={styles.value}>Paid by</Text>
+            <Text style={{ ...styles.value, fontWeight: "bold" }}>Paid by</Text>
             <Text style={styles.value}>{paymentDetails.accountType}</Text>
             <Text style={styles.value}>{paymentDetails.accountNumber}</Text>
             <Text style={styles.value}>{paymentDetails.paymentMethod}</Text>
@@ -276,8 +262,8 @@ export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
         </View>
 
         {/* Table */}
-        <View style={styles.table}>
-          <View style={styles.tableHeader}>
+        <View style={{ ...styles.table, paddingHorizontal: 32 }}>
+          <View style={{ ...styles.tableHeader, backgroundColor: color }}>
             <Text style={[styles.tableHeaderCell, { flex: 0.7 }]}>Item</Text>
             <Text style={[styles.tableHeaderCell, { flex: 2 }]}>
               Description
@@ -310,26 +296,32 @@ export default function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
             </View>
           ))}
           {/* Table Footer */}
-          <View style={styles.tableFooterRow}>
-            <Text style={styles.tableFooterCell}>Subtotal:</Text>
-            <Text style={styles.tableFooterValue}>${subtotal.toFixed(2)}</Text>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 32, gap: 16 }}>
+            <Text>Subtotal:</Text>
+            <Text>${subtotal.toFixed(2)}</Text>
           </View>
-          <View style={styles.tableFooterRow}>
-            <Text style={styles.tableFooterCell}>Tax:</Text>
-            <Text style={styles.tableFooterValue}>${totalTax.toFixed(2)}</Text>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 8, gap: 16 }}>
+            <Text>Tax:</Text>
+            <Text>${totalTax.toFixed(2)}</Text>
           </View>
-          <View style={styles.totalRow}>
-            <Text style={styles.totalLabel}>Total:</Text>
-            <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 4, gap: 16, backgroundColor: color, width: "180px", color: "#fff", marginLeft: "auto", padding: 5, }}>
+            <Text>Total:</Text>
+            <Text>${total.toFixed(2)}</Text>
           </View>
         </View>
 
+
+
         {/* Thank You & Footer */}
-        <Text style={styles.thankYou}>Thank you!</Text>
-        <Text style={styles.footerNote}>{footerTerms}</Text>
-        <View style={styles.footer}>
-          <Text>+01234345</Text>
-          <Text>support@example.com</Text>
+        <View style={{ marginTop: "auto" }}>
+          <View style={{paddingHorizontal: 32}}>
+            <Text style={{ ...styles.thankYou, color: color }}>Thank you!</Text>
+            <Text style={styles.footerNote}>{footerTerms}</Text>
+          </View>
+          <View style={{ ...styles.footer, backgroundColor: color }}>
+            <Text>+01234345</Text>
+            <Text>support@example.com</Text>
+          </View>
         </View>
       </Page>
     </Document>
