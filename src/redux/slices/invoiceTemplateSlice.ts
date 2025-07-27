@@ -4,10 +4,9 @@ import { getTodayDate, getTodayDateWithTime } from "@/utils/dateFormat";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: TInvoiceData = {
-  title: "",
+  templateName: "",
   customerId: "",
   invoiceNumber: `INV-${crypto.randomUUID()}`,
-  orderNumber: "",
   invoiceDate: getTodayDate(),
   serviceDate: getTodayDateWithTime(),
   dueDate: getTodayDate(),

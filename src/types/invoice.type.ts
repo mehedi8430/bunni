@@ -56,10 +56,9 @@ export type TInvoiceTemplate = {
 };
 
 export type TInvoiceData = {
-  title: string;
+  templateName: string;
   customerId: string;
   invoiceNumber: string;
-  orderNumber: string;
   invoiceDate: string;
   serviceDate: string;
   dueDate: string;

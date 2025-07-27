@@ -269,7 +269,7 @@ export default function ItemsSection() {
           variant={"outline"}
           size={"lg"}
           className="bg-sidebar"
-          type="button"
+          type="submit"
           onClick={() =>
             console.log("Form Submitted:", { items, subtotal, total })
           }

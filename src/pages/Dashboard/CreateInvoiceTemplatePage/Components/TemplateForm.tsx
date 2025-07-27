@@ -29,17 +29,20 @@ export default function TemplateForm() {
   const { state: invoiceId } = useLocation();
   const { invoice } = useInvoiceApi(invoiceId);
 
+  const location = useLocation();
+  const templatesNameArray = location.pathname.split("/");
+
   const dispatch = useDispatch();
   const {
     customerId,
     invoiceNumber,
-    orderNumber,
     invoiceDate,
     serviceDate,
     dueDate,
     footerTerms,
+    templateName,
   } = useAppSelector(templateSelector);
-
+  console.log({ templateName });
   // Populate form with invoice data when available
   useEffect(() => {
     if (invoice) {
@@ -52,12 +55,15 @@ export default function TemplateForm() {
     console.log("Form submitted:", {
       customerId,
       invoiceNumber,
-      orderNumber,
       invoiceDate,
       serviceDate,
       dueDate,
       footerTerms,
     });
+
+    dispatch(
+      updateField({ field: "templateName", value: templatesNameArray[3] }),
+    );
   };
 
   return (

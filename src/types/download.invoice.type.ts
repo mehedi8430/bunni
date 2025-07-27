@@ -7,6 +7,7 @@ export type InvoiceTemplateProps = {
     invoiceNumber?: string;
     invoiceDate?: string;
     dueDate?: string;
+    serviceDate?: string;
     billTo: {
       name: string;
       address: string;
