@@ -10,6 +10,7 @@ import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
 import type { TInvoice } from "@/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MoreHorizontal } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import DownloadGamma from "../../components/pdf-template/DownloadGamma";
 import DownloadDelta from "../../components/pdf-template/DownloadDelta";
@@ -33,6 +34,8 @@ export default function InvoiceTableRowActions({
   setIsDeleteOpen,
   type,
 }: InvoiceTableRowActionsProps) {
+  const { t } = useTranslation("table");
+
   const navigate = useNavigate();
   const invoiceData = useAppSelector(templateSelector);
 
@@ -113,7 +116,7 @@ export default function InvoiceTableRowActions({
             }
             fileName={`invoice-${transformedInvoiceData.invoiceNumber}.pdf`}
           >
-            Download
+            {t("Download")}
           </PDFDownloadLink>
         </DropdownMenuItem>
 
@@ -124,7 +127,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Copy className="h-4 w-4" />  */}
-          Copy Link
+          {t("Copy Link")}
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -135,7 +138,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Eye className="h-4 w-4" />  */}
-          Preview
+          {t("Preview")}
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -145,7 +148,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Ban className="h-4 w-4" />  */}
-          Void
+          {t("Void")}
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -155,7 +158,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <BanknoteArrowDown className="h-4 w-4" />  */}
-          Refund
+          {t("Refund")}
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -165,7 +168,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <SendToBack className="h-4 w-4" />  */}
-          Resend
+          {t("Resend")}
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -186,7 +189,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Edit className="h-4 w-4" />  */}
-          Edit
+          {t("Edit")}
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
@@ -196,7 +199,7 @@ export default function InvoiceTableRowActions({
           className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
         >
           {/* <Trash className="h-4 w-4" />  */}
-          Delete
+          {t("Delete")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

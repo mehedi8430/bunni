@@ -1,14 +1,15 @@
-import { Funnel } from "lucide-react";
-import { Button } from "./ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Funnel } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Button } from "./ui/button";
 
 interface DateTimePickerProps {
   onDateTimeChange?: (dateTime: Date | undefined) => void;
@@ -19,6 +20,7 @@ export default function DateTimePicker({
   onDateTimeChange,
   initialDateTime,
 }: DateTimePickerProps) {
+  const { t } = useTranslation("table");
   const [date, setDate] = useState<Date | undefined>(
     initialDateTime || new Date(),
   );
@@ -82,7 +84,7 @@ export default function DateTimePicker({
             }}
           >
             <Funnel />
-            Date and time
+            {t("Date and time")}
           </Button>
         </PopoverTrigger>
 
@@ -114,7 +116,7 @@ export default function DateTimePicker({
             variant="primary"
             onClick={handleContinue}
           >
-            Continue
+            {t("Continue")}
           </Button>
         </PopoverContent>
       </Popover>

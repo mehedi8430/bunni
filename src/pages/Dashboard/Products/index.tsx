@@ -1,26 +1,28 @@
+import { AlertDialogModal } from "@/components/AlertDialogModal";
 import {
   DataTable,
   type DataTableHandle,
 } from "@/components/DataTable/dataTable";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
-import { useEffect, useRef, useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 import { DialogModal } from "@/components/DialogModal";
-import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { productApi } from "@/mockApi/productApi";
-import ProductForm from "./components/ProductForm";
-import type { TProduct } from "@/types";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import { productApi } from "@/mockApi/productApi";
+import type { TProduct } from "@/types";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { MoreHorizontal, Plus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import ProductForm from "./components/ProductForm";
 
 export default function ProductsPage() {
+  const { t } = useTranslation("table");
   const tableRef = useRef<DataTableHandle<TProduct> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -89,7 +91,7 @@ export default function ProductsPage() {
     },
     {
       accessorKey: "name",
-      header: () => <div className="text-start">Name</div>,
+      header: () => <div className="text-start">{t("Name")}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="truncate text-start">{row.getValue("name")}</div>
@@ -97,19 +99,19 @@ export default function ProductsPage() {
     },
     {
       accessorKey: "type",
-      header: "Type",
+      header: t("Type"),
       size: 120,
       cell: ({ row }) => <div className="truncate">{row.getValue("type")}</div>,
     },
     {
       accessorKey: "unit",
-      header: "Unit",
+      header: t("Unit"),
       size: 120,
       cell: ({ row }) => <div className="truncate">{row.getValue("unit")}</div>,
     },
     {
       accessorKey: "price",
-      header: "Price",
+      header: t("Price"),
       size: 120,
       cell: ({ row }) => (
         <div className="truncate">${row.getValue("price")}</div>
@@ -117,7 +119,7 @@ export default function ProductsPage() {
     },
     {
       accessorKey: "description",
-      header: "Description",
+      header: t("Description"),
       size: 250,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("description")}</div>
