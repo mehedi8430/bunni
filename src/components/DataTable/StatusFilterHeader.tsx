@@ -19,7 +19,7 @@ const StatusFilterHeader = ({
   onStatusFilterChange,
   statusOptions,
 }: StatusFilterHeaderProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("table");
 
   return (
     <div className="flex items-center justify-center gap-2">

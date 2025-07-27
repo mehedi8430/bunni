@@ -3,15 +3,16 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 // Import multiple namespaces
-// import actionsEn from "../locales/en/actions.json";
 import landingEn from "../locales/en/landing-page.json";
+import paymentEn from "../locales/en/payment.json";
 import sidebarEn from "../locales/en/sidebar.json";
-// import tableEn from "../locales/en/table.json";
+import tableEn from "../locales/en/table.json";
 
-// import actionsEs from "../locales/es/actions.json";
+// Spanish translations
 import landingEs from "../locales/es/landing-page.json";
+import paymentEs from "../locales/es/payment.json";
 import sidebarEs from "../locales/es/sidebar.json";
-// import tableEs from "../locales/es/table.json";
+import tableEs from "../locales/es/table.json";
 
 i18n
   .use(LanguageDetector)
@@ -21,14 +22,18 @@ i18n
       en: {
         sidebar: sidebarEn,
         landing: landingEn,
+        table: tableEn,
+        payment: paymentEn,
       },
       es: {
         sidebar: sidebarEs,
         landing: landingEs,
+        table: tableEs,
+        payment: paymentEs,
       },
     },
     fallbackLng: "en",
-    ns: ["sidebar", "landing"],
+    ns: ["landing", "table", "payment"],
     defaultNS: "landing",
     interpolation: { escapeValue: false },
     detection: {

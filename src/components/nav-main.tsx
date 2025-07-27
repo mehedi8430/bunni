@@ -37,7 +37,7 @@ export function NavMain({
     }[];
   }[];
 }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("sidebar");
 
   const navigate = useNavigate();
   const location = useLocation();

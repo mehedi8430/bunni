@@ -1,13 +1,14 @@
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { useTranslation } from "react-i18next";
 
 interface AlertDialogModalProps {
   isOpen: boolean;
@@ -28,6 +29,7 @@ export function AlertDialogModal({
   confirmText = "Confirm",
   cancelText = "Cancel",
 }: AlertDialogModalProps) {
+  const { t } = useTranslation("table");
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent>
@@ -36,9 +38,9 @@ export function AlertDialogModal({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{cancelText}</AlertDialogCancel>
+          <AlertDialogCancel>{t(cancelText)}</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm}>
-            {confirmText}
+            {t(confirmText)}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

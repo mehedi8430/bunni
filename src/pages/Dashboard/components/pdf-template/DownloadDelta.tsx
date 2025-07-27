@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     // }
 });
 
-const PreviewDeltaPDF = ({
+const DownloadDelta = ({
     invoice,
 }: InvoiceTemplateProps) => {
     const {
@@ -107,7 +107,6 @@ const PreviewDeltaPDF = ({
         dueDate,
         serviceDate
     } = invoice;
-    console.log(invoice);
 
     const billFrom = {
         name: "Jane Smith",
@@ -222,6 +221,6 @@ const PreviewDeltaPDF = ({
     );
 };
 
-export default PreviewDeltaPDF;
+export default DownloadDelta;
 
 

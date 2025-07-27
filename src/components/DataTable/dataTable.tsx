@@ -1,15 +1,15 @@
 import {
-  type ColumnDef,
-  type SortingState,
-  getSortedRowModel,
   flexRender,
   getCoreRowModel,
-  useReactTable,
-  getPaginationRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type ColumnDef,
+  type SortingState,
   type Table as TableType,
-  type VisibilityState,
   type Updater,
+  type VisibilityState,
 } from "@tanstack/react-table";
 
 import {
@@ -20,15 +20,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Skeleton } from "../ui/skeleton";
 import React, {
-  useState,
   forwardRef,
   useImperativeHandle,
+  useState,
   type ForwardedRef,
 } from "react";
+import { useTranslation } from "react-i18next";
 import AppPagination from "../AppPagination.tsx";
 import SelectInput, { type SelectOption } from "../SelectInput/index.tsx";
+import { Skeleton } from "../ui/skeleton";
 
 export interface DataTableHandle<TData> {
   table: TableType<TData>;
@@ -67,6 +68,7 @@ function DataTableInner<TData, TValue>(
   }: DataTableProps<TData, TValue>,
   ref: ForwardedRef<DataTableHandle<TData>>,
 ) {
+  const { t } = useTranslation("table");
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
@@ -142,7 +144,7 @@ function DataTableInner<TData, TValue>(
               ))}
               {actions && (
                 <TableHead className="sticky right-0 z-50 w-[60px] bg-gray-400 px-2 py-2 text-center font-semibold text-black sm:px-8">
-                  <div className="truncate">Actions</div>
+                  <div className="truncate">{t("Actions")}</div>
                 </TableHead>
               )}
             </TableRow>
@@ -200,10 +202,14 @@ function DataTableInner<TData, TValue>(
         <div className="flex flex-col items-center justify-between gap-3 px-2 sm:flex-row sm:gap-4 sm:px-4">
           <div className="order-2 flex items-center text-center text-xs text-[#54607A] sm:text-left sm:text-sm">
             <span className="block sm:inline">
-              Showing 1 to {limit <= total ? limit : total}
+              {t("Showing {{start}} to {{end}} of {{total}} results", {
+                start: 1,
+                end: limit <= total ? limit : total,
+                total,
+              })}
             </span>
             <span className="mr-2 block sm:ml-1 sm:inline">
-              of {total} entries
+              {t("of {{total}} entries", { total })}
             </span>
             <SelectInput
               options={limitOptions}
