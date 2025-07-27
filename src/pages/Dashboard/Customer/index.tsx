@@ -1,11 +1,11 @@
+import { AlertDialogModal } from "@/components/AlertDialogModal";
 import {
   DataTable,
   type DataTableHandle,
 } from "@/components/DataTable/dataTable";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import { DialogModal } from "@/components/DialogModal";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
-import { useEffect, useRef, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -14,18 +14,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { customerApi, type Customer } from "@/mockApi/customerApi";
-import { DialogModal } from "@/components/DialogModal";
-import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { CustomerForm } from "./components/CustomerForm";
-import CustomerDetails from "./components/CustomerDetails";
-import TopPayingCustomerChart from "./components/TopPayingCustomerChart";
-import HighestUnpaidBalanceChart from "./components/HighestUnpaidBalanceChart";
-import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 import type { TCustomer } from "@/types/customer.type";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { MoreHorizontal, Plus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import CustomerDetails from "./components/CustomerDetails";
+import { CustomerForm } from "./components/CustomerForm";
+import HighestUnpaidBalanceChart from "./components/HighestUnpaidBalanceChart";
+import TopPayingCustomerChart from "./components/TopPayingCustomerChart";
 
 export default function CustomerPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("table");
   const tableRef = useRef<DataTableHandle<TCustomer> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -103,19 +103,23 @@ export default function CustomerPage() {
     },
     {
       accessorKey: "name",
-      header: () => <div className="text-start">Customer Name</div>,
+      header: () => <div className="text-start">{t("Customer Name")}</div>,
       size: 220,
       cell: ({ row }) => (
-        <div onClick={() => {
-          setSelectedCustomer(row.original)
-          setIsViewOpen(true)
-        }}
-          className="truncate text-start cursor-pointer">{row.getValue("name")}</div>
+        <div
+          onClick={() => {
+            setSelectedCustomer(row.original);
+            setIsViewOpen(true);
+          }}
+          className="cursor-pointer truncate text-start"
+        >
+          {row.getValue("name")}
+        </div>
       ),
     },
     {
       accessorKey: "truncated_tokens",
-      header: "Truncated Token",
+      header: t("Truncated Token"),
       size: 220,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("truncated_tokens")}</div>
@@ -123,7 +127,7 @@ export default function CustomerPage() {
     },
     {
       accessorKey: "email",
-      header: "Email",
+      header: t("Email"),
       size: 220,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("email")}</div>
@@ -131,7 +135,7 @@ export default function CustomerPage() {
     },
     {
       accessorKey: "phone",
-      header: "Phone",
+      header: t("Phone"),
       size: 200,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("phone")}</div>
@@ -139,7 +143,7 @@ export default function CustomerPage() {
     },
     {
       accessorKey: "company",
-      header: "Company",
+      header: t("Company"),
       size: 200,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("company")}</div>
@@ -147,7 +151,7 @@ export default function CustomerPage() {
     },
     {
       accessorKey: "achToken",
-      header: "ACH Token",
+      header: t("ACH Token"),
       size: 200,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("achToken")}</div>
@@ -159,7 +163,10 @@ export default function CustomerPage() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0 hover:bg-transparent cursor-pointer">
+          <Button
+            variant="ghost"
+            className="h-8 w-8 cursor-pointer p-0 hover:bg-transparent"
+          >
             <span className="sr-only">Open menu</span>
             <MoreHorizontal />
           </Button>
@@ -173,7 +180,7 @@ export default function CustomerPage() {
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b py-3 text-base"
           >
             {/* <Eye className="mr-2 h-4 w-4" /> */}
-            {t("view_customer")}
+            {t("View Customer")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -182,7 +189,7 @@ export default function CustomerPage() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            {t("edit_customer")}
+            {t("Edit Customer")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -191,7 +198,7 @@ export default function CustomerPage() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            {t("delete_customer")}
+            {t("Delete Customer")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -216,12 +223,12 @@ export default function CustomerPage() {
   };
 
   const tableHeaderColumns = [
-    { id: "name", displayName: "Customer Name", canHide: false },
-    { id: "truncated_tokens", displayName: "Truncated Token" },
-    { id: "email", displayName: "Email" },
-    { id: "phone", displayName: "Phone" },
-    { id: "company", displayName: "Company" },
-    { id: "achToken", displayName: "ACH Token" },
+    { id: "name", displayName: t("Customer Name"), canHide: false },
+    { id: "truncated_tokens", displayName: t("Truncated Token") },
+    { id: "email", displayName: t("Email") },
+    { id: "phone", displayName: t("Phone") },
+    { id: "company", displayName: t("Company") },
+    { id: "achToken", displayName: t("ACH Token") },
   ];
 
   console.log("table ref:", tableRef.current?.table);
@@ -262,10 +269,10 @@ export default function CustomerPage() {
               handleFilterChange={handleFilterChange}
               table={tableRef.current.table}
               columns={tableHeaderColumns}
-              searchPlaceholder="Search by name, email, or company"
+              searchPlaceholder={t("search-placeholder")}
               showDatePicker={false}
               showExportButton={true}
-              exportButtonText="Export"
+              exportButtonText={t("Export")}
               onExportClick={() => console.log("Export clicked")}
               columnVisibility={columnVisibility}
             />
@@ -318,8 +325,8 @@ export default function CustomerPage() {
       <AlertDialogModal
         isOpen={isDeleteOpen}
         onOpenChange={setIsDeleteOpen}
-        title="Confirm Delete"
-        description="Are you sure you want to delete this customer? This action cannot be undone."
+        title={t("Confirm Delete")}
+        description={t("Delete Confirmation")}
         onConfirm={async () => {
           if (customerToDelete) {
             console.log("Customer To Be Deleted:", customerToDelete);

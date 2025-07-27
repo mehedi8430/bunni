@@ -3,17 +3,14 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 // Import multiple namespaces
-// import actionsEn from "../locales/en/actions.json";
 import landingEn from "../locales/en/landing-page.json";
 import sidebarEn from "../locales/en/sidebar.json";
 import tableEn from "../locales/en/table.json";
-// import tableEn from "../locales/en/table.json";
 
-// import actionsEs from "../locales/es/actions.json";
+// Spanish translations
 import landingEs from "../locales/es/landing-page.json";
 import sidebarEs from "../locales/es/sidebar.json";
 import tableEs from "../locales/es/table.json";
-// import tableEs from "../locales/es/table.json";
 
 i18n
   .use(LanguageDetector)

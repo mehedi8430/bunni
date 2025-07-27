@@ -34,5 +34,13 @@
   "Showing {{start}} to {{end}} of {{total}} results": "Showing {{start}} to {{end}} of {{total}} results",
   "Draft": "Draft",
   "Overdue": "Overdue",
-  "Cancelled": "Cancelled"
+  "Cancelled": "Cancelled",
+  "Truncated Token": "Truncated Token",
+  "Email": "Email",
+  "Phone": "Phone",
+  "Company": "Company",
+  "ACH Token": "ACH Token",
+  "View Customer": "View Customer",
+  "Edit Customer": "Edit Customer",
+  "Delete Customer": "Delete Customer"
 }
