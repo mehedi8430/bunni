@@ -42,5 +42,18 @@
   "ACH Token": "Token ACH",
   "View Customer": "Ver Cliente",
   "Edit Customer": "Editar Cliente",
-  "Delete Customer": "Eliminar Cliente"
+  "Delete Customer": "Eliminar Cliente",
+  "Transaction Number": "Número de Transacción",
+  "Date": "Fecha",
+  "Payment Method": "Método de Pago",
+  "All Status": "Todos los Estados",
+  "Unpaid": "No Pagado",
+  "Save": "Guardar",
+  "View": "Ver",
+  "Total Payment": "Pago Total",
+  "Pending Payments": "Pagos Pendientes",
+  "Schedule Payment": "Programar Pago",
+  "Virtual Terminal": "Terminal Virtual",
+  "Pay by Link": "Pagar por Enlace",
+  "Payment": "Pago"
 }
