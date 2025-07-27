@@ -202,10 +202,14 @@ function DataTableInner<TData, TValue>(
         <div className="flex flex-col items-center justify-between gap-3 px-2 sm:flex-row sm:gap-4 sm:px-4">
           <div className="order-2 flex items-center text-center text-xs text-[#54607A] sm:text-left sm:text-sm">
             <span className="block sm:inline">
-              Showing 1 to {limit <= total ? limit : total}
+              {t("Showing {{start}} to {{end}} of {{total}} results", {
+                start: 1,
+                end: limit <= total ? limit : total,
+                total,
+              })}
             </span>
             <span className="mr-2 block sm:ml-1 sm:inline">
-              of {total} entries
+              {t("of {{total}} entries", { total })}
             </span>
             <SelectInput
               options={limitOptions}

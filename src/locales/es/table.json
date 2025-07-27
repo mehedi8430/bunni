@@ -30,5 +30,9 @@
   "Confirm Delete": "Confirmar eliminación",
   "Delete Confirmation": "¿Está seguro de que desea eliminar esta factura? Esta acción no se puede deshacer.",
   "Confirm": "Confirmar",
-  "Cancel": "Cancelar"
+  "Cancel": "Cancelar",
+  "Showing {{start}} to {{end}} of {{total}} results": "Mostrando {{start}} a {{end}} de {{total}} resultados",
+  "Draft": "Borrador",
+  "Overdue": "Vencido",
+  "Cancelled": "Cancelado"
 }

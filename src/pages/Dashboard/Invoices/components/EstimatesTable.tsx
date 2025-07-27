@@ -1,22 +1,25 @@
+import { AlertDialogModal } from "@/components/AlertDialogModal";
 import {
   DataTable,
   type DataTableHandle,
 } from "@/components/DataTable/dataTable";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import StatusFilterHeader from "@/components/DataTable/StatusFilterHeader";
+import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
-import { useEffect, useRef, useState, useMemo } from "react";
-import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { PdfDialogModal } from "@/components/shared/PdfModal";
 import { cn } from "@/lib/utils";
-import type { TInvoice } from "@/types";
-import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
-import InvoiceTableRowActions from "./InvoiceTableRowActions";
-import PreviewTemplate from "../../CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import { estimatesApi } from "@/mockApi/estimatesApi";
-import StatusFilterHeader from "@/components/DataTable/StatusFilterHeader";
+import type { TInvoice } from "@/types";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import PreviewTemplate from "../../CreateInvoiceTemplatePage/Components/PreviewTemplate";
+import InvoiceTableRowActions from "./InvoiceTableRowActions";
 
 export default function EstimatesTable() {
+  const { t } = useTranslation("table");
+
   const tableRef = useRef<DataTableHandle<TInvoice> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -102,7 +105,7 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "id",
-      header: () => <div className="text-start">Estimate</div>,
+      header: () => <div className="text-start">{t("Invoice")}</div>,
       size: 180,
       cell: ({ row }) => (
         <div className="truncate text-start">{row.getValue("id")}</div>
@@ -111,7 +114,7 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "customerName",
-      header: () => <div className="text-start">Customer Name</div>,
+      header: () => <div className="text-start">{t("Customer Name")}</div>,
       size: 220,
       cell: ({ row }) => (
         <div className="truncate text-start">
@@ -153,7 +156,7 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("Amount"),
       size: 120,
       cell: ({ row }) => (
         <div className="truncate">${row.getValue("amount")}</div>
@@ -162,7 +165,7 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "tenderType",
-      header: "Tender Type",
+      header: t("Tender Type"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("tenderType")}</div>
@@ -171,14 +174,14 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "date",
-      header: "Created Date",
+      header: t("Created Date"),
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("date")}</div>,
       enableHiding: true,
     },
     {
       accessorKey: "dueDate",
-      header: "Due Date",
+      header: t("Due Date"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("dueDate")}</div>
@@ -187,7 +190,7 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "createdBy",
-      header: "Created By",
+      header: t("Created By"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("createdBy")}</div>
@@ -196,7 +199,7 @@ export default function EstimatesTable() {
     },
     {
       accessorKey: "sentVia",
-      header: "Sent Via",
+      header: t("Sent Via"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("sentVia")}</div>
@@ -231,15 +234,15 @@ export default function EstimatesTable() {
   };
 
   const tableHeaderColumns = [
-    { id: "id", displayName: "Invoice" },
-    { id: "customerName", displayName: "Customer Name" },
-    { id: "status", displayName: "Status" },
-    { id: "amount", displayName: "Amount" },
-    { id: "tenderType", displayName: "Tender Type" },
-    { id: "date", displayName: "Created Date" },
-    { id: "dueDate", displayName: "Due Date" },
-    { id: "createdBy", displayName: "Created By" },
-    { id: "sentVia", displayName: "Sent Via" },
+    { id: "id", displayName: t("Invoice") },
+    { id: "customerName", displayName: t("Customer Name") },
+    { id: "status", displayName: t("Status") },
+    { id: "amount", displayName: t("Amount") },
+    { id: "tenderType", displayName: t("Tender Type") },
+    { id: "date", displayName: t("Created Date") },
+    { id: "dueDate", displayName: t("Due Date") },
+    { id: "createdBy", displayName: t("Created By") },
+    { id: "sentVia", displayName: t("Sent Via") },
   ];
 
   return (
@@ -252,7 +255,7 @@ export default function EstimatesTable() {
             onClick={clearAllFilters}
             className="text-sm"
           >
-            Clear Filters
+            {t("Clear Filters")}
           </Button>
         </div>
       )}
@@ -264,10 +267,10 @@ export default function EstimatesTable() {
           setSelectedDate={setSelectedDate}
           table={tableRef.current.table}
           columns={tableHeaderColumns}
-          searchPlaceholder="Search by name, email, or company"
+          searchPlaceholder={t("search-placeholder")}
           showDatePicker={true}
           showExportButton={true}
-          exportButtonText="Export"
+          exportButtonText={t("Export")}
           onExportClick={() => console.log("Export clicked")}
           columnVisibility={columnVisibility}
         />
