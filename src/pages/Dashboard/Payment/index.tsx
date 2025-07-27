@@ -35,7 +35,7 @@ const StatusFilterHeader = ({
   statusFilter: string;
   onStatusFilterChange: (status: string) => void;
 }) => {
-  const { t } = useTranslation("table");
+  const { t } = useTranslation(["table"]);
   return (
     <div className="flex items-center justify-center gap-2">
       <span>{t("Status")}</span>
@@ -326,7 +326,7 @@ export default function PaymentPage() {
     <section className="space-y-10">
       <div className="flex flex-col items-center justify-between space-y-1 lg:flex-row">
         <h1 className="text-2xl font-semibold md:text-[26px]">
-          {t("Payment")}
+          {t("payment:Payment")}
         </h1>
         <div className="flex flex-wrap items-center justify-center gap-6">
           <Button
@@ -335,7 +335,7 @@ export default function PaymentPage() {
             className="text-base font-normal"
           >
             <Plus />
-            {t("Schedule Payment")}
+            {t("payment:Schedule_Payment")}
           </Button>
           <Button
             onClick={() => setIsVirtualTerminalOpen(true)}
@@ -343,7 +343,7 @@ export default function PaymentPage() {
             className="text-base font-normal"
           >
             <Plus />
-            {t("Virtual Terminal")}
+            {t("payment:Virtual_Terminal")}
           </Button>
           <Button
             onClick={() => setIsAddPaymentOpen(true)}
@@ -351,7 +351,7 @@ export default function PaymentPage() {
             className="text-base font-normal"
           >
             <Plus />
-            {t("Pay by Link")}
+            {t("payment:Pay_by_Link")}
           </Button>
         </div>
       </div>
@@ -363,7 +363,7 @@ export default function PaymentPage() {
               <ReactSVG src={assets.icons.doller_up} />
             </div>
             <p className="text-muted-foreground text-[16px] font-normal">
-              {t("Total Payment")}
+              {t("payment:Total_Payment")}
             </p>
           </div>
           <p className="ml-11 text-xl font-bold">$ 2,567</p>
@@ -375,7 +375,7 @@ export default function PaymentPage() {
               <ReactSVG src={assets.icons.pending} />
             </div>
             <p className="text-muted-foreground text-[16px] font-normal">
-              {t("Pending Payments")}
+              {t("payment:Pending_Payments")}
             </p>
           </div>
           <p className="ml-11 text-xl font-bold">$ 4,212</p>
