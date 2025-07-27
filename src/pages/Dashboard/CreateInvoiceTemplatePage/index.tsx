@@ -24,12 +24,12 @@ export default function CreateInvoiceTemplatePage() {
 
   return (
     <section
-      className={cn("flex flex-col items-start gap-6 md:flex-row", {
+      className={cn("flex flex-col items-start gap-6 md:flex-row 2xl:w-full", {
         "md:w-[calc(100vw-120px)]": isCollapsed,
         "md:w-[calc(100vw-350px)]": isExpanded,
       })}
     >
-      <div className="bg-sidebar rounded-lg py-5 md:w-[40%]">
+      <div className="bg-sidebar rounded-lg py-5 md:w-[40%] 2xl:w-1/2">
         <h2 className="px-6 text-xl font-semibold">
           {location.state ? "Edit" : "New"}{" "}
           {type === "estimate" ? "Estimate" : "Invoice"}
@@ -39,7 +39,7 @@ export default function CreateInvoiceTemplatePage() {
         <TemplateForm />
       </div>
 
-      <div className="flex-1 space-y-0 md:w-[60%] md:space-y-6">
+      <div className="flex-1 space-y-0 md:w-[60%] md:space-y-6 2xl:w-1/2">
         {/* Preview Section */}
         <Outlet />
 
