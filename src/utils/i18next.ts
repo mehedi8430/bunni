@@ -9,6 +9,8 @@ import sidebarEn from "../locales/en/sidebar.json";
 import tableEn from "../locales/en/table.json";
 import productsEn from "../locales/en/products.json";
 import invoiceSettinjgsEn from "../locales/en/invoice-setting.json";
+import addCustomerModalEn from "../locales/en/add-customer-modal.json";
+import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
 
 // Spanish translations
 import landingEs from "../locales/es/landing-page.json";
@@ -17,6 +19,8 @@ import sidebarEs from "../locales/es/sidebar.json";
 import tableEs from "../locales/es/table.json";
 import productsEs from "../locales/es/products.json";
 import invoiceSettinjgsEs from "../locales/es/invoice-setting.json";
+import addCustomerModalEs from "../locales/es/add-customer-modal.json";
+import viewCustomerModalEs from "../locales/es/view-customer-modal.json";
 
 i18n
   .use(LanguageDetector)
@@ -30,6 +34,8 @@ i18n
         payment: paymentEn,
         products: productsEn,
         invoice_settings: invoiceSettinjgsEn,
+        add_customer_modal: addCustomerModalEn,
+        view_customer_modal: viewCustomerModalEn,
       },
       es: {
         sidebar: sidebarEs,
@@ -38,6 +44,8 @@ i18n
         payment: paymentEs,
         products: productsEs,
         invoice_settings: invoiceSettinjgsEs,
+        add_customer_modal: addCustomerModalEs,
+        view_customer_modal: viewCustomerModalEs,
       },
     },
     fallbackLng: "en",
