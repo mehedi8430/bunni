@@ -7,12 +7,14 @@ import landingEn from "../locales/en/landing-page.json";
 import paymentEn from "../locales/en/payment.json";
 import sidebarEn from "../locales/en/sidebar.json";
 import tableEn from "../locales/en/table.json";
+import addCustomerModalEn from "../locales/en/add-customer-modal.json";
 
 // Spanish translations
 import landingEs from "../locales/es/landing-page.json";
 import paymentEs from "../locales/es/payment.json";
 import sidebarEs from "../locales/es/sidebar.json";
 import tableEs from "../locales/es/table.json";
+import addCustomerModalEs from "../locales/es/add-customer-modal.json";
 
 i18n
   .use(LanguageDetector)
@@ -24,12 +26,14 @@ i18n
         landing: landingEn,
         table: tableEn,
         payment: paymentEn,
+        add_customer_modal: addCustomerModalEn,
       },
       es: {
         sidebar: sidebarEs,
         landing: landingEs,
         table: tableEs,
         payment: paymentEs,
+        add_customer_modal: addCustomerModalEs,
       },
     },
     fallbackLng: "en",
