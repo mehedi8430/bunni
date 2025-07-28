@@ -49,5 +49,7 @@
   "All Status": "All Status",
   "Unpaid": "Unpaid",
   "Save": "Save",
-  "View": "View"
+  "View": "View",
+  "title": "Customers",
+  "dashboard_new_customer": "Customer"
 }

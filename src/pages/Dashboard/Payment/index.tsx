@@ -440,7 +440,7 @@ export default function PaymentPage() {
 
       {/* Virtual Terminal Form modal */}
       <DialogModal
-        title="Virtual Terminal"
+        title={t("virtual_terminal_modal:virtual_terminal")}
         isOpen={isVirtualTerminalOpen}
         onOpenChange={setIsVirtualTerminalOpen}
         className="w-xl"
@@ -453,7 +453,7 @@ export default function PaymentPage() {
 
       {/* Add Recurring Billing Form modal */}
       <DialogModal
-        title="Payment Schedule"
+        title={t("payment_schedule_modal:payment_schedule")}
         isOpen={isRecurringBillingOpen}
         onOpenChange={setIsRecurringBillingOpen}
         className="w-xl"
@@ -466,7 +466,7 @@ export default function PaymentPage() {
 
       {/* Add payment form modal */}
       <DialogModal
-        title="Add Payment"
+        title={t("add_payment_modal:add_payment")}
         isOpen={isAddPaymentOpen}
         onOpenChange={setIsAddPaymentOpen}
         className="w-xl"

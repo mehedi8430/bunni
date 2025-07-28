@@ -1,0 +1,20 @@
+{
+  "payment_schedule": "Payment Schedule",
+  "customer": "Customer",
+  "select_a_customer": "Select a customer",
+  "add_customer": "+ Add Customer",
+  "start_date": "Start Date",
+  "end_date": "End Date",
+  "payment_amount": "Payment Amount",
+  "interval": "Interval",
+  "monthly": "Monthly",
+  "weekly": "Weekly",
+  "daily": "Daily",
+  "payment_method": "Payment Method",
+  "card_number": "Card Number",
+  "card_expiry": "Card Expiry",
+  "card_cvc": "Card CVC",
+  "cancel": "Cancel",
+  "save": "Save",
+  "add_new_customer": "Add New Customer"
+}

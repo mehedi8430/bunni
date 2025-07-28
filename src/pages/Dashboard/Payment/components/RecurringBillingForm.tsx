@@ -8,9 +8,11 @@ import { Input } from "@/components/ui/input";
 import { DialogModal } from "@/components/DialogModal";
 import { CustomerForm } from "../../Customer/components/CustomerForm";
 import { CustomDatePicker } from "@/components/customeDatePicker/CustomDatePicker";
+import { useTranslation } from "react-i18next";
 
 
 export default function RecurringBillingForm({ onClose }: RecurringBillingFormProps) {
+    const { t } = useTranslation("payment_schedule_modal");
     const { form, onSubmit, customers } = useRecurringBilling();
     const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -39,14 +41,14 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             name="customer"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Customer</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("customer")}</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={customers.map((customer) => ({
                                                 value: customer.id,
                                                 label: customer.name,
                                             }))}
-                                            placeholder="Select a customer"
+                                            placeholder={t("select_a_customer")}
                                             onValueChange={field.onChange}
                                             triggerClassName="w-full py-3"
                                         />
@@ -63,7 +65,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             className="text-primary px-2 py-1 w-full flex justify-end mb-0"
                         >
                             <span onClick={() => setIsAddCustomerOpen(true)}>
-                                + Add Customer
+                                {t("add_customer")}
                             </span>
                         </Button>
 
@@ -77,7 +79,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                     <FormItem className="flex-1">
                                         <FormControl>
                                             <CustomDatePicker
-                                                label="Start Date"
+                                                label={t("start_date")}
                                                 onDateChange={(date) =>
                                                     field.onChange(date)
                                                 }
@@ -94,7 +96,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                     <FormItem className="flex-1">
                                         <FormControl>
                                             <CustomDatePicker
-                                                label="End Date"
+                                                label={t("end_date")}
                                                 onDateChange={(date) =>
                                                     field.onChange(date)
                                                 }
@@ -110,7 +112,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             name="amount"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Payment Amount</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("payment_amount")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
@@ -132,7 +134,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             name="interval"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Interval</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("interval")}</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={intervalOptions.map((option) => ({
@@ -155,7 +157,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                             name="paymentMethod"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Payment Method</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("payment_method")}</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={paymentMethodOptions.map((option) => ({
@@ -183,7 +185,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                     name="cardNumber"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-base font-normal">Card Number</FormLabel>
+                                            <FormLabel className="text-base font-normal">{t("card_number")}</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type="text"
@@ -206,7 +208,7 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                         name="cardExpiry"
                                         render={({ field }) => (
                                             <FormItem className="w-1/2">
-                                                <FormLabel className="text-base font-normal">Card Expiry</FormLabel>
+                                                <FormLabel className="text-base font-normal">{t("card_expiry")}</FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -228,11 +230,11 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                                         name="cardCVC"
                                         render={({ field }) => (
                                             <FormItem className="w-1/2">
-                                                <FormLabel className="text-base font-normal">Card CVC</FormLabel>
+                                                <FormLabel className="text-base font-normal">{t("card_cvc")}</FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
-                                                        placeholder="CVC"
+                                                        placeholder={t("card_cvc")}
                                                         {...field}
                                                         onChange={(e) =>
                                                             field.onChange(e.target.value)
@@ -253,9 +255,9 @@ export default function RecurringBillingForm({ onClose }: RecurringBillingFormPr
                     {/* Buttons */}
                     <div className="flex items-center justify-center md:justify-end gap-3 p-5">
                         <Button type="button" variant="outline" onClick={onClose} className="px-8 py-4 text-base font-normal">
-                            Cancel
+                            {t("cancel")}
                         </Button>
-                        <Button variant={"primary"} type="submit" className="px-8 py-4 shadow-2xl text-base font-normal border border-button-border">Save</Button>
+                        <Button variant={"primary"} type="submit" className="px-8 py-4 shadow-2xl text-base font-normal border border-button-border">{t("save")}</Button>
                     </div>
                 </form>
             </Form>

@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import SelectInput from "@/components/SelectInput";
+import { useTranslation } from "react-i18next";
 
 
 export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProps) {
+    const { t } = useTranslation("virtual_terminal_modal");
     const { form, onSubmit, customers, } = useVirtualTerminal();
     const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -33,14 +35,14 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                             name="customer"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Customer</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("customer")}</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={customers.map((customer) => ({
                                                 value: customer.id,
                                                 label: customer.name,
                                             }))}
-                                            placeholder="Select a customer"
+                                            placeholder={t("select_a_customer")}
                                             onValueChange={field.onChange}
                                             triggerClassName="w-full py-3"
                                         />
@@ -56,7 +58,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                             size="sm"
                             className="text-primary px-2 py-1 w-full flex justify-end mb-0"
                         >
-                            <span onClick={() => setIsAddCustomerOpen(true)}>+ Add Customer</span>
+                            <span onClick={() => setIsAddCustomerOpen(true)}>{t("add_customer")}</span>
                         </Button>
 
                         {/* Payment Amount */}
@@ -65,7 +67,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                             name="amount"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Payment Amount</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("payment_amount")}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
@@ -88,7 +90,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                             name="paymentMethod"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-base font-normal">Payment Method</FormLabel>
+                                    <FormLabel className="text-base font-normal">{t("payment_method")}</FormLabel>
                                     <FormControl>
                                         <SelectInput
                                             options={paymentMethodOptions.map((option) => ({
@@ -118,7 +120,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                                     name="cardNumber"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-base font-normal">Card Number</FormLabel>
+                                            <FormLabel className="text-base font-normal">{t("card_number")}</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type="text"
@@ -141,7 +143,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                                         name="cardExpiry"
                                         render={({ field }) => (
                                             <FormItem className="w-1/2">
-                                                <FormLabel className="text-base font-normal">Card Expiry</FormLabel>
+                                                <FormLabel className="text-base font-normal">{t("card_expiry")}</FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -163,7 +165,7 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                                         name="cardCVC"
                                         render={({ field }) => (
                                             <FormItem className="w-1/2">
-                                                <FormLabel className="text-base font-normal">Card CVC</FormLabel>
+                                                <FormLabel className="text-base font-normal">{t("card_cvc")}</FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -188,9 +190,9 @@ export default function VirtualTerminalForm({ onClose }: VirtualTerminalFormProp
                     {/* Buttons */}
                     <div className="flex items-center justify-center md:justify-end gap-3 p-5">
                         <Button type="button" variant="outline" onClick={onClose} className="px-8 py-4 text-base font-normal">
-                            Cancel
+                            {t("cancel")}
                         </Button>
-                        <Button variant={"primary"} type="submit" className="px-4 md:px-8 py-4 shadow-2xl text-base font-normal border border-button-border">Process Payment</Button>
+                        <Button variant={"primary"} type="submit" className="px-4 md:px-8 py-4 shadow-2xl text-base font-normal border border-button-border">{t("process_payment")}</Button>
                     </div>
                 </form>
             </Form>

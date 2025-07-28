@@ -49,5 +49,7 @@
   "All Status": "Todos los Estados",
   "Unpaid": "No Pagado",
   "Save": "Guardar",
-  "View": "Ver"
+  "View": "Ver",
+  "title": "Clientes",
+  "dashboard_new_customer": "Cliente"
 }

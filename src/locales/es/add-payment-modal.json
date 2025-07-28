@@ -1,0 +1,21 @@
+{
+  "add_payment": "Agregar pago",
+  "customer": "Cliente",
+  "select_a_customer": "Seleccione un cliente",
+  "add_customer": "+ Agregar cliente",
+  "payment_amount": "Monto del pago",
+  "payment_amount_placeholder": "$0.00",
+  "payment_method": "Método de pago",
+  "email": "Correo electrónico",
+  "sms": "SMS",
+  "link": "Copiar enlace",
+  "recipient_email": "Correo electrónico del destinatario",
+  "recipient_email_placeholder": "juan@ejemplo.com",
+  "phone_number": "Número de teléfono",
+  "phone_number_placeholder": "+1234567890",
+  "shareable_link": "Copiar enlace",
+  "link_copied": "¡Enlace copiado al portapapeles!",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "add_new_customer": "Agregar nuevo cliente"
+}

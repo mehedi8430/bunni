@@ -1,0 +1,21 @@
+{
+  "virtual_terminal": "Virtual Terminal",
+  "customer": "Customer",
+  "select_a_customer": "Select a customer",
+  "add_customer": "+ Add Customer",
+  "payment_amount": "Payment Amount",
+  "payment_method": "Payment Method",
+  "credit_card": "Credit Card",
+  "ach": "ACH",
+  "cash": "Cash",
+  "card_number": "Card Number",
+  "card_expiry": "Card Expiry",
+  "card_cvc": "Card CVC",
+  "card_expiry_placeholder": "MM/YY or MM/YYYY",
+  "card_number_placeholder": "1234 5678 9012 3456",
+  "card_cvc_placeholder": "CVC",
+  "payment_amount_placeholder": "$0.00",
+  "cancel": "Cancel",
+  "process_payment": "Process Payment",
+  "add_new_customer": "Add New Customer"
+}

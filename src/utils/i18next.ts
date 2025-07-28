@@ -14,6 +14,9 @@ import sidebarEn from "../locales/en/sidebar.json";
 import subscriptionEn from "../locales/en/subscription.json";
 import tableEn from "../locales/en/table.json";
 import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
+import paymentScheduleModalEn from "../locales/en/payment-schedule-modal.json";
+import virtualTerminalModalEn from "../locales/en/virtual-terminal-modal.json";
+import addPaymentModalEn from "../locales/en/add-payment-modal.json";
 
 // Spanish translations
 import addCustomerModalEs from "../locales/es/add-customer-modal.json";
@@ -27,6 +30,9 @@ import sidebarEs from "../locales/es/sidebar.json";
 import subscriptionEs from "../locales/es/subscription.json";
 import tableEs from "../locales/es/table.json";
 import viewCustomerModalEs from "../locales/es/view-customer-modal.json";
+import paymentScheduleModalEs from "../locales/es/payment-schedule-modal.json";
+import virtualTerminalModalEs from "../locales/es/virtual-terminal-modal.json";
+import addPaymentModalEs from "../locales/es/add-payment-modal.json";
 
 i18n
   .use(LanguageDetector)
@@ -45,6 +51,9 @@ i18n
         notification: notificationEn,
         subscription: subscriptionEn,
         add_member_modal: addMemberModalEn,
+        payment_schedule_modal: paymentScheduleModalEn,
+        virtual_terminal_modal: virtualTerminalModalEn,
+        add_payment_modal: addPaymentModalEn,
       },
       es: {
         sidebar: sidebarEs,
@@ -58,6 +67,9 @@ i18n
         notification: notificationEs,
         subscription: subscriptionEs,
         add_member_modal: addMemberModalEs,
+        payment_schedule_modal: paymentScheduleModalEs,
+        virtual_terminal_modal: virtualTerminalModalEs,
+        add_payment_modal: addPaymentModalEs,
       },
     },
     fallbackLng: "en",
