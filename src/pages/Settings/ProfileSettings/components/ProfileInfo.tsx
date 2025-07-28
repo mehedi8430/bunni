@@ -13,12 +13,14 @@ import type { TProfileData } from "@/types";
 import { Plus, RectangleEllipsis } from "lucide-react";
 import { useState } from "react";
 import AddressForm from "./AddressForm";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileInfo({
   profileData,
 }: {
   profileData: TProfileData;
 }) {
+  const { t } = useTranslation("profile_settings");
   const { color } = useAppSelector(templateSelector);
   const [isAddressOpen, setIsAddressOpen] = useState<boolean>(false);
   const [initialData, setInitialData] = useState<
@@ -62,21 +64,21 @@ export default function ProfileInfo({
     <section className="space-y-6">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="w-full space-y-6 rounded-md bg-white px-5 py-8">
-          <h4 className="mb-5 text-2xl font-semibold">Personal Info</h4>
+          <h4 className="mb-5 text-2xl font-semibold">{t("personal_info")}</h4>
           <div className="flex items-center gap-8">
-            <p className="text-foreground text-lg font-normal">Name:</p>
+            <p className="text-foreground text-lg font-normal">{t("name")}</p>
             <span className="text-foreground/60 text-base">
               {profileData?.personalInfo.name}
             </span>
           </div>
           <div className="flex items-center gap-9.5">
-            <p className="text-foreground text-lg font-normal">Email:</p>
+            <p className="text-foreground text-lg font-normal">{t("email")}</p>
             <span className="text-foreground/60 text-base">
               {profileData?.personalInfo.email}
             </span>
           </div>
           <div className="flex items-center gap-7">
-            <p className="text-foreground text-lg font-normal">Phone:</p>
+            <p className="text-foreground text-lg font-normal">{t("phone")}</p>
             <span className="text-foreground/60 text-base">
               {profileData?.personalInfo.phone}
             </span>
@@ -85,7 +87,7 @@ export default function ProfileInfo({
           {/* Address */}
         </div>
         <div className="w-full space-y-4 rounded-md bg-white px-5 py-8">
-          <h4 className="text-2xl font-semibold">Business Info</h4>
+          <h4 className="text-2xl font-semibold">{t("business_info")}</h4>
 
           {/* Business Logo Upload */}
           <div className="mb-2 flex h-20 w-20 items-center justify-center rounded-full">
@@ -97,7 +99,7 @@ export default function ProfileInfo({
           </div>
           <div className="flex items-center gap-2">
             <p className="text-foreground text-lg font-normal">
-              Business Name:
+              {t("business_name")}
             </p>
             <span className="text-foreground/60 text-base">
               {profileData?.businessInfo.name}
@@ -108,7 +110,7 @@ export default function ProfileInfo({
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <p className="text-foreground text-lg font-normal">
-                Business Addresses
+                {t("business_addresses")}
               </p>
               <Button
                 variant="outline"
@@ -117,13 +119,13 @@ export default function ProfileInfo({
                 onClick={() => setIsAddressOpen(true)}
               >
                 <Plus />
-                Add Address
+                {t("add_address")}
               </Button>
             </div>
             {profileData?.businessInfo.addresses.map((address, index) => (
               <p className="text-foreground/60 flex items-center gap-2 text-base">
                 {address?.address}{" "}
-                {address?.isDefault && <Badge>Default</Badge>}
+                {address?.isDefault && <Badge>{t("default")}</Badge>}
                 <DropdownMenu>
                   <DropdownMenuTrigger className="focus:outline-none focus-visible:ring-0">
                     <button>
@@ -131,7 +133,7 @@ export default function ProfileInfo({
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuItem>Set as Default</DropdownMenuItem>
+                    <DropdownMenuItem>{t("set_as_default")}</DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => {
                         setIsAddressOpen(true);
@@ -142,9 +144,9 @@ export default function ProfileInfo({
                         });
                       }}
                     >
-                      Edit
+                      {t("edit")}
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Remove</DropdownMenuItem>
+                    <DropdownMenuItem>{t("remove")}</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </p>
@@ -154,7 +156,7 @@ export default function ProfileInfo({
           {/* Business Contact */}
           <div className="flex items-center gap-2">
             <p className="text-foreground text-lg font-normal">
-              Business Contact:
+              {t("business_contact")}
             </p>
             <span className="text-foreground/60 text-base">
               {profileData?.businessInfo.contact}
@@ -163,7 +165,7 @@ export default function ProfileInfo({
 
           {/* website Url */}
           <div className="flex items-center gap-2">
-            <p className="text-foreground text-lg font-normal">Website:</p>
+            <p className="text-foreground text-lg font-normal">{t("website")}</p>
             <span className="text-foreground/60 text-base">
               {profileData?.businessInfo.website}
             </span>
@@ -171,16 +173,15 @@ export default function ProfileInfo({
 
           {/* brand color */}
           <div className="flex items-center gap-2">
-            <p className="text-foreground text-lg font-normal">Brand Color:</p>
+            <p className="text-foreground text-lg font-normal">{t("brand_color")}</p>
             <div
               style={{
                 backgroundColor: color || profileData?.businessInfo.brandColor,
-                color: color || profileData?.businessInfo.brandColor,
                 opacity: 1.5,
               }}
               className="rounded-md px-2 py-1"
             >
-              <span className="text-foreground/60 text-base">
+              <span className="text-white text-base">
                 {profileData?.businessInfo.brandColor}
               </span>
             </div>
@@ -193,7 +194,7 @@ export default function ProfileInfo({
         isOpen={isAddressOpen}
         onOpenChange={setIsAddressOpen}
         title={
-          initialData?.index !== undefined ? "Edit Address" : "Add Address"
+          initialData?.index !== undefined ? t("edit_address") : t("add_new_address")
         }
       >
         <AddressForm

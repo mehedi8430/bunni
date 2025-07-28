@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProfileInfo from "./components/ProfileInfo";
 import type { TProfileData } from "@/types";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileSettingsPage() {
+  const {t} = useTranslation("profile_settings");
   // const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
 
@@ -41,13 +43,13 @@ export default function ProfileSettingsPage() {
     <section className="space-y-6 md:space-y-10">
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold md:text-[32px]">
-          Profile Settings
+          {t("profile_settings")}
         </h1>
         <Button
           onClick={() => setEditProfile(true)}
           className="border-button-border border text-base font-normal"
         >
-          Edit Profile
+          {t("edit_profile")}
         </Button>
       </div>
       {editProfile ? (
