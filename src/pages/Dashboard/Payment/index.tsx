@@ -440,7 +440,7 @@ export default function PaymentPage() {
 
       {/* Virtual Terminal Form modal */}
       <DialogModal
-        title="Virtual Terminal"
+        title={t("virtual_terminal_modal:virtual_terminal")}
         isOpen={isVirtualTerminalOpen}
         onOpenChange={setIsVirtualTerminalOpen}
         className="w-xl"
