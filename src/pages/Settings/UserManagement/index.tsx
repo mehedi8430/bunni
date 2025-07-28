@@ -1,25 +1,27 @@
+import { AlertDialogModal } from "@/components/AlertDialogModal";
 import {
   DataTable,
   type DataTableHandle,
 } from "@/components/DataTable/dataTable";
+import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
+import { DialogModal } from "@/components/DialogModal";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Plus } from "lucide-react";
-import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
-import { useEffect, useRef, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlertDialogModal } from "@/components/AlertDialogModal";
 import { userApi } from "@/mockApi/userApi";
 import type { TUser } from "@/types";
-import { DialogModal } from "@/components/DialogModal";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import { MoreHorizontal, Plus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import UserForm from "./components/UserForm";
-import { DataTableFilter } from "@/components/DataTable/dataTableFilter";
 
 export default function UserManagementPage() {
+  const { t } = useTranslation();
   const tableRef = useRef<DataTableHandle<TUser> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -227,7 +229,9 @@ export default function UserManagementPage() {
       <DialogModal
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
-        title={editUser.id ? "Edit Member" : "Add New Member"}
+        title={
+          editUser.id ? "Edit Member" : t("add_member_modal:add_new_member")
+        }
         className="!w-4xl"
       >
         <UserForm

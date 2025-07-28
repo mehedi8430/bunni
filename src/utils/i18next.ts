@@ -3,23 +3,29 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 // Import multiple namespaces
-import landingEn from "../locales/en/landing-page.json";
-import paymentEn from "../locales/en/payment.json";
-import sidebarEn from "../locales/en/sidebar.json";
-import tableEn from "../locales/en/table.json";
-import productsEn from "../locales/en/products.json";
-import invoiceSettinjgsEn from "../locales/en/invoice-setting.json";
 import addCustomerModalEn from "../locales/en/add-customer-modal.json";
+import addMemberModalEn from "../locales/en/add-member-modal.json";
+import invoiceSettinjgsEn from "../locales/en/invoice-setting.json";
+import landingEn from "../locales/en/landing-page.json";
+import notificationEn from "../locales/en/notification.json";
+import paymentEn from "../locales/en/payment.json";
+import productsEn from "../locales/en/products.json";
+import sidebarEn from "../locales/en/sidebar.json";
+import subscriptionEn from "../locales/en/subscription.json";
+import tableEn from "../locales/en/table.json";
 import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
 
 // Spanish translations
-import landingEs from "../locales/es/landing-page.json";
-import paymentEs from "../locales/es/payment.json";
-import sidebarEs from "../locales/es/sidebar.json";
-import tableEs from "../locales/es/table.json";
-import productsEs from "../locales/es/products.json";
-import invoiceSettinjgsEs from "../locales/es/invoice-setting.json";
 import addCustomerModalEs from "../locales/es/add-customer-modal.json";
+import addMemberModalEs from "../locales/es/add-member-modal.json";
+import invoiceSettinjgsEs from "../locales/es/invoice-setting.json";
+import landingEs from "../locales/es/landing-page.json";
+import notificationEs from "../locales/es/notification.json";
+import paymentEs from "../locales/es/payment.json";
+import productsEs from "../locales/es/products.json";
+import sidebarEs from "../locales/es/sidebar.json";
+import subscriptionEs from "../locales/es/subscription.json";
+import tableEs from "../locales/es/table.json";
 import viewCustomerModalEs from "../locales/es/view-customer-modal.json";
 
 i18n
@@ -36,6 +42,9 @@ i18n
         invoice_settings: invoiceSettinjgsEn,
         add_customer_modal: addCustomerModalEn,
         view_customer_modal: viewCustomerModalEn,
+        notification: notificationEn,
+        subscription: subscriptionEn,
+        add_member_modal: addMemberModalEn,
       },
       es: {
         sidebar: sidebarEs,
@@ -46,6 +55,9 @@ i18n
         invoice_settings: invoiceSettinjgsEs,
         add_customer_modal: addCustomerModalEs,
         view_customer_modal: viewCustomerModalEs,
+        notification: notificationEs,
+        subscription: subscriptionEs,
+        add_member_modal: addMemberModalEs,
       },
     },
     fallbackLng: "en",

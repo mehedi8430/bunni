@@ -1,0 +1,18 @@
+{
+  "add_new_member": "Añadir Nuevo Miembro",
+  "first_name": "Nombre",
+  "last_name": "Apellido",
+  "email": "Correo Electrónico",
+  "phone_number": "Número de Teléfono",
+  "location": "Ubicación",
+  "commission": "Comisión",
+  "permissions": "Permisos",
+  "admin": "Administrador",
+  "send_invite": "Enviar Invitación",
+  "enter_first_name": "Introducir nombre",
+  "enter_last_name": "Introducir apellido",
+  "enter_email": "Introducir correo electrónico",
+  "enter_phone_number": "Introducir número de teléfono",
+  "enter_location": "Introducir ubicación",
+  "owner": "Propietario"
+}
