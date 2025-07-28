@@ -12,6 +12,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "1",
+    templateName: "invoice-beta",
 
     title: "Web Development Services Estimate", // Changed title for clarity
     customerId: "cust_001",
@@ -61,6 +62,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "2",
+    templateName: "invoice-beta",
 
     title: "Consulting Services Estimate", // Changed title
     customerId: "cust_002",
@@ -110,6 +112,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "ACH",
     date: "05 Feb, 2025",
     templateId: "3",
+    templateName: "invoice-beta",
 
     title: "SEO Optimization Estimate", // Changed title
     customerId: "cust_003",
@@ -159,6 +162,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "4",
+    templateName: "invoice-delta",
 
     title: "Graphic Design Package Estimate", // Changed title
     customerId: "cust_004",
@@ -208,6 +212,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "1",
+    templateName: "invoice-alpha",
 
     title: "Photography Services Estimate", // Changed title
     customerId: "cust_005",
@@ -246,6 +251,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "Cash",
     date: "05 Feb, 2025",
     templateId: "2",
+    templateName: "invoice-gamma",
 
     title: "App Design UI/UX Estimate", // Changed title
     customerId: "cust_003",
@@ -295,6 +301,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "3",
+    templateName: "invoice-beta",
 
     title: "Video Editing Service Estimate", // Changed title
     customerId: "cust_006",
@@ -344,6 +351,7 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     tenderType: "ACH",
     date: "08 Feb, 2025",
     templateId: "4",
+    templateName: "invoice-alpha",
 
     title: "E-commerce Development Estimate", // Changed title
     customerId: "cust_007",
