@@ -26,9 +26,10 @@ const StatusFilterHeader = ({
   onStatusFilterChange: (status: string) => void;
 }) => {
   const { t } = useTranslation(["table"]);
+
   return (
     <div className="flex items-center justify-center gap-2">
-      <span>Status</span>
+      <span>{t("Status")}</span>
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
@@ -119,13 +120,13 @@ export default function DiscountSettings() {
   const discountColumns: ColumnDef<TDiscount>[] = [
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("invoice_settings:Name"),
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("name")}</div>,
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("invoice_settings:Amount"),
       size: 100,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("amount")}</div>
@@ -133,7 +134,7 @@ export default function DiscountSettings() {
     },
     {
       accessorKey: "createdDate",
-      header: "Created Date",
+      header: t("invoice_settings:Created_Date"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("createdDate")}</div>

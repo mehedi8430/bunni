@@ -3,39 +3,45 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { invoiceFootersSelector, removeInvoiceFooter, } from "@/redux/slices/invoiceFooterSlice";
+import {
+  invoiceFootersSelector,
+  removeInvoiceFooter,
+} from "@/redux/slices/invoiceFooterSlice";
 import InvoiceFooterForm from "./InvoiceFooterForm";
 import type { TInvoiceFooter } from "@/types";
-
+import { useTranslation } from "react-i18next";
 
 export default function InvoiceFooterSetting() {
+  const { t } = useTranslation("invoice_settings");
   const [isEditInvoiceFooterOpen, setIsEditInvoiceFooterOpen] = useState(false);
-  const [editInvoiceFooter, setEditInvoiceFooter] = useState<Partial<TInvoiceFooter>>({});
+  const [editInvoiceFooter, setEditInvoiceFooter] = useState<
+    Partial<TInvoiceFooter>
+  >({});
   const invoiceFooters = useSelector(invoiceFootersSelector);
   const dispatch = useDispatch();
 
-
-
   return (
-    <section className="bg-white px-4 py-5 rounded-lg shadow-md">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="mb-1 text-xl font-semibold">Invoice Footer Setting</h2>
+    <section className="rounded-lg bg-white px-4 py-5 shadow-md">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="mb-1 text-xl font-semibold">
+          {t("Invoice_Footer_Setting")}
+        </h2>
         <Button
           onClick={() => {
-            setEditInvoiceFooter({}); // Clear form for new footer
+            setEditInvoiceFooter({});
             setIsEditInvoiceFooterOpen(true);
           }}
           variant="primary"
           className="text-sm font-normal md:text-base"
         >
           <Plus />
-          Configure Footer
+          {t("Configure_Footer")}
         </Button>
       </div>
 
       <div className="space-y-4">
         {invoiceFooters.map((footer) => (
-          <div key={footer.id} className="p-4 border rounded-lg">
+          <div key={footer.id} className="rounded-lg border p-4">
             <div className="flex items-center justify-between gap-4">
               <p className="text-base">{footer.footerContent}</p>
               <div className="flex items-center gap-2">
@@ -47,7 +53,7 @@ export default function InvoiceFooterSetting() {
                   }}
                   className="mt-2 text-sm font-normal md:text-base"
                 >
-                  Edit
+                  {t("table:Edit")}
                 </Button>
                 <Button
                   variant="destructive"
@@ -56,7 +62,7 @@ export default function InvoiceFooterSetting() {
                   }}
                   className="mt-2 text-sm font-normal md:text-base"
                 >
-                  delete
+                  {t("table:Delete")}
                 </Button>
               </div>
             </div>
@@ -64,18 +70,11 @@ export default function InvoiceFooterSetting() {
         ))}
       </div>
 
-
-
-
       {/* Dialog for editing footer */}
       <DialogModal
         isOpen={isEditInvoiceFooterOpen}
         onOpenChange={setIsEditInvoiceFooterOpen}
-        title={
-          editInvoiceFooter.id
-            ? "Edit Invoice"
-            : "Create Invoice"
-        }
+        title={editInvoiceFooter.id ? "Edit Invoice" : "Create Invoice"}
       >
         <InvoiceFooterForm
           footer={editInvoiceFooter}
@@ -83,5 +82,5 @@ export default function InvoiceFooterSetting() {
         />
       </DialogModal>
     </section>
-  )
+  );
 }
