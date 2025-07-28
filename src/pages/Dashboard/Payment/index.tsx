@@ -453,7 +453,7 @@ export default function PaymentPage() {
 
       {/* Add Recurring Billing Form modal */}
       <DialogModal
-        title="Payment Schedule"
+        title={t("payment_schedule_modal:payment_schedule")}
         isOpen={isRecurringBillingOpen}
         onOpenChange={setIsRecurringBillingOpen}
         className="w-xl"
