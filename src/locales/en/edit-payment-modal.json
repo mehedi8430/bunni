@@ -1,0 +1,22 @@
+{
+  "edit_payment": "Edit Payment",
+  "add_new_payment": "Add New Payment",
+  "invoice": "Invoice",
+  "invoice_placeholder": "Enter invoice number",
+  "customer_name": "Customer Name",
+  "customer_name_placeholder": "Enter customer name",
+  "date": "Date",
+  "amount": "Amount",
+  "amount_placeholder": "Enter amount",
+  "status": "Status",
+  "status_save": "Save",
+  "status_paid": "Paid",
+  "status_unpaid": "Unpaid",
+  "payment_method": "Payment Method",
+  "payment_method_credit_card": "Credit Card",
+  "payment_method_bank_transfer": "Bank Transfer",
+  "payment_method_paypal": "PayPal",
+  "payment_method_other": "Other",
+  "cancel": "Cancel",
+  "save": "Save"
+}

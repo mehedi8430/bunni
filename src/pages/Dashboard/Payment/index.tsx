@@ -494,7 +494,7 @@ export default function PaymentPage() {
       <DialogModal
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
-        title={editPayment.invoice ? "Edit Payment" : "Add New Payment"}
+        title={editPayment.invoice ? t("edit_payment_modal:edit_payment") : t("edit_payment_modal:add_new_payment")}
       >
         <PaymentForm
           payment={editPayment}
