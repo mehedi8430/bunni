@@ -1,0 +1,16 @@
+{
+  "createTaxRatesSettings": "Crear Configuración de Impuestos",
+  "editTaxRatesSettings": "Editar Configuración de Impuestos",
+  "name": "Nombre",
+  "invoiceDescription": "Deje que su cliente sepa para qué es esta factura",
+  "rate": "Tasa",
+  "percentage": "Porcentaje",
+  "fixedAmount": "Cantidad Fija",
+  "freeShipping": "Envío Gratis",
+  "amount": "Cantidad",
+  "status": "Estado",
+  "active": "Activo",
+  "inactive": "Inactivo",
+  "cancel": "Cancelar",
+  "next": "Siguiente"
+}

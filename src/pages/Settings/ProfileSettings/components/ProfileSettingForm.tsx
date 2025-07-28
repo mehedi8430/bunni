@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ImageUpload } from "@/components/ui/image-upload";
 import type { TProfileData } from "@/types";
+import { useTranslation } from "react-i18next";
 
 interface ProfileSettingFormProps {
   onSuccess?: () => void;
@@ -21,6 +22,7 @@ export default function ProfileSettingForm({
   onSuccess,
   profileData,
 }: ProfileSettingFormProps) {
+  const { t } = useTranslation("profile_settings");
   const { form, onSubmit } = UseProfileForm({ onSuccess, profileData });
 
   return (
@@ -32,7 +34,7 @@ export default function ProfileSettingForm({
         >
           <div className="flex flex-col gap-16 md:flex-row md:items-center">
             <div className="w-full space-y-6 md:w-1/2">
-              <h4 className="mb-5 text-2xl font-semibold">Personal Info</h4>
+              <h4 className="mb-5 text-2xl font-semibold">{t("personal_info")}</h4>
               {/* name field */}
               <div className="flex flex-col gap-4 md:flex-row">
                 {/* First Name */}
@@ -42,7 +44,7 @@ export default function ProfileSettingForm({
                   render={({ field }) => (
                     <FormItem className="w-full md:w-1/2">
                       <FormLabel className="text-lg font-normal">
-                        First Name
+                        {t("first_name")}
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -62,7 +64,7 @@ export default function ProfileSettingForm({
                   render={({ field }) => (
                     <FormItem className="w-full md:w-1/2">
                       <FormLabel className="text-lg font-normal">
-                        Last Name
+                        {t("last_name")}
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -83,7 +85,7 @@ export default function ProfileSettingForm({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg font-normal">Email</FormLabel>
+                    <FormLabel className="text-lg font-normal">{t("email")}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter email"
@@ -102,11 +104,11 @@ export default function ProfileSettingForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Phone Number
+                      {t("phone_number")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter phone number"
+                        placeholder={t("phone_number")}
                         {...field}
                         className="custom-focus"
                       />
@@ -117,7 +119,7 @@ export default function ProfileSettingForm({
               />
             </div>
             <div className="w-full space-y-4 md:w-1/2">
-              <h4 className="text-2xl font-semibold">Business Info</h4>
+              <h4 className="text-2xl font-semibold">{t("business_info")}</h4>
 
               {/* Business Logo Upload */}
               <FormField
@@ -144,11 +146,11 @@ export default function ProfileSettingForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Business Name
+                      {t("business_name")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter business name"
+                        placeholder={t("business_name")}
                         {...field}
                         className="custom-focus"
                       />
@@ -165,11 +167,11 @@ export default function ProfileSettingForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Business Address
+                      {t("business_address")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter business address"
+                        placeholder={t("business_address")}
                         {...field}
                         className="custom-focus"
                       />
@@ -185,11 +187,11 @@ export default function ProfileSettingForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Business Contact
+                      {t("business_contact")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter business contact"
+                        placeholder={t("business_contact")}
                         {...field}
                         className="custom-focus"
                       />
@@ -205,11 +207,11 @@ export default function ProfileSettingForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Website URL
+                      {t("website_url")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter website URL"
+                        placeholder={t("website_url")}
                         {...field}
                         className="custom-focus"
                       />
@@ -225,12 +227,12 @@ export default function ProfileSettingForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Choose your brand color
+                      {t("pick_color")}
                     </FormLabel>
                     <FormControl>
                       <div className="flex items-center gap-4">
                         <Input
-                          placeholder="Pick a color"
+                          placeholder={t("pick_color")}
                           {...field}
                           className="custom-focus"
                           onChange={(e) => field.onChange(e.target.value)}
@@ -258,7 +260,7 @@ export default function ProfileSettingForm({
               type="submit"
               className="border-button-border border px-10 py-5 text-lg font-normal shadow-2xl"
             >
-              Save Changes
+              {t("save_changes")}
             </Button>
           </div>
         </form>

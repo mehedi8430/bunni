@@ -1,21 +1,21 @@
-import { DataTable } from "@/components/DataTable/dataTable";
-import { Button } from "@/components/ui/button";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { invoiceApi } from "@/mockApi/invoiceApi";
-import type { TTaxRate } from "@/types";
-import TaxRateTableActions from "./TaxRateTableActions";
+import { DataTable } from "@/components/DataTable/dataTable";
 import { DialogModal } from "@/components/DialogModal";
-import TaxRateForm from "./TaxRateForm";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { invoiceApi } from "@/mockApi/invoiceApi";
+import type { TTaxRate } from "@/types";
+import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import TaxRateForm from "./TaxRateForm";
+import TaxRateTableActions from "./TaxRateTableActions";
 
 export default function TaxRatesSettings() {
   const { t } = useTranslation("invoice_settings");
@@ -163,8 +163,8 @@ export default function TaxRatesSettings() {
         onOpenChange={setIsEditTaxRateOpen}
         title={
           editTaxRate.id
-            ? "Edit Tax Rates Settings"
-            : "Create Tax Rates Settings"
+            ? t("create_tax_rates_settings_modal:editTaxRatesSettings")
+            : t("create_tax_rates_settings_modal:createTaxRatesSettings")
         }
       >
         <TaxRateForm

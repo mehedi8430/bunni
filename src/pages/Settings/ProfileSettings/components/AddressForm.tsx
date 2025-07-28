@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 
 interface AddressFormProps {
   initialData?: {
@@ -46,6 +47,7 @@ export default function AddressForm({
   onSubmit,
   onCancel,
 }: AddressFormProps) {
+  const { t } = useTranslation("profile_settings");
   // Parse initialData.address if no split fields are provided
   let defaultValues: AddressFormData = {
     streetAddress: initialData?.streetAddress || "",
@@ -94,11 +96,11 @@ export default function AddressForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-lg font-normal">
-                Street Address
+                {t("street_address")}
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter street address"
+                  placeholder={t("street_address_placeholder")}
                   {...field}
                   className="custom-focus"
                 />
@@ -112,10 +114,10 @@ export default function AddressForm({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-lg font-normal">Country</FormLabel>
+              <FormLabel className="text-lg font-normal">{t("country")}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter country"
+                  placeholder={t("country_placeholder")}
                   {...field}
                   className="custom-focus"
                 />
@@ -130,11 +132,11 @@ export default function AddressForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-lg font-normal">
-                District/State
+                {t("district")}
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter district or state"
+                  placeholder={t("district_placeholder")}
                   {...field}
                   className="custom-focus"
                 />
@@ -149,11 +151,11 @@ export default function AddressForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-lg font-normal">
-                Zip/Postal Code
+                {t("zip")}
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter zip or postal code"
+                  placeholder={t("zip_placeholder")}
                   {...field}
                   className="custom-focus"
                 />
@@ -174,7 +176,7 @@ export default function AddressForm({
                 />
               </FormControl>
               <FormLabel className="cursor-pointer text-lg font-normal">
-                Set as Default
+                {t("set_as_default")}
               </FormLabel>
               <FormMessage />
             </FormItem>
@@ -187,7 +189,7 @@ export default function AddressForm({
             onClick={onCancel}
             className="px-6 py-2 text-base font-normal"
           >
-            Cancel
+            {t("cancel")}
           </Button>
           <Button
             variant="primary"
@@ -195,8 +197,8 @@ export default function AddressForm({
             className="px-6 py-2 text-base font-normal"
           >
             {initialData?.index !== undefined
-              ? "Update Address"
-              : "Add Address"}
+              ? t("update_address")
+              : t("add_address")}
           </Button>
         </div>
       </form>

@@ -1,6 +1,5 @@
+import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import type { TTaxRate } from "@/types";
 import {
   Form,
   FormControl,
@@ -9,7 +8,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import SelectInput from "@/components/SelectInput";
+import { Input } from "@/components/ui/input";
+import type { TTaxRate } from "@/types";
+import { useTranslation } from "react-i18next";
 import useTax from "../hooks/use-tax";
 
 interface TaxRateFormProps {
@@ -23,6 +24,8 @@ export default function TaxRateForm({
   onSave,
   onClose,
 }: TaxRateFormProps) {
+  const { t } = useTranslation("create_tax_rates_settings_modal");
+
   const { form, onSubmit } = useTax({
     taxRate,
     onSave,
@@ -86,10 +89,12 @@ export default function TaxRateForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-base font-normal">Name</FormLabel>
+                <FormLabel className="text-base font-normal">
+                  {t("name")}
+                </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Let your customer kno what this Invoice is for"
+                    placeholder={t("invoiceDescription")}
                     {...field}
                     className="custom-focus"
                   />
@@ -105,15 +110,17 @@ export default function TaxRateForm({
             name="rate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-base font-normal">Rate</FormLabel>
+                <FormLabel className="text-base font-normal">
+                  {t("type")}
+                </FormLabel>
                 <FormControl>
                   <SelectInput
                     options={[
-                      { value: "Percentage", label: "Percentage" },
-                      { value: "Fixed Amount", label: "Fixed Amount" },
-                      { value: "Free Shipping", label: "Free Shipping" },
+                      { value: "Percentage", label: t("percentage") },
+                      { value: "Fixed Amount", label: t("fixedAmount") },
+                      { value: "Free Shipping", label: t("freeShipping") },
                     ]}
-                    placeholder="Select type"
+                    placeholder={t("selectType")}
                     value={field.value}
                     onValueChange={field.onChange}
                     triggerClassName="custom-focus w-full"
@@ -130,7 +137,9 @@ export default function TaxRateForm({
             name="amount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-base font-normal">Amount</FormLabel>
+                <FormLabel className="text-base font-normal">
+                  {t("amount")}
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -152,14 +161,16 @@ export default function TaxRateForm({
             name="status"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="text-base font-normal">Status</FormLabel>
+                <FormLabel className="text-base font-normal">
+                  {t("status")}
+                </FormLabel>
                 <FormControl>
                   <SelectInput
                     options={[
-                      { value: "Active", label: "Active" },
-                      { value: "Inactive", label: "Inactive" },
+                      { value: "Active", label: t("active") },
+                      { value: "Inactive", label: t("inactive") },
                     ]}
-                    placeholder="Select type"
+                    placeholder={t("selectType")}
                     value={field.value}
                     onValueChange={field.onChange}
                     triggerClassName="custom-focus w-full"
@@ -179,14 +190,14 @@ export default function TaxRateForm({
               onClick={onClose}
               className="px-10 py-5 text-base font-normal"
             >
-              Cancel
+              {t("cancel")}
             </Button>
             <Button
               variant={"primary"}
               type="submit"
               className="border-button-border border px-10 py-5 text-base font-normal shadow-2xl"
             >
-              Next
+              {t("next")}
             </Button>
           </div>
         </form>
