@@ -8,6 +8,7 @@ import paymentEn from "../locales/en/payment.json";
 import sidebarEn from "../locales/en/sidebar.json";
 import tableEn from "../locales/en/table.json";
 import addCustomerModalEn from "../locales/en/add-customer-modal.json";
+import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
 
 // Spanish translations
 import landingEs from "../locales/es/landing-page.json";
@@ -15,6 +16,7 @@ import paymentEs from "../locales/es/payment.json";
 import sidebarEs from "../locales/es/sidebar.json";
 import tableEs from "../locales/es/table.json";
 import addCustomerModalEs from "../locales/es/add-customer-modal.json";
+import viewCustomerModalEs from "../locales/es/view-customer-modal.json";
 
 i18n
   .use(LanguageDetector)
@@ -27,6 +29,7 @@ i18n
         table: tableEn,
         payment: paymentEn,
         add_customer_modal: addCustomerModalEn,
+        view_customer_modal: viewCustomerModalEn
       },
       es: {
         sidebar: sidebarEs,
@@ -34,6 +37,7 @@ i18n
         table: tableEs,
         payment: paymentEs,
         add_customer_modal: addCustomerModalEs,
+        view_customer_modal: viewCustomerModalEs
       },
     },
     fallbackLng: "en",

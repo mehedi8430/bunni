@@ -1,0 +1,13 @@
+{
+  "view_details": "View Details",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "company": "Company",
+  "truncated_ach_tokens": "Truncated ACH Tokens",
+  "ach_token": "ACH Token",
+  "billing_address": "Billing Address",
+  "loading": "Loading...",
+  "customer_not_found": "Customer not found",
+  "done": "Done"
+}

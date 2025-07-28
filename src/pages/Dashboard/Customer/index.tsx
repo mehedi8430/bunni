@@ -299,7 +299,7 @@ export default function CustomerPage() {
       <DialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
-        title="View Details"
+        title= {t("view_customer_modal:view_details")}
       >
         <CustomerDetails
           onClose={() => setIsViewOpen(false)}
