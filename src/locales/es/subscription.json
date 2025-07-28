@@ -1,0 +1,25 @@
+{
+  "Subscriptions_Plans": "Planes de suscripción",
+  "Description": "Descripción",
+  "Current_Plan": "Plan actual",
+  "Pro_Plan": "Plan Pro",
+  "Cancel_Plan": "Cancelar plan",
+  "Choose_Your_Plan": "Elige tu plan",
+  "manage_your_subscription": "Gestiona tu plan de suscripción",
+  "Upgrade_plan": "Mejorar plan",
+  "Start_Date": "Fecha de inicio",
+  "End_Date": "Fecha de finalización",
+
+  "Build_Bill_Free_to_Start": "Crea y factura — Comienza gratis",
+  "Invoice_Smarter_Grow_Faster": "Factura de manera más inteligente. Crece más rápido.",
+
+  "3_Free_Invoice": "3 facturas gratis",
+  "No_Management_Setting": "Sin configuración de gestión",
+  "3_Free_Template": "3 plantillas gratis",
+  "Add_Admin_In_Company_Profile": "Agregar administrador en el perfil de la empresa",
+  "Limited_Access": "Acceso limitado",
+  "Unlimited_Invoice": "Facturas ilimitadas",
+  "Management_Setting": "Configuración de gestión",
+  "Unlimited_Template": "Plantillas ilimitadas",
+  "Full_Access": "Acceso completo"
+}

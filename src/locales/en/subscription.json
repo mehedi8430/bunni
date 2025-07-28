@@ -1,0 +1,25 @@
+{
+  "Subscriptions_Plans": "Subscription Plans",
+  "Description": "Description",
+  "Current_Plan": "Current Plan",
+  "Pro_Plan": "Pro Plan",
+  "Cancel_Plan": "Cancel Plan",
+  "Choose_Your_Plan": "Choose Your Plan",
+  "manage_your_subscription": "Manage your subscription plan",
+  "Upgrade_plan": "Upgrade Plan",
+  "Start_Date": "Start Date",
+  "End_Date": "End Date",
+
+  "Build_Bill_Free_to_Start": "Build & Bill — Free to Start",
+  "Invoice_Smarter_Grow_Faster": "Invoice Smarter. Grow Faster.",
+
+  "3_Free_Invoice": "3 Free Invoice",
+  "No_Management_Setting": "No Management Setting",
+  "3_Free_Template": "3 Free Template",
+  "Add_Admin_In_Company_Profile": "Add Admin In Company Profile",
+  "Limited_Access": "Limited Access",
+  "Unlimited_Invoice": "Unlimited Invoice",
+  "Management_Setting": "Management Setting",
+  "Unlimited_Template": "Unlimited Template",
+  "Full_Access": "Full Access"
+}
