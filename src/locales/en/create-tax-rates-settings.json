@@ -1,0 +1,16 @@
+{
+  "createTaxRatesSettings": "Create Tax Rates Settings",
+  "editTaxRatesSettings": "Edit Tax Rates Settings",
+  "name": "Name",
+  "invoiceDescription": "Let your customer know what this Invoice is for",
+  "rate": "Rate",
+  "percentage": "Percentage",
+  "fixedAmount": "Fixed Amount",
+  "freeShipping": "Free Shipping",
+  "amount": "Amount",
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "cancel": "Cancel",
+  "next": "Next"
+}

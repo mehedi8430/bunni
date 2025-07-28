@@ -3,5 +3,14 @@
   "Discount_Settings": "Discount Settings",
   "Add_Discount": "Add Discount",
   "Active": "Active",
-  "Inactive": "Inactive"
+  "Inactive": "Inactive",
+  "Search_Placeholder": "Search by name, email, or company",
+  "Add_Tax": "Add Tax Rate",
+  "Name": "Name",
+  "Amount": "Amount",
+  "Created_Date": "Created Date",
+  "Last_Login": "Last Login",
+  "Tax_Settings": "Tax Rates Settings",
+  "Invoice_Footer_Setting": "Invoice Footer Setting",
+  "Configure_Footer": "Configure Footer"
 }

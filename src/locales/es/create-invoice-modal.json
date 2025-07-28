@@ -1,0 +1,8 @@
+{
+  "createInvoice": "Crear Factura",
+  "editInvoice": "Editar Factura",
+  "invoiceFooter": "Pie de factura",
+  "setInvoiceFooterContent": "Establezca el contenido de su pie de factura aquí...",
+  "cancel": "Cancelar",
+  "next": "Siguiente"
+}

@@ -240,7 +240,11 @@ export default function ProductsPage() {
       <DialogModal
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
-        title={editProduct.id ? "Edit Product" : "Add New Product"}
+        title={
+          editProduct.id
+            ? t("add_product_modal:editProduct")
+            : t("add_product_modal:addNewProduct")
+        }
       >
         <ProductForm
           product={editProduct}
@@ -253,8 +257,8 @@ export default function ProductsPage() {
       <AlertDialogModal
         isOpen={isDeleteOpen}
         onOpenChange={setIsDeleteOpen}
-        title="Confirm Delete"
-        description="Are you sure you want to delete this product? This action cannot be undone."
+        title={t("Confirm Delete")}
+        description={t("Delete Confirmation")}
         onConfirm={async () => {
           if (productToDelete) {
             console.log("Product To Be Deleted:", productToDelete);

@@ -1,3 +1,4 @@
+import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +16,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { mockTaxRates, mockDiscounts } from "@/mockApi/invoiceApi";
+import { mockDiscounts, mockTaxRates } from "@/mockApi/invoiceApi";
+import DiscountForm from "@/pages/Settings/InvoiceSettings/components/DiscountForm";
+import TaxRateForm from "@/pages/Settings/InvoiceSettings/components/TaxRateForm";
+import { useAppSelector } from "@/redux/hooks";
 import {
   addItem,
   removeItem,
@@ -25,16 +29,14 @@ import {
 } from "@/redux/slices/invoiceTemplateSlice";
 import { type TInvoiceItem, type TProduct } from "@/types";
 import { Plus, X } from "lucide-react";
-import { useDispatch } from "react-redux";
-import ItemSelectionField from "./ItemSelectionField";
-import { useAppSelector } from "@/redux/hooks";
-import { DialogModal } from "@/components/DialogModal";
-import ProductForm from "../../Products/components/ProductForm";
 import { useState } from "react";
-import DiscountForm from "@/pages/Settings/InvoiceSettings/components/DiscountForm";
-import TaxRateForm from "@/pages/Settings/InvoiceSettings/components/TaxRateForm";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import ProductForm from "../../Products/components/ProductForm";
+import ItemSelectionField from "./ItemSelectionField";
 
 export default function ItemsSection() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { items, subtotal, total, discount } = useAppSelector(templateSelector);
 
@@ -304,7 +306,7 @@ export default function ItemsSection() {
       <DialogModal
         isOpen={isAddProductOpen}
         onOpenChange={setIsAddProductOpen}
-        title={"Add New Product"}
+        title={t("add_product_modal:addNewProduct")}
       >
         <ProductForm
           onClose={() => setIsAddProductOpen(false)}

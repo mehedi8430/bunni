@@ -1,22 +1,25 @@
-import { DataTable } from "@/components/DataTable/dataTable";
-import { Button } from "@/components/ui/button";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { invoiceApi } from "@/mockApi/invoiceApi";
-import type { TTaxRate } from "@/types";
-import TaxRateTableActions from "./TaxRateTableActions";
+import { DataTable } from "@/components/DataTable/dataTable";
 import { DialogModal } from "@/components/DialogModal";
-import TaxRateForm from "./TaxRateForm";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { invoiceApi } from "@/mockApi/invoiceApi";
+import type { TTaxRate } from "@/types";
+import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import TaxRateForm from "./TaxRateForm";
+import TaxRateTableActions from "./TaxRateTableActions";
 
 export default function TaxRatesSettings() {
+  const { t } = useTranslation("invoice_settings");
+
   const [pageTaxRate, setPageTaxRate] = useState(1);
   const [limitTaxRate, setLimitTaxRate] = useState(10);
   const [dataTaxRate, setDataTaxRate] = useState<TTaxRate[]>([]);
@@ -53,13 +56,13 @@ export default function TaxRatesSettings() {
   const taxRateColumns: ColumnDef<TTaxRate>[] = [
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("Name"),
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("name")}</div>,
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("Amount"),
       size: 100,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("amount")}</div>
@@ -67,7 +70,7 @@ export default function TaxRatesSettings() {
     },
     {
       accessorKey: "createdDate",
-      header: "Created Date",
+      header: t("Created_Date"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("createdDate")}</div>
@@ -75,7 +78,7 @@ export default function TaxRatesSettings() {
     },
     {
       accessorKey: "lastLogin",
-      header: "Last Login",
+      header: t("Last_Login"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("lastLogin")}</div>
@@ -86,7 +89,10 @@ export default function TaxRatesSettings() {
   const actions = (row: TTaxRate) => {
     return (
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger
+          asChild
+          className="cursor-pointer hover:bg-transparent"
+        >
           <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
             <MoreHorizontal />
@@ -100,7 +106,7 @@ export default function TaxRatesSettings() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Edit
+            {t("table:Edit")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -109,7 +115,7 @@ export default function TaxRatesSettings() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Delete
+            {t("table:Delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -133,7 +139,7 @@ export default function TaxRatesSettings() {
 
   return (
     <div className="bg-sidebar rounded-2xl py-4">
-      <h2 className="mb-1 px-4 text-xl font-semibold">Tax Rates Settings</h2>
+      <h2 className="mb-1 px-4 text-xl font-semibold">{t("Tax_Settings")}</h2>
       <TaxRateTableActions
         searchTerm={searchTermTaxRate}
         handleFilterChange={handleFilterChangeTaxRate}
@@ -157,8 +163,8 @@ export default function TaxRatesSettings() {
         onOpenChange={setIsEditTaxRateOpen}
         title={
           editTaxRate.id
-            ? "Edit Tax Rates Settings"
-            : "Create Tax Rates Settings"
+            ? t("create_tax_rates_settings_modal:editTaxRatesSettings")
+            : t("create_tax_rates_settings_modal:createTaxRatesSettings")
         }
       >
         <TaxRateForm

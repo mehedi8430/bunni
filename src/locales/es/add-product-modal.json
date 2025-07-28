@@ -1,0 +1,19 @@
+{
+  "addNewProduct": "Agregar nuevo producto",
+  "editProduct": "Editar producto",
+  "productName": "Nombre del producto",
+  "enterProductName": "Introducir nombre del producto",
+  "price": "Precio",
+  "type": "Tipo",
+  "product": "Producto",
+  "service": "Servicio",
+  "unit": "Unidad",
+  "selectUnit": "Seleccionar unidad",
+  "selectType": "Seleccionar tipo",
+  "description": "Descripción",
+  "enterProductDescription": "Introducir descripción del producto",
+  "perUnit": "Por unidad",
+  "perItem": "Por artículo",
+  "cancel": "Cancelar",
+  "save": "Guardar"
+}

@@ -1,0 +1,17 @@
+{
+  "createDiscount": "Create Discount",
+  "editDiscount": "Edit Discount",
+  "name": "Name",
+  "invoiceDescription": "Let your customer know what this Invoice is for",
+  "amountPlaceholder": "e.g. 10 for 10% or 50 for $50",
+  "type": "Type",
+  "percentage": "Percentage",
+  "fixedAmount": "Fixed Amount",
+  "freeShipping": "Free Shipping",
+  "amount": "Amount",
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "cancel": "Cancel",
+  "next": "Next"
+}

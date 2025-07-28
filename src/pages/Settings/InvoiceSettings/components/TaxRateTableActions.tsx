@@ -1,7 +1,8 @@
 import SearchInput from "@/components/SearchInput";
 import { Button } from "@/components/ui/button";
 import type { TProduct } from "@/types";
-import { Funnel, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type TaxRateTableActionsProps = {
   searchTerm: string;
@@ -16,21 +17,23 @@ export default function TaxRateTableActions({
   setIsEditOpen,
   setEditProduct,
 }: TaxRateTableActionsProps) {
+  const { t } = useTranslation("invoice_settings");
+
   return (
     <div className="flex flex-col items-center justify-between p-4 max-md:gap-4 md:flex-row">
       <div className="flex flex-col items-center gap-6 md:flex-row">
         <SearchInput
           value={searchTerm}
           onChange={handleFilterChange}
-          placeholder="Search by name, email, or company"
+          placeholder={t("Search_Placeholder")}
           debounceDelay={300}
           className="w-[82vw] md:w-[443px]"
         />
 
-        <Button variant={"outline"} className="text-muted-foreground bg-white">
+        {/* <Button variant={"outline"} className="text-muted-foreground bg-white">
           <Funnel />
           Filter by
-        </Button>
+        </Button> */}
       </div>
 
       <Button
@@ -42,7 +45,7 @@ export default function TaxRateTableActions({
         }}
       >
         <Plus />
-        Add Tax Rate
+        {t("Add_Tax")}
       </Button>
     </div>
   );

@@ -26,7 +26,7 @@ export default function DiscountTableActions({
         <SearchInput
           value={searchTerm}
           onChange={handleFilterChange}
-          placeholder="Search by name, email, or company"
+          placeholder={t("Search_Placeholder")}
           debounceDelay={300}
           className="w-[82vw] md:w-[443px]"
         />

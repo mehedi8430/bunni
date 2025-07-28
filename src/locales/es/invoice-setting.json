@@ -3,5 +3,14 @@
   "Discount_Settings": "Configuración de descuento",
   "Add_Discount": "Agregar descuento",
   "Active": "Activo",
-  "Inactive": "Inactivo"
+  "Inactive": "Inactivo",
+  "Search_Placeholder": "Buscar por nombre, correo electrónico o empresa",
+  "Add_Tax": "Agregar tasa impositiva",
+  "Name": "Nombre",
+  "Amount": "Cantidad",
+  "Created_Date": "Fecha de creación",
+  "Last_Login": "Último inicio de sesión",
+  "Tax_Settings": "Configuración de tasas impositivas",
+  "Invoice_Footer_Setting": "Configuración del pie de página de la factura",
+  "Configure_Footer": "Configurar pie de página"
 }

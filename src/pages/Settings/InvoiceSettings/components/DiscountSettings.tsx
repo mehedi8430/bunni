@@ -1,21 +1,21 @@
-import { DataTable } from "@/components/DataTable/dataTable";
-import { Button } from "@/components/ui/button";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useEffect, useState, useMemo } from "react";
 import { AlertDialogModal } from "@/components/AlertDialogModal";
-import { invoiceApi } from "@/mockApi/invoiceApi";
-import type { TDiscount } from "@/types";
+import { DataTable } from "@/components/DataTable/dataTable";
 import { DialogModal } from "@/components/DialogModal";
-import DiscountTableActions from "./DiscountTableActions";
-import DiscountForm from "./DiscountForm";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Filter } from "lucide-react";
+import { invoiceApi } from "@/mockApi/invoiceApi";
+import type { TDiscount } from "@/types";
+import type { ColumnDef } from "@tanstack/react-table";
+import { Filter, MoreHorizontal } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import DiscountForm from "./DiscountForm";
+import DiscountTableActions from "./DiscountTableActions";
 
 // Custom header component for status filtering
 const StatusFilterHeader = ({
@@ -26,9 +26,10 @@ const StatusFilterHeader = ({
   onStatusFilterChange: (status: string) => void;
 }) => {
   const { t } = useTranslation(["table"]);
+
   return (
     <div className="flex items-center justify-center gap-2">
-      <span>Status</span>
+      <span>{t("Status")}</span>
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
@@ -119,13 +120,13 @@ export default function DiscountSettings() {
   const discountColumns: ColumnDef<TDiscount>[] = [
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("invoice_settings:Name"),
       size: 150,
       cell: ({ row }) => <div className="truncate">{row.getValue("name")}</div>,
     },
     {
       accessorKey: "amount",
-      header: "Amount",
+      header: t("invoice_settings:Amount"),
       size: 100,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("amount")}</div>
@@ -133,7 +134,7 @@ export default function DiscountSettings() {
     },
     {
       accessorKey: "createdDate",
-      header: "Created Date",
+      header: t("invoice_settings:Created_Date"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("createdDate")}</div>
@@ -281,7 +282,11 @@ export default function DiscountSettings() {
       <DialogModal
         isOpen={isEditDiscountOpen}
         onOpenChange={setIsEditDiscountOpen}
-        title={editDiscount.id ? "Edit Discount" : "Create  Discount"}
+        title={
+          editDiscount.id
+            ? t("create_discount_modal:editDiscount")
+            : t("create_discount_modal:createDiscount")
+        }
       >
         <DiscountForm
           discount={editDiscount}
