@@ -14,6 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { ReactSVG } from "react-svg";
+import assets from "@/lib/imageProvider";
 
 interface ColumnDef {
   id: string;
@@ -44,15 +46,14 @@ export function DataTableFilter<T>({
   columns,
   searchPlaceholder = "Search...",
   showDatePicker = true,
-  // showExportButton = true,
-  // exportButtonText = "Export",
-  // onExportClick,
+  showExportButton = true,
+  exportButtonText = "Export",
+  onExportClick,
   searchInputClassName = "w-full lg:w-[443px]",
   columnVisibility,
 }: DataTableFilterProps<T>) {
   const { t } = useTranslation("table");
 
-  console.log({ columnVisibility });
   // Get filterable columns (exclude select and actions columns if present)
   const getFilterableColumns = () => {
     return columns.filter(
@@ -92,7 +93,7 @@ export function DataTableFilter<T>({
         </div>
 
         {/* Column filter dropdown */}
-        <div>
+        <div className="flex items-center gap-3">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -111,20 +112,17 @@ export function DataTableFilter<T>({
                   key={column.id}
                   checked={columnVisibility?.[column.id] ?? true}
                   onCheckedChange={() => toggleColumnVisibility(column.id)}
+                  onSelect={(event) => event.preventDefault()}
                 >
                   {column.displayName}
                 </DropdownMenuCheckboxItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-      </div>
-
-      <div className="">
-        {/* {showExportButton && (
+          {showExportButton && (
             <Button
               variant="filter_button"
-              className="rounded-lg lg:hidden"
+              className="hidden rounded-lg lg:flex lg:self-end"
               onClick={onExportClick}
             >
               <ReactSVG
@@ -133,22 +131,25 @@ export function DataTableFilter<T>({
               />
               {exportButtonText}
             </Button>
-          )} */}
+          )}
+        </div>
       </div>
 
-      {/* {showExportButton && (
-        <Button
-          variant="filter_button"
-          className="hidden rounded-lg lg:flex lg:self-end"
-          onClick={onExportClick}
-        >
-          <ReactSVG
-            src={assets.icons.export_icon}
-            className="text-muted-foreground"
-          />
-          {exportButtonText}
-        </Button>
-      )} */}
+      <div className="">
+        {showExportButton && (
+          <Button
+            variant="filter_button"
+            className="rounded-lg lg:hidden"
+            onClick={onExportClick}
+          >
+            <ReactSVG
+              src={assets.icons.export_icon}
+              className="text-muted-foreground"
+            />
+            {exportButtonText}
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

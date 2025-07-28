@@ -18,6 +18,7 @@ import productsEn from "../locales/en/products.json";
 import sidebarEn from "../locales/en/sidebar.json";
 import subscriptionEn from "../locales/en/subscription.json";
 import tableEn from "../locales/en/table.json";
+import userManagementEn from "../locales/en/user_management.json";
 import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
 import viewPaymentDetailsModalEn from "../locales/en/view-payment-details-modal.json";
 import virtualTerminalModalEn from "../locales/en/virtual-terminal-modal.json";
@@ -38,6 +39,7 @@ import productsEs from "../locales/es/products.json";
 import sidebarEs from "../locales/es/sidebar.json";
 import subscriptionEs from "../locales/es/subscription.json";
 import tableEs from "../locales/es/table.json";
+import userManagementEs from "../locales/es/user_management.json";
 import viewCustomerModalEs from "../locales/es/view-customer-modal.json";
 import viewPaymentDetailsModalEs from "../locales/es/view-payment-details-modal.json";
 import virtualTerminalModalEs from "../locales/es/virtual-terminal-modal.json";
@@ -62,6 +64,7 @@ i18n
         payment_schedule_modal: paymentScheduleModalEn,
         virtual_terminal_modal: virtualTerminalModalEn,
         add_payment_modal: addPaymentModalEn,
+        user_management: userManagementEn,
         edit_payment_modal: editPaymentModalEn,
         view_payment_details_modal: viewPaymentDetailsModalEn,
         add_product_modal: addProductModalEn,
@@ -82,6 +85,7 @@ i18n
         payment_schedule_modal: paymentScheduleModalEs,
         virtual_terminal_modal: virtualTerminalModalEs,
         add_payment_modal: addPaymentModalEs,
+        user_management: userManagementEs,
         edit_payment_modal: editPaymentModalEs,
         view_payment_details_modal: viewPaymentDetailsModalEs,
         add_product_modal: addProductModalEs,

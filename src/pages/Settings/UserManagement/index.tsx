@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import UserForm from "./components/UserForm";
 
 export default function UserManagementPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("user_management");
   const tableRef = useRef<DataTableHandle<TUser> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -65,7 +65,7 @@ export default function UserManagementPage() {
   const columns: ColumnDef<TUser>[] = [
     {
       accessorKey: "memberName",
-      header: "Member Name",
+      header: t("Member_Name"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("memberName")}</div>
@@ -73,7 +73,7 @@ export default function UserManagementPage() {
     },
     {
       accessorKey: "email",
-      header: "Email",
+      header: t("Email"),
       size: 200,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("email")}</div>
@@ -81,7 +81,7 @@ export default function UserManagementPage() {
     },
     {
       accessorKey: "phone",
-      header: "Phone",
+      header: t("Phone"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("phone")}</div>
@@ -89,7 +89,7 @@ export default function UserManagementPage() {
     },
     {
       accessorKey: "permissions",
-      header: "Permissions",
+      header: t("Permissions"),
       size: 120,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("permissions")}</div>
@@ -97,7 +97,7 @@ export default function UserManagementPage() {
     },
     {
       accessorKey: "lastLogin",
-      header: "Last Login",
+      header: t("invoice_settings:Last_Login"),
       size: 150,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("lastLogin")}</div>
@@ -123,7 +123,7 @@ export default function UserManagementPage() {
             className="custom-action-button"
           >
             {/* <Edit className="mr-2 h-4 w-4" /> */}
-            Edit
+            {t("table:Edit")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -132,7 +132,7 @@ export default function UserManagementPage() {
             className="custom-action-button"
           >
             {/* <SendToBack className="mr-2 h-4 w-4" /> */}
-            Resend Invite
+            {t("Resend_Invite")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -142,7 +142,7 @@ export default function UserManagementPage() {
             className="custom-action-button"
           >
             {/* <Trash className="mr-2 h-4 w-4" /> */}
-            Delete
+            {t("table:Delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -171,16 +171,18 @@ export default function UserManagementPage() {
   };
 
   const tableHeaderColumns = [
-    { id: "memberName", displayName: "Member Name", canHide: false },
-    { id: "email", displayName: "Email" },
-    { id: "phone", displayName: "Phone" },
-    { id: "permissions", displayName: "Permissions" },
-    { id: "lastLogin", displayName: "Last Login" },
+    { id: "memberName", displayName: t("Member_Name") },
+    { id: "email", displayName: t("Email") },
+    { id: "phone", displayName: t("Phone") },
+    { id: "permissions", displayName: t("Permissions") },
+    { id: "lastLogin", displayName: t("invoice_settings:Last_Login") },
   ];
 
   return (
     <section className="space-y-6 md:space-y-10">
-      <h1 className="text-2xl font-semibold md:text-[26px]">User Management</h1>
+      <h1 className="text-2xl font-semibold md:text-[26px]">
+        {t("User_Management")}
+      </h1>
 
       <div className="bg-sidebar rounded-2xl py-4">
         <div className="flex items-center justify-between pr-3">
@@ -190,7 +192,7 @@ export default function UserManagementPage() {
               handleFilterChange={handleFilterChange}
               table={tableRef.current.table}
               columns={tableHeaderColumns}
-              searchPlaceholder="Search by name, email, or company"
+              searchPlaceholder={t("invoice_settings:Search_Placeholder")}
               showDatePicker={false}
               showExportButton={false}
               columnVisibility={columnVisibility}
@@ -205,7 +207,7 @@ export default function UserManagementPage() {
             }}
           >
             <Plus />
-            Add Member
+            {t("Add_Member")}
           </Button>
         </div>
 
