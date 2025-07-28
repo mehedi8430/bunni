@@ -299,7 +299,7 @@ export default function CustomerPage() {
       <DialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
-        title="View Details"
+        title= {t("view_customer_modal:view_details")}
       >
         <CustomerDetails
           onClose={() => setIsViewOpen(false)}
@@ -311,7 +311,7 @@ export default function CustomerPage() {
       <DialogModal
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
-        title={editCustomer.id ? "Edit Customer" : "Add New Customer"}
+        title={editCustomer.id ? t("add_customer_modal:edit_customer") : t("add_customer_modal:add_new_customer")}
         className="!max-w-4xl"
       >
         <CustomerForm

@@ -16,6 +16,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PreviewTemplate from "../../CreateInvoiceTemplatePage/Components/PreviewTemplate";
 import InvoiceTableRowActions from "./InvoiceTableRowActions";
+import PreviewBeta from "../../CreateInvoiceTemplatePage/Components/PreviewBeta";
+import PreviewGamma from "../../CreateInvoiceTemplatePage/Components/PreviewGamma";
+import PreviewDelta from "../../CreateInvoiceTemplatePage/Components/PreviewDelta";
 
 export default function InvoicesTable() {
   const { t } = useTranslation("table");
@@ -33,7 +36,8 @@ export default function InvoicesTable() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [invoiceToDelete, setInvoiceToDelete] = useState<string | null>(null);
-  const [, setSelectedInvoice] = useState<TInvoice | null>(null);
+  const [selectedInvoice, setSelectedInvoice] = useState<TInvoice | null>(null);
+  console.log("selectedInvoice", selectedInvoice);
 
   // Modal states
   const [isViewOpen, setIsViewOpen] = useState(false);
@@ -110,8 +114,8 @@ export default function InvoicesTable() {
       size: 180,
       cell: ({ row }) => (
         <div
-          className="cursor-pointer truncate text-start"
-          onClick={() => setIsViewOpen(true)}
+          className="cursor-pointer truncate text-start hover:underline hover:text-primary"
+          onClick={() =>{ setIsViewOpen(true); setSelectedInvoice(row.original); }}
         >
           {row.getValue("id")}
         </div>
@@ -312,7 +316,10 @@ export default function InvoicesTable() {
         className=""
         title={null}
       >
-        <PreviewTemplate />
+        {selectedInvoice?.templateName === "invoice-alpha" && <PreviewTemplate />}
+        {selectedInvoice?.templateName === "invoice-beta" && <PreviewBeta />}
+        {selectedInvoice?.templateName === "invoice-gamma" && <PreviewGamma />}
+        {selectedInvoice?.templateName === "invoice-delta" && <PreviewDelta />}
       </PdfDialogModal>
 
       {/* Delete Alert Dialog */}

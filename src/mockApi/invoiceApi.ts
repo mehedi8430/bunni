@@ -103,12 +103,13 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     customerName: "David Johnson",
     status: "Paid",
     orderNumber: "#72648252",
-    amount: 635,
+    amount: 100035,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "1",
 
     title: "Web Development Services",
+    templateName: "invoice-alpha",
     customerId: "cust_001",
     invoiceNumber: "INV-000001-1",
     invoiceDate: "05 Feb, 2025",
@@ -152,12 +153,13 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     customerName: "Sarah Thompson",
     status: "Processing",
     orderNumber: "#A12B4D67",
-    amount: 635,
+    amount: 63502002200,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "2",
 
     title: "Consulting Services",
+    templateName: "invoice-beta",
     customerId: "cust_002",
     invoiceNumber: "INV-000001-2",
     invoiceDate: "05 Feb, 2025",
@@ -207,6 +209,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     templateId: "3",
 
     title: "SEO Optimization",
+    templateName: "invoice-gamma",
     customerId: "cust_003",
     invoiceNumber: "INV-000001-3",
     invoiceDate: "05 Feb, 2025",
@@ -256,6 +259,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     templateId: "4",
 
     title: "Graphic Design Package",
+    templateName: "invoice-delta",
     customerId: "cust_004",
     invoiceNumber: "INV-000001-4",
     invoiceDate: "05 Feb, 2025",
@@ -305,6 +309,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     templateId: "1",
 
     title: "Photography Services",
+    templateName: "invoice-alpha",
     customerId: "cust_005",
     invoiceNumber: "INV-000001-5",
     invoiceDate: "05 Feb, 2025",
@@ -343,6 +348,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     templateId: "2",
 
     title: "App Design UI/UX",
+    templateName: "invoice-beta",
     customerId: "cust_003",
     invoiceNumber: "INV-000001-6",
     invoiceDate: "05 Feb, 2025",
@@ -392,6 +398,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     templateId: "3",
 
     title: "Video Editing Service",
+    templateName: "invoice-gamma",
     customerId: "cust_006",
     invoiceNumber: "INV-000001-7",
     invoiceDate: "05 Feb, 2025",
@@ -441,6 +448,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     templateId: "4",
 
     title: "E-commerce Development",
+    templateName: "invoice-delta",
     customerId: "cust_007",
     invoiceNumber: "INV-000001-8",
     invoiceDate: "08 Feb, 2025",

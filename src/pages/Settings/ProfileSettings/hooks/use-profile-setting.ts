@@ -1,5 +1,6 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { setColor } from "@/redux/slices/invoiceTemplateSlice";
+import type { TProfileData } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -26,21 +27,7 @@ type ProfileFormValues = z.infer<typeof useFormSchema>;
 
 interface UseProfileFormProps {
   onSuccess?: () => void;
-  profileData?: {
-    personalInfo: {
-      name: string;
-      email: string;
-      phone: string;
-    };
-    businessInfo: {
-      logo: string;
-      name: string;
-      address: string;
-      contact: string;
-      website: string;
-      brandColor: string;
-    };
-  };
+  profileData?: TProfileData;
 }
 
 export default function UseProfileForm({
@@ -58,7 +45,7 @@ export default function UseProfileForm({
       email: profileData?.personalInfo.email || "",
       phone: profileData?.personalInfo.phone || "",
       businessName: profileData?.businessInfo.name || "",
-      businessAddress: profileData?.businessInfo.address || "",
+      businessAddress: profileData?.businessInfo.addresses?.[0]?.address || "",
       businessLogo: "",
       businessContact: profileData?.businessInfo.contact || "",
       websiteUrl: profileData?.businessInfo.website || "",

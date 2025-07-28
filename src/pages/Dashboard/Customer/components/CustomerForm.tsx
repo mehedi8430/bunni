@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { type Customer } from "@/mockApi/customerApi";
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
@@ -40,6 +41,7 @@ interface CustomerFormProps {
 }
 
 export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
+  const { t } = useTranslation("add_customer_modal");
   const [defaultFirstName, defaultLastName] = customer?.name
     ? customer.name.split(' ', 2)
     : ["", ""];
@@ -84,10 +86,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="firstName"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-base font-normal">First Name</FormLabel>
+                  <FormLabel className="text-base font-normal">{t("first_name")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Write here"
+                      placeholder={t("write_here")}
                       {...field}
                       className="custom-focus"
                     />
@@ -101,10 +103,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="lastName"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-base font-normal">Last Name</FormLabel>
+                  <FormLabel className="text-base font-normal">{t("last_name")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Write here"
+                      placeholder={t("write_here")}
                       {...field}
                       className="custom-focus"
                     />
@@ -120,10 +122,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="email"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-base font-normal">Email</FormLabel>
+                  <FormLabel className="text-base font-normal">{t("email")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="e.g., john@example.com"
+                      placeholder={t("email_placeholder")}
                       {...field}
                       className="custom-focus"
                     />
@@ -137,10 +139,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
               name="phone"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-base font-normal">Phone Number</FormLabel>
+                  <FormLabel className="text-base font-normal">{t("phone_number")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="e.g., +123-456-7890"
+                      placeholder={t("phone_placeholder")}
                       {...field}
                       className="custom-focus"
                     />
@@ -155,10 +157,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             name="company"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel className="text-base font-normal">Company</FormLabel>
+                <FormLabel className="text-base font-normal">{t("company")}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="e.g., ABC Corp"
+                    placeholder={t("company_placeholder")}
                     {...field}
                     className="custom-focus"
                   />
@@ -172,10 +174,10 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
             name="address"
             render={({ field }) => (
               <FormItem className="">
-                <FormLabel className="text-base font-normal">Address</FormLabel>
+                <FormLabel className="text-base font-normal">{t("address")}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="e.g., 123 Main St, NY"
+                    placeholder={t("address_placeholder")}
                     {...field}
                     className="custom-focus"
                   />
@@ -222,9 +224,9 @@ export function CustomerForm({ customer, onClose, onSave }: CustomerFormProps) {
         <hr className="shadow-[0_-4px_6px_rgba(0,0,0,0.2)] mt-7" />
         <div className="flex items-center justify-center md:justify-end gap-3 p-5">
           <Button type="button" variant="outline" onClick={onClose} className="px-8 py-4 text-base font-normal">
-            Cancel
+            {t("cancel")}
           </Button>
-          <Button variant={"primary"} type="submit" className="px-8 py-4 shadow-2xl text-base font-normal border border-button-border">Save</Button>
+          <Button variant={"primary"} type="submit" className="px-8 py-4 shadow-2xl text-base font-normal border border-button-border">{t("save")}</Button>
         </div>
       </form>
     </Form>

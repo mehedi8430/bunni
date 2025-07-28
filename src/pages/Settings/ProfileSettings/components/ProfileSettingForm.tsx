@@ -10,24 +10,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ImageUpload } from "@/components/ui/image-upload";
+import type { TProfileData } from "@/types";
 
 interface ProfileSettingFormProps {
   onSuccess?: () => void;
-  profileData?: {
-    personalInfo: {
-      name: string;
-      email: string;
-      phone: string;
-    };
-    businessInfo: {
-      logo: string;
-      name: string;
-      address: string;
-      contact: string;
-      website: string;
-      brandColor: string;
-    };
-  };
+  profileData?: TProfileData;
 }
 
 export default function ProfileSettingForm({

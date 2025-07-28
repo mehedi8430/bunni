@@ -1,0 +1,13 @@
+{
+  "view_details": "Ver detalles",
+  "name": "Nombre",
+  "email": "Correo electrónico",
+  "phone": "Teléfono",
+  "company": "Empresa",
+  "truncated_ach_tokens": "Tokens ACH truncados",
+  "ach_token": "Token ACH",
+  "billing_address": "Dirección de facturación",
+  "loading": "Cargando...",
+  "customer_not_found": "Cliente no encontrado",
+  "done": "Listo"
+}

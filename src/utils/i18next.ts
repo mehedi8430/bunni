@@ -3,20 +3,24 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 // Import multiple namespaces
+import addCustomerModalEn from "../locales/en/add-customer-modal.json";
 import landingEn from "../locales/en/landing-page.json";
 import notificationEn from "../locales/en/notification.json";
 import paymentEn from "../locales/en/payment.json";
 import sidebarEn from "../locales/en/sidebar.json";
 import subscriptionEn from "../locales/en/subscription.json";
 import tableEn from "../locales/en/table.json";
+import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
 
 // Spanish translations
+import addCustomerModalEs from "../locales/es/add-customer-modal.json";
 import landingEs from "../locales/es/landing-page.json";
 import notificationEs from "../locales/es/notification.json";
 import paymentEs from "../locales/es/payment.json";
 import sidebarEs from "../locales/es/sidebar.json";
 import subscriptionEs from "../locales/es/subscription.json";
 import tableEs from "../locales/es/table.json";
+import viewCustomerModalEs from "../locales/es/view-customer-modal.json";
 
 i18n
   .use(LanguageDetector)
@@ -30,6 +34,8 @@ i18n
         payment: paymentEn,
         notification: notificationEn,
         subscription: subscriptionEn,
+        add_customer_modal: addCustomerModalEn,
+        view_customer_modal: viewCustomerModalEn,
       },
       es: {
         sidebar: sidebarEs,
@@ -38,6 +44,8 @@ i18n
         payment: paymentEs,
         notification: notificationEs,
         subscription: subscriptionEs,
+        add_customer_modal: addCustomerModalEs,
+        view_customer_modal: viewCustomerModalEs,
       },
     },
     fallbackLng: "en",

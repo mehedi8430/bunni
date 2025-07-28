@@ -1,0 +1,20 @@
+{
+  "edit_customer": "Edit Customer",
+  "add_new_customer": "Add New Customer",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "phone_number": "Phone Number",
+  "company": "Company",
+  "address": "Address",
+  "credit_card_token": "Credit Card Token",
+  "ach_token": "ACH Token",
+  "write_here": "Write here",
+  "email_placeholder": "e.g., john@example.com",
+  "phone_placeholder": "e.g., +123-456-7890",
+  "company_placeholder": "e.g., ABC Corp",
+  "address_placeholder": "e.g., 123 Main St, NY",
+  "ach_token_placeholder": "•••• 723532345",
+  "cancel": "Cancel",
+  "save": "Save"
+}
