@@ -1,0 +1,12 @@
+{
+  "view_details": "View Details",
+  "loading": "Loading...",
+  "payment_not_found": "Payment not found",
+  "invoice": "Invoice",
+  "customer_name": "Customer Name",
+  "date": "Date",
+  "amount": "Amount",
+  "status": "Status",
+  "payment_method": "Payment Method",
+  "done": "Done"
+}

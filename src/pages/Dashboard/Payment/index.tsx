@@ -481,7 +481,7 @@ export default function PaymentPage() {
       <DialogModal
         isOpen={isViewOpen}
         onOpenChange={setIsViewOpen}
-        title="View Details"
+        title={t("view_payment_details_modal:view_details")}
         className="!w-md"
       >
         <PaymentDetails

@@ -1,0 +1,12 @@
+{
+  "view_details": "Ver detalles",
+  "loading": "Cargando...",
+  "payment_not_found": "Pago no encontrado",
+  "invoice": "Factura",
+  "customer_name": "Nombre del cliente",
+  "date": "Fecha",
+  "amount": "Monto",
+  "status": "Estado",
+  "payment_method": "Método de pago",
+  "done": "Hecho"
+}
