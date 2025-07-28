@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Filter } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Custom header component for status filtering
 const StatusFilterHeader = ({
@@ -24,6 +25,7 @@ const StatusFilterHeader = ({
   statusFilter: string;
   onStatusFilterChange: (status: string) => void;
 }) => {
+  const { t } = useTranslation(["table"]);
   return (
     <div className="flex items-center justify-center gap-2">
       <span>Status</span>
@@ -41,19 +43,19 @@ const StatusFilterHeader = ({
             onClick={() => onStatusFilterChange("")}
             className={`cursor-pointer ${statusFilter === "" ? "bg-accent" : ""}`}
           >
-            All Status
+            {t("All Status")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => onStatusFilterChange("active")}
             className={`cursor-pointer ${statusFilter === "active" ? "bg-accent" : ""}`}
           >
-            Active
+            {t("invoice_settings:Active")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => onStatusFilterChange("inactive")}
             className={`cursor-pointer ${statusFilter === "inactive" ? "bg-accent" : ""}`}
           >
-            Inactive
+            {t("invoice_settings:Inactive")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -62,6 +64,7 @@ const StatusFilterHeader = ({
 };
 
 export default function DiscountSettings() {
+  const { t } = useTranslation("table");
   const [pageDiscount, setPageDiscount] = useState(1);
   const [limitDiscount, setLimitDiscount] = useState(10);
   const [dataDiscount, setDataDiscount] = useState<TDiscount[]>([]);
@@ -181,7 +184,7 @@ export default function DiscountSettings() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Edit
+            {t("Edit")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -190,7 +193,7 @@ export default function DiscountSettings() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Delete
+            {t("Delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -232,12 +235,14 @@ export default function DiscountSettings() {
   return (
     <div className="bg-sidebar rounded-2xl py-4">
       <div className="mb-1 flex items-center justify-between px-4">
-        <h2 className="text-xl font-semibold">Discount Settings</h2>
+        <h2 className="text-xl font-semibold">
+          {t("invoice_settings:Discount_Settings")}
+        </h2>
         {(statusFilter || searchTermDiscount) && (
           <Button
             variant="outline"
             onClick={clearAllFilters}
-            className="text-sm "
+            className="text-sm"
           >
             Clear Filters
           </Button>

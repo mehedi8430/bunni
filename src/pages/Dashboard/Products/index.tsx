@@ -91,7 +91,7 @@ export default function ProductsPage() {
     },
     {
       accessorKey: "name",
-      header: () => <div className="text-start">{t("Name")}</div>,
+      header: () => <div className="text-start">{t("products:Name")}</div>,
       size: 150,
       cell: ({ row }) => (
         <div className="truncate text-start">{row.getValue("name")}</div>
@@ -99,19 +99,19 @@ export default function ProductsPage() {
     },
     {
       accessorKey: "type",
-      header: t("Type"),
+      header: t("products:Type"),
       size: 120,
       cell: ({ row }) => <div className="truncate">{row.getValue("type")}</div>,
     },
     {
       accessorKey: "unit",
-      header: t("Unit"),
+      header: t("products:Unit"),
       size: 120,
       cell: ({ row }) => <div className="truncate">{row.getValue("unit")}</div>,
     },
     {
       accessorKey: "price",
-      header: t("Price"),
+      header: t("products:Price"),
       size: 120,
       cell: ({ row }) => (
         <div className="truncate">${row.getValue("price")}</div>
@@ -119,7 +119,7 @@ export default function ProductsPage() {
     },
     {
       accessorKey: "description",
-      header: t("Description"),
+      header: t("products:Description"),
       size: 250,
       cell: ({ row }) => (
         <div className="truncate">{row.getValue("description")}</div>
@@ -144,7 +144,7 @@ export default function ProductsPage() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Edit
+            {t("Edit")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -153,7 +153,7 @@ export default function ProductsPage() {
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
           >
-            Delete
+            {t("Delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -178,17 +178,19 @@ export default function ProductsPage() {
   };
 
   const tableHeaderColumns = [
-    { id: "name", displayName: "Name", canHide: false },
-    { id: "type", displayName: "Type" },
-    { id: "unit", displayName: "Unit" },
-    { id: "price", displayName: "Price" },
-    { id: "description", displayName: "Desciption" },
+    { id: "name", displayName: t("products:Name") },
+    { id: "type", displayName: t("products:Type") },
+    { id: "unit", displayName: t("products:Unit") },
+    { id: "price", displayName: t("products:Price") },
+    { id: "description", displayName: t("products:Description") },
   ];
 
   return (
     <section className="space-y-10">
       <div className="flex items-start justify-between">
-        <h1 className="text-2xl font-semibold md:text-[26px]">Products</h1>
+        <h1 className="text-2xl font-semibold md:text-[26px]">
+          {t("products:Products")}
+        </h1>
         <Button
           variant="primary"
           className="text-base font-normal"
@@ -198,7 +200,7 @@ export default function ProductsPage() {
           }}
         >
           <Plus />
-          New Product
+          {t("products:New_Product")}
         </Button>
       </div>
 

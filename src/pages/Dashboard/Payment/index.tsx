@@ -314,12 +314,12 @@ export default function PaymentPage() {
   };
 
   const tableHeaderColumns = [
-    { id: "invoice", displayName: t("Invoice"), canHide: false },
-    { id: "customerName", displayName: t("Customer Name"), canHide: false },
-    { id: "date", displayName: t("Date"), canHide: false },
-    { id: "amount", displayName: t("Amount"), canHide: false },
-    { id: "status", displayName: t("Status"), canHide: false },
-    { id: "paymentMethod", displayName: t("Payment Method"), canHide: false },
+    { id: "invoice", displayName: t("Invoice") },
+    { id: "customerName", displayName: t("Customer Name") },
+    { id: "date", displayName: t("Date") },
+    { id: "amount", displayName: t("Amount") },
+    { id: "status", displayName: t("Status") },
+    { id: "paymentMethod", displayName: t("Payment Method") },
   ];
 
   return (
