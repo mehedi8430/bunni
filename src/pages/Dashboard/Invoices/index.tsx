@@ -27,19 +27,21 @@ export default function InvoicesPage() {
           </p>
         </div>
         <div className="space-y-4 space-x-4">
+          {/* Create Invoice */}
           <Button
             variant="primary"
             className="text-base font-normal max-sm:mx-auto"
-            onClick={() => navigate("/dashboard/invoices/templates")}
+            onClick={() => navigate("/dashboard/template/invoice-alpha")}
           >
             <Plus />
             {t("dashboard_create_invoice")}
           </Button>
+          {/* Create Estimate */}
           <Button
             variant={"primary"}
             className="text-base font-normal"
             onClick={() =>
-              navigate("/dashboard/invoices/templates?type=estimate")
+              navigate("/dashboard/template/invoice-alpha?type=estimate")
             }
           >
             <Plus />
