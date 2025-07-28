@@ -1,0 +1,18 @@
+{
+  "add_new_member": "Add New Member",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "phone_number": "Phone Number",
+  "location": "Location",
+  "commission": "Commission",
+  "permissions": "Permissions",
+  "admin": "Admin",
+  "send_invite": "Send Invite",
+  "enter_first_name": "Enter first name",
+  "enter_last_name": "Enter last name",
+  "enter_email": "Enter email",
+  "enter_phone_number": "Enter phone number",
+  "enter_location": "Enter location",
+  "owner": "Owner"
+}

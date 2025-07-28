@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 
 // Import multiple namespaces
 import addCustomerModalEn from "../locales/en/add-customer-modal.json";
+import addMemberModalEn from "../locales/en/add-member-modal.json";
 import landingEn from "../locales/en/landing-page.json";
 import notificationEn from "../locales/en/notification.json";
 import paymentEn from "../locales/en/payment.json";
@@ -14,6 +15,7 @@ import viewCustomerModalEn from "../locales/en/view-customer-modal.json";
 
 // Spanish translations
 import addCustomerModalEs from "../locales/es/add-customer-modal.json";
+import addMemberModalEs from "../locales/es/add-member-modal.json";
 import landingEs from "../locales/es/landing-page.json";
 import notificationEs from "../locales/es/notification.json";
 import paymentEs from "../locales/es/payment.json";
@@ -36,6 +38,7 @@ i18n
         subscription: subscriptionEn,
         add_customer_modal: addCustomerModalEn,
         view_customer_modal: viewCustomerModalEn,
+        add_member_modal: addMemberModalEn,
       },
       es: {
         sidebar: sidebarEs,
@@ -46,6 +49,7 @@ i18n
         subscription: subscriptionEs,
         add_customer_modal: addCustomerModalEs,
         view_customer_modal: viewCustomerModalEs,
+        add_member_modal: addMemberModalEs,
       },
     },
     fallbackLng: "en",
