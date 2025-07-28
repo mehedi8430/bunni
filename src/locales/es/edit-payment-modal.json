@@ -1,0 +1,22 @@
+{
+  "edit_payment": "Editar pago",
+  "add_new_payment": "Agregar nuevo pago",
+  "invoice": "Factura",
+  "invoice_placeholder": "Ingrese número de factura",
+  "customer_name": "Nombre del cliente",
+  "customer_name_placeholder": "Ingrese nombre del cliente",
+  "date": "Fecha",
+  "amount": "Monto",
+  "amount_placeholder": "Ingrese monto",
+  "status": "Estado",
+  "status_save": "Guardar",
+  "status_paid": "Pagado",
+  "status_unpaid": "No pagado",
+  "payment_method": "Método de pago",
+  "payment_method_credit_card": "Tarjeta de crédito",
+  "payment_method_bank_transfer": "Transferencia bancaria",
+  "payment_method_paypal": "PayPal",
+  "payment_method_other": "Otro",
+  "cancel": "Cancelar",
+  "save": "Guardar"
+}

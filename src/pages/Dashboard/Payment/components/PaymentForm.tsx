@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { Payment } from "@/mockApi/paymentApi";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface PaymentFormProps {
   payment?: Partial<Payment>;
@@ -13,6 +14,7 @@ interface PaymentFormProps {
 }
 
 export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
+  const {t} = useTranslation("edit_payment_modal");
   const [formData, setFormData] = useState<Partial<Payment>>({
     invoice: payment?.invoice || "",
     customerName: payment?.customerName || "",
@@ -53,7 +55,7 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <Label className="text-lg font-normal" htmlFor="invoice">Invoice</Label>
+        <Label className="text-lg font-normal" htmlFor="invoice">{t("invoice")}</Label>
         <Input
           id="invoice"
           value={formData.invoice}
@@ -65,7 +67,7 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
         />
       </div>
       <div>
-        <Label className="text-lg font-normal" htmlFor="customerName">Customer Name</Label>
+        <Label className="text-lg font-normal" htmlFor="customerName">{t("customer_name")}</Label>
         <Input
           id="customerName"
           value={formData.customerName}
@@ -80,7 +82,7 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
         <Label className="text-lg font-normal" htmlFor="date"></Label>
         <CustomDatePicker
           defaultDate={formData.date}
-          label="Date"
+          label={t("date")}
           onDateChange={(date) =>
             setFormData({
               ...formData,
@@ -90,7 +92,7 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
         />
       </div>
       <div>
-        <Label className="text-lg font-normal" htmlFor="amount">Amount</Label>
+        <Label className="text-lg font-normal" htmlFor="amount">{t("amount")}</Label>
         <Input
           id="amount"
           type="number"
@@ -98,12 +100,12 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
           onChange={(e) =>
             setFormData({ ...formData, amount: Number(e.target.value) })
           }
-          placeholder="Enter amount"
+          placeholder={t("amount_placeholder")}
           className="custom-focus"
         />
       </div>
       <div>
-        <Label className="text-lg font-normal" htmlFor="status">Status</Label>
+        <Label className="text-lg font-normal" htmlFor="status">{t("status")}</Label>
         <SelectInput
           options={statusOptions.map((option) => ({
             value: option.value,
@@ -117,7 +119,7 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
         />
       </div>
       <div>
-        <Label className="text-lg font-normal" htmlFor="paymentMethod">Payment Method</Label>
+        <Label className="text-lg font-normal" htmlFor="paymentMethod">{t("payment_method")}</Label>
         <SelectInput
           options={paymentMethodOptions.map((option) => ({
             value: option.value,
@@ -134,9 +136,9 @@ export function PaymentForm({ payment, onClose, onSave }: PaymentFormProps) {
       {/* Buttons */}
       <div className="flex items-center justify-center md:justify-end gap-3 p-2">
         <Button type="button" variant="outline" onClick={onClose} className="px-10 py-5 text-base font-normal">
-          Cancel
+          {t("cancel")}
         </Button>
-        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">Save</Button>
+        <Button variant={"primary"} type="submit" className="px-10 py-5 shadow-2xl text-base font-normal border border-button-border">{t("save")}</Button>
       </div>
     </form>
   );
