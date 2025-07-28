@@ -1,0 +1,21 @@
+{
+  "add_payment": "Add Payment",
+  "customer": "Customer",
+  "select_a_customer": "Select a customer",
+  "add_customer": "+ Add Customer",
+  "payment_amount": "Payment Amount",
+  "payment_amount_placeholder": "$0.00",
+  "payment_method": "Payment Method",
+  "email": "Email",
+  "sms": "SMS",
+  "link": "Copy link",
+  "recipient_email": "Recipient Email",
+  "recipient_email_placeholder": "john@example.com",
+  "phone_number": "Phone Number",
+  "phone_number_placeholder": "+1234567890",
+  "shareable_link": "Copy Link",
+  "link_copied": "Link copied to clipboard!",
+  "cancel": "Cancel",
+  "save": "Save",
+  "add_new_customer": "Add New Customer"
+}

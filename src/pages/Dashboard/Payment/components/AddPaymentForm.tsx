@@ -20,6 +20,7 @@ import { CustomerForm } from "../../Customer/components/CustomerForm";
 import { Copy, Link2, Mail, MessageSquareMore } from "lucide-react";
 import { toast } from "sonner";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
+import { useTranslation } from "react-i18next";
 
 // Zod schema
 const paymentFormSchema = z.object({
@@ -45,6 +46,7 @@ interface AddPaymentFormProps {
 
 // Component
 export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
+  const { t } = useTranslation("add_payment_modal");
   const [selectedMethod, setSelectedMethod] = useState<
     "email" | "sms" | "link"
   >("email");
@@ -84,7 +86,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-lg font-normal">
-                    Customer
+                    {t("customer")}
                   </FormLabel>
                   <FormControl>
                     <SelectInput
@@ -92,7 +94,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
                         value: customer.id,
                         label: customer.name,
                       }))}
-                      placeholder="Select a customer"
+                      placeholder={t("select_a_customer")}
                       onValueChange={field.onChange}
                       triggerClassName="w-full py-3"
                     />
@@ -107,7 +109,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               size="sm"
               className="text-primary mb-0 flex w-full justify-end px-2 py-1"
             >
-              <span onClick={() => setIsAddCustomerOpen(true)}>+ Add Customer</span>
+              <span onClick={() => setIsAddCustomerOpen(true)}>{t("add_customer")}</span>
             </Button>
 
             {/* Payment Amount */}
@@ -117,7 +119,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-lg font-normal">
-                    Payment Amount
+                    {t("payment_amount")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -142,7 +144,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               render={() => (
                 <FormItem>
                   <FormLabel className="text-lg font-normal">
-                    Payment Method
+                    {t("payment_method")}
                   </FormLabel>
                   <FormControl>
                     <Tabs
@@ -155,24 +157,24 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
                       <TabsList className="border-border grid w-full grid-cols-3 border">
                         <TabsTrigger
                           value="email"
-                          className="text-muted-foreground text-sm focus:text-white md:text-sm"
+                          className="data-[state=active]:bg-primary text-sm data-[state=active]:text-white"
                         >
                           <Mail className="size-4 md:size-5" />
-                          Email
+                          {t("email")}
                         </TabsTrigger>
                         <TabsTrigger
                           value="sms"
-                          className="text-muted-foreground text-sm focus-within:text-white md:text-sm"
+                          className="data-[state=active]:bg-primary text-sm data-[state=active]:text-white"
                         >
                           <MessageSquareMore className="size-4 md:size-5" />
-                          SMS
+                          {t("sms")}
                         </TabsTrigger>
                         <TabsTrigger
                           value="link"
-                          className="text-muted-foreground text-sm focus-within:text-white md:text-sm"
+                          className="data-[state=active]:bg-primary text-sm data-[state=active]:text-white"
                         >
                           <Link2 className="size-4 -rotate-45 md:size-5" />
-                          Copy link
+                          {t("shareable_link")}
                         </TabsTrigger>
                       </TabsList>
                     </Tabs>
@@ -190,7 +192,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Recipient Email
+                      {t("recipient_email")}
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -212,7 +214,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-lg font-normal">
-                      Phone Number
+                      {t("phone_number")}
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -231,7 +233,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               <div className="relative">
                 <FormItem>
                   <FormLabel className="text-lg font-normal">
-                    Shareable Link
+                    {t("shareable_link")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -265,14 +267,14 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
               onClick={onClose}
               className="px-10 py-5 text-base font-normal"
             >
-              Cancel
+              {t("cancel")}
             </Button>
             <Button
               variant={"primary"}
               type="submit"
               className="border-button-border border px-10 py-5 text-base font-normal shadow-2xl"
             >
-              Save
+              {t("save")}
             </Button>
           </div>
         </form>
@@ -281,7 +283,7 @@ export function AddPaymentForm({ onClose, onSend }: AddPaymentFormProps) {
       <DialogModal
         isOpen={isAddCustomerOpen}
         onOpenChange={setIsAddCustomerOpen}
-        title="Add New Customer"
+        title={t("add_new_customer")}
       >
         <CustomerForm
           onSave={() => console.log("Customer saved!")}

@@ -466,7 +466,7 @@ export default function PaymentPage() {
 
       {/* Add payment form modal */}
       <DialogModal
-        title="Add Payment"
+        title={t("add_payment_modal:add_payment")}
         isOpen={isAddPaymentOpen}
         onOpenChange={setIsAddPaymentOpen}
         className="w-xl"
