@@ -1,0 +1,8 @@
+{
+  "createInvoice": "Create Invoice",
+  "editInvoice": "Edit Invoice",
+  "invoiceFooter": "Invoice Footer",
+  "setInvoiceFooterContent": "Set your invoice footer content here...",
+  "cancel": "Cancel",
+  "next": "Next"
+}

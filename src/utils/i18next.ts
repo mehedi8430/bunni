@@ -8,6 +8,7 @@ import addMemberModalEn from "../locales/en/add-member-modal.json";
 import addPaymentModalEn from "../locales/en/add-payment-modal.json";
 import addProductModalEn from "../locales/en/add-product-modal.json";
 import createDiscountModalEn from "../locales/en/create-discount-modal.json";
+import createInvoiceModalEn from "../locales/en/create-invoice-modal.json";
 import createTaxRatesSettingsModalEn from "../locales/en/create-tax-rates-settings.json";
 import editPaymentModalEn from "../locales/en/edit-payment-modal.json";
 import invoiceSettinjgsEn from "../locales/en/invoice-setting.json";
@@ -30,6 +31,7 @@ import addMemberModalEs from "../locales/es/add-member-modal.json";
 import addPaymentModalEs from "../locales/es/add-payment-modal.json";
 import addProductModalEs from "../locales/es/add-product-modal.json";
 import createDiscountModalEs from "../locales/es/create-discount-modal.json";
+import createInvoiceModalEs from "../locales/es/create-invoice-modal.json";
 import createTaxRatesSettingsModalEs from "../locales/es/create-tax-rates-settings.json";
 import editPaymentModalEs from "../locales/es/edit-payment-modal.json";
 import invoiceSettinjgsEs from "../locales/es/invoice-setting.json";
@@ -72,6 +74,7 @@ i18n
         add_product_modal: addProductModalEn,
         create_discount_modal: createDiscountModalEn,
         create_tax_rates_settings_modal: createTaxRatesSettingsModalEn,
+        create_invoice_modal: createInvoiceModalEn,
       },
       es: {
         sidebar: sidebarEs,
@@ -94,6 +97,7 @@ i18n
         add_product_modal: addProductModalEs,
         create_discount_modal: createDiscountModalEs,
         create_tax_rates_settings_modal: createTaxRatesSettingsModalEs,
+        create_invoice_modal: createInvoiceModalEs,
       },
     },
     fallbackLng: "en",

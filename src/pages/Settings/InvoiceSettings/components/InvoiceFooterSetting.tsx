@@ -1,15 +1,15 @@
 import { DialogModal } from "@/components/DialogModal";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   invoiceFootersSelector,
   removeInvoiceFooter,
 } from "@/redux/slices/invoiceFooterSlice";
-import InvoiceFooterForm from "./InvoiceFooterForm";
 import type { TInvoiceFooter } from "@/types";
+import { Plus } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import InvoiceFooterForm from "./InvoiceFooterForm";
 
 export default function InvoiceFooterSetting() {
   const { t } = useTranslation("invoice_settings");
@@ -74,7 +74,11 @@ export default function InvoiceFooterSetting() {
       <DialogModal
         isOpen={isEditInvoiceFooterOpen}
         onOpenChange={setIsEditInvoiceFooterOpen}
-        title={editInvoiceFooter.id ? "Edit Invoice" : "Create Invoice"}
+        title={
+          editInvoiceFooter.id
+            ? t("create_invoice_modal:editInvoice")
+            : t("create_invoice_modal:createInvoice")
+        }
       >
         <InvoiceFooterForm
           footer={editInvoiceFooter}
