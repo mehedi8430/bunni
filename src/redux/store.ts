@@ -11,19 +11,19 @@ import {
   persistStore,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { baseApi } from "./api";
 import authReducer from "./slices/authSlice";
 import dialogReducer from "./slices/dialogSlice";
 import invoiceTemplateReducer from "./slices/invoiceTemplateSlice";
 import languageReducer from "./slices/languageSlice";
 import invoiceFooterSliceReducer from "./slices/invoiceFooterSlice";
+import { apiSlice } from "./api";
 
 const persistConfig = {
   key: "root",
   storage,
   version: 1,
   whitelist: ["auth"],
-  blacklist: [baseApi.reducerPath],
+  blacklist: [apiSlice.reducerPath],
 };
 
 const rootReducer = combineReducers({
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   invoiceTemplate: invoiceTemplateReducer,
   language: languageReducer,
   invoiceFooters: invoiceFooterSliceReducer,
-  [baseApi.reducerPath]: baseApi.reducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -44,7 +44,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(baseApi.middleware),
+    }).concat(apiSlice.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

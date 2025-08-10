@@ -1,13 +1,13 @@
-import { baseApi } from "../api";
+import { apiSlice } from "../api";
 import { userLoggedIn } from "../slices/authSlice";
 
-export const authApi = baseApi.injectEndpoints({
+export const authApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
+    // User Login
     userLogin: build.mutation({
       query: (data) => ({
         url: "auth/login/",
         method: "POST",
-        // credentials: 'include',
         body: data,
       }),
       invalidatesTags: ["auth"],
@@ -17,7 +17,6 @@ export const authApi = baseApi.injectEndpoints({
           const result = await queryFulfilled;
 
           const response = result.data?.data;
-          console.log("response", response);
 
           dispatch(
             userLoggedIn({
@@ -31,6 +30,31 @@ export const authApi = baseApi.injectEndpoints({
         }
       },
     }),
+
+    // User Logout
+    // userLoggedOut: builder.mutation({
+    //   query: (token) => ({
+    //     url: "/logout",
+    //     method: "POST",
+    //     headers: { Authorization: `Bearer ${token}` },
+    //     // body:token
+    //   }),
+    //   async onQueryStarted(arg, { dispatch }) {
+    //     try {
+    //       dispatch(
+    //         loggedOut({
+    //           status: null,
+    //           message: null,
+    //           token: null,
+    //           student: null,
+    //         }),
+    //       );
+    //       persistor.purge(["auth"]);
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   },
+    // }),
 
     forgotPassword: build.mutation({
       query: (data) => ({
@@ -59,15 +83,6 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-    userLogout: build.mutation({
-      query: () => ({
-        url: "/auth/logout",
-        method: "POST",
-        credentials: "include",
-      }),
-      invalidatesTags: ["auth"],
-    }),
-
     loggedInUserInfo: build.query({
       query: () => ({
         method: "GET",
@@ -83,6 +98,5 @@ export const {
   useForgotPasswordMutation,
   useSetNewPasswordMutation,
   useResetPasswordMutation,
-  useUserLogoutMutation,
   useLoggedInUserInfoQuery,
 } = authApi;
