@@ -19,8 +19,11 @@ import languageReducer from "./slices/languageSlice";
 import invoiceFooterSliceReducer from "./slices/invoiceFooterSlice";
 
 const persistConfig = {
-  key: "userInfo",
+  key: "root",
   storage,
+  version: 1,
+  whitelist: ["auth"],
+  blacklist: [baseApi.reducerPath],
 };
 
 const rootReducer = combineReducers({

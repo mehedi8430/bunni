@@ -1,13 +1,14 @@
-import { createApi, fetchBaseQuery, } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
-  reducerPath: 'baseApi',
+  reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_API_URL,
-    credentials: 'include',
+    // credentials: 'include',
     prepareHeaders: (headers) => {
-      const storedData = localStorage.getItem('persist:userInfo');
-      const accessToken = JSON.parse(storedData!).token;
+      const storedData = localStorage.getItem("persist:userInfo");
+      console.log({ storedData });
+      const accessToken = JSON.parse(storedData!)?.auth?.access_token;
 
       if (accessToken) headers.set("authorization", JSON.parse(accessToken));
       // headers.set("Content-Type", "application/json");
@@ -16,11 +17,8 @@ export const baseApi = createApi({
       //   headers.set("Content-Type", "application/json");
       // }
       return headers;
-    }
+    },
   }),
   endpoints: () => ({}),
-  tagTypes: [
-    'auth',
-    'user'
-  ]
+  tagTypes: ["auth", "user"],
 });
