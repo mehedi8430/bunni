@@ -17,6 +17,7 @@ export default function RegistrationForm({
   ...props
 }: React.ComponentProps<"form">) {
   const { form, onSubmit } = useRegistrationForm();
+
   return (
     <Form {...form}>
       <form
