@@ -44,7 +44,7 @@ export const authApi = apiSlice.injectEndpoints({
     // User Logout
     // userLoggedOut: builder.mutation({
     //   query: (token) => ({
-    //     url: "/logout",
+    //     url: "auth/logout",
     //     method: "POST",
     //     headers: { Authorization: `Bearer ${token}` },
     //     // body:token
@@ -66,39 +66,22 @@ export const authApi = apiSlice.injectEndpoints({
     //   },
     // }),
 
-    forgotPassword: build.mutation({
+    // Verify OTP
+    verifyOTP: build.mutation({
       query: (data) => ({
-        url: "/auth/forgot-password",
+        url: "auth/verify-otp",
         method: "POST",
-        credentials: "include",
         body: data,
       }),
     }),
 
-    setNewPassword: build.mutation({
-      query: ({ data, token }) => ({
-        url: `/auth/reset-password/${token}`,
+    // Resend OTP
+    resendOTP: build.mutation({
+      query: (data) => ({
+        url: "auth/resend-otp",
         method: "POST",
-        credentials: "include",
         body: data,
       }),
-    }),
-
-    resetPassword: build.mutation({
-      query: ({ data, userId }) => ({
-        url: `/users/update-password/${userId}`,
-        method: "PUT",
-        credentials: "include",
-        body: data,
-      }),
-    }),
-
-    loggedInUserInfo: build.query({
-      query: () => ({
-        method: "GET",
-        url: "/user/me",
-      }),
-      providesTags: ["auth"],
     }),
   }),
 });
@@ -106,8 +89,6 @@ export const authApi = apiSlice.injectEndpoints({
 export const {
   useUserRegisterMutation,
   useUserLoginMutation,
-  useForgotPasswordMutation,
-  useSetNewPasswordMutation,
-  useResetPasswordMutation,
-  useLoggedInUserInfoQuery,
+  useVerifyOTPMutation,
+  useResendOTPMutation,
 } = authApi;
