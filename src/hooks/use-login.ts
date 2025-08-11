@@ -40,8 +40,10 @@ export default function useLogin() {
         toast.success("Login successful!");
         navigate("/dashboard", { replace: true });
       }
-    } catch (error) {
-      console.log(error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err?.data?.message || "Login failed!");
     }
   }
 
