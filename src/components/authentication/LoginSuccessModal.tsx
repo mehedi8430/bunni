@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 export default function LoginSuccessModal() {
   const [searchParams, setSearchParams] = useSearchParams();
   const isSuccess = Boolean(searchParams.get("success"));
+
   return (
     <Dialog
       open={isSuccess}

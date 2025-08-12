@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,15 +15,47 @@ import useConfirmationCode from "@/hooks/use-confirmation-code";
 import { toast } from "sonner";
 import LoginSuccessModal from "./LoginSuccessModal";
 import OtpSlot from "./OtpSlot";
+import { useSearchParams } from "react-router";
+import { useResendOTPMutation } from "@/redux/endpoints/authApi";
 
 export default function ConfirmationCodeForm({
-  className, // Default to false if not provided
+  className,
   ...props
 }: React.ComponentProps<"form">) {
-  const { form, onSubmit } = useConfirmationCode();
+  const [resendOTP] = useResendOTPMutation();
 
-  const user = {
-    email: "abcdef@gmail.com",
+  const { form, onSubmit } = useConfirmationCode();
+  const [searchQuery] = useSearchParams();
+  const email = searchQuery.get("email") || "";
+
+  const [remainingTime, setRemainingTime] = useState(120);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+    if (remainingTime > 0) {
+      timer = setTimeout(() => setRemainingTime(remainingTime - 1), 1000);
+    }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [remainingTime]);
+
+  const handleResend = async () => {
+    console.log("Resending code...");
+
+    try {
+      const response = await resendOTP({ email }).unwrap();
+
+      if (response?.status_code === 200) {
+        toast.success(response?.message || "Code resent successfully!");
+        setRemainingTime(120);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.data?.message || "Failed to resend code");
+    }
   };
 
   return (
@@ -34,11 +66,11 @@ export default function ConfirmationCodeForm({
         {...props}
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-4xl leading-14 font-bold">Confirmation Code</h1>
-          <p className="text-description text-lg leading-7 text-balance">
+          <h1 className="text-3xl leading-14 font-bold">Confirmation Code</h1>
+          <p className="text-description text-base leading-7 text-balance">
             Enter Confirmation code that sent to your email address
             <br />
-            <span className="font-bold">{user.email}</span>
+            <span className="text-sm font-bold">{email}</span>
           </p>
         </div>
 
@@ -75,24 +107,22 @@ export default function ConfirmationCodeForm({
               Didn't receive the code?
               <Button
                 variant="link"
-                disabled={false} // Disable button for 25 seconds
+                disabled={remainingTime > 0}
                 type="button"
                 className="text-card-foreground cursor-pointer font-medium underline"
-                onClick={() => {
-                  // Add resend logic here
-                  console.log("Resending code...");
-                  toast("Verification code resent", {
-                    description: "Please check your email for the new code.",
-                  });
-                }}
+                onClick={handleResend}
               >
                 Resend
               </Button>
-              in 25 second
+              {remainingTime > 0
+                ? `in ${remainingTime} second${remainingTime === 1 ? "" : "s"}`
+                : ""}
             </p>
           </div>
         </div>
       </form>
+
+      {/* Login Success Modal */}
       <LoginSuccessModal />
     </Form>
   );
