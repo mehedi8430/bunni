@@ -69,7 +69,7 @@ export const authApi = apiSlice.injectEndpoints({
     // Verify OTP
     verifyOTP: build.mutation({
       query: (data) => ({
-        url: "auth/verify-otp",
+        url: "auth/verify-otp/",
         method: "POST",
         body: data,
       }),
@@ -78,7 +78,7 @@ export const authApi = apiSlice.injectEndpoints({
     // Resend OTP
     resendOTP: build.mutation({
       query: (data) => ({
-        url: "auth/resend-otp",
+        url: "auth/resend-otp/",
         method: "POST",
         body: data,
       }),

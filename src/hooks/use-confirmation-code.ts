@@ -17,7 +17,6 @@ export default function useConfirmationCode() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -25,7 +24,6 @@ export default function useConfirmationCode() {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log("Form submitted with data:", data);
 
@@ -43,7 +41,6 @@ export default function useConfirmationCode() {
       const response = await verifyOTP(payload).unwrap();
       console.log({ response });
 
-      // Assuming success status_code is 200 or similar; adjust based on your API
       if (response.status_code === 200) {
         toast.success("Verification successful!");
         searchParams.set("success", "true");
@@ -57,22 +54,20 @@ export default function useConfirmationCode() {
       const message = error?.data?.message || "Verification failed!";
 
       if (details && typeof details === "object") {
-        // Map backend field names to form field names and set errors
         Object.entries(details).forEach(
           ([backendField, messages]: [string, unknown]) => {
             let formField = backendField;
-            if (backendField === "otp") formField = "pin"; // Map 'otp' to 'pin'
+            if (backendField === "otp") formField = "pin";
 
             if (Array.isArray(messages) && messages.length > 0) {
               form.setError(formField as keyof z.infer<typeof FormSchema>, {
                 type: "server",
-                message: messages[0], // Use the first error message
+                message: messages[0],
               });
             }
           },
         );
       } else {
-        // Fallback for non-field-specific errors
         toast.error(message);
       }
     }
@@ -80,36 +75,3 @@ export default function useConfirmationCode() {
 
   return { form, onSubmit };
 }
-
-// import { useVerifyOTPMutation } from "@/redux/endpoints/authApi";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { useForm } from "react-hook-form";
-// import { useSearchParams } from "react-router";
-// import { z } from "zod";
-
-// const FormSchema = z.object({
-//   pin: z.string().min(6, {
-//     message: "Your one-time password must be 6 characters.",
-//   }),
-// });
-// export default function useConfirmationCode() {
-//   const [searchParams, setSearchParams] = useSearchParams();
-//   const [verifyOTP] = useVerifyOTPMutation();
-
-//   // 1. Define your form.
-//   const form = useForm<z.infer<typeof FormSchema>>({
-//     resolver: zodResolver(FormSchema),
-//     defaultValues: {
-//       pin: "",
-//     },
-//   });
-
-//   // 2. Define a submit handler.
-//   function onSubmit(data: z.infer<typeof FormSchema>) {
-//     console.log("Form submitted with data:", data);
-//     searchParams.set("success", "true");
-//     setSearchParams(searchParams, { replace: true });
-//   }
-
-//   return { form, onSubmit };
-// }
