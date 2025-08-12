@@ -2,7 +2,13 @@ import { icons } from "@/lib/imageProvider";
 import * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
-import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import NavUser from "./nav-user";
 
 const data = {
   navMain: [
@@ -82,6 +88,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
+
+      <SidebarFooter className="mb-22">
+        <NavUser />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
