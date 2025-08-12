@@ -64,11 +64,12 @@ export default function DashboardPage() {
           {t("dashboard_today_is", { date: formatted })}
         </p>
 
+        {/* Buttons Actions */}
         <div className="mt-6 flex flex-wrap items-center gap-2 md:flex-row">
           <Button
             variant={"primary"}
             className="text-base font-normal"
-            onClick={() => navigate("/dashboard/invoices/templates")}
+            onClick={() => navigate("/dashboard/template/invoice-alpha")}
           >
             <Plus />
             {t("dashboard_create_invoice")}
@@ -100,7 +101,7 @@ export default function DashboardPage() {
               variant={"primary"}
               className="text-base font-normal"
               onClick={() =>
-                navigate("/dashboard/invoices/templates?type=estimate")
+                navigate("/dashboard/template/invoice-alpha?type=estimate")
               }
             >
               <Plus />

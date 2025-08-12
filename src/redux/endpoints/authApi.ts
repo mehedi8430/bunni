@@ -1,5 +1,5 @@
 import { apiSlice } from "../api";
-import { userLoggedIn } from "../slices/authSlice";
+import { userLoggedIn, userLoggedOut } from "../slices/authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
@@ -42,29 +42,20 @@ export const authApi = apiSlice.injectEndpoints({
     }),
 
     // User Logout
-    // userLoggedOut: builder.mutation({
-    //   query: (token) => ({
-    //     url: "auth/logout",
-    //     method: "POST",
-    //     headers: { Authorization: `Bearer ${token}` },
-    //     // body:token
-    //   }),
-    //   async onQueryStarted(arg, { dispatch }) {
-    //     try {
-    //       dispatch(
-    //         loggedOut({
-    //           status: null,
-    //           message: null,
-    //           token: null,
-    //           student: null,
-    //         }),
-    //       );
-    //       persistor.purge(["auth"]);
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   },
-    // }),
+    userLoggedOut: build.mutation({
+      query: (refresh_token) => ({
+        url: "auth/logout/",
+        method: "POST",
+        body: refresh_token,
+      }),
+      async onQueryStarted(arg, { dispatch }) {
+        try {
+          dispatch(userLoggedOut());
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
 
     // Verify OTP
     verifyOTP: build.mutation({
@@ -83,12 +74,52 @@ export const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    // Reset Password
+    resetPassword: build.mutation({
+      query: (data) => ({
+        url: "auth/reset-password/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    // forget password
+    forgetPassword: build.mutation({
+      query: (data) => ({
+        url: "auth/forgot-password/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    // Get User Profile
+    getUserProfile: build.query({
+      query: () => ({
+        url: "profile/",
+        method: "GET",
+      }),
+    }),
+
+    // Update User Profile
+    updateUserProfile: build.mutation({
+      query: (data) => ({
+        url: "profile/",
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
 export const {
   useUserRegisterMutation,
   useUserLoginMutation,
+  useUserLoggedOutMutation,
   useVerifyOTPMutation,
   useResendOTPMutation,
+  useResetPasswordMutation,
+  useForgetPasswordMutation,
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
 } = authApi;
