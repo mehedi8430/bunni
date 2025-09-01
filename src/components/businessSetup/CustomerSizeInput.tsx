@@ -8,11 +8,11 @@ import { Input } from "../ui/input";
 import { RadioGroup } from "../ui/radio-group";
 
 type Props = {
-  field: ControllerRenderProps<z.infer<typeof formSchema>, "customerSize">;
+  field: ControllerRenderProps<z.infer<typeof formSchema>, "customer_size">;
   options: string[];
 };
 export default function CustomerSizeInput({ field, options }: Props) {
-  return (
+  return (  
     <RadioGroup
       onValueChange={field.onChange}
       defaultValue={field.value}

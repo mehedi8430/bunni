@@ -16,6 +16,8 @@ import dialogReducer from "./slices/dialogSlice";
 import invoiceTemplateReducer from "./slices/invoiceTemplateSlice";
 import languageReducer from "./slices/languageSlice";
 import invoiceFooterSliceReducer from "./slices/invoiceFooterSlice";
+import busynessReducer from "./slices/busynessSlice";
+
 import { apiSlice } from "./api";
 
 const persistConfig = {
@@ -27,6 +29,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+  busyness: busynessReducer,
   auth: authReducer,
   dialog: dialogReducer,
   invoiceTemplate: invoiceTemplateReducer,

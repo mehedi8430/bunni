@@ -23,7 +23,7 @@ export default function BusinessInformationForm({
   ...props
 }: React.ComponentProps<"form">) {
   const { form, onSubmit } = useBusinessInformation();
-  const businessLegalStructure = form.watch("businessLegalStructure");
+  const legal_stucture = form.watch("legal_stucture");
   console.log(form.formState.errors);
 
   return (
@@ -43,7 +43,7 @@ export default function BusinessInformationForm({
           <div className="grid gap-3">
             <FormField
               control={form.control}
-              name="firstName"
+              name="first_name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>What’s Your First Name</FormLabel>
@@ -59,7 +59,7 @@ export default function BusinessInformationForm({
           <div className="grid gap-3">
             <FormField
               control={form.control}
-              name="lastName"
+              name="last_name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
@@ -75,7 +75,7 @@ export default function BusinessInformationForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="businessName"
+              name="business_name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>What’s Your Business Name?</FormLabel>
@@ -90,7 +90,7 @@ export default function BusinessInformationForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="businessDocument"
+              name="business_do"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>What Dose Your Business Do?</FormLabel>
@@ -111,7 +111,7 @@ export default function BusinessInformationForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="businessLegalStructure"
+              name="legal_stucture"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
@@ -132,11 +132,11 @@ export default function BusinessInformationForm({
           </div>
 
           {/* Conditionally render extra field */}
-          {businessLegalStructure === "others" && (
+          {legal_stucture === "others" && (
             <div className="col-span-full grid gap-3">
               <FormField
                 control={form.control}
-                name="businessType"
+                name="business_type"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Is It One Of These Business Type?</FormLabel>
@@ -158,7 +158,7 @@ export default function BusinessInformationForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="businessCountry"
+              name="business_country"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Business Country</FormLabel>
@@ -179,7 +179,7 @@ export default function BusinessInformationForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="businessCurrency"
+              name="business_currency"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Business Currency</FormLabel>

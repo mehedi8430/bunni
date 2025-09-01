@@ -40,7 +40,7 @@ export default function DetailCompanyNameForm({
           <div className="grid gap-3">
             <FormField
               control={form.control}
-              name="businessStartYear"
+              name="business_start"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>What Year Did You Start Your Business?</FormLabel>
@@ -61,7 +61,7 @@ export default function DetailCompanyNameForm({
           <div className="grid gap-3">
             <FormField
               control={form.control}
-              name="customerSize"
+              name="customer_size"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>How Many Customers Do You Have?</FormLabel>
@@ -80,7 +80,7 @@ export default function DetailCompanyNameForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="acceptPaymentOnline"
+              name="accept_payments"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Do You Accept Payment Online?</FormLabel>
@@ -122,7 +122,7 @@ export default function DetailCompanyNameForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="mostUsedPaymentMethod"
+              name="payment_method"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>How Do Most Of Your Customers Pay You?</FormLabel>
