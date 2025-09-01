@@ -62,7 +62,7 @@ export default function WhatWouldLikeToDoForm({
           <div className="grid gap-3">
             <FormField
               control={form.control}
-              name="likeToDo"
+              name="like_to_do"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
