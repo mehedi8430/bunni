@@ -40,10 +40,8 @@ const busynessSlice = createSlice({
   initialState,
   reducers: {
     setBusinessInfo: (state, action) => {
-      console.log("Action payload:", action.payload);
       // Mutate the state directly (Redux Toolkit uses Immer)
       Object.assign(state, action.payload);
-      console.log("Updated state:", state);
     },
   },
 });
