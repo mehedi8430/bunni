@@ -12,19 +12,23 @@ import useBusinessInformation from "@/hooks/use-business-information";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router";
 import SelectInput from "../SelectInput";
-import { businessCountryOptions } from "./businessCountryData";
+import { businessCityOptions, businessCountryOptions } from "./businessCountryData";
 import { businessCurrencyOptions } from "./businessCurrencyData";
 import { businessDoOptions } from "./businessDoData";
 import { businessLegalStructureOptions } from "./businessLegalStructureData";
 import { businessTypeOptions } from "./businessTypeData";
+import { useCurrentUserQuery } from "@/redux/endpoints/userApi";
 
 export default function BusinessInformationForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const { data } = useCurrentUserQuery("");
   const { form, onSubmit } = useBusinessInformation();
   const legal_stucture = form.watch("legal_stucture");
   console.log(form.formState.errors);
+
+  console.log(data?.profile?.last_name);
 
   return (
     <Form {...form}>
@@ -40,31 +44,39 @@ export default function BusinessInformationForm({
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="grid gap-3">
+            <div className="grid gap-3">
             <FormField
               control={form.control}
               name="first_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>What’s Your First Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="here..." {...field} className="py-5" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              render={() => (
+              <FormItem>
+                <FormLabel>What’s Your First Name</FormLabel>
+                <FormControl>
+                <Input
+                  placeholder="here..."
+                  value={data?.profile?.first_name || ""}
+                  className="py-5"
+                />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
               )}
             />
-          </div>
+            </div>
 
           <div className="grid gap-3">
             <FormField
               control={form.control}
               name="last_name"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="here..." {...field} className="py-5" />
+                    <Input
+                      placeholder="here..."
+                      value={data?.profile?.last_name || ""}
+                      className="py-5"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -175,6 +187,26 @@ export default function BusinessInformationForm({
               )}
             />
           </div>
+          <div className="col-span-full grid gap-3">
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Business City</FormLabel>
+                  <FormControl>
+                    <SelectInput
+                      options={businessCityOptions}
+                      onValueChange={field.onChange}
+                      placeholder="here..."
+                      triggerClassName="w-full py-5"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <div className="col-span-full grid gap-3">
             <FormField
@@ -210,7 +242,7 @@ export default function BusinessInformationForm({
             type="submit"
             className="disabled:bg-disabled w-full cursor-pointer md:col-span-full"
             size={"lg"}
-            disabled={!form.formState.isValid || form.formState.isSubmitting}
+            disabled={ form.formState.isSubmitting}
           >
             Next
           </Button>

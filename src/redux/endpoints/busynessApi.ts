@@ -5,7 +5,7 @@ export const busynessApi = apiSlice.injectEndpoints({
     // create busyness
     createBusyness: builder.mutation({
       query: (body) => ({
-        url: "business/",
+        url: "/business/",
         method: "POST",
         body,
       }),

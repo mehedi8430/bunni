@@ -17,6 +17,7 @@ const formSchema = z.object({
   business_type: z.string().optional(),
   business_country: z.string().min(1, "Business country is required"),
   business_currency: z.string().min(1, "Business currency is required"),
+  city: z.string().min(1, "Business city is required"),
 });
 
 export default function useBusinessInformation() {
@@ -36,6 +37,7 @@ export default function useBusinessInformation() {
       business_type: "",
       business_country: "",
       business_currency: "",
+      city: "",
     },
   });
 

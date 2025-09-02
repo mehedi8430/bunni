@@ -65,19 +65,11 @@ export default function Header() {
                     />
                   </div>
                 </PopoverTrigger>
-                <PopoverContent className="w-48 p-4">
+                <PopoverContent className="w-56 p-0 py-4" align="end" side="bottom" sideOffset={5}>
                   <div className="space-y-2">
-                    <Link
-                      to={`/dashboard/settings/profile`}
-                      className="flex items-center gap-2.5"
-                    >
-                      <User strokeWidth={1.5} />
-                      <span className="text-lg font-normal">My Profile</span>
+                    <Link to='/business-setup' className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded">
+                     + Add New Business
                     </Link>
-                    <button className="flex items-center gap-2.5 text-red-500">
-                      <LogOut strokeWidth={1.5} />
-                      <span className="text-lg font-normal">Logout</span>
-                    </button>
                   </div>
                 </PopoverContent>
               </Popover>

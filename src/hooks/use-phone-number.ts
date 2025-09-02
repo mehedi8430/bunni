@@ -1,9 +1,10 @@
+import { useCreateBusynessMutation } from "@/redux/endpoints/busynessApi";
 import { useAppSelector } from "@/redux/hooks";
-import { selectBusinessInfo, setBusinessInfo } from "@/redux/slices/busynessSlice";
+import { selectBusinessInfo } from "@/redux/slices/busynessSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { z } from "zod";
 
 export const formSchema = z.object({
@@ -15,9 +16,9 @@ export const formSchema = z.object({
 });
 
 export default function usePhoneNumber() {
-  const busynessData = useAppSelector(selectBusinessInfo);
-  const dispatch = useDispatch();
+  const businessInfo = useAppSelector(selectBusinessInfo);
   const navigate = useNavigate();
+  const [createBusyness] = useCreateBusynessMutation();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -28,13 +29,26 @@ export default function usePhoneNumber() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const updatedBusynessData = { ...busynessData, ...values };
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    dispatch(setBusinessInfo(updatedBusynessData));
-    navigate(`/dashboard`, { replace: true });
+
+    console.log(businessInfo);
+
+    try{
+      const response = await createBusyness(businessInfo);
+      toast.success("Business Create Successfully!");
+      console.log("Business created:", response);
+      return;
+      navigate(`/dashboard`, { replace: true });
+      
+    }catch(error){
+      console.error("Failed to create business info:", error);
+      toast.error("Failed to create business information");
+    }
+
+    
   }
   return { form, onSubmit };
 }

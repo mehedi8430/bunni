@@ -49,6 +49,15 @@ export const userApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+    // get current user
+    currentUser: build.query({
+      query: () => ({
+        url: "/profile/",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: [{ type: "user", id: "LIST" }],
+    }),
   }),
 });
 
@@ -58,4 +67,5 @@ export const {
   useUserUpdateMutation,
   useAllUsersQuery,
   useSingleUsersQuery,
+  useCurrentUserQuery,
 } = userApi;

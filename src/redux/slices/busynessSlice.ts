@@ -16,6 +16,7 @@ type BusinessInfo = {
   accept_payments?: string;
   like_to_do?: string;
   phone?: string;
+  city?: string;
 };
 
 const initialState: BusinessInfo = {
@@ -33,6 +34,7 @@ const initialState: BusinessInfo = {
   accept_payments: "",
   like_to_do: "",
   phone: "",
+  city: "",
 };
 
 const busynessSlice = createSlice({

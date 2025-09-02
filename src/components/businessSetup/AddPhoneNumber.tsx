@@ -10,11 +10,16 @@ import {
 import { Input } from "@/components/ui/input";
 import usePhoneNumber from "@/hooks/use-phone-number";
 import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/redux/hooks";
+import { selectBusinessInfo, setBusinessInfo } from "@/redux/slices/busynessSlice";
+import { useDispatch } from "react-redux";
 
 export default function AddPhoneNumber({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const busynessData = useAppSelector(selectBusinessInfo);
+  const dispatch = useDispatch();
   const { form, onSubmit } = usePhoneNumber();
 
   return (
@@ -44,6 +49,11 @@ export default function AddPhoneNumber({
                       placeholder="+1    (162) 826-7904"
                       {...field}
                       className="py-5"
+                      onChange={(e) => {
+                        field.onChange(e);
+                        const updatedBusynessData = { ...busynessData, phone: e.target.value };
+                        dispatch(setBusinessInfo(updatedBusynessData));
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
