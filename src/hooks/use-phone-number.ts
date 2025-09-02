@@ -30,17 +30,13 @@ export default function usePhoneNumber() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
 
-    console.log(businessInfo);
+    console.log(values);
 
     try{
       const response = await createBusyness(businessInfo);
       toast.success("Business Create Successfully!");
       console.log("Business created:", response);
-      return;
       navigate(`/dashboard`, { replace: true });
       
     }catch(error){

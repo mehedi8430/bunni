@@ -17,18 +17,14 @@ import { businessCurrencyOptions } from "./businessCurrencyData";
 import { businessDoOptions } from "./businessDoData";
 import { businessLegalStructureOptions } from "./businessLegalStructureData";
 import { businessTypeOptions } from "./businessTypeData";
-import { useCurrentUserQuery } from "@/redux/endpoints/userApi";
 
 export default function BusinessInformationForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
-  const { data } = useCurrentUserQuery("");
   const { form, onSubmit } = useBusinessInformation();
   const legal_stucture = form.watch("legal_stucture");
   console.log(form.formState.errors);
-
-  console.log(data?.profile?.last_name);
 
   return (
     <Form {...form}>
@@ -48,13 +44,13 @@ export default function BusinessInformationForm({
             <FormField
               control={form.control}
               name="first_name"
-              render={() => (
+              render={({ field }) => (
               <FormItem>
                 <FormLabel>What’s Your First Name</FormLabel>
                 <FormControl>
                 <Input
                   placeholder="here..."
-                  value={data?.profile?.first_name || ""}
+                  {...field}
                   className="py-5"
                 />
                 </FormControl>
@@ -68,13 +64,13 @@ export default function BusinessInformationForm({
             <FormField
               control={form.control}
               name="last_name"
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="here..."
-                      value={data?.profile?.last_name || ""}
+                      {...field}
                       className="py-5"
                     />
                   </FormControl>
@@ -242,7 +238,7 @@ export default function BusinessInformationForm({
             type="submit"
             className="disabled:bg-disabled w-full cursor-pointer md:col-span-full"
             size={"lg"}
-            disabled={ form.formState.isSubmitting}
+            disabled={ !form.formState.isValid || form.formState.isSubmitting}
           >
             Next
           </Button>
