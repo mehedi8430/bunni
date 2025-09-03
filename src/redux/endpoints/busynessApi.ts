@@ -10,8 +10,15 @@ export const busynessApi = apiSlice.injectEndpoints({
         body,
       }),
     }),
+    // get all business
+    getAllBusiness: builder.query({
+      query: () => ({
+        url: "/business/",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateBusynessMutation } = busynessApi;
+export const { useCreateBusynessMutation, useGetAllBusinessQuery } = busynessApi;
 export default busynessApi;

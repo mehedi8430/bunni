@@ -7,8 +7,16 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Link } from "react-router";
 import NotificationContent from "./notification-content";
+import { useGetAllBusinessQuery } from "@/redux/endpoints/busynessApi";
+import type { TBusiness } from "@/types/business.type";
+import { setBusinessInfo } from "@/redux/slices/busynessSlice";
+import { useDispatch } from "react-redux";
 
 export default function Header() {
+  const { data } = useGetAllBusinessQuery("");
+  const dispatch = useDispatch();
+  const businesses = data?.data || [];
+  console.log("businesses", businesses);
   return (
     <header className="bg-sidebar border-border fixed top-0 z-9999 w-full border-b">
       <div className="flex items-center max-md:justify-center">
@@ -65,11 +73,21 @@ export default function Header() {
                     />
                   </div>
                 </PopoverTrigger>
-                <PopoverContent className="w-56 p-0 py-4" align="end" side="bottom" sideOffset={5}>
+                <PopoverContent className="w-56 p-0 py-4 h-[220px] overflow-y-auto" align="end" side="bottom" sideOffset={5}>
                   <div className="space-y-2">
-                    <Link to='/business-setup' className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded">
-                     + Add New Business
+                    <Link to='/business-setup' className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded text-center">
+                      + Add New Business
                     </Link>
+                    <div>
+                      {
+                        businesses.map((business: TBusiness) => (
+                          <button
+                            key={business.id}
+                            className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer"
+                          >{business?.business_name}</button>
+                        ))
+                      }
+                    </div>
                   </div>
                 </PopoverContent>
               </Popover>
@@ -131,9 +149,35 @@ export default function Header() {
                         />
                         <AvatarFallback>SC</AvatarFallback>
                       </Avatar>
-                      <div className="flex flex-col">
-                        <span className="text-sm font-medium">Acme Inc.</span>
-                      </div>
+                      <Popover>
+                        <PopoverTrigger asChild className="cursor-pointer">
+                          <div className="flex items-center gap-1.5">
+                            Acme Inc.
+                            <ChevronDown
+                              strokeWidth={1.5}
+                              className="border-border rounded-full border p-0.5"
+                            />
+                          </div>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-56 p-0 py-4 h-[220px] overflow-y-auto" align="end" side="bottom" sideOffset={5}>
+                          <div className="space-y-2">
+                            <Link to='/business-setup' className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded text-center">
+                              + Add New Business
+                            </Link>
+                            <div>
+                              {
+                                businesses.map((business: TBusiness) => (
+                                  <button
+                                    key={business.id}
+                                    onClick={() => dispatch(setBusinessInfo(business.id))}
+                                    className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer"
+                                  >{business?.business_name}</button>
+                                ))
+                              }
+                            </div>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                     </div>
                     <div className="flex flex-col gap-3">
                       <Link

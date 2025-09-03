@@ -17,6 +17,7 @@ type BusinessInfo = {
   like_to_do?: string;
   phone?: string;
   city?: string;
+  id?: string;
 };
 
 const initialState: BusinessInfo = {
@@ -35,6 +36,7 @@ const initialState: BusinessInfo = {
   like_to_do: "",
   phone: "",
   city: "",
+  id: "",
 };
 
 const busynessSlice = createSlice({
