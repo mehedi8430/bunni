@@ -55,6 +55,9 @@ export default function PreviewTemplate({
   } = useAppSelector(templateSelector);
 
   const { customer: selectedCustomer } = useCustomerApi(customerId);
+  const searchparams = new URLSearchParams(window.location.search);
+  const type = searchparams.get("type");
+  console.log(type);
 
   return (
     <div
@@ -72,14 +75,16 @@ export default function PreviewTemplate({
           className="text-4xl font-extrabold"
           style={{ color: color || "#38988A" }}
         >
-          INVOICE
+          {type === "estimate" ? "ESTIMATE" : "INVOICE"}
         </h1>
       </div>
 
       {/* Date and invoice number */}
       <div className="mb-6 flex justify-between bg-gray-200 py-1">
         <div className="mx-auto flex w-full max-w-md justify-between text-xs font-medium uppercase">
-          <span>Invoice n° {invoiceNumber}</span>
+          <span>
+            {type === "estimate" ? "Estimate" : "Invoice"} n° {invoiceNumber}
+          </span>
           <span>Date: {formatDateToShort(invoiceDate)}</span>
         </div>
       </div>
