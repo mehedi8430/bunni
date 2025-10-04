@@ -9,6 +9,7 @@ import { Plus } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EstimatesTable from "./components/EstimatesTable";
 import { useTranslation } from "react-i18next";
+import OutstandingCard from "./components/OutstandingCard";
 
 export default function InvoicesPage() {
   const { t } = useTranslation();
@@ -58,7 +59,7 @@ export default function InvoicesPage() {
           iconBgColor="bg-red-100"
           valueColor="text-red-400"
         />
-        <TopCard
+        <OutstandingCard
           icon={<ReactSVG src={icons.dolar} />}
           title={t("recent_payments")}
           value="$3,847"
