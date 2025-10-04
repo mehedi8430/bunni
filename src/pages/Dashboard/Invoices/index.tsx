@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EstimatesTable from "./components/EstimatesTable";
 import { useTranslation } from "react-i18next";
 import OutstandingCard from "./components/OutstandingCard";
+import TotalEstimateCard from "./components/TotalEstimateCard";
 
 export default function InvoicesPage() {
   const { t } = useTranslation();
@@ -66,7 +67,7 @@ export default function InvoicesPage() {
           iconBgColor="bg-purple-100"
           valueColor="text-foreground"
         />
-        <TopCard
+        <TotalEstimateCard
           icon={<ReactSVG src={icons.groupuser} />}
           title={t("total_customers")}
           value="$2,567"
