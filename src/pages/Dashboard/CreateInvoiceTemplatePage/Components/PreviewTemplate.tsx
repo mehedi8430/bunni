@@ -57,7 +57,6 @@ export default function PreviewTemplate({
   const { customer: selectedCustomer } = useCustomerApi(customerId);
   const searchparams = new URLSearchParams(window.location.search);
   const type = searchparams.get("type");
-  console.log(type);
 
   return (
     <div

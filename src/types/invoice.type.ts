@@ -63,6 +63,7 @@ export type TInvoiceData = {
   invoiceNumber: string;
   invoiceDate: string;
   serviceDate: string;
+  reminderDate: string;
   dueDate: string;
   footerTerms: string;
   items: TInvoiceItem[];

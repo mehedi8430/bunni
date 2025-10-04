@@ -59,7 +59,6 @@ export default function PreviewDelta({
   const { customer: selectedCustomer } = useCustomerApi(customerId);
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
-  console.log("Template Type:", type);
 
   return (
     <div

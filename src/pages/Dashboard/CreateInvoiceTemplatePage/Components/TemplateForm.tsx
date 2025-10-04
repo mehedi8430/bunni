@@ -149,19 +149,34 @@ export default function TemplateForm() {
                 }
               />
             </div>
-            <CustomDatePicker
-              defaultDate={dueDate}
-              label="Due Date"
-              labelClassName="custom-label -mb-2"
-              onDateChange={(date) =>
-                dispatch(
-                  updateField({
-                    field: "dueDate",
-                    value: date ? date.toDateString() : "",
-                  }),
-                )
-              }
-            />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <CustomDatePicker
+                defaultDate={dueDate}
+                label="Due Date"
+                labelClassName="custom-label -mb-2"
+                onDateChange={(date) =>
+                  dispatch(
+                    updateField({
+                      field: "dueDate",
+                      value: date ? date.toDateString() : "",
+                    }),
+                  )
+                }
+              />
+              <CustomDatePicker
+                defaultDate={dueDate}
+                label="Reminder Date"
+                labelClassName="custom-label -mb-2"
+                onDateChange={(date) =>
+                  dispatch(
+                    updateField({
+                      field: "reminderDate",
+                      value: date ? date.toDateString() : "",
+                    }),
+                  )
+                }
+              />
+            </div>
           </div>
         </CollapsibleField>
 
