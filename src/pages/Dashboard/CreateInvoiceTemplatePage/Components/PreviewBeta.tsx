@@ -44,8 +44,7 @@ export default function PreviewBeta({
   },
 }: Partial<PreviewBetaProps>) {
   const [searchParams] = useSearchParams();
-  const name = searchParams.get("name");
-  console.log("Template Name:", name);
+  const type = searchParams.get("type");
 
   const {
     color,
@@ -70,7 +69,9 @@ export default function PreviewBeta({
       {/* Date and invoice number */}
       <div className="mx-3 my-4 mb-6 flex justify-between rounded-full bg-gray-100 py-2.5">
         <div className="flex w-full justify-between px-4 text-[15px] font-medium">
-          <span>Invoice {invoiceNumber}</span>
+          <span>
+            {type === "estimate" ? "Estimate" : "Invoice"} N° {invoiceNumber}
+          </span>
           <span>Date: {formatDateToShort(invoiceDate)}</span>
         </div>
       </div>

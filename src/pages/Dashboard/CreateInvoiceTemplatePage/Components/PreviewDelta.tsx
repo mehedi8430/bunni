@@ -2,6 +2,7 @@ import { icons } from "@/lib/imageProvider";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import { useAppSelector } from "@/redux/hooks";
 import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
+import { useSearchParams } from "react-router";
 
 type BillToFrom = {
   name: string;
@@ -56,6 +57,9 @@ export default function PreviewDelta({
   } = useAppSelector(templateSelector);
 
   const { customer: selectedCustomer } = useCustomerApi(customerId);
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  console.log("Template Type:", type);
 
   return (
     <div
@@ -105,7 +109,9 @@ export default function PreviewDelta({
           </div>
           <div className="flex-1">
             <div className="mb-2">
-              <p className="mb-1 text-sm font-bold">Invoice number</p>
+              <p className="mb-1 text-sm font-bold">
+                {type === "estimate" ? "Estimate" : "Invoice"} number
+              </p>
               <p className="text-xs">#{invoiceNumber}</p>
             </div>
             <div>

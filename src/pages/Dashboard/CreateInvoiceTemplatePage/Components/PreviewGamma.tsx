@@ -2,6 +2,7 @@ import { images } from "@/lib/imageProvider";
 import { useCustomerApi } from "@/mock-api-hook/features/customers/useCustomerApi";
 import { useAppSelector } from "@/redux/hooks";
 import { templateSelector } from "@/redux/slices/invoiceTemplateSlice";
+import { useSearchParams } from "react-router";
 
 type BillToFrom = {
   name: string;
@@ -55,6 +56,8 @@ export default function PreviewGamma({
   } = useAppSelector(templateSelector);
 
   const { customer: selectedCustomer } = useCustomerApi(customerId);
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
 
   return (
     <div
@@ -68,7 +71,7 @@ export default function PreviewGamma({
             className="text-[26px] font-extrabold"
             style={{ color: color || "#38988A" }}
           >
-            INVOICE
+            {type === "estimate" ? "ESTIMATE" : "INVOICE"}
           </h1>
           <span className="text-sm">#{invoiceNumber}</span>
         </div>
