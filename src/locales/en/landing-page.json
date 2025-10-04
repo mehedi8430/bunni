@@ -154,8 +154,8 @@
   "total_payment": "Total Payment",
   "pending_payments": "Pending Payments",
   "invoice_estimate": "Estimate",
-  "outstanding_invoices": "Outstanding Invoices",
-  "recent_payments": "Recent Payments",
-  "total_customers": "Total Customers",
-  "revenue_this_month": "Revenue this month"
+  "outstanding_invoices": "Total Sales",
+  "recent_payments": "Total Outstanding Balance",
+  "total_customers": "Total Estimate",
+  "revenue_this_month": "Total Refunds"
 }
