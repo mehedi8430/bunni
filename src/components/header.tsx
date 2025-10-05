@@ -5,18 +5,24 @@ import { icons } from "@/lib/imageProvider";
 import { ReactSVG } from "react-svg";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import NotificationContent from "./notification-content";
 import { useGetAllBusinessQuery } from "@/redux/endpoints/busynessApi";
 import type { TBusiness } from "@/types/business.type";
-import { setBusinessInfo } from "@/redux/slices/busynessSlice";
-import { useDispatch } from "react-redux";
 
 export default function Header() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const { data } = useGetAllBusinessQuery("");
-  const dispatch = useDispatch();
   const businesses = data?.data || [];
-  console.log("businesses", businesses);
+
+  const handleBusinessSelect = (businessId: string | number) => {
+    // Update the URL with business ID query parameter
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('businessId', businessId.toString());
+    setSearchParams(newSearchParams);
+  };
+  const currentBusinessId = parseInt(searchParams.get('businessId') || '0');
+
   return (
     <header className="bg-sidebar border-border fixed top-0 z-9999 w-full border-b">
       <div className="flex items-center max-md:justify-center">
@@ -32,11 +38,6 @@ export default function Header() {
         <div className="flex w-full items-center justify-end gap-4 pr-14 pl-24 max-md:hidden">
           <div className="flex cursor-pointer items-center">
             <Headset strokeWidth={2} className="size-5" />
-            {/* <SelectInput
-              options={[]}
-              placeholder="Support"
-              triggerClassName="border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 [&>svg]:border [&>svg]:border-border [&>svg]:rounded-full [&>svg]:opacity-80 [&>svg]:size-5 [&>svg]:stroke-black data-[placeholder]:text-foreground data-[placeholder]:text-lg data-[select-trigger]:text-foreground data-[select-trigger]:text-lg"
-            /> */}
           </div>
 
           <div className="flex items-center gap-6">
@@ -66,7 +67,12 @@ export default function Header() {
               <Popover>
                 <PopoverTrigger asChild className="cursor-pointer">
                   <div className="flex items-center gap-1.5">
-                    Acme Inc.
+                    {/* Show current business name or default */}
+                    {(() => {
+                      const currentBusinessId = searchParams.get('businessId');
+                      const currentBusiness = businesses.find((b: TBusiness) => b.id === currentBusinessId);
+                      return currentBusiness?.business_name || 'Acme Inc.';
+                    })()}
                     <ChevronDown
                       strokeWidth={1.5}
                       className="border-border rounded-full border p-0.5"
@@ -75,16 +81,22 @@ export default function Header() {
                 </PopoverTrigger>
                 <PopoverContent className="w-56 p-0 py-4 h-[220px] overflow-y-auto" align="end" side="bottom" sideOffset={5}>
                   <div className="space-y-2">
-                    <Link to='/business-setup' className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded text-center">
-                      + Add New Business
-                    </Link>
-                    <div>
+                    <div className="mx-1.5">
+                      <Link to='/business-setup' className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded text-center">
+                        + Add New Business
+                      </Link>
+                    </div>
+                    <div className="space-y-2 mx-1.5">
                       {
                         businesses.map((business: TBusiness) => (
                           <button
+                            onClick={() => handleBusinessSelect(business.id)}
                             key={business.id}
-                            className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer"
-                          >{business?.business_name}</button>
+                            className={`hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer border ${currentBusinessId === business.id ? '!bg-primary font-medium text-white' : ''
+                              }`}
+                          >
+                            {business?.business_name}
+                          </button>
                         ))
                       }
                     </div>
@@ -152,7 +164,12 @@ export default function Header() {
                       <Popover>
                         <PopoverTrigger asChild className="cursor-pointer">
                           <div className="flex items-center gap-1.5">
-                            Acme Inc.
+                            {/* Show current business name or default in mobile */}
+                            {(() => {
+                              const currentBusinessId = searchParams.get('businessId');
+                              const currentBusiness = businesses.find((b: TBusiness) => b.id === currentBusinessId);
+                              return currentBusiness?.business_name || 'Acme Inc.';
+                            })()}
                             <ChevronDown
                               strokeWidth={1.5}
                               className="border-border rounded-full border p-0.5"
@@ -169,9 +186,12 @@ export default function Header() {
                                 businesses.map((business: TBusiness) => (
                                   <button
                                     key={business.id}
-                                    onClick={() => dispatch(setBusinessInfo(business.id))}
-                                    className="hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer"
-                                  >{business?.business_name}</button>
+                                    onClick={() => handleBusinessSelect(business.id)}
+                                    className={`hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer text-left ${searchParams.get('businessId') === business.id ? 'bg-primary/20 font-medium' : ''
+                                      }`}
+                                  >
+                                    {business?.business_name}
+                                  </button>
                                 ))
                               }
                             </div>
