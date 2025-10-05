@@ -11,6 +11,7 @@ import EstimatesTable from "./components/EstimatesTable";
 import { useTranslation } from "react-i18next";
 import OutstandingCard from "./components/OutstandingCard";
 import TotalEstimateCard from "./components/TotalEstimateCard";
+import TotalRefundsCard from "./components/TotalRefundsCard";
 
 export default function InvoicesPage() {
   const { t } = useTranslation();
@@ -74,7 +75,7 @@ export default function InvoicesPage() {
           iconBgColor="bg-yellow-50"
           valueColor="text-foreground"
         />
-        <TopCard
+        <TotalRefundsCard
           icon={<ReactSVG src={icons.revinue} />}
           title={t("revenue_this_month")}
           value="$4,212"

@@ -63,14 +63,14 @@ export default function TotalEstimateCard({
             {title}
           </h3>
         </div>
-        <div className="mt-2">
+        <div>
           <DropdownMenu>
             <DropdownMenuTrigger className="text-sm text-muted-foreground hover:text-foreground transition-colors border py-1 px-2 rounded-md flex items-center gap-2 whitespace-nowrap">
               <CalendarDays className="h-4 w-4" />
               {getDisplayText()}
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="border-border">
+            <DropdownMenuContent align="end" className="border-border">
               <Calendar
                 mode="range"
                 defaultMonth={dateRange?.from}

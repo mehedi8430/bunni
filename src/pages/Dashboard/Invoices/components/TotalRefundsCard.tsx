@@ -13,7 +13,7 @@ interface TopCardProps {
   valueColor?: string;
 }
 
-export default function TopCard({
+export default function TotalRefundsCard({
   icon,
   title,
   value,
@@ -70,7 +70,7 @@ export default function TopCard({
               {getDisplayText()}
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="border-border">
+            <DropdownMenuContent className="border-border" align="end">
               <Calendar
                 mode="range"
                 defaultMonth={dateRange?.from}

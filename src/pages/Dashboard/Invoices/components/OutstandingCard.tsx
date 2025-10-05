@@ -49,7 +49,7 @@ export default function OutstandingCard({
   return (
     <div className="card_container col-span-3 space-y-5 xl:col-span-1">
       {/* Icon and Title Section */}
-      <div className="flex items-center justify-between gap-1">
+      <div className="flex justify-between gap-1">
         <div className="flex items-center gap-2">
           {/* Icon Container */}
           <div
@@ -63,14 +63,14 @@ export default function OutstandingCard({
             {title}
           </h3>
         </div>
-        <div className="mt-2">
+        <div>
           <DropdownMenu>
             <DropdownMenuTrigger className="text-sm text-muted-foreground hover:text-foreground transition-colors border py-1 px-2 rounded-md flex items-center gap-2 whitespace-nowrap">
               <CalendarDays className="h-4 w-4" />
               {getDisplayText()}
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="border-border">
+            <DropdownMenuContent align="end" className="border-border">
               <Calendar
                 mode="range"
                 defaultMonth={dateRange?.from}
