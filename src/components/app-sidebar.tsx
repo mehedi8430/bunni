@@ -68,7 +68,7 @@ const data = {
           icon: icons.notification,
         },
         {
-          title: "Payment Integration",
+          title: "Integration",
           url: "/dashboard/settings/payment",
           icon: icons.payment_integration,
         },
