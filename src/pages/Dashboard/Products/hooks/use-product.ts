@@ -8,9 +8,6 @@ export const productFormSchema = z.object({
     id: z.string().optional(),
     name: z.string().min(1, { message: "Name is required" }),
     type: z.enum(["Product", "Service"]),
-    unit: z.enum(["per unit", "per item"], {
-        errorMap: () => ({ message: "Please select a valid unit." }),
-    }),
     price: z
         .number({ invalid_type_error: "Enter a valid price" })
         .positive({ message: "Price must be positive" })
@@ -44,9 +41,6 @@ export default function useProduct({
             id: product?.id || "",
             name: product?.name || "",
             type: product?.type || "Product",
-            unit: product?.unit === "per unit" || product?.unit === "per item"
-                ? (product?.unit as "per unit" | "per item")
-                : undefined,
             price: product?.price ?? 0,
             description: product?.description || "",
         },
@@ -57,7 +51,6 @@ export default function useProduct({
             id: data.id || `PROD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
             name: data.name,
             type: data.type,
-            unit: data.unit,
             price: data.price,
             description: data.description || "",
         };

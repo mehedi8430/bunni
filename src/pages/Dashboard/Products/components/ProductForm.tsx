@@ -109,7 +109,7 @@ export default function ProductForm({
           </div>
 
           {/* Unit */}
-          <FormField
+          {/* <FormField
             control={form.control}
             name="unit"
             render={({ field }) => (
@@ -132,7 +132,7 @@ export default function ProductForm({
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           {/* Description */}
           <FormField

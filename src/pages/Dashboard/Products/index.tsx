@@ -104,12 +104,6 @@ export default function ProductsPage() {
       cell: ({ row }) => <div className="truncate">{row.getValue("type")}</div>,
     },
     {
-      accessorKey: "unit",
-      header: t("products:Unit"),
-      size: 120,
-      cell: ({ row }) => <div className="truncate">{row.getValue("unit")}</div>,
-    },
-    {
       accessorKey: "price",
       header: t("products:Price"),
       size: 120,
@@ -180,7 +174,6 @@ export default function ProductsPage() {
   const tableHeaderColumns = [
     { id: "name", displayName: t("products:Name") },
     { id: "type", displayName: t("products:Type") },
-    { id: "unit", displayName: t("products:Unit") },
     { id: "price", displayName: t("products:Price") },
     { id: "description", displayName: t("products:Description") },
   ];
