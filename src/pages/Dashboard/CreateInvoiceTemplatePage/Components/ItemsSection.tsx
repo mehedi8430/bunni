@@ -1,12 +1,6 @@
 import { DialogModal } from "@/components/DialogModal";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -34,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import ProductForm from "../../Products/components/ProductForm";
 import ItemSelectionField from "./ItemSelectionField";
+import SendViaModal from "./SendViaModal";
 
 export default function ItemsSection() {
   const { t } = useTranslation();
@@ -43,6 +38,7 @@ export default function ItemsSection() {
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
   const [isAddDiscountOpen, setIsAddDiscountOpen] = useState(false);
   const [isAddTaxOpen, setIsAddTaxOpen] = useState(false);
+  const [isSendViaOpen, setIsSendViaOpen] = useState(false);
 
   const handleItemSelect = (index: number, product: TProduct) => {
     dispatch(selectProduct({ index, product }));
@@ -278,29 +274,25 @@ export default function ItemsSection() {
         >
           Save
         </Button>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant={"primary"} size={"lg"} type="button">
-              Send Via
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="border-border border p-0"
-            side="right"
-          >
-            <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent">
-              SMS
-            </DropdownMenuItem>
-            <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent">
-              Email
-            </DropdownMenuItem>
-            <DropdownMenuItem className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent">
-              Copy Link
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button
+          variant={"primary"} size={"lg"} type="button"
+          onClick={() =>
+            setIsSendViaOpen(true)
+          }
+        >
+          Send Via
+        </Button>
       </div>
+
+      {/* Add  Modal */}
+      <DialogModal
+        isOpen={isSendViaOpen}
+        onOpenChange={setIsSendViaOpen}
+        title={"Send Via"}
+        className="!w-md"
+      >
+        <SendViaModal onClose={() => setIsSendViaOpen(false)} />
+      </DialogModal>
 
       {/* Add Product Modal */}
       <DialogModal
