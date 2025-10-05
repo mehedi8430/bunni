@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import DiscountSettings from "./components/DiscountSettings";
 import InvoiceFooterSetting from "./components/InvoiceFooterSetting";
 import TaxRatesSettings from "./components/TaxRatesSettings";
+import InvoiceTextTemplate from "./components/InvoiceTextTemplate";
 
 export default function InvoiceSettingsPage() {
   const { t } = useTranslation("invoice_settings");
@@ -14,6 +15,7 @@ export default function InvoiceSettingsPage() {
       <DiscountSettings />
       <TaxRatesSettings />
       <InvoiceFooterSetting />
+      <InvoiceTextTemplate />
     </section>
   );
 }

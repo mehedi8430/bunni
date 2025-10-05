@@ -107,7 +107,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "1",
-
+    reminderDate: "12 Feb, 2025",
     title: "Web Development Services",
     templateName: "invoice-alpha",
     customerId: "cust_001",
@@ -157,7 +157,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "2",
-
+    reminderDate: "15 Feb, 2025",
     title: "Consulting Services",
     templateName: "invoice-beta",
     customerId: "cust_002",
@@ -207,7 +207,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "ACH",
     date: "05 Feb, 2025",
     templateId: "3",
-
+    reminderDate: "10 Feb, 2025",
     title: "SEO Optimization",
     templateName: "invoice-gamma",
     customerId: "cust_003",
@@ -257,7 +257,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "4",
-
+    reminderDate: "12 Feb, 2025",
     title: "Graphic Design Package",
     templateName: "invoice-delta",
     customerId: "cust_004",
@@ -307,7 +307,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "1",
-
+    reminderDate: "12 Feb, 2025",
     title: "Photography Services",
     templateName: "invoice-alpha",
     customerId: "cust_005",
@@ -346,7 +346,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "Cash",
     date: "05 Feb, 2025",
     templateId: "2",
-
+    reminderDate: "12 Feb, 2025",
     title: "App Design UI/UX",
     templateName: "invoice-beta",
     customerId: "cust_003",
@@ -396,7 +396,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "3",
-
+    reminderDate: "10 Feb, 2025",
     title: "Video Editing Service",
     templateName: "invoice-gamma",
     customerId: "cust_006",
@@ -446,7 +446,7 @@ const mockInvoices: TInvoice[] & TInvoiceData[] = [
     tenderType: "ACH",
     date: "08 Feb, 2025",
     templateId: "4",
-
+    reminderDate: "12 Feb, 2025",
     title: "E-commerce Development",
     templateName: "invoice-delta",
     customerId: "cust_007",
