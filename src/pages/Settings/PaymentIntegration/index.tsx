@@ -1,6 +1,7 @@
 import Translator from "@/components/shared/Translator";
 import { Button } from "@/components/ui/button";
 import { icons } from "@/lib/imageProvider";
+import { Mail, Mails } from "lucide-react";
 
 export default function PaymentIntegrationPage() {
   return (
@@ -17,6 +18,34 @@ export default function PaymentIntegrationPage() {
             <p className="text-foreground text-xl font-normal">Stripe</p>
             <p className="text-foreground/40 text-lg font-normal">
               <Translator text="payment_integration_description" />
+            </p>
+          </div>
+        </div>
+        <div className="mt-4 flex w-full justify-end md:mt-0">
+          <Button>Connect</Button>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-between rounded-md bg-white p-6 md:flex-row">
+        <div className="flex items-center space-x-8">
+          <Mail className="text-[#635BFF] w-16 h-10" />
+          <div className="">
+            <p className="text-foreground text-xl font-normal">Gmail</p>
+            <p className="text-foreground/40 text-lg font-normal">
+              Manage your email methods and settings here.
+            </p>
+          </div>
+        </div>
+        <div className="mt-4 flex w-full justify-end md:mt-0">
+          <Button>Connect</Button>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-between rounded-md bg-white p-6 md:flex-row">
+        <div className="flex items-center space-x-8">
+          <Mails className="text-[#635BFF] w-16 h-10" />
+          <div className="">
+            <p className="text-foreground text-xl font-normal">Outlook</p>
+            <p className="text-foreground/40 text-lg font-normal">
+              Manage your outlook methods and settings here.
             </p>
           </div>
         </div>
