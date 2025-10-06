@@ -26,11 +26,17 @@ export const productApi = apiSlice.injectEndpoints({
 
     // Create Product
     createProduct: build.mutation({
-      query: (data) => ({
-        url: "products/",
-        method: "POST",
-        body: data,
-      }),
+      query: (data) => {
+          console.log("Creating product with data:", data);
+        return (
+          {
+            url: "products/",
+            method: "POST",
+            body: data,
+            withCredentials: true,
+          }
+        )
+      },
     }),
 
     // Update Product

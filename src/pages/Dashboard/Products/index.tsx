@@ -149,7 +149,7 @@ export default function ProductsPage() {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              setProductToDelete(row?.id);
+              setProductToDelete(row?.name);
               setIsDeleteOpen(true);
             }}
             className="border-border flex cursor-pointer items-center justify-center rounded-none border-b bg-gradient-to-b from-[#f3f8f7] to-transparent py-3 text-base hover:bg-transparent"
@@ -164,10 +164,10 @@ export default function ProductsPage() {
   const handleSave = (updatedProduct: TProduct) => {
     setData((prev) =>
       prev.map((prod) =>
-        prod.id === updatedProduct.id ? updatedProduct : prod,
+        prod.name === updatedProduct.name ? updatedProduct : prod,
       ),
     );
-    if (!updatedProduct.id) {
+    if (!updatedProduct.name) {
       setData((prev) => [...prev, updatedProduct]);
       setTotal((prev) => prev + 1);
     }
@@ -241,7 +241,7 @@ export default function ProductsPage() {
         isOpen={isEditOpen}
         onOpenChange={setIsEditOpen}
         title={
-          editProduct.id
+          editProduct.name
             ? t("add_product_modal:editProduct")
             : t("add_product_modal:addNewProduct")
         }
@@ -263,7 +263,7 @@ export default function ProductsPage() {
           if (productToDelete) {
             console.log("Product To Be Deleted:", productToDelete);
             setData((prev) =>
-              prev.filter((prod) => prod.id !== productToDelete),
+              prev.filter((prod) => prod.name !== productToDelete),
             );
             setTotal((prev) => prev - 1);
             setIsDeleteOpen(false);
