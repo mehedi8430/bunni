@@ -17,6 +17,7 @@ import invoiceTemplateReducer from "./slices/invoiceTemplateSlice";
 import languageReducer from "./slices/languageSlice";
 import invoiceFooterSliceReducer from "./slices/invoiceFooterSlice";
 import busynessReducer from "./slices/busynessSlice";
+import businessSwitchReducer from "./slices/busynessSwitchSlice";
 
 import { apiSlice } from "./api";
 
@@ -24,7 +25,7 @@ const persistConfig = {
   key: "root",
   storage,
   version: 1,
-  whitelist: ["auth"],
+  whitelist: ["auth", "businessSwitch"],
   blacklist: [apiSlice.reducerPath],
 };
 
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   invoiceTemplate: invoiceTemplateReducer,
   language: languageReducer,
   invoiceFooters: invoiceFooterSliceReducer,
+  businessSwitch: businessSwitchReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

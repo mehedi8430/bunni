@@ -22,6 +22,9 @@ import { useTranslation } from "react-i18next";
 import ProductForm from "./components/ProductForm";
 
 export default function ProductsPage() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const currentBusinessId = parseInt(searchParams.get('businessId') || '0');
+  console.log("Current businessId from URL:", currentBusinessId);
   const { t } = useTranslation("table");
   const tableRef = useRef<DataTableHandle<TProduct> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

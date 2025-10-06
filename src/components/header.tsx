@@ -5,23 +5,24 @@ import { icons } from "@/lib/imageProvider";
 import { ReactSVG } from "react-svg";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
-import { Link, useSearchParams } from "react-router";
+import { Link } from "react-router";
 import NotificationContent from "./notification-content";
 import { useGetAllBusinessQuery } from "@/redux/endpoints/busynessApi";
 import type { TBusiness } from "@/types/business.type";
+import { useDispatch } from "react-redux";
+import { selectBusinessId, setBusinessId } from "@/redux/slices/busynessSwitchSlice";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function Header() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
   const { data } = useGetAllBusinessQuery("");
   const businesses = data?.data || [];
-
+  
   const handleBusinessSelect = (businessId: string | number) => {
-    // Update the URL with business ID query parameter
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('businessId', businessId.toString());
-    setSearchParams(newSearchParams);
+    dispatch(setBusinessId(businessId));
   };
-  const currentBusinessId = parseInt(searchParams.get('businessId') || '0');
+  const currentBusinessId = useAppSelector(selectBusinessId);
+
 
   return (
     <header className="bg-sidebar border-border fixed top-0 z-9999 w-full border-b">
@@ -67,12 +68,7 @@ export default function Header() {
               <Popover>
                 <PopoverTrigger asChild className="cursor-pointer">
                   <div className="flex items-center gap-1.5">
-                    {/* Show current business name or default */}
-                    {(() => {
-                      const currentBusinessId = searchParams.get('businessId');
-                      const currentBusiness = businesses.find((b: TBusiness) => b.id === currentBusinessId);
-                      return currentBusiness?.business_name || 'Acme Inc.';
-                    })()}
+                    Acme Inc.
                     <ChevronDown
                       strokeWidth={1.5}
                       className="border-border rounded-full border p-0.5"
@@ -164,12 +160,7 @@ export default function Header() {
                       <Popover>
                         <PopoverTrigger asChild className="cursor-pointer">
                           <div className="flex items-center gap-1.5">
-                            {/* Show current business name or default in mobile */}
-                            {(() => {
-                              const currentBusinessId = searchParams.get('businessId');
-                              const currentBusiness = businesses.find((b: TBusiness) => b.id === currentBusinessId);
-                              return currentBusiness?.business_name || 'Acme Inc.';
-                            })()}
+                            Acme Inc.
                             <ChevronDown
                               strokeWidth={1.5}
                               className="border-border rounded-full border p-0.5"
@@ -187,8 +178,7 @@ export default function Header() {
                                   <button
                                     key={business.id}
                                     onClick={() => handleBusinessSelect(business.id)}
-                                    className={`hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer text-left ${searchParams.get('businessId') === business.id ? 'bg-primary/20 font-medium' : ''
-                                      }`}
+                                    className={`hover:bg-primary/40 px-3 pt-3 pb-3 block rounded w-full cursor-pointer text-left`}
                                   >
                                     {business?.business_name}
                                   </button>
