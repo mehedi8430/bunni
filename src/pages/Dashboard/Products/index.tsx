@@ -20,11 +20,15 @@ import { MoreHorizontal, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProductForm from "./components/ProductForm";
+import { useAppSelector } from "@/redux/hooks";
+import { selectBusinessId } from "@/redux/slices/busynessSwitchSlice";
+import { useGetProductsQuery } from "@/redux/endpoints/productApi";
 
 export default function ProductsPage() {
-  const searchParams = new URLSearchParams(window.location.search);
-  const currentBusinessId = parseInt(searchParams.get('businessId') || '0');
-  console.log("Current businessId from URL:", currentBusinessId);
+   const currentBusinessId = useAppSelector(selectBusinessId);
+   console.log("Current businessId from Redux:", currentBusinessId);
+   const {data: products} = useGetProductsQuery({profile_id: currentBusinessId || ""});
+   console.log("Products from RTK Query:", products);
   const { t } = useTranslation("table");
   const tableRef = useRef<DataTableHandle<TProduct> | null>(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

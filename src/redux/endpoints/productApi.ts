@@ -4,10 +4,16 @@ export const productApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     // View All Products
     getProducts: build.query({
-      query: () => ({
-        url: "products/",
-        method: "GET",
-      }),
+      query: (body) => {
+        console.log("Fetching products with data:", body);
+        return (
+          {
+            url: "products/",
+            method: "GET",
+            body,
+          }
+        )
+      },
     }),
 
     // View Single Product
