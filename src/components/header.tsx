@@ -17,11 +17,14 @@ export default function Header() {
   const dispatch = useDispatch();
   const { data } = useGetAllBusinessQuery("");
   const businesses = data?.data || [];
-  
+
   const handleBusinessSelect = (businessId: string | number) => {
     dispatch(setBusinessId(businessId));
   };
   const currentBusinessId = useAppSelector(selectBusinessId);
+
+  const currentBusiness = businesses.find((b: TBusiness) => b.id === currentBusinessId);
+
 
 
   return (
@@ -68,7 +71,9 @@ export default function Header() {
               <Popover>
                 <PopoverTrigger asChild className="cursor-pointer">
                   <div className="flex items-center gap-1.5">
-                    Acme Inc.
+                    {
+                      currentBusiness?.business_name || 'Select Business'
+                    }
                     <ChevronDown
                       strokeWidth={1.5}
                       className="border-border rounded-full border p-0.5"
