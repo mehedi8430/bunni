@@ -22,7 +22,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["auth"],
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted( { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
@@ -48,7 +48,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: refresh_token,
       }),
-      async onQueryStarted(arg, { dispatch }) {
+      async onQueryStarted( { dispatch }) {
         try {
           dispatch(userLoggedOut());
         } catch (err) {

@@ -13,14 +13,15 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
     date: "05 Feb, 2025",
     templateId: "1",
     templateName: "invoice-beta",
-
-    title: "Web Development Services Estimate", // Changed title for clarity
+    reminderDate: "03 Feb, 2025", // Added missing property
+    
+    title: "Web Development Services Estimate",
     customerId: "cust_001",
-    invoiceNumber: "EST-000001-1", // Changed to EST number
+    invoiceNumber: "EST-000001-1",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "01 Feb, 2025",
     dueDate: "10 Feb, 2025",
-    footerTerms: "Estimate valid for 30 days.", // Changed terms
+    footerTerms: "Estimate valid for 30 days.",
     items: [
       {
         id: "item-1",
@@ -56,21 +57,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-2",
     customerName: "Sarah Thompson",
-    status: "Sent", // Changed status
+    status: "Sent",
     orderNumber: "#A12B4D67",
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "2",
     templateName: "invoice-beta",
+    reminderDate: "04 Feb, 2025", // Added missing property
 
-    title: "Consulting Services Estimate", // Changed title
+    title: "Consulting Services Estimate",
     customerId: "cust_002",
-    invoiceNumber: "EST-000001-2", // Changed to EST number
+    invoiceNumber: "EST-000001-2",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "03 Feb, 2025",
     dueDate: "12 Feb, 2025",
-    footerTerms: "Estimate requires client approval.", // Changed terms
+    footerTerms: "Estimate requires client approval.",
     items: [
       {
         id: "item-3",
@@ -106,21 +108,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-3",
     customerName: "Michael Brown",
-    status: "Cancelled", // Changed status
+    status: "Cancelled",
     orderNumber: "#E5F67834",
     amount: 635,
     tenderType: "ACH",
     date: "05 Feb, 2025",
     templateId: "3",
     templateName: "invoice-beta",
+    reminderDate: "02 Feb, 2025", // Added missing property
 
-    title: "SEO Optimization Estimate", // Changed title
+    title: "SEO Optimization Estimate",
     customerId: "cust_003",
-    invoiceNumber: "EST-000001-3", // Changed to EST number
+    invoiceNumber: "EST-000001-3",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "04 Feb, 2025",
     dueDate: "11 Feb, 2025",
-    footerTerms: "Estimate declined by client.", // Changed terms
+    footerTerms: "Estimate declined by client.",
     items: [
       {
         id: "item-5",
@@ -156,21 +159,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-4",
     customerName: "Emily White",
-    status: "Overdue", // Changed status
+    status: "Overdue",
     orderNumber: "#B4C9201",
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "4",
     templateName: "invoice-delta",
+    reminderDate: "01 Feb, 2025", // Added missing property
 
-    title: "Graphic Design Package Estimate", // Changed title
+    title: "Graphic Design Package Estimate",
     customerId: "cust_004",
-    invoiceNumber: "EST-000001-4", // Changed to EST number
+    invoiceNumber: "EST-000001-4",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "02 Feb, 2025",
     dueDate: "09 Feb, 2025",
-    footerTerms: "Estimate pending review.", // Changed terms
+    footerTerms: "Estimate pending review.",
     items: [
       {
         id: "item-7",
@@ -206,21 +210,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-5",
     customerName: "Jessica Green",
-    status: "Cancelled", // Changed status
+    status: "Cancelled",
     orderNumber: "#FBE6A237",
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "1",
     templateName: "invoice-alpha",
+    reminderDate: "03 Feb, 2025", // Added missing property
 
-    title: "Photography Services Estimate", // Changed title
+    title: "Photography Services Estimate",
     customerId: "cust_005",
-    invoiceNumber: "EST-000001-5", // Changed to EST number
+    invoiceNumber: "EST-000001-5",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "01 Feb, 2025",
     dueDate: "08 Feb, 2025",
-    footerTerms: "Estimate accepted.", // Changed terms
+    footerTerms: "Estimate accepted.",
     items: [
       {
         id: "item-9",
@@ -245,21 +250,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-6",
     customerName: "Daniel Anderson",
-    status: "Draft", // Changed status
+    status: "Draft",
     orderNumber: "#E52F8B90",
     amount: 635,
     tenderType: "Cash",
     date: "05 Feb, 2025",
     templateId: "2",
     templateName: "invoice-gamma",
+    reminderDate: "04 Feb, 2025", // Added missing property
 
-    title: "App Design UI/UX Estimate", // Changed title
+    title: "App Design UI/UX Estimate",
     customerId: "cust_003",
-    invoiceNumber: "EST-000001-6", // Changed to EST number
+    invoiceNumber: "EST-000001-6",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "03 Feb, 2025",
     dueDate: "15 Feb, 2025",
-    footerTerms: "Awaiting client feedback.", // Changed terms
+    footerTerms: "Awaiting client feedback.",
     items: [
       {
         id: "item-10",
@@ -295,21 +301,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-7",
     customerName: "Laura King",
-    status: "Overdue", // Changed status
+    status: "Overdue",
     orderNumber: "#C5F5B88",
     amount: 635,
     tenderType: "Credit Card",
     date: "05 Feb, 2025",
     templateId: "3",
     templateName: "invoice-beta",
+    reminderDate: "02 Feb, 2025", // Added missing property
 
-    title: "Video Editing Service Estimate", // Changed title
+    title: "Video Editing Service Estimate",
     customerId: "cust_006",
-    invoiceNumber: "EST-000001-7", // Changed to EST number
+    invoiceNumber: "EST-000001-7",
     invoiceDate: "05 Feb, 2025",
     serviceDate: "04 Feb, 2025",
     dueDate: "14 Feb, 2025",
-    footerTerms: "Client decided not to proceed.", // Changed terms
+    footerTerms: "Client decided not to proceed.",
     items: [
       {
         id: "item-12",
@@ -345,21 +352,22 @@ const mockEstimates: TInvoice[] & TInvoiceData[] = [
   {
     id: "EST-000001-8",
     customerName: "James Martinez",
-    status: "Sent", // Changed status
+    status: "Sent",
     orderNumber: "#9A5D3E74",
     amount: 829,
     tenderType: "ACH",
     date: "08 Feb, 2025",
     templateId: "4",
     templateName: "invoice-alpha",
+    reminderDate: "06 Feb, 2025", // Added missing property
 
-    title: "E-commerce Development Estimate", // Changed title
+    title: "E-commerce Development Estimate",
     customerId: "cust_007",
-    invoiceNumber: "EST-000001-8", // Changed to EST number
+    invoiceNumber: "EST-000001-8",
     invoiceDate: "08 Feb, 2025",
     serviceDate: "05 Feb, 2025",
     dueDate: "15 Feb, 2025",
-    footerTerms: "Estimate signed and approved.", // Changed terms
+    footerTerms: "Estimate signed and approved.",
     items: [
       {
         id: "item-14",
@@ -411,7 +419,7 @@ export const estimatesApi = {
     limit?: number;
     date?: string;
   } = {}): Promise<{ data: TInvoice[]; total: number }> => {
-    let filteredEstimates: TInvoice[] = [...mockEstimates]; // Use mockEstimates
+    let filteredEstimates: TInvoice[] = [...mockEstimates];
 
     // Apply search filter
     if (search) {
@@ -435,7 +443,7 @@ export const estimatesApi = {
           estimateDate.getFullYear() === selectedDate.getFullYear() &&
           estimateDate.getMonth() === selectedDate.getMonth() &&
           estimateDate.getDate() === selectedDate.getDate()
-        ); // Match by year, month, and day
+        );
       });
     }
 
@@ -456,11 +464,10 @@ export const estimatesApi = {
    * @returns {Promise<TInvoice>}
    */
   getEstimateById: async (id: string): Promise<TInvoice> => {
-    const estimate = mockEstimates.find((est) => est.id === id); // Use mockEstimates
+    const estimate = mockEstimates.find((est) => est.id === id);
     if (estimate) {
       return simulateApiResponse(estimate);
     }
-    // Return a rejected promise or throw an error for not found
-    return simulateApiResponse(null as any, 404, false); // Changed status to 404 for not found
+    return simulateApiResponse(null as any, 404, false);
   },
 };

@@ -4,15 +4,15 @@ import { simulateApiResponse } from ".";
 
 const mockProducts: TProduct[] = [
   {
-    id: "PROD-000001-1",
     name: "Pipe Repair",
     type: "Product",
     unit: "per hour",
     price: 100.0,
     description: "Standard pipe repair service",
+    business_id: "BUS-000001",
   },
   {
-    id: "PROD-000001-2",
+    business_id: "BUS-000001",
     name: "Leak Detection",
     type: "Service",
     unit: "per month",
@@ -20,7 +20,7 @@ const mockProducts: TProduct[] = [
     description: "Emergency pipe repair service",
   },
   {
-    id: "PROD-000001-3",
+    business_id: "BUS-000001",
     name: "Plumbing Check",
     type: "Product",
     unit: "per month",
@@ -28,7 +28,7 @@ const mockProducts: TProduct[] = [
     description: "Residential plumbing solutions",
   },
   {
-    id: "PROD-000001-4",
+    business_id: "BUS-000001",
     name: "Drain Cleaning",
     type: "Service",
     unit: "per hour",
@@ -36,7 +36,7 @@ const mockProducts: TProduct[] = [
     description: "Commercial plumbing maintenance",
   },
   {
-    id: "PROD-000001-5",
+    business_id: "BUS-000001",
     name: "Sewer Replacement",
     type: "Product",
     unit: "per month",
@@ -44,7 +44,7 @@ const mockProducts: TProduct[] = [
     description: "Leak detection and repair",
   },
   {
-    id: "PROD-000001-6",
+    business_id: "BUS-000001",
     name: "Water Heater Setup",
     type: "Service",
     unit: "per hour",
@@ -52,7 +52,7 @@ const mockProducts: TProduct[] = [
     description: "Drain cleaning and unclogging",
   },
   {
-    id: "PROD-000001-7",
+    business_id: "BUS-000001",
     name: "Fixture Installation",
     type: "Product",
     unit: "per hour",
@@ -60,7 +60,7 @@ const mockProducts: TProduct[] = [
     description: "Pipe installation and replacement",
   },
   {
-    id: "PROD-000001-8",
+    business_id: "BUS-000001",
     name: "Plumbing Services",
     type: "Service",
     unit: "per month",
@@ -68,7 +68,7 @@ const mockProducts: TProduct[] = [
     description: "Water heater repair and installation",
   },
   {
-    id: "PROD-000001-9",
+    business_id: "BUS-000001",
     name: "Pipe Insulation",
     type: "Product",
     unit: "per month",
@@ -101,7 +101,7 @@ export const productApi = {
         (prod) =>
           prod.name.toLowerCase().includes(searchTerm) ||
           prod.type.toLowerCase().includes(searchTerm) ||
-          prod.unit.toLowerCase().includes(searchTerm) ||
+          prod.unit?.toLowerCase().includes(searchTerm) ||
           prod.description.toLowerCase().includes(searchTerm),
       );
     }
@@ -123,7 +123,7 @@ export const productApi = {
    * @returns {Promise<Product>}
    */
   getProductById: async (id: string): Promise<TProduct> => {
-    const product = mockProducts.find((prod) => prod.id === id);
+    const product = mockProducts.find((prod) => prod.name === id);
     if (product) {
       return simulateApiResponse(product);
     }

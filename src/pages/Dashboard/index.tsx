@@ -34,10 +34,10 @@ export default function DashboardPage() {
   const handleProductSave = (updatedProduct: TProduct) => {
     setProductData((prev) =>
       prev.map((prod) =>
-        prod.id === updatedProduct.id ? updatedProduct : prod,
+        prod.name === updatedProduct.name ? updatedProduct : prod,
       ),
     );
-    if (!updatedProduct.id) {
+    if (!updatedProduct.name) {
       setProductData((prev) => [...prev, updatedProduct]);
       setProductTotal((prev) => prev + 1);
     }
@@ -155,7 +155,7 @@ export default function DashboardPage() {
       <DialogModal
         isOpen={isProductEditOpen}
         onOpenChange={setIsProductEditOpen}
-        title={editProduct.id ? "Edit Product" : "Add New Product"}
+        title={editProduct.name ? "Edit Product" : "Add New Product"}
       >
         <ProductForm
           product={editProduct}

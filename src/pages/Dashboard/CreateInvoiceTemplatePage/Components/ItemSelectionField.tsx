@@ -66,12 +66,12 @@ export default function ItemSelectionField({
 
   const handleInputChange = (value: string) => {
     const product: TProduct = {
-      id: itemId,
       name: value,
       type: "Product",
       unit: "",
       price: 0,
       description: value,
+      business_id: value,
     };
     dispatch(
       selectProduct({
@@ -109,7 +109,7 @@ export default function ItemSelectionField({
               <CommandGroup>
                 {products.map((product) => (
                   <CommandItem
-                    key={product.id}
+                    key={product.name}
                     value={product.name}
                     onSelect={handleSelectChange}
                     className="text-muted-foreground data-[selected=true]:text-muted-foreground"
