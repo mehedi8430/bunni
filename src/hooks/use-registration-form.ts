@@ -48,7 +48,9 @@ export default function useRegistrationForm() {
       last_name: values.lastName,
       email: values.email,
       password: values.password,
+      confirmPassword: values.confirmPassword,
     };
+    console.log("User Sign Up Data: ----->", payload);
 
     try {
       const response = await userRegister(payload).unwrap();
