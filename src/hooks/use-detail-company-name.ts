@@ -21,7 +21,7 @@ export const formSchema = z.object({
       },
     ),
   customer_size: z.string().min(1, "Customer size is required"),
-  accept_payments: z.enum(["Not, I don’t", "Not yet, but I want to start"]),
+  accept_peyments: z.enum(["Not, I don’t", "Not yet, but I want to start"]),
   payment_method: z
     .string()
     .min(1, "Most used payment method is required"),
@@ -40,7 +40,7 @@ export default function useDetailCompanyName() {
     defaultValues: {
       business_start: new Date().getFullYear().toString(),
       customer_size: "",
-      accept_payments: "Not yet, but I want to start",
+      accept_peyments: "Not yet, but I want to start",
       payment_method: "",
     },
   });

@@ -13,11 +13,10 @@ type BusinessInfo = {
   business_start?: string;
   customer_size?: string;
   payment_method?: string;
-  accept_payments?: string;
+  accept_peyments?: string;
   like_to_do?: string;
   phone?: string;
   city?: string;
-  id?: string;
 };
 
 const initialState: BusinessInfo = {
@@ -32,15 +31,14 @@ const initialState: BusinessInfo = {
   business_start: "",
   customer_size: "",
   payment_method: "",
-  accept_payments: "",
+  accept_peyments: "",
   like_to_do: "",
   phone: "",
   city: "",
-  id: "",
 };
 
 const busynessSlice = createSlice({
-  name: "busyness",
+  name: "business",
   initialState,
   reducers: {
     setBusinessInfo: (state, action) => {

@@ -5,10 +5,11 @@ export const busynessApi = apiSlice.injectEndpoints({
     // create busyness
     createBusyness: builder.mutation({
       query: (body) => ({
-        url: "/business/",
+        url: "business-data/",
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Business"],
     }),
     // get all business
     getAllBusiness: builder.query({
@@ -16,6 +17,7 @@ export const busynessApi = apiSlice.injectEndpoints({
         url: "/business/",
         method: "GET",
       }),
+      providesTags: ["Business"],
     }),
   }),
 });

@@ -28,7 +28,7 @@ export default function useWhatWouldLikeToDo() {
     const updatedBusynessData = { ...busynessData, ...values };
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log( "Updated business data from hook---->:",updatedBusynessData);
     dispatch(setBusinessInfo(updatedBusynessData));
     navigate(`/business-setup/add-phone-number`, { replace: true });
   }

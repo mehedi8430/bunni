@@ -33,6 +33,8 @@ export default function usePhoneNumber() {
 
     console.log(values);
 
+    console.log("Final business data to submit:", businessInfo);
+
     try{
       const response = await createBusyness(businessInfo);
       toast.success("Business Create Successfully!");

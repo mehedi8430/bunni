@@ -19,6 +19,7 @@ export default function AddPhoneNumber({
   ...props
 }: React.ComponentProps<"form">) {
   const busynessData = useAppSelector(selectBusinessInfo);
+  console.log("Business data in phone number form:", busynessData);
   const dispatch = useDispatch();
   const { form, onSubmit } = usePhoneNumber();
 

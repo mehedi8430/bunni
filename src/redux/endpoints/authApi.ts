@@ -10,7 +10,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["auth"],
+      invalidatesTags: ["Auth"],
     }),
 
     // User Login
@@ -20,7 +20,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["auth"],
+      invalidatesTags: ["Auth"],
 
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {

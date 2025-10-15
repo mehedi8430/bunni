@@ -18,8 +18,8 @@ export default function CustomerSizeInput({ field, options }: Props) {
       defaultValue={field.value}
       className="border-border flex items-center gap-0 rounded-sm border"
     >
-      {options.map((option: string) => (
-        <FormItem className={cn("flex-1 border-r last:border-r-0")}>
+      {options.map((option: string, index: number) => (
+        <FormItem className={cn("flex-1 border-r last:border-r-0")} key={index}>
           <FormControl>
             <RadioGroupItem
               value={option}

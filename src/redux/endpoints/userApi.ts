@@ -4,59 +4,53 @@ export const userApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     userCreate: build.mutation({
       query: (data) => ({
-        url: "/users/register",
+        url: "users/register",
         method: "POST",
-        credentials: "include",
         body: data,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["User"],
     }),
 
     userDelete: build.mutation({
       query: (id) => ({
-        url: `/users/${id}`,
+        url: `users/${id}`,
         method: "DELETE",
-        credentials: "include",
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["User"],
     }),
 
     userUpdate: build.mutation({
       query: ({ id, data }) => ({
-        url: `/users/${id}`,
+        url: `users/${id}`,
         method: "PUT",
-        credentials: "include",
         body: data,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["User"],
     }),
 
     allUsers: build.query({
       query: (params) => ({
-        url: "/users",
+        url: "users",
         method: "GET",
-        credentials: "include",
         params,
       }),
-      providesTags: ["user"],
+      providesTags: ["User"],
     }),
 
     singleUsers: build.query({
       query: (id) => ({
-        url: `/users/${id}`,
+        url: `users/${id}`,
         method: "GET",
-        credentials: "include",
       }),
-      providesTags: ["user"],
+      providesTags: ["User"],
     }),
-    // get current user
+
     currentUser: build.query({
       query: () => ({
-        url: "/profile/",
+        url: "profile/",
         method: "GET",
-        credentials: "include",
       }),
-      providesTags: [{ type: "user", id: "LIST" }],
+      providesTags: [{ type: "User", id: "LIST" }],
     }),
   }),
 });

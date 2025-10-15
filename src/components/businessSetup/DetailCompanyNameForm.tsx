@@ -80,7 +80,7 @@ export default function DetailCompanyNameForm({
           <div className="col-span-full grid gap-3">
             <FormField
               control={form.control}
-              name="accept_payments"
+              name="accept_peyments"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Do You Accept Payment Online?</FormLabel>
