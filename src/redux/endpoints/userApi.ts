@@ -50,7 +50,7 @@ export const userApi = apiSlice.injectEndpoints({
         url: "profile/",
         method: "GET",
       }),
-      providesTags: [{ type: "User", id: "LIST" }],
+      providesTags: ["User", "Auth"],
     }),
   }),
 });

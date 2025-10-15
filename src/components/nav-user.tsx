@@ -17,38 +17,45 @@ import {
 import { useState } from "react";
 import { AlertDialogModal } from "./AlertDialogModal";
 import {
-  // useGetUserProfileQuery,
-  useUserLoggedOutMutation,
+  useLogoutUserMutation,
 } from "@/redux/endpoints/authApi";
 import { toast } from "sonner";
-import { useAppSelector } from "@/redux/hooks";
+import { useSelector } from "react-redux";
 import { authSelector } from "@/redux/slices/authSlice";
+import { useNavigate } from "react-router";
 
-export default function NavUser() {
+interface NavUserProps {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  is_owner: boolean;
+  owner_email: string | null;
+  image: string;
+}
+
+export default function NavUser({ user }: { user: NavUserProps }) {
+  const navigate = useNavigate();
+  const {image, email, first_name, last_name } = user;
+  console.log(first_name, last_name);
   const [isLogoutOpen, setIsLogoutOpen] = useState<boolean>(false);
-  const refreshToken = useAppSelector(authSelector)?.refresh_token;
+  const { refresh_token } = useSelector(authSelector);
 
-  const [userLoggedOut] = useUserLoggedOutMutation();
-  // const { data } = useGetUserProfileQuery();
+  const [logoutUser] = useLogoutUserMutation();
 
   const handleLogout = async () => {
     try {
-      const response = await userLoggedOut(refreshToken).unwrap();
+      const response = await logoutUser({ refresh: refresh_token }).unwrap();
 
       if (response.status_code === 200) {
         toast.success(response?.message || "Logout successful!");
+        navigate("/");
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
       toast.error(error?.data?.detail || "Failed to logout");
     }
-  };
-
-  const userData = {
-    img: "https://github.com/eduardo-camargo.png",
-    fullName: "Eduardo Camargo",
-    email: "8B2b3@example.com",
   };
 
   return (
@@ -59,20 +66,20 @@ export default function NavUser() {
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
               >
                 <Avatar className="h-8 w-8 rounded-full">
-                  <AvatarImage src={userData?.img} alt={userData?.fullName} />
-                  <AvatarFallback className="rounded-lg">
-                    {userData?.fullName?.charAt(0).toUpperCase()}
+                  <AvatarImage src={image} alt={`${first_name} ${last_name}`} />
+                  <AvatarFallback className="rounded-lg text-lg font-bold bg-primary text-white">
+                    {first_name.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
-                    {userData?.fullName}
+                    {first_name}{" "}{last_name}
                   </span>
                   <span className="truncate font-medium">
-                    {userData?.email}
+                    {email}
                   </span>
                 </div>
                 <ChevronsUpDown className="ml-auto size-4" />
@@ -87,16 +94,16 @@ export default function NavUser() {
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={userData?.img} alt={userData?.fullName} />
+                    <AvatarImage src={image} alt={`${first_name} ${last_name}`} />
                     <AvatarFallback className="rounded-lg">
-                      {userData?.fullName?.charAt(0).toUpperCase()}
+                      {first_name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">
-                      {userData?.fullName}
+                      {first_name} {last_name}
                     </span>
-                    <span className="truncate text-xs">{userData?.email}</span>
+                    <span className="truncate text-xs">{email}</span>
                   </div>
                 </div>
               </DropdownMenuLabel>
@@ -107,6 +114,7 @@ export default function NavUser() {
                 onClick={() => {
                   setIsLogoutOpen(true);
                 }}
+                className="cursor-pointer"
               >
                 <LogOut />
                 Log Out

@@ -9,6 +9,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import NavUser from "./nav-user";
+import { useCurrentUserQuery } from "@/redux/endpoints/userApi";
 
 const data = {
   navMain: [
@@ -83,15 +84,23 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: userProfileData, isLoading } = useCurrentUserQuery("");
+  console.log(isLoading);
+  const user = userProfileData?.data?.user;
+  console.log("User Profile Data:", user);
   return (
     <Sidebar collapsible="icon" {...props} className="mt-20 border-none">
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
 
-      <SidebarFooter className="mb-22">
-        <NavUser />
-      </SidebarFooter>
+      {
+        !isLoading && user && (
+          <SidebarFooter className="mb-22">
+            <NavUser user={user} />
+          </SidebarFooter>
+        )
+      }
       <SidebarRail />
     </Sidebar>
   );

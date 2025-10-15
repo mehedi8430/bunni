@@ -42,19 +42,25 @@ export const authApi = apiSlice.injectEndpoints({
     }),
 
     // User Logout
-    userLoggedOut: build.mutation({
-      query: (refresh_token) => ({
+    logoutUser: build.mutation({
+      query: (body) => ({
         url: "auth/logout/",
         method: "POST",
-        body: refresh_token,
+        body,
       }),
-      async onQueryStarted({ dispatch }) {
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
+          // Wait for the server response
+          await queryFulfilled;
+          // Then clear tokens
           dispatch(userLoggedOut());
+          // Clear all cached queries (like currentUser)
+          dispatch(apiSlice.util.resetApiState());
         } catch (err) {
-          console.log(err);
+          console.log("Logout failed:", err);
         }
       },
+      invalidatesTags: ["Auth", "User"],
     }),
 
     // Verify OTP
@@ -113,12 +119,13 @@ export const authApi = apiSlice.injectEndpoints({
     }),
 
     // Get User Profile
-    getUserProfile: build.query({
-      query: () => ({
-        url: "profile/",
-        method: "GET",
-      }),
-    }),
+    // getUserProfile: build.query({
+    //   query: () => ({
+    //     url: "profile/",
+    //     method: "GET",
+    //   }),
+    //   providesTags: ["Auth", { type: "User", id: "LIST" }],
+    // }),
 
     // Update User Profile
     updateUserProfile: build.mutation({
@@ -134,11 +141,11 @@ export const authApi = apiSlice.injectEndpoints({
 export const {
   useUserRegisterMutation,
   useUserLoginMutation,
-  useUserLoggedOutMutation,
+  useLogoutUserMutation,
   useVerifyOTPMutation,
   useResendOTPMutation,
   useResetPasswordMutation,
   useForgetPasswordMutation,
-  useGetUserProfileQuery,
+  // useGetUserProfileQuery,
   useUpdateUserProfileMutation,
 } = authApi;
