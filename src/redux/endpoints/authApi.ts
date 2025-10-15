@@ -22,7 +22,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["auth"],
 
-      async onQueryStarted( { queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
@@ -48,7 +48,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: refresh_token,
       }),
-      async onQueryStarted( { dispatch }) {
+      async onQueryStarted({ dispatch }) {
         try {
           dispatch(userLoggedOut());
         } catch (err) {
@@ -64,6 +64,25 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          console.log("Full result:", result);
+
+          const response = result.data?.data;
+
+          dispatch(
+            userLoggedIn({
+              email: response?.email ?? null,
+              refresh_token: response?.refresh,
+              access_token: response?.access,
+            })
+          )
+        } catch (err) {
+          console.log(err);
+        }
+      }
     }),
 
     // Resend OTP
