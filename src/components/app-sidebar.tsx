@@ -85,9 +85,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userProfileData, isLoading } = useCurrentUserQuery("");
-  console.log(isLoading);
   const user = userProfileData?.data?.user;
-  console.log("User Profile Data:", user);
   return (
     <Sidebar collapsible="icon" {...props} className="mt-20 border-none">
       <SidebarContent>

@@ -2,12 +2,17 @@ import Image from "@/components/shared/Image";
 import Translator from "@/components/shared/Translator";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { icons } from "@/lib/imageProvider";
+import { useCurrentUserQuery } from "@/redux/endpoints/userApi";
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 
 
 
 export default function Navbar() {
+
+    const { data: userProfileData } = useCurrentUserQuery("");
+    const user = userProfileData?.data?.user;
+    console.log("User Profile Data:", user);
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
     const location = useLocation();
@@ -25,7 +30,7 @@ export default function Navbar() {
         if (element) {
             const navbarHeight = 100;
             const elementPosition = element.offsetTop - navbarHeight;
-            
+
             window.scrollTo({
                 top: elementPosition,
                 behavior: 'smooth'
@@ -36,7 +41,7 @@ export default function Navbar() {
     // Function to handle mobile nav click
     const handleMobileNavClick = (e: React.MouseEvent, path: string) => {
         e.preventDefault(); // Prevent default anchor behavior
-        
+
         if (path.startsWith('#')) {
             // Close mobile menu first
             setIsMobileMenuOpen(false);
@@ -120,22 +125,34 @@ export default function Navbar() {
 
                                 <div className="w-full border-t border-gray-200 my-4"></div>
 
-                                <div className="flex flex-col w-full space-y-5 px-4">
-                                    <SheetClose asChild>
-                                        <Link to={"/auth"}>
-                                            <button className="w-full px-3 py-1.5 border border-primary text-foreground rounded-md">
-                                                <Translator text="log-in" />
-                                            </button>
-                                        </Link>
-                                    </SheetClose>
-                                    <SheetClose asChild>
-                                        <Link to={"/auth/register"}>
-                                            <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
-                                                <Translator text="sign-up" />
-                                            </button>
-                                        </Link>
-                                    </SheetClose>
-                                </div>
+                                {
+                                    user ? (
+                                        <SheetClose asChild className="px-4">
+                                                <Link to={"/dashboard"} className="w-full">
+                                                    <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
+                                                        Dashboard
+                                                    </button>
+                                                </Link>
+                                            </SheetClose>
+                                    ) : (
+                                        <div className="flex flex-col w-full space-y-5 px-4">
+                                            <SheetClose asChild>
+                                                <Link to={"/auth"}>
+                                                    <button className="w-full px-3 py-1.5 border border-primary text-foreground rounded-md">
+                                                        <Translator text="log-in" />
+                                                    </button>
+                                                </Link>
+                                            </SheetClose>
+                                            <SheetClose asChild>
+                                                <Link to={"/auth/register"}>
+                                                    <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
+                                                        <Translator text="sign-up" />
+                                                    </button>
+                                                </Link>
+                                            </SheetClose>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </SheetContent>
                     </Sheet>
@@ -159,20 +176,27 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* Auth Buttons (Desktop) */}
-                <div className="hidden lg:flex items-center space-x-5">
-                    <Link to={"/auth"}>
-                        <button className="px-5 py-1.5 border border-primary text-foreground rounded-md text-base cursor-pointer">
-                            <Translator text="log-in" />
-                        </button>
-                    </Link>
-                    <Link to={"/auth/register"}>
-                        <button className="px-5 py-1.5 bg-primary text-white rounded-md text-base cursor-pointer">
-                            <Translator text="sign-up" />
-                        </button>
-                    </Link>
-                </div>
+                {
+                    user ? (
+                        <Link to={"/dashboard"} className="hidden lg:flex items-center space-x-5 px-5 py-1.5 bg-primary text-white rounded-md text-base cursor-pointer">
+                            Dashboard
+                        </Link>
+                    ) : (
+                        <div className="hidden lg:flex items-center space-x-5">
+                            <Link to={"/auth"}>
+                                <button className="px-5 py-1.5 border border-primary text-foreground rounded-md text-base cursor-pointer">
+                                    <Translator text="log-in" />
+                                </button>
+                            </Link>
+                            <Link to={"/auth/register"}>
+                                <button className="px-5 py-1.5 bg-primary text-white rounded-md text-base cursor-pointer">
+                                    <Translator text="sign-up" />
+                                </button>
+                            </Link>
+                        </div>
+                    )
+                }
             </div>
-        </nav>
+        </nav >
     )
 }
