@@ -110,7 +110,7 @@ export const authApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Auth"],
     }),
 
-    // forget password otp verification
+    // forget password otp sent
     forgetPassword: build.mutation({
       query: (data) => ({
         url: "auth/forgot-password/",
