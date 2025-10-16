@@ -26,7 +26,8 @@ export default function ConfirmationCodeForm({
 
   const { form, onSubmit } = useConfirmationCode();
   const [searchQuery] = useSearchParams();
-  const email = searchQuery.get("email") || "";
+  const email = searchQuery.get("e") || "";
+  const decodedEmail = email ? atob(decodeURIComponent(email)) : "";
 
   const [remainingTime, setRemainingTime] = useState(120);
 
@@ -41,10 +42,9 @@ export default function ConfirmationCodeForm({
   }, [remainingTime]);
 
   const handleResend = async () => {
-    console.log("Resending code...");
 
     try {
-      const response = await resendOTP({ email }).unwrap();
+      const response = await resendOTP({ email: decodedEmail }).unwrap();
 
       if (response?.status_code === 200) {
         toast.success(response?.message || "Code resent successfully!");
@@ -70,7 +70,7 @@ export default function ConfirmationCodeForm({
           <p className="text-description text-base leading-7 text-balance">
             Enter Confirmation code that sent to your email address
             <br />
-            <span className="text-sm font-bold">{email}</span>
+            <span className="text-sm font-bold">{decodedEmail}</span>
           </p>
         </div>
 

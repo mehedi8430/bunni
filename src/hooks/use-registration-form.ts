@@ -57,7 +57,8 @@ export default function useRegistrationForm() {
 
       if (response.status_code === 201) {
         toast.success("Registration successful!");
-        navigate(`/auth/confirmation-code?email=${values.email}`, {
+        const encodedEmail = encodeURIComponent(btoa(values.email));
+        navigate(`/auth/confirmation-code?e=${encodedEmail}`, {
           replace: true,
         });
       }

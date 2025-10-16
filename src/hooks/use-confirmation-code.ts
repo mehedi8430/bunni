@@ -13,7 +13,8 @@ const FormSchema = z.object({
 export default function useConfirmationCode() {
   const [verifyOTP] = useVerifyOTPMutation();
   const [searchQuery] = useSearchParams();
-  const email = searchQuery.get("email");
+  const email = searchQuery.get("e");
+  const decodedEmail = email ? atob(decodeURIComponent(email)) : "";
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -33,9 +34,11 @@ export default function useConfirmationCode() {
     }
 
     const payload = {
-      email,
+      email: decodedEmail,
       otp: data.pin,
     };
+
+    console.log("Verification Payload: ----->", payload);
 
     try {
       const response = await verifyOTP(payload).unwrap();
@@ -71,7 +74,7 @@ export default function useConfirmationCode() {
         toast.error(message);
       }
     }
-  }
 
+  }
   return { form, onSubmit };
 }
