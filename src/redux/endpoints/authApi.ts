@@ -100,7 +100,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    // forgate password otp verification
+    // forget password otp verification
     forgetPasswordOtpVerification: build.mutation({
       query: (data) => ({
         url: "auth/reset-password/",
@@ -119,6 +119,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
     }),
+
     // Update User Profile
     updateUserProfile: build.mutation({
       query: (data) => ({
@@ -127,6 +128,18 @@ export const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    // set new password after forget password
+    setNewPassword: build.mutation({
+      query: (data) => ({
+        url: "auth/set-forgot-password/",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
+
+
   }),
 });
 
@@ -139,4 +152,5 @@ export const {
   useForgetPasswordOtpVerificationMutation,
   useForgetPasswordMutation,
   useUpdateUserProfileMutation,
+  useSetNewPasswordMutation,
 } = authApi;

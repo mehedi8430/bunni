@@ -1,5 +1,7 @@
+import { useSetNewPasswordMutation } from "@/redux/endpoints/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -22,7 +24,9 @@ const formSchema = z
     path: ["confirmPassword"], // This will show the error on the confirmPassword field
   });
 
-export default function useResetYourPassword() {
+export default function useResetYourPassword({email}: {email: string}) {
+  const navigate = useNavigate();
+  const [setNewPassword] = useSetNewPasswordMutation();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,11 +37,26 @@ export default function useResetYourPassword() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    toast.success("Password reset successful!");
+   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const payload = {
+      email: email,
+      password: values.newPassword,
+    };
+
+    toast.loading("Resetting password...");
+    
+    try{
+      const result = await setNewPassword(payload).unwrap();
+      if(result.status_code === 200){
+        toast.dismiss();
+        toast.success("Password reset successful! You can now log in with your new password.");
+        navigate("/auth/login");
+      }
+    } catch(err){
+      console.log(err);
+      toast.dismiss();
+      toast.error("Password reset failed. Please try again.");
+    }
   }
 
   return { form, onSubmit };

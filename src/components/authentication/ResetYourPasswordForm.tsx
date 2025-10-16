@@ -10,12 +10,16 @@ import {
 import useResetYourPassword from "@/hooks/use-reset-your-password";
 import { cn } from "@/lib/utils";
 import { PasswordInput } from "./PasswordInput";
+import { useParams } from "react-router";
 
 export default function ResetYourPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
-  const { form, onSubmit } = useResetYourPassword();
+
+  const { email } = useParams<{ email?: string }>();
+  const decodedEmail = atob(decodeURIComponent(email!));
+  const { form, onSubmit } = useResetYourPassword({email: decodedEmail});
 
   return (
     <Form {...form}>
