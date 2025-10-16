@@ -27,7 +27,7 @@ export default function VerificationCodeForm({
 }: VerificationCodeFormProps & React.ComponentProps<"form">) {
   const { email } = useParams<{ email?: string }>();
   const decodedEmail = atob(decodeURIComponent(email!));
-  const { form, onSubmit } = useVerification();
+  const { form, onSubmit } = useVerification({email: decodedEmail});
 
   return (
     <Form {...form}>

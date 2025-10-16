@@ -1,5 +1,7 @@
+import { useForgetPasswordOtpVerificationMutation } from "@/redux/endpoints/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -9,7 +11,9 @@ const FormSchema = z.object({
   }),
 });
 
-export default function useVerification() {
+export default function useVerification({email}: {email: string}) {
+  const navigate = useNavigate();
+  const [forgetPasswordOtpVerification] = useForgetPasswordOtpVerificationMutation();
   // 1. Define your form.
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -19,13 +23,27 @@ export default function useVerification() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("Form submitted with data:", data);
-    toast("You submitted the following values", {
-      description: `<pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>`,
-    });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const payload = {
+      email: email,
+      otp: data.pin,
+    };
+    toast.loading("Verifying otp...");
+
+    try{
+      const result = await forgetPasswordOtpVerification(payload).unwrap();
+      if(result.status_code === 200){
+        toast.dismiss();
+        toast.success("Verification successful! You can now reset your password.");
+        const encodedEmail = encodeURIComponent(btoa(email));
+        navigate(`/auth/reset-password/${encodedEmail}`)
+      }
+    } catch(err){
+      console.log(err);
+      toast.dismiss();
+      toast.error("Verification failed. Please try again.");
+    }
+    
   }
 
   return { form, onSubmit };

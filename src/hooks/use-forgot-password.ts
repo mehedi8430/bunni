@@ -22,7 +22,6 @@ export default function useForgotPassword() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     toast.loading("Sending password reset code...");
     try {
       const result = await forgotPassword(values).unwrap();

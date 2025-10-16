@@ -63,7 +63,7 @@ export const authApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Auth", "User"],
     }),
 
-    // Verify OTP
+    // Verify OTP for registration
     verifyOTP: build.mutation({
       query: (data) => ({
         url: "auth/verify-otp/",
@@ -100,16 +100,17 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    // Reset Password
-    resetPassword: build.mutation({
+    // forgate password otp verification
+    forgetPasswordOtpVerification: build.mutation({
       query: (data) => ({
         url: "auth/reset-password/",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Auth"],
     }),
 
-    // forget password
+    // forget password otp verification
     forgetPassword: build.mutation({
       query: (data) => ({
         url: "auth/forgot-password/",
@@ -118,16 +119,6 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
     }),
-
-    // Get User Profile
-    // getUserProfile: build.query({
-    //   query: () => ({
-    //     url: "profile/",
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["Auth", { type: "User", id: "LIST" }],
-    // }),
-
     // Update User Profile
     updateUserProfile: build.mutation({
       query: (data) => ({
@@ -145,8 +136,7 @@ export const {
   useLogoutUserMutation,
   useVerifyOTPMutation,
   useResendOTPMutation,
-  useResetPasswordMutation,
+  useForgetPasswordOtpVerificationMutation,
   useForgetPasswordMutation,
-  // useGetUserProfileQuery,
   useUpdateUserProfileMutation,
 } = authApi;

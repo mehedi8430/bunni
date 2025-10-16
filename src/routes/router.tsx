@@ -32,7 +32,6 @@ import PaymentIntegrationPage from "@/pages/Settings/PaymentIntegration";
 import ProfileSettingsPage from "@/pages/Settings/ProfileSettings";
 import SubscriptionPage from "@/pages/Settings/Subscription";
 import UserManagementPage from "@/pages/Settings/UserManagement";
-import { Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 
 export const Router = createBrowserRouter([
@@ -151,16 +150,14 @@ export const Router = createBrowserRouter([
       },
       {
         path: "verification/:email",
-        element: <Suspense fallback={<div>Loading...</div>}>
-          <VerificationCodeForm />
-        </Suspense>,
+        element: <VerificationCodeForm />,
       },
       {
         path: "confirmation-code",
         element: <ConfirmationCodeForm />,
       },
       {
-        path: "reset-password",
+        path: "reset-password/:email",
         element: <ResetYourPasswordForm />,
       },
     ],
