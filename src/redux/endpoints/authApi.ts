@@ -22,7 +22,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
@@ -48,7 +48,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           // Wait for the server response
           await queryFulfilled;
@@ -70,7 +70,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
 
