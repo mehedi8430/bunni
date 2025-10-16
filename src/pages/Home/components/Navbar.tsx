@@ -128,12 +128,12 @@ export default function Navbar() {
                                 {
                                     user ? (
                                         <SheetClose asChild className="px-4">
-                                                <Link to={"/dashboard"} className="w-full">
-                                                    <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
-                                                        Dashboard
-                                                    </button>
-                                                </Link>
-                                            </SheetClose>
+                                            <Link to={"/dashboard"} className="w-full">
+                                                <button className="w-full px-6 py-2 bg-primary text-white rounded-md ">
+                                                    Dashboard
+                                                </button>
+                                            </Link>
+                                        </SheetClose>
                                     ) : (
                                         <div className="flex flex-col w-full space-y-5 px-4">
                                             <SheetClose asChild>

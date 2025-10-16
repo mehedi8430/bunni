@@ -116,6 +116,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Auth"],
     }),
 
     // Get User Profile

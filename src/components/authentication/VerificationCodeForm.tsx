@@ -10,9 +10,9 @@ import useVerification from "@/hooks/use-verification";
 import { cn } from "@/lib/utils";
 
 import { InputOTP, InputOTPGroup } from "@/components/ui/input-otp";
-import { useParams } from "react-router";
 import { toast } from "sonner";
 import OtpSlot from "./OtpSlot";
+import { useParams } from "react-router";
 
 interface VerificationCodeFormProps {
   className?: string;
@@ -23,20 +23,11 @@ interface VerificationCodeFormProps {
 
 export default function VerificationCodeForm({
   className,
-
   ...props
 }: VerificationCodeFormProps & React.ComponentProps<"form">) {
+  const { email } = useParams<{ email?: string }>();
+  const decodedEmail = atob(decodeURIComponent(email!));
   const { form, onSubmit } = useVerification();
-
-  const params = useParams<{
-    token: string;
-    email: string;
-  }>();
-
-  if (!params.token || !params.email) {
-    toast.error("Invalid verification link. Please try again.");
-    return null;
-  }
 
   return (
     <Form {...form}>
@@ -49,7 +40,7 @@ export default function VerificationCodeForm({
           <h1 className="text-4xl leading-14 font-bold">Verification Code</h1>
           <p className="text-description text-lg leading-7 text-balance">
             Enter verification code sent to your email address <br />
-            <span className="font-bold">{params.email}</span>
+            <span className="font-bold">{decodedEmail}</span>
           </p>
         </div>
 

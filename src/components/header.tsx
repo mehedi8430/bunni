@@ -32,7 +32,7 @@ export default function Header() {
       <div className="flex items-center max-md:justify-center">
         <div className="flex w-[328px] items-center justify-center">
           <div className="flex h-[60px] w-[109px] items-center justify-center overflow-hidden">
-            <Link to="/dashboard">
+            <Link to="/">
               <ReactSVG src={icons.navLogo} />
             </Link>
           </div>
